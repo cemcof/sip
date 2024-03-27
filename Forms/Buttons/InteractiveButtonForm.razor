@@ -1,0 +1,67 @@
+@using Microsoft.Extensions.FileProviders
+@typeparam TFormModel where TFormModel : class, new()
+
+<InteractiveButton OnClick="@(() => OnSubmit.InvokeAsync(Model))"
+                   Caption="@Caption"
+                   BtnClass="@BtnClass"
+                   CssIcon="@CssIcon"
+                   TooltipDirection="@TooltipDirection"
+                   RenderAsIcon="@RenderAsIcon"
+                   Tip="@Tip">
+
+    <ConfirmTemplate Context="confirmTemplateContext">
+
+        <CEditForm class="@(CssTheme + " cform-in-button")"
+                   RenderAsFormElement="@false"
+                   Model="@Model"
+                   TModelType="TFormModel"
+                   Context="ctx"
+                   OnSubmit="@((model) => OnFormConfirm(confirmTemplateContext, model))"
+                   OnCancel="confirmTemplateContext.CancelAsync"
+                   ChildContent="@ChildContent">
+
+        </CEditForm>
+
+    </ConfirmTemplate>
+
+</InteractiveButton>
+
+@code {
+
+    [Parameter]
+    public TFormModel Model { get; set; } = null!;
+
+    [Parameter]
+    public string CssTheme { get; set; } = "cform";
+
+    [Parameter]
+    public string? CssIcon { get; set; }
+
+    [Parameter]
+    public string? BtnClass { get; set; }
+
+    [Parameter]
+    public RenderFragment<CEditForm<TFormModel>>? ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback<TFormModel> OnSubmit { get; set; }
+
+    private async Task OnFormConfirm(InteractiveButton confirmTemplateContext, TFormModel formModel)
+    {
+        Model = formModel;
+        await confirmTemplateContext.ConfirmAsync();
+    }
+
+    [Parameter]
+    public TooltipDirection TooltipDirection { get; set; }
+
+    [Parameter]
+    public string? Tip { get; set; }
+
+    [Parameter]
+    public string? Caption { get; set; }
+
+    [Parameter]
+    public bool RenderAsIcon { get; set; }
+
+}

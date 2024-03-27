@@ -1,0 +1,46 @@
+
+
+.tube-selector-caption {
+    text-align: center;
+    padding: 0.6rem;
+}
+
+.search-tubepreview-container {
+    display: flex;
+    align-content: start;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: auto;
+}
+
+.search-tubepreview-container ::deep .tube-preview-container {
+    width: 45%;
+    margin: 0.3rem;
+}
+
+.tubes-page-container {
+    height: calc(100vh - 5rem);
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.tubes-page-container > div {
+    flex: 1;
+    margin: 0 0.5rem;
+    height: 100%;
+}
+
+
+
+
+table tr:hover {
+    background-color: var(--bs-primary);
+    color: white;
+    cursor: pointer;
+}
+
+
+.tubes-edit-container .card-body {
+    height: 0;
+}

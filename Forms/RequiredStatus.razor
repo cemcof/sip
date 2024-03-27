@@ -1,0 +1,12 @@
+<CascadingValue Name="IsRequiredCascade" Value="Required">
+    @ChildContent
+</CascadingValue>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public bool? Required { get; set; }
+
+}

@@ -1,0 +1,27 @@
+.tube-id-container {
+    position: relative;
+    font-weight: bold;
+    text-align: center;
+}
+
+.tube-id-details {
+    display: none;
+}
+
+.tube-id-container:hover .tube-id-details {
+    display: block;
+}
+
+.tube-id-details {
+    text-align: left;
+    position: absolute;
+    background-color: white;
+    padding: 0.3rem;
+    font-weight: normal;
+    font-size: 1rem;
+    top: 2.5rem;
+    left: calc(50% - 10rem);
+    width: 20rem;
+    border: 1px solid gray;
+    box-shadow: 0 0 6px 5px rgba(0,0,0,0.28)
+}

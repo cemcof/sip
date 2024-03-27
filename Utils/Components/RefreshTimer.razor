@@ -1,0 +1,51 @@
+@implements IDisposable
+
+@code {
+    
+    [Parameter]
+    public EventCallback Action { get; set; } = EventCallback.Empty;
+
+    private TimeSpan _interval;
+    [Parameter]
+    public TimeSpan Interval { get; set; } 
+
+    
+    private TimeSpan _dueTime;
+    [Parameter]
+    public TimeSpan DueTime { get; set; }
+
+    private Timer? _timer;
+
+    
+    protected override void OnParametersSet()
+    {
+        _timer ??= new Timer(_tick, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
+        
+        var refreshTimer = false;
+
+        var newInterval = Interval == default ? TimeSpan.FromMinutes(1) : Interval;
+        if (newInterval != _interval) refreshTimer = true;
+        _interval = newInterval;
+        
+        var newDueTime = DueTime == default ? TimeSpan.FromMinutes(1) : DueTime;
+        if (newDueTime != _dueTime) refreshTimer = true;
+        _dueTime = newDueTime;
+
+        if (refreshTimer)
+        {
+            _timer.Change(_dueTime, _interval);
+        }
+    }
+
+    private void _tick(object? obj)
+    {
+        InvokeAsync(() => Action.InvokeAsync());
+    }
+
+
+    public void Dispose()
+    {
+        _timer?.Dispose();   
+    }
+
+}

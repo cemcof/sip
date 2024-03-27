@@ -1,0 +1,75 @@
+@typeparam TItem
+@inherits CInputBase<List<TItem>>
+
+<div class="form-group cinput-container cmultiobject-container rendering-strategy-@(RenderingStrategy) @(HasLabel ? "labeled" : "labelless") @(IsRequired ? "required" : "")">
+    <div class="clabel-container" style="@GetFlexStyleForIndex(0)">
+        <div class="item-add" @onclick="AddItem"><i class="fa fa-plus-circle pointer"></i></div>
+        <CLabelAndTip Id="@InputId" Tip="@Tip">@DisplayName</CLabelAndTip>
+    </div>
+
+    <div class="cinput-input-container" style="@GetFlexStyleForIndex(1)">
+        
+        @if (ChildContent is not null && CurrentValue is not null)
+        {
+            <div class="items-container">
+                @foreach (var item in CurrentValue)
+                {
+                    <div class="item-container" @key="@item">
+                        @* Allow removing only if there is more items than minimal allowed *@
+                        @if (CurrentValue.Count > (MinLength ?? 0))
+                        {
+                            <div class="item-remove pointer" @onclick="@(() => RemoveItem(item))"><i class="fa fa-minus-circle"></i></div>
+                        }
+
+                        <div class="item-content">
+                            @ChildContent(item)
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        
+    </div>
+</div>        
+
+@code {
+    
+    [Parameter]
+    public RenderFragment<TItem>? ChildContent { get; set; }
+
+    [Parameter]
+    public Func<TItem> ItemFactory { get; set; } = Activator.CreateInstance<TItem>;
+
+    private void AddItem()
+    {
+        CurrentValue ??= new List<TItem>();
+        CurrentValue.Add(ItemFactory());
+        EditContext.NotifyFieldChanged(FieldIdentifier);
+    }
+
+    private void RemoveItem(TItem item)
+    {
+        CurrentValue ??= new List<TItem>();
+        CurrentValue.Remove(item);
+        EditContext.NotifyFieldChanged(FieldIdentifier);
+    }
+
+    protected override void OnParametersSet()
+    {
+        CurrentValue ??= new List<TItem>();
+
+        var minlength = MinLength ?? 0;
+        while (CurrentValue.Count < minlength)
+        {
+            CurrentValue.Add(ItemFactory());
+        }
+        
+        base.OnParametersSet();
+    }
+
+    protected override bool TryParseValueFromString(string? value, out List<TItem> result, out string validationErrorMessage)
+    {
+        throw new NotSupportedException();
+    }
+
+}

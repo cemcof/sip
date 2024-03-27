@@ -1,0 +1,9 @@
+Anchored: &anchored
+    Kekw: 4
+    Pa: 8
+    
+JinyPole:
+    - Kekw: 4
+      Pa: 6
+    - *anchored
+    

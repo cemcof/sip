@@ -1,0 +1,46 @@
+@using sip.Utils
+<div class="issue urgency-@DetermineUrgency(Issue).ToString() status-@Issue.Status.ToString()" selected="@IsSelected">
+            
+        <div>@Issue.Id</div>
+        <div>@Issue.Status.Humanize()</div>
+        <div>@StringUtils.WithPlaceholder(Issue.InitiatedBy?.Fullname) / @StringUtils.WithPlaceholder(Issue.Responsible?.Fullname)</div>
+        
+        <div>@Issue.Subject</div>
+        <div>@Issue.Description</div>
+        <div>@Issue.SolutionDescription</div>
+        <div>@Issue.DtObserved.HappenAgo()</div>
+    
+</div>        
+
+
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public Issue Issue { get; set; } = null!;
+    
+    [Parameter]
+    public bool IsSelected { get; set; }
+    
+    [Parameter]
+    public EventCallback<Issue>? OnSelection { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (Issue is null) throw new ArgumentNullException(nameof(Issue));
+    }
+
+    // TODO - from options
+    private IssueUrgency DetermineUrgency(Issue issue)
+    {
+        var urgency = issue.Urgency;
+        if (urgency is not IssueUrgency.Auto) return urgency;
+
+        var timeDelta = DateTime.UtcNow - issue.DtAssigned;
+
+        if (timeDelta.Days < 7) return IssueUrgency.Low;
+        if (timeDelta.Days < 30) return IssueUrgency.Medium;
+        return IssueUrgency.High;
+    }
+
+}

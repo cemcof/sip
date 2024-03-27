@@ -1,0 +1,22 @@
+@typeparam TValue
+
+@if (Value is not null)
+{
+    @if (WhenReady is not null) @WhenReady(Value!)
+}
+else
+{
+    @if (WhenNull is not null) @WhenNull
+}
+
+
+@code {
+    [Parameter]
+    public TValue? Value { get; set; }
+    
+    [Parameter]
+    public RenderFragment<TValue>? WhenReady { get; set; }
+    
+    [Parameter]
+    public RenderFragment? WhenNull { get; set; }
+}

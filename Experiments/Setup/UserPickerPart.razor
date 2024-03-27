@@ -1,0 +1,73 @@
+@using sip.Experiments.Model
+@inject AppUserManager UserManager
+
+
+<GroupVertical>
+    <Header>
+        <div class="space-between-panel">
+            <div>
+                <strong>User</strong>
+                <small class="small small-tip">- contact information of the data owner</small>
+            </div>
+                        
+            <div><a href="javascript:void(0)" @onclick="_sameAsOperatorClick">Same as operator</a></div>
+        </div>
+        
+        <CDropdown HasLabel="@false" ItemsProvider="_UsersProvider" TValue="AppUser" @bind-Value="@Exp.User">
+            <ItemTemplate Context="user">
+                <div class="icon-item-template">
+                    <div><i class="bi bi-person"></i></div>
+                    <div>
+                        @user <br/>
+                        <small>@user.PrimaryContact.Affiliation</small>
+                    </div>
+                </div>
+            </ItemTemplate>
+
+            <AlternativeBody Context="dropdown">
+                 <CEditForm TModelType="AppUser" Context="form"
+                           ModelFactory="@(UserManager.CreateItem)"
+                           OnSubmit="@((p) => _createUserSubmit(p, dropdown))"
+                           OnCancel="@(() => dropdown.SelectItem(null))">
+                    <CreateUser Model="@dropdown.Value"></CreateUser>
+                </CEditForm>
+            </AlternativeBody>
+
+        </CDropdown>
+        
+        <DynamicFormElement class="inline noalign" Key="@(nameof(Experiment.AccessRoute))" ValueTarget="@Exp" Setup="@ExpMeta.Info[nameof(Experiment.AccessRoute)]"></DynamicFormElement>
+    </Header>
+</GroupVertical>
+
+@code {
+    [Parameter]
+    public Experiment Exp { get; set; } = null!;
+    
+    [Parameter] public ExperimentOptions ExpMeta { get; set; } = null!;
+    
+    private void _sameAsOperatorClick()
+    {
+        Exp.User = Exp.Operator;
+    }
+    
+    private async Task _onNewUser(AppUser u)
+    {
+        await UserManager.NewUserAsync(new NewUserModel() {UserDetails = u});
+        await UserManager.EnsureUserInRole(new UserInRole {UserId = u.Id, RoleId = nameof(LabUserRole), OrganizationId = Exp.OrganizationId});
+        // await _accountManager.RequestAccountActivation(acc.Id);
+    }
+    
+    private async ValueTask<ItemsProviderResult<AppUser>> _UsersProvider(ItemsProviderRequest request, string? searchstring)
+    {
+        var users = await UserManager.GetUsersAsync(request.ToFilter());
+        return new ItemsProviderResult<AppUser>(users.Items, users.TotalCount);
+    }
+
+    private async Task _createUserSubmit(AppUser appUser, CDropdown<AppUser> dropdown)
+    {
+        await UserManager.PersistItem(appUser);
+        await dropdown.SelectItem(appUser);
+    }
+
+
+}

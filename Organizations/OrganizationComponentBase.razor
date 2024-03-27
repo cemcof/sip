@@ -1,0 +1,43 @@
+@code {
+
+    [CascadingParameter]
+    public OrganizationComponentContext OrganizationComponentContext { get; set; } = null!;
+    
+    
+    // This is necessary to capture parameter from the route
+    [Parameter]
+    public string OrganizationId { get; set; } = null!;
+
+    public IOrganization Organization => OrganizationComponentContext.Organization 
+                                         ?? throw new ArgumentNullException(nameof(OrganizationComponentContext.Organization));
+    
+    
+    // TODO - del?
+    public Func<string, string> UrlProvider => OrganizationComponentContext.UrlProvider ?? (s => s);
+
+    public ClaimsPrincipal AuthUser => OrganizationComponentContext.PrincipalUser ??
+                                       throw new ArgumentNullException(nameof(OrganizationComponentContext.PrincipalUser));
+    
+    
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        // Cascading parameter triggers unwanted rerender when it gets changed but this component is no longer relevant
+        // and should have been removed from rendering tree (e.g. because of navigation)
+        
+        // We can therefore end up having empty organization context and we need to handle that
+        // Since all components inheriting this one always need organization scope
+        
+        // Lets disable rendering and on parameters set events
+        
+        // Do we have the organization? Continue rendering normally
+        if (parameters.TryGetValue(nameof(OrganizationComponentContext), out OrganizationComponentContext? organizationCtx)
+            && organizationCtx?.Organization is not null)
+        {
+            return base.SetParametersAsync(parameters);
+        }
+        
+        // Otherwise, completely skip the lifecycle
+        return Task.CompletedTask;
+    }
+
+}

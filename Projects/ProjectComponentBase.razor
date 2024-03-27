@@ -1,0 +1,42 @@
+@using sip.Userman
+@using sip.Projects.Statuses
+@typeparam TProject where TProject : Project
+
+@inject IProjectLoader<TProject> ProjectLoader
+@inject IProjectStatusManager<TProject> ProjectStatusManager
+@inject AppUserManager UserManager
+
+@code {
+
+    [Parameter, EditorRequired]
+    public string ProjectId { get; set; } = string.Empty;
+    
+    [Parameter]
+    public ClaimsPrincipal CpUser { get; set; } = null!;
+    public AppUser User { get; set; } = null!;
+
+    protected TProject Project { get; set; } = null!;
+    protected List<StatusInfo> StatusFlow { get; set; } = null!;
+    protected List<Status> Statuses { get; set; } = null!;
+    protected Document? SelectedDocument;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await ReloadProject();
+        User = await UserManager.FindByCpAsync(CpUser, CancellationToken.None) ?? throw new InvalidOperationException("Missing claims principal");
+        Statuses = Project.ProjectStatuses.ToList();
+        SelectedDocument = Project.ProjectDocuments.FirstOrDefault();
+        StatusFlow = (await ProjectStatusManager.GetRelevantStatusInfosAsync(Project)).ToList();
+    }
+
+    protected async Task ReloadProject()
+    {
+        Project = await ProjectLoader.LoadAsync(ProjectId);
+    }
+
+    protected void SelectDocument(Document doc)
+    {
+        SelectedDocument = doc;
+    }
+
+}

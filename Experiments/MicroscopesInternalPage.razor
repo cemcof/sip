@@ -1,0 +1,18 @@
+@page "/{OrganizationId}/internal/microscopes/{InstrumentId}/{ExperimentType}"
+@inherits OrganizationComponentBase
+
+<MicroscopesPage InternalView="@true"
+                 ExperimentType="@ExperimentType"
+                 InstrumentId="@InstrumentId"
+></MicroscopesPage>
+
+
+@code {
+
+    [Parameter]
+    public string InstrumentId { get; set; } = null!;
+
+    [Parameter]
+    public string ExperimentType { get; set; } = null!;
+
+}

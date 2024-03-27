@@ -1,0 +1,33 @@
+.small {
+    opacity: 0.8;
+    color: gray;
+    font-style: italic;
+    display: block;
+    
+}
+
+.left {
+    
+}
+
+.right {
+    text-align: right;
+}
+
+.project-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.project-item.attention-urgent {
+    background-color: #d3d384;
+}
+
+.project-item.attention-irrelevant {
+    opacity: 0.6;
+}
+
+.project-item.attention-important {
+    background-color: #d5d5d5;
+}

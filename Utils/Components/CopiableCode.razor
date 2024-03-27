@@ -1,0 +1,18 @@
+@inject IJSRuntime Js
+
+
+<div class="code-block">
+    <button class="btn btn-outline-primary btn-sm" onclick="window.copyFromSiblingElementToClipboard(event.target)">
+        <i class="bi bi-clipboard"></i>
+    </button>
+    
+    <code>
+        @CodeContent
+    </code>
+</div>
+
+@code {
+    
+    [Parameter]
+    public string? CodeContent { get; set; }
+}   

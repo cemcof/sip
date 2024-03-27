@@ -1,0 +1,54 @@
+@inject ILogger<FilteredItemViewer<TItem>> Logger
+
+@typeparam TItem
+
+
+<div class="item-viewer @CssClass">
+    <div class="item-viewer-header">
+        <SearchBar RequestSearch="OnSearch" Placeholder="@SearchPlaceholder"></SearchBar>    
+        @if (NextToSearchBarRight is not null) @NextToSearchBarRight
+    </div>
+    
+    <div class="item-viewer-body">
+        <ItemsRenderer @ref="_itemsRendererRef" ItemsProvider="@(request => ItemsProvider(request, _searchString))"
+                       ItemContent="@ItemTemplate">
+            
+        </ItemsRenderer>  
+    </div>
+    
+</div>
+
+
+
+@code {
+    
+    [Parameter]
+    public string? CssClass { get; set; }
+    
+    [Parameter, EditorRequired]
+    public string? SearchPlaceholder { get; set; }
+
+    [Parameter, EditorRequired]
+    public RenderFragment<TItem> ItemTemplate { get; set; } = null!;
+
+    [Parameter]
+    public RenderFragment? NextToSearchBarRight { get; set; } = null!;
+
+    [Parameter, EditorRequired]
+    public ItemProviderRequestWithSearchDelegate<TItem> ItemsProvider { get; set; } = null!;
+
+    private async Task OnSearch((string searchString, CancellationToken ct) target)
+    {
+        _searchString = target.searchString;
+        if (_itemsRendererRef is not null)
+        {
+            Logger.LogDebug("Performing request items, search string is {}", _searchString);
+            await _itemsRendererRef.RequestItems();
+        }
+        
+    }
+
+
+    private string? _searchString;
+    private ItemsRenderer<TItem>? _itemsRendererRef;
+}

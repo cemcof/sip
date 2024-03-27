@@ -1,0 +1,136 @@
+@inject IOptionsMonitor<MainGuiOptions> GuiOpts
+@inject IAuthorizationService AuthorizationService
+@inject IOrganizationProvider OrganizationProvider
+@inject IConfiguration Configuration
+@inject ILogger<MainNavPanel> Logger
+<nav>
+
+    @* Render brand part *@
+    <NavLink href="/" class="brand">
+        @{ var mainGui = GuiOpts.CurrentValue!; }
+
+        @if (mainGui.LogoPath is not null)
+        {
+            <img src="@mainGui.LogoPath" alt="@mainGui.BrandText"/>
+        }
+
+        @if (mainGui.BrandText is not null)
+        {
+            <div>@mainGui.BrandText</div>
+        }
+    </NavLink>
+    <hr/>
+
+    @* Render identity part *@
+    <IdentityPanel Organization="@ComponentContext.Organization"/>
+    <hr/>
+
+    @* Render main navigation links *@
+    <ul class="navlinks">
+        @foreach (var nl in _authorizedMainModules)
+        {
+            <li>
+                <NavLink href="@GetFullLinkHref(null, nl.Value.LinkHref)">
+                    @if (nl.Value.CssIcon is not null)
+                    {
+                        <i class="@nl.Value.CssIcon"></i>
+                    }
+                    &nbsp; @nl.Value.DisplayText
+                </NavLink>
+            </li>
+        }
+    </ul>
+
+
+    @* Render organizations and their navigation links  *@
+    @foreach (var org in _authorizedOrgsModules)
+    {
+        <div class="navlinks-header">@org.Key.Abbreviation</div>
+        <hr/>
+
+        <ul class="navlinks">
+            @foreach (var nl in org.Value)
+            {
+                <li>
+                    <NavLink href="@GetFullLinkHref(org.Key, nl.Value.LinkHref)">
+                        @if (nl.Value.CssIcon is not null)
+                        {
+                            <i class="@nl.Value.CssIcon"></i>
+                        }
+                        &nbsp; @nl.Value.DisplayText
+                    </NavLink>
+                </li>
+            }
+        </ul>
+    }
+
+
+</nav>
+
+
+@code {
+
+    [CascadingParameter]
+    public OrganizationComponentContext ComponentContext { get; set; } = null!;
+
+    private Dictionary<IOrganization, Dictionary<string, PanelItemOptions>> _authorizedOrgsModules = new();
+    private Dictionary<string, PanelItemOptions> _authorizedMainModules = new();
+
+    private string GetFullLinkHref(IOrganization? org, string link)
+        => (org is null) ?
+            link :
+            "/" + org.LinkId + "/" + link;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Logger.LogDebug("OnParametersSetAsync MainNavPanel: {@ComponentContext}", ComponentContext);
+
+        Dictionary<IOrganization, Dictionary<string, PanelItemOptions>> authorizedOrgsModules = new();
+
+        async Task<Dictionary<string, PanelItemOptions>> GetAuthorizedModules(Dictionary<string, PanelItemOptions> modules, IOrganization? organization = null)
+        {
+            var result = new Dictionary<string, PanelItemOptions>();
+            foreach (var mainOptsModule in modules)
+            {
+                var authReqs = mainOptsModule.Value.GetAuthorizationRequirements(organization).ToArray();
+                if (authReqs.Any())
+                {
+                    var authr = await AuthorizationService.AuthorizeAsync(ComponentContext.PrincipalUser, null, authReqs);
+                    if (authr.Succeeded)
+                    {
+                        result.Add(mainOptsModule.Key, mainOptsModule.Value);
+                    }
+                }
+                else
+                {
+                    result.Add(mainOptsModule.Key, mainOptsModule.Value);
+                    
+                }
+            }
+            return result;
+        }
+
+    // Authorize main modules 
+        Dictionary<string, PanelItemOptions> authorizedMainModules = await GetAuthorizedModules(GuiOpts.CurrentValue.Modules);
+
+    // Authorize org modules
+    // First get list of organizations with some modules configured
+        var orgs = OrganizationProvider.GetAll();
+    // Now go over the organizations but authorize only those that have some modules configured
+        foreach (var organization in orgs)
+        {
+            var orgOptions = GuiOpts.Get(organization).Modules;
+            var authorized = await GetAuthorizedModules(orgOptions, organization);
+            if (authorized.Any())
+            {
+                authorizedOrgsModules.Add(organization, authorized);
+            }
+        }
+
+        _authorizedMainModules = authorizedMainModules;
+        _authorizedOrgsModules = authorizedOrgsModules;
+
+        Logger.LogDebug("End OnParametersSetAsync MainNavPanel: {@ComponentContext}", ComponentContext);
+    }
+
+}

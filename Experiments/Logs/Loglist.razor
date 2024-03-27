@@ -1,0 +1,65 @@
+@inject ILogger<Loglist> Logger
+
+<div class="loglist-container flex-grow-1">
+    <ul class="log-list">
+        <Virtualize @ref="_virtualize" TItem="Log" Context="log" Items="@Logs" ItemsProvider="@LogsProvider" OverscanCount="@Overscan" ItemSize="20" >
+            <li class="level-@(log.Level) origin-@(log.Origin)">
+                @if (RichLogs)
+                {
+                    <div class="log-head">
+                        [@log.Dt.StandardFormat(true)] <span class="origin-text">@log.Origin</span>, <span class="log-level-text">@log.Level</span>
+                    </div>
+
+                    <div class="log-message">
+                        <pre>    @log.Message.Replace("\n", "\n    ")</pre>
+                    </div>
+                }
+                else
+                {
+                    <div class="log-brief">[@log.Dt.StandardFormat(true)] <pre>@log.Message</pre></div>
+                }
+            </li>
+        </Virtualize>
+    </ul>
+</div>
+
+
+@code {
+
+    [Parameter]
+    public ICollection<Log>? Logs { get; set; }
+    
+    [Parameter]
+    public ItemsProviderDelegate<Log>? LogsProvider { get; set; }
+
+    [Parameter]
+    public bool Autorefresh { get; set; }
+
+    [Parameter]
+    public int Overscan { get; set; } = 10;
+
+
+
+    [Parameter]
+    public bool RichLogs { get; set; }
+
+
+    public async Task ReloadLogsAsync()
+    {
+        Logger.LogTrace("Reloading logs...");
+        if (_virtualize is not null)
+        {
+            await _virtualize.RefreshDataAsync();
+        }
+    }
+
+    protected override Task OnParametersSetAsync()
+    {
+        if (Autorefresh)
+            return ReloadLogsAsync();
+
+        return Task.CompletedTask;
+    }
+
+    private Virtualize<Log>? _virtualize;
+}

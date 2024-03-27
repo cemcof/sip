@@ -1,0 +1,97 @@
+@page "/btntesting"
+
+@inject ILogger<InteractiveButtonTest> Logger
+
+<div class="d-flex justify-content-between w-100" style="height: 90vh">
+    
+    <InteractiveButton
+        TooltipDirection="TooltipDirection.Right"
+        Caption="Interactive button 1"
+        CssIcon="fas fa-trash"
+        BtnClass="btn btn-primary"
+        ContainerClass="align-self-center"
+        OnClick="Button1Callback">
+        <ConfirmTemplate>
+            <div class="d-flex">
+                <p class="me-2">Please confirm removal of user Keke</p>
+                <button class="btn btn-sm btn-danger" @onclick="context.ConfirmAsync">Yes, delete</button>
+                <button class="btn btn-sm btn-primary" @onclick="context.CancelAsync">No, cancel</button>
+            </div>
+        </ConfirmTemplate>
+        <SuccessFlashTemplate>
+            Vyborne, povedlo se to
+        </SuccessFlashTemplate>
+    </InteractiveButton>
+    
+    <InteractiveButton
+        TooltipDirection="TooltipDirection.Bottom"
+        Caption="Interactive button 2"
+        CssIcon="fas fa-trash"
+        BtnClass="btn btn-primary"
+        Tip="Toto je nejaky random tip"
+        ContainerClass="align-self-start"
+        OnClick="Button2Callback">
+        
+        <SuccessFlashTemplate>
+            Vyborne
+        </SuccessFlashTemplate>
+    </InteractiveButton>
+    
+    <InteractiveButton
+        TooltipDirection="TooltipDirection.Top"
+        Caption="Interactive button 3"
+        CssIcon="fas fa-trash"
+        BtnClass="btn btn-primary"
+        Tip="Toto je nejaky random tip"
+        ContainerClass="align-self-end"
+        OnClick="Button3Callback">
+        <ConfirmTemplate>Please confirm removal of user Keke
+            <button class="btn btn-danger" @onclick="context.ConfirmAsync">Yes, delete</button>
+            <button class="btn btn-primary" @onclick="context.CancelAsync">No, cancel</button>
+        </ConfirmTemplate>
+        <SuccessFlashTemplate>
+            Vyborne
+        </SuccessFlashTemplate>
+    </InteractiveButton>
+    
+    <InteractiveButton
+        TooltipDirection="TooltipDirection.Left"
+        Caption="Interactive button 4"
+        CssIcon="fas fa-trash"
+        BtnClass="btn btn-primary"
+        Tip="Toto je nejaky random tip"
+        ContainerClass="align-self-center"
+        OnClick="Button1Callback">
+        <ConfirmTemplate>Please confirm removal of user Keke
+            <button class="btn btn-danger" @onclick="context.ConfirmAsync">Yes, delete</button>
+            <button class="btn btn-primary" @onclick="context.CancelAsync">No, cancel</button>
+        </ConfirmTemplate>
+        <SuccessFlashTemplate>
+            Vyborne
+        </SuccessFlashTemplate>
+    </InteractiveButton>
+    
+</div>
+
+@code {
+
+    private async Task Button1Callback()
+    {
+        Logger.LogInformation("Firing 1");
+        await Task.Delay(3000);
+        
+    }
+
+    private async Task Button2Callback()
+    {
+        await Task.Delay(1000); // Do something for sec and then fail
+        throw new UserException("Jozo tos posral");
+    }
+    
+    private async Task Button3Callback()
+    {
+        await Task.Delay(1000); // Do something for sec and then fail
+        throw new InvalidOperationException("Jozo tos posral");
+    }
+
+}

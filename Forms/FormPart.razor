@@ -1,0 +1,32 @@
+@typeparam TMod 
+
+@if (Model is not null && ChildContent is not null)
+{
+    <div class="cform-part @Name @Class">
+        <div class="cform-part-header">
+            @DisplayName
+        </div>
+        
+        <div class="cform-part-body">
+            @ChildContent(Model)
+        </div>
+    </div>
+}
+
+
+@code {
+    
+    [Parameter]
+    public string? Name { get; set; }
+    
+    [Parameter] 
+    public string? Class { get; set; }
+    
+    [Parameter]
+    public string? DisplayName { get; set; }
+    
+    [Parameter, EditorRequired] public TMod? Model { get; set; }
+    
+    [Parameter, EditorRequired] public RenderFragment<TMod>? ChildContent { get; set; }
+    
+}

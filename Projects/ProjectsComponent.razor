@@ -1,0 +1,126 @@
+@page "/projects"
+
+@inherits LayoutComponentBase
+
+@inject IProjectLoader ProjectLoader
+
+@inject IProjectItemRenderProvider ProjectRenderProvider 
+@inject IProjectsFilterProvider ProjectsFilterProvider
+ 
+@inject NavigationManager NavigationManager
+@inject ILogger<ProjectsComponent> Logger
+@inject IEnumerable<IProjectDefine> ProjectDefines
+@inject AppUserManager UserManager
+
+<div class="projects-page-layout">
+    
+    @* The side panel *@
+    
+    <div class="projectlist-container">
+
+        @* List of projects with relevant markers *@
+        <div class="project-markers">
+
+        </div>
+
+        @* Search bar and filters *@
+        <div class="search-filters-container">
+            <SearchBar RequestSearch="OnSearchRequest"></SearchBar>
+
+            <InteractiveButton TooltipDirection="TooltipDirection.Bottom" BtnClass="btn btn-light" CssIcon="fas fa-sliders-h">
+
+                <ConfirmTemplate>
+                    <div class="text-center">Search, filters, statistics</div>
+
+                </ConfirmTemplate>
+            </InteractiveButton>
+        </div>
+
+        @* List of projects *@
+
+        <div class="projectlist">
+            <ItemsRenderer @ref="_itemsRendererRef" TItem="Project" ItemsProvider="ProjectsProviderDelegate">
+
+                <NavLink href="@($"/projects/{context.Id}")">
+                    @{
+                        var rinfo = ProjectRenderProvider.GetProjectItemComponent(context);
+                    }
+                    <DynamicComponent Type="@rinfo.Component" Parameters="@rinfo.Parameters"></DynamicComponent>
+                </NavLink>
+
+            </ItemsRenderer>
+
+        </div>
+    </div>
+    
+    @* Main project body *@
+
+    <div class="project-container">
+        @if (Body is not null)
+        {
+            @Body
+        }
+        else
+        {
+            <span class="note">No project selected</span>
+        }
+    </div>
+</div>
+
+@code {
+
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthenticationStateAsync { get; set; } = null!;
+
+    [CascadingParameter]
+    public OrganizationComponentContext ComponentContext { get; set; } = null!;
+
+    private ClaimsPrincipal _cpUser = null!;
+    private AppUser _user = null!;
+    private ProjectsFilter _projectsFilter = null!;
+    private string _search = string.Empty;
+    private ProjectsLoadResults _loadResults = new();
+    private ItemsRenderer<Project>? _itemsRendererRef;
+    
+    
+
+    protected override async Task OnInitializedAsync()
+    {
+        _projectsFilter = await ProjectsFilterProvider.GetProjectFiltersAsync(ComponentContext.PrincipalUser);
+        _cpUser = ComponentContext.PrincipalUser;
+        _user = ComponentContext.ApplicationUser ?? throw new InvalidOperationException("No user authorized");
+    }
+
+    private async Task OnSearchRequest((string, CancellationToken) arg)
+    {
+        _search = arg.Item1;
+        if (_itemsRendererRef is not null)
+        {
+            await _itemsRendererRef.RequestItems();
+        }
+    }
+
+    private async ValueTask<ItemsProviderResult<Project>> ProjectsProviderDelegate(ItemsProviderRequest request)
+    {
+        _projectsFilter.SearchString = _search;
+        _projectsFilter.CpRequester = _cpUser;
+        _projectsFilter.UserRequester = _user;
+        // _projectsFilter.ProjectFilters = ProjectDefines.Select(pd => (ProjectFilter) Activator.CreateInstance(pd.ProjectType.FilterType)!).DistinctBy(x => x.GetType()).ToList();
+        var projectsLoadResults = await ProjectLoader.LoadManyAsync(_projectsFilter);
+        _loadResults = projectsLoadResults;
+        var projects = projectsLoadResults.Projects.ToList();
+        if (NavigationManager.Uri.EndsWith("/projects"))
+        {
+            // No project selected - select first one, if any and redirect
+            var selectedPid = projects.FirstOrDefault()?.Id;
+            if (selectedPid is not null)
+            {
+                NavigationManager.NavigateTo($"/projects/{selectedPid}");
+            }
+        }
+
+        return new ItemsProviderResult<Project>(projects.Skip(request.StartIndex).Take(request.Count), projects.Count);
+    }
+
+}

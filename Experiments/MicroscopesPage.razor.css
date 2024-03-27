@@ -1,0 +1,15 @@
+.microscopes-page {
+    display: flex;
+    flex-grow: 1; /* Cover rest of the viewport vertically */
+    align-items: stretch;
+}
+
+.microscopes-page > nav { 
+    flex-shrink: 0;
+    flex-basis: 14rem;
+    
+}
+
+.microscopes-page > div {
+    flex-grow: 1;
+}

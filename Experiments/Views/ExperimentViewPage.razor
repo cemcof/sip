@@ -1,0 +1,41 @@
+@page "/experiment/{ExperimentId:guid}"
+@using sip.Experiments.Model
+
+@inject ExperimentsService ExperimentsService
+
+<div class="container">
+    @if (_error is not null)
+    {
+        <p>@_error</p>
+    }
+    else
+    {
+            
+        <NullAware Value="@_exp">
+            <WhenReady>
+                <ExperimentView IsHeadlessPage="@true" Exp="@context"></ExperimentView>
+            </WhenReady>
+        </NullAware>
+    }
+</div>
+
+@code {
+    private Experiment? _exp;
+    private string? _error; 
+    
+    [Parameter]
+    public Guid ExperimentId { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        try
+        {
+            _exp = await ExperimentsService.GetExperimentAsync(ExperimentId);
+        }
+        catch (NotAvailableException)
+        {
+            _error = "Experiment not available";
+        }
+    }
+
+}

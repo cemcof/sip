@@ -1,0 +1,290 @@
+@inherits CInputBase<string>
+
+@inject ILogger<FilesystemBrowser> Logger;
+
+<div class="form-group radio-group cinput-container cfilesystem-container rendering-strategy-@(RenderingStrategy) @(HasLabel ? "labeled" : "labelless") @(IsRequired ? "required" : "")">
+    @if (HasLabel)
+    {
+        <div class="clabel-container" style="@GetFlexStyleForIndex(0)">
+            <CLabelAndTip Id="@InputId" Tip="@Tip">@DisplayName</CLabelAndTip>
+        </div>
+    }
+    
+    <div onkeydown="preventDefaultIfEnter(event); preventDefaultIfUp(event); preventDefaultIfDown(event)" 
+         onkeypress="preventDefaultIfEnter(event); preventDefaultIfUp(event); preventDefaultIfDown(event)" 
+         class="cinput-input-container" style="@GetFlexStyleForIndex(1)">
+        <ListView TItem="FileSystemItemInfo" @ref="_listViewRef" 
+                  ClassName="filesystem"
+                  ItemsCount="12" 
+                  ItemSelectable="@_IsItemSelectable"
+                  HideBodyAndFooter="@(!_showPicker)" 
+                  Items="@ItemsToRender" 
+                  OnItemConfirmed="@_confirmSelection"
+                  OnCancelled="_hideList">
+            <Header>
+                <input type="text" class="form-control @FieldCssClass" id="@InputId" value="@CurrentValue" 
+                       readonly="@IsReadonly" disabled="@IsDisabled"
+                       @onfocus="_inputFocused"
+                       @onblur="_inputBlurred"
+                       @oninput="_inputOnInput"/>
+                <div class="invalid-feedback">
+                    <ValidationMessage For="ValueExpression"></ValidationMessage>
+                </div>
+            </Header>
+
+            <ItemTemplate>
+                <div class="cfilesystem-picker-item px-2 @(_GetItemCssClass(context).Item1) @((context.IsAccessible) ? "" : "inaccessible")">
+                    <i class="bi @(_GetItemCssClass(context).Item2)"></i> &nbsp;@context.Name
+                </div>
+            </ItemTemplate>
+            
+        </ListView>
+        
+    </div>
+
+</div>
+
+@code {
+    
+    [Parameter]
+    public bool PickFolder { get; set; }
+    
+    [Parameter]
+    public string? Scope { get; set; }
+
+    [CascadingParameter(Name = "filebrowser_scope")]
+    public string? ScopeCascaded { get; set; }
+    
+    private string? GetScope => Scope ?? ScopeCascaded;
+
+
+    [Parameter]
+    [EditorRequired]
+    public IFilesystemProvider FileSystemProvider { get; set; } = null!;
+
+    private string CurrentInputDirname
+    {
+        get
+        {
+            var cv = CurrentValue ?? "";
+            
+            if (string.IsNullOrEmpty(cv))
+                return string.Empty;
+            
+            var lastSlashIndex = cv.LastIndexOf('/');
+            var lastBslashIndex = cv.LastIndexOf('\\');
+            if (lastSlashIndex != -1)
+            {
+                return string.Concat(cv.Take(lastSlashIndex)) + "/";
+            }
+
+            if (lastBslashIndex != -1)
+            {
+                return string.Concat(cv.Take(lastBslashIndex)) + "\\";
+            }
+            
+            return cv;
+        }
+    }
+
+    private List<FileSystemItemInfo> _items = new();
+    private List<FileSystemItemInfo> ItemsToRender => new(_items.Where(x => x.Name != "."));
+    
+    private ListView<FileSystemItemInfo> _listViewRef = null!;
+    private bool _showPicker = false;
+
+    private string CurrentSlashedValue => BackslahsesToSlashes(CurrentValue ?? "");
+    private string BackslahsesToSlashes(string path) => path.Replace("\\", "/");
+
+    private CancellationTokenSource _providerCts = new();
+    private enum FbState { Ready, Pending, TimedOut }
+
+    private FbState _state = FbState.Ready;
+    
+    [Parameter]
+    public EventCallback<string> OnValidPick { get; set; }
+    
+    
+    protected override void Dispose(bool disposing)
+    {
+        _providerCts.Cancel();
+        base.Dispose(disposing);
+    }
+
+    private (string,string) _GetItemCssClass(FileSystemItemInfo item)
+    {
+        if (_state == FbState.Pending && item.Path == CurrentValue) return ("pending", "bi-three-dots");
+        if (_state == FbState.TimedOut && item.Path == CurrentValue) return ("timed-out", "bi-x-circle");
+        if (!item.IsDirectory) return ("file", "bi-file-earmark-fill");
+        
+        return item.Name switch
+            {
+                ".." => ("parent-directory", "bi-chevron-left"),
+                "." => ("current-directory", ""),
+                _ => ("directory", "bi-folder-fill")
+            };
+    }
+
+    private bool _IsItemSelectable(FileSystemItemInfo finfo)
+    {
+        if (!finfo.IsAccessible) return false;
+        // Cannot pick file when directory is supposed to be picked
+        if (!finfo.IsDirectory && PickFolder) return false;
+
+        return true;
+    }
+
+    private async Task RequestDirectoryInfoAsync()
+    {
+        Logger.LogTrace("Requesting directory info for CurrentValue {Cv} with scope {Scope}", CurrentValue, GetScope);
+        List<FileSystemItemInfo> items;
+        _providerCts.Cancel();
+        _providerCts = new CancellationTokenSource();
+
+        try
+        {
+            _state = FbState.Pending;
+            items = await FileSystemProvider.RequestDirectoryInfoAsync(
+                path: CurrentValue ?? string.Empty, 
+                scope: GetScope, 
+                timeout: default,
+                cts: _providerCts.Token);
+            
+            _state = FbState.Ready;
+        }
+        catch (TaskCanceledException)
+        {
+            return;
+        }
+        catch (TimeoutException)
+        {
+            _state = FbState.TimedOut;
+            return;
+        }
+
+        _items = items.ToList();
+        
+        // Dont include current directory in the list 
+        var current = _items.FirstOrDefault(i => i.Name == ".");
+        // if (current is not null) _items.Remove(current);
+        
+        var parent = _items.FirstOrDefault(i => i.Name == "..");
+        // If parent is same, we are at root, however, showing other roots should be possible, so make it empty value
+        if (parent is not null && parent.Path == current?.Path) parent.Path = string.Empty;
+        // Also make sure that parent apears always on top
+        if (parent is not null && _items.FirstOrDefault() != parent)
+        {
+            _items.Remove(parent);
+            _items.Insert(0, parent);
+        }
+    
+        _selectAppropriateItem();
+        EditContext.NotifyFieldChanged(FieldIdentifier);
+    }
+
+    private async void _showList()
+    {
+        _showPicker = true;
+        await RequestDirectoryInfoAsync();
+    }
+
+    private void _hideList()
+    {
+         _showPicker = false;
+    }
+
+
+    private void _selectAppropriateItem()
+    {
+        if (string.IsNullOrWhiteSpace(CurrentValue)) return;
+        var item = _items.FirstOrDefault(f => f.Path.Contains(CurrentValue, StringComparison.InvariantCultureIgnoreCase));
+        Logger.LogTrace("Selecting appropriate item: {}", item);
+        _listViewRef.SelectItem(item);
+    }
+
+    protected override bool TryParseValueFromString(string? value, out string result, out string validationErrorMessage)
+    {
+        result = value ?? string.Empty;
+        validationErrorMessage = string.Empty;
+        return true;
+    }
+
+    private async void _inputOnInput(ChangeEventArgs e)
+    {
+        var newval = e.Value as string ?? "";
+        CurrentValue = newval;
+        var prevFolder = CurrentInputDirname;
+        _selectAppropriateItem();
+        if (prevFolder != CurrentInputDirname)
+        {
+            await RequestDirectoryInfoAsync();
+        }
+        
+    }
+
+    private void _inputBlurred()
+    {
+        _hideList();
+    }
+
+    private void _inputFocused()
+    {
+        _showList();
+    }
+
+    private async Task _confirmSelection(FileSystemItemInfo? item)
+    {
+        if (item is null) return;
+        // Selected options was entered - set new input value.
+        if (item.IsDirectory)
+        {
+            // In this case, we enumerate selected folder
+            CurrentValue = item.Path;
+            _listViewRef.SelectItem(null);
+            await RequestDirectoryInfoAsync();
+        }
+
+        if (!item.IsDirectory)
+        {
+            // Trying to pick a file, after picking a file, hide the picker
+            CurrentValue = item.Path;
+            _hideList();
+        }
+
+        if (IsValid()) await OnValidPick.InvokeAsync(CurrentValue);
+    }
+
+    private bool IsValid() => _items.Any(fsi => fsi.IsDirectory == PickFolder && fsi.Path != "" && fsi.Path == CurrentValue);
+    
+
+    public override IEnumerable<string> SelfValidate(ValidationContext validationContext)
+    {
+        var messages = base.SelfValidate(validationContext);
+        foreach (var message in messages)
+        {
+            yield return message;
+        }
+        
+        var errmess = "Enter valid filesystem path";
+        
+        // if (PickFolder)
+        // {
+        //     // Picked folder must be equal to parent of the offered items.
+        //     var parFol = _items.FirstOrDefault(f => f.IsDirectory && f.Name == "..");
+        //     if (parFol is null || parFol.Path != CurrentValue)
+        //         yield return errmess;
+        // }
+        // else
+        // {
+        //     // Picket file must be directly in the list.
+        //     if (!_items.Any(f => !f.IsDirectory && f.Path == CurrentValue))
+        //         yield return errmess;
+        // }
+        
+        // Is the picked item in the current list?
+        if (!IsValid() && IsRequired)
+        {
+             yield return errmess;
+        }
+    }
+}

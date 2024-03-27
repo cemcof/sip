@@ -1,0 +1,28 @@
+@page "/projects/{ProjectId}"
+@layout ProjectsComponent
+@* @inject IProjectItemRenderProvider ProjectItemRenderProvider *@
+
+@if (_compType is not null)
+{
+    <AuthorizeView>
+        <DynamicComponent Type="@_compType"
+                          Parameters="@(new Dictionary<string, object> {{"ProjectId", ProjectId}, {"CpUser", context.User}})">
+        </DynamicComponent>
+    </AuthorizeView>
+}
+
+@code {
+
+    [Parameter]
+    public string ProjectId { get; set; } = string.Empty;
+
+    
+
+    private Type? _compType;
+    
+    protected override async Task OnParametersSetAsync()
+    {
+        _compType = null; // await ProjectItemRenderProvider.GetProjectComponent(ProjectId);
+    }
+
+}

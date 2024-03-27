@@ -1,0 +1,14 @@
+
+@if (FileMetadata is not null)
+{
+    <iframe @attributes="AdditionalAttributes" src="/files/@FileMetadata.Id"></iframe>
+}
+
+
+@code { 
+    [Parameter] public FileMetadata? FileMetadata { get; set; }
+    
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+
+}

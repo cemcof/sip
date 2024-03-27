@@ -1,0 +1,19 @@
+
+@if (!string.IsNullOrWhiteSpace(Flex))
+{
+    <CascadingValue Value="@Flex" Name="@nameof(CInputBase<object>.FlexCascade)">
+        @ChildContent
+    </CascadingValue>    
+}
+else
+{
+    @ChildContent
+}
+
+@code {
+    [Parameter]
+    public string? Flex { get; set; }    
+    
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+}

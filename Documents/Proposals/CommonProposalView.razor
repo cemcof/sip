@@ -1,0 +1,45 @@
+@typeparam TProposal
+
+<header class="proposal-header">
+    <img src="@HeaderLogoUrl" />
+</header>
+
+<div class="body">
+    
+    <div class="heading">
+        @Heading
+    </div>
+
+    @ChildContent(Proposal)
+</div>
+
+
+<div class="footer">
+    <img src="@FooterLogoUrl" />
+</div>
+
+
+@code {
+    [Parameter]
+    public string HeaderLogoUrl { get; set; } = string.Empty;
+
+    [Parameter]
+    public string FooterLogoUrl { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Heading { get; set; } = string.Empty;
+
+    [Parameter, EditorRequired]
+    public TProposal Proposal { get; set; } = default!;
+
+    [Parameter, EditorRequired]
+    public RenderFragment<TProposal> ChildContent { get; set; } = null!;
+
+    protected override void OnParametersSet()
+    {
+        if (ChildContent is null) throw new ArgumentException("Component parameter is required", nameof(ChildContent));
+        if (Proposal is null) throw new ArgumentException("Component parameter is required", nameof(Proposal));
+        base.OnParametersSet();
+    }
+
+}

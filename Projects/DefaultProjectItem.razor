@@ -1,0 +1,35 @@
+@* Common item project renderer *@
+@* Renders project type badge, project ID, acronym and provided node *@
+
+     
+<div class="listitem-badged-container">
+    
+    @if (Badge is not null)
+    {
+        <div class="badg @Theme">
+            @Badge
+        </div>
+    }
+    
+    <div class="listitem-content">
+        <div class="headline">@Project.Id - @Project.Acronym</div>
+        <div class="note">@Note</div>
+    </div>
+
+
+</div>
+
+
+@code {
+    
+    [Parameter, EditorRequired]
+    public Project Project { get; set; } = null!;
+    
+    [Parameter] 
+    public string? Note { get; set; }
+    
+    [Parameter] public string? Badge { get; set; }
+    
+    [Parameter] public string? Theme { get; set; }
+    
+}

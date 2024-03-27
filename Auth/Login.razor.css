@@ -1,0 +1,43 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80rem;
+    margin: 2rem auto;
+}
+
+.provider-item {
+    display: flex;
+    border: 1px solid #bbbbbb;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 0.6rem;
+    padding: 1rem;
+}
+
+.provider-item-logo {
+    width: 120px;
+    height: 50px;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    margin-right: 2rem;
+}
+
+.provider-item:hover {
+    border-color: black;
+    background-color: #f6f6f6;
+    box-shadow: 0 0 10px #5e5e5e;
+}
+
+
+.provider-item-content div:first-child { 
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+h1 {
+    font-size: 130%;
+    font-weight: bold;
+}

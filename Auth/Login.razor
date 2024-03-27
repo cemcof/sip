@@ -1,0 +1,60 @@
+@using Microsoft.AspNetCore.Authentication
+@using System.Web
+@using sip.Core
+
+@inject ILogger<Login> Logger
+@inject IOptions<AppOptions> AppOptions
+@inject IOptions<Dictionary<string, LoginProviderGuiOptions>> LoginGuiOptions
+@inject NavigationManager NavigationManager
+
+<div class="login-container">
+    
+    <h1>Log in to the @AppOptions.Value.Name system via one of the following providers</h1>
+    
+    <div class="providers-container">
+        
+        @foreach (var ao in LoginGuiOptions.Value)
+        {
+            var (schemeName, opts) = (ao.Key, ao.Value);
+            
+            <div class="provider-item" @onclick="@(() => ChallengeScheme(schemeName))">
+                
+                <div class="provider-item-logo">
+                    <img src="@opts.LogoUrl"  alt="@opts.DisplayName" />    
+                </div>
+                
+                <div class="provider-item-content">
+                    <div>@opts.DisplayName</div>
+                    <div>@opts.Description</div>
+                </div>
+                
+            </div>
+        }
+        
+    </div>
+    
+</div>
+
+@code {
+    
+    [Parameter]
+    public string? ReturnUrl { get; set; }
+
+    protected override void OnInitialized()
+    {
+        var firstAuth = LoginGuiOptions.Value.Keys.FirstOrDefault();
+        if (firstAuth is not null && LoginGuiOptions.Value.Keys.Count == 1)
+        {
+            ChallengeScheme(firstAuth);
+        }
+    }
+
+    private void ChallengeScheme(string scheme)
+    {
+        var retUrl = string.IsNullOrWhiteSpace(ReturnUrl) ? "/" : ReturnUrl!;
+        var retEncoded = HttpUtility.UrlEncode(retUrl);
+        var target = $"/challenge/{scheme}?returnUrl={retEncoded}";
+        Logger.LogDebug("Challenging from login component: {}, unencoded return {}", target, retUrl);
+        NavigationManager.NavigateTo(target, forceLoad: true);
+    }
+}

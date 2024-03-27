@@ -1,0 +1,149 @@
+.schedule-header {
+    display: flex;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.week-caption {
+    width: 15rem;
+    text-align: center;
+}
+
+.hour-numbers {
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+}
+
+.hour-number {
+    position: absolute;
+    left: 0;
+}
+
+.day-container {
+    display: flex;
+    border-bottom: 3px solid black;
+    border-top: 3px solid black;
+    margin: -3px 0 0 0;
+}
+
+.day-caption {
+    width: 7.5rem;
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background-color: #cbcbcb;
+}
+
+.day-caption > div {
+    align-self: center;
+}
+
+.instruments-container {
+    flex-grow: 1;
+}
+
+.instrument-container {
+    display: flex;
+    flex-grow: 1;
+    height: 20px;
+    margin: -1px 0 0 0;
+    border-top: 1px solid #b0b0b0;
+    border-bottom: 1px solid #b0b0b0;
+}
+
+.instrument-container:first-child, .instrument-container:last-child {
+    border-top: none;
+    border-bottom: none;
+}
+
+.instrument-caption {
+    display: flex;
+    width: 7.5rem;
+    color: white;
+    justify-content: center;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.instrument-caption-text {
+    align-self: center;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.instrument-reservations {
+    display: flex;
+    flex-grow: 1;
+    position: relative;
+}
+
+.reservation {
+    position: absolute;
+    left: 0;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-right: 5px;
+    height: 100%;
+    border-right: 2px solid white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.reservation-caption {
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.schedule-container-header {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.day-caption[highlighted], .hour-number[highlighted] {
+    background-color: rgb(253, 218, 152);
+}
+
+.time-marker {
+    width: 0.2rem;
+    background-color: rgb(186, 197, 30);
+    position: absolute;
+    height: 90vh;
+    z-index: 10;
+}
+
+.reservation-details-container {
+    z-index: 999;
+    background-color: rgba(255, 255, 255, 0.8);
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reservation-details {
+    width: 40rem;
+    padding: 2rem;
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 0 3px 13px 2px rgba(0,0,0,0.46)
+}
+
+
+.reservation-details .details-item {
+    display: flex;
+}
+
+.reservation-details .details-item > div:first-child {
+    flex-basis: 12rem;
+    flex-shrink: 0;
+    text-align: right;
+    font-weight: bold;
+    margin-right: 2rem;
+}

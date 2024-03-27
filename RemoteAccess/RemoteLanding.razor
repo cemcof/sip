@@ -1,0 +1,78 @@
+@using sip.Organizations
+@using sip.Userman
+@inherits OrganizationComponentBase
+@inject ILogger<RemoteLanding> Logger
+@inject IRemoteAccess RemoteAccess
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+
+<RefreshTimer Action="@OnParametersSetAsync"></RefreshTimer>
+
+<div class="remote-landing-container">
+    <div class="heading">Remote access to CEMCOF instruments</div>
+
+    <p>In unlikely case that you only see a black screen but no error, do not try to click or interact blindly, 
+        as the user input may actually still be interpreted. 
+        In this case, please contact a CEMCOF member to assist you.</p>
+    
+    @if (_remoteSessions.Any())
+    {
+        <div class="session-buttons-container">
+            @foreach (var ac in _remoteSessions)
+            {
+                <button @onclick="@(() => ConnectClick(ac))">@ac.ForInstrument.Name - @ac.ForConnection.Name (until @ac.Expiration.StandardFormat())</button>
+            }
+        </div>
+    }
+    else
+    {
+        <span>There are currently no sessions available</span>
+        <br/>
+    }
+    
+    @if (!string.IsNullOrEmpty(_messageText))
+    {
+        <span>@_messageText</span>
+    }
+    
+</div>
+
+
+@code {
+    private string? _messageText;
+    
+    private List<RemoteAccessSessionRequest> _remoteSessions = new();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        try
+        {
+            _remoteSessions = (await RemoteAccess.GetAuthorizedSessionsForUser(Organization, AuthUser.ToUserClientInfo()))
+                .ToList();
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, "Error loading remote access information");
+            _messageText = "Error loading remote access information";
+        }
+    }
+
+    private async Task ConnectClick(RemoteAccessSessionRequest sessionRequest)
+    {
+        _messageText = "Connecting...";
+        StateHasChanged();
+
+        try
+        {
+            var session = await RemoteAccess.OpenSession(sessionRequest);
+            _messageText = null;
+            await JsRuntime.InvokeVoidAsync("open", session.TargetUrl, "_blank");
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, "Error establishing guaca session");
+            _messageText = "Connection failed";
+        }
+        
+    }
+}

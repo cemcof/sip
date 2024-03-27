@@ -1,0 +1,240 @@
+@typeparam TValue where TValue : IEquatable<TValue>
+@using sip.Utils.Items
+@using sip.Utils
+@inherits CInputBase<TValue>
+@inject ILogger<CDropdown<TValue>> Logger
+
+
+<div class="form-group select-group cinput-container cdropdown-container rendering-strategy-@(RenderingStrategy) @(HasLabel ? "labeled" : "labelless") @(IsRequired ? "required" : "")">
+    @if (HasLabel)
+    {
+        <div class="clabel-container" style="@GetFlexStyleForIndex(0)">
+            <CLabelAndTip Id="@InputId" Tip="@Tip">@DisplayName</CLabelAndTip>
+        </div>
+    }
+
+    <div class="cinput-input-container" style="@GetFlexStyleForIndex(1)">
+        @if (CurrentValue is null)
+        {
+            <TooltipContainer class="tt-fullsize" TooltipDirection="TooltipDirection.Bottom">
+                <SearchBar @ref="_searchBarRef" RequestSearch="RequestSearch"
+                           OnNavigationKeyDown="_searchInputNavigationKeyDown"
+                           OnSearchFocused="_searchInputFocused"
+                           OnSearchBlurred="_searchInputBlurred">
+
+                </SearchBar>
+
+                <ToolTip class="tt-fullsize dropdown-tooltip" ShowIf="@ShowDropdown">
+
+                    @if (Header is not null) @Header(this)
+
+                    @if (_state is DropdownState.DroppedDown)
+                    {
+                        <SListView @ref="_selectListViewRef" TItem="TValue"
+                                   ItemContent="@ItemTemplate"
+                                   OnItemConfirmed="SelectItem"
+                                   ItemsProvider="@(request => ItemsProvider(request, _currentSearchString))">
+                        </SListView>
+                    }
+
+                    @if (_state is DropdownState.AlternativeMode && AlternativeBody is not null)
+                    {
+                        @AlternativeBody(this)
+                    }
+
+                    @if (Footer is not null) @Footer(this)
+
+                </ToolTip>
+
+            </TooltipContainer>
+        }
+        else
+        {
+            <div class="selected-item" @onclick="@(() => Reset(true))">
+                @SelectedItemTemplate(CurrentValue)
+            </div>
+        }
+
+        <div class="invalid-feedback">
+            <ValidationMessage For="ValueExpression"></ValidationMessage>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    private bool IsItemSelected => CurrentValue is not null;
+    private bool ShowDropdown => _state is DropdownState.AlternativeMode or DropdownState.DroppedDown;
+    private string _currentSearchString = string.Empty;
+    private bool _refocus = false;
+
+    public enum DropdownState
+    {
+        Idle,
+        DroppedDown,
+        AlternativeMode
+    }
+
+    private DropdownState _state = DropdownState.Idle;
+    public DropdownState State => _state;
+
+    [Parameter]
+    public ItemProviderRequestWithSearchDelegate<TValue> ItemsProvider { get; set; } = null!;
+
+    [Parameter]
+    public RenderFragment<TValue> ItemTemplate { get; set; } = val => @<div>@val.ToString().Humanize()</div>;
+
+    [Parameter]
+    public RenderFragment<TValue> SelectedItemTemplate { get; set; } = null!;
+
+    // Optional content rendered before the dropdown listview 
+    [Parameter]
+    public RenderFragment<CDropdown<TValue>>? Header { get; set; }
+
+    // Optional content rendered after the dropdown listview
+    [Parameter]
+    public RenderFragment<CDropdown<TValue>>? Footer { get; set; }
+
+    // Optional content rendered instead of the listview when in alternative mode
+    [Parameter]
+    public RenderFragment<CDropdown<TValue>>? AlternativeBody { get; set; }
+
+    // If default value is set, automatically select first value from the provider instead
+    [Parameter]
+    public bool AutoDefault { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+    // Check if we should try to automatically set default value from provider 
+        if (AutoDefault && (CurrentValue is null || CurrentValue.Equals(default)))
+        {
+            var providerItem = await ItemsProvider(new ItemsProviderRequest(0, 1, CancellationToken.None), null);
+            CurrentValue = providerItem.Items.FirstOrDefault();
+        }
+    }
+
+    protected override Task OnParametersSetAsync()
+    {
+        ArgumentNullException.ThrowIfNull(ItemsProvider, nameof(ItemsProvider));
+
+    // ReSharper disable once ConstantNullCoalescingCondition
+        SelectedItemTemplate ??= ItemTemplate;
+        return Task.CompletedTask;
+    }
+
+
+    protected override bool TryParseValueFromString(string? value, out TValue result, out string validationErrorMessage)
+    {
+        throw new NotImplementedException();
+    }
+
+    // private ValueTask<ItemsProviderResult<TValue>> _itemProviderRelay(ItemsProviderRequest request)
+    // {
+    //     // Take search string and combine cancellation tokens
+    //     ItemsProvider(new ItemsProviderRequest(request.StartIndex, request.Count, ))
+    // }
+
+    private async Task RequestSearch((string, CancellationToken) arg)
+    {
+    // We should use search cancellation token instead of the virtual default one
+    // TODO- somehow incorporate cancellation token from search bar
+        _currentSearchString = arg.Item1;
+        if (_selectListViewRef is not null)
+        {
+            await _selectListViewRef.RequestItems();
+        }
+    }
+
+    public Task SelectItem(TValue? item)
+    {
+        Logger.LogDebug("Item selected {}", item);
+        CurrentValue = item;
+        _state = DropdownState.Idle;
+        return Task.CompletedTask;
+    }
+
+
+    private SListView<TValue>? _selectListViewRef;
+
+    private void OnItemMove(int dir)
+    {
+        _selectListViewRef?.MoveSelection(dir);
+    }
+
+    private void _searchInputNavigationKeyDown(KeyNames key)
+    {
+        Logger.LogDebug("{}: {}", nameof(_searchInputNavigationKeyDown), key);
+
+        if (key is KeyNames.ArrowDown)
+        {
+            _selectListViewRef?.SelectNextItem();
+        }
+
+        if (key is KeyNames.ArrowUp)
+        {
+            _selectListViewRef?.SelectPreviousItem();
+        }
+
+        if (key is KeyNames.Enter)
+        {
+            _selectListViewRef?.ConfirmCurrentItem();
+        }
+
+        if (key is KeyNames.Escape)
+        {
+            _state = DropdownState.Idle;
+        }
+    }
+
+    private Task Reset(bool refocus = false)
+    {
+        Logger.LogDebug("Resetting dropdown from {}", _state);
+        CurrentValue = default;
+        _currentSearchString = "";
+        _refocus = refocus;
+        _state = DropdownState.Idle;
+
+        return Task.CompletedTask;
+    }
+
+    public void EnterAltMode()
+    {
+        Logger.LogDebug("Entering alt mode...");
+        _state = DropdownState.AlternativeMode;
+        StateHasChanged();
+    }
+
+    public void ExitAltMode()
+    {
+        _state = DropdownState.Idle;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_searchBarRef is not null && _refocus)
+        {
+            await _searchBarRef.FocusAsync();
+        }
+
+        _refocus = false;
+    }
+
+    private SearchBar? _searchBarRef;
+
+    private Task _searchInputFocused()
+    {
+        _state = DropdownState.DroppedDown;
+        return Task.CompletedTask;
+    }
+
+    private Task _searchInputBlurred()
+    {
+        if (_state is DropdownState.DroppedDown)
+        {
+            return Reset();
+        }
+
+        return Task.CompletedTask;
+    }
+
+}

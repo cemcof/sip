@@ -1,0 +1,25 @@
+.sample {
+    font-weight: bold;
+    flex-grow: 1;
+    margin-left: 1rem;
+    font-size: 90%;
+}
+
+.badg {
+    flex: 0 0 5rem;
+    font-size: 70%;
+}
+
+
+
+.names {
+    font-style: italic;
+    font-size: 80%;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.exp-overview-container ::deep a.exp-item {
+    display: flex;
+    align-items: center;
+}

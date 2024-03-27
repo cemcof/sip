@@ -1,0 +1,161 @@
+@inject IOptionsMonitor<DewarsOptions> Options
+
+<div class="tube-selector-container">
+        
+        @if (_guiStatus == TubeSelectorGuiStatus.SelectingDewarAndHolder)
+        {
+            <div class="text-center">Select a holder in a dewar</div>
+            
+            @foreach (var dw in Options.Get(Organization).DewarList)
+            {
+                var dwCaptured = dw;
+                <DewarSvg DewarId="@dwCaptured"
+                          HolderClicked="@((h) => _selectDewarAndHodler(dwCaptured, h))"
+                          GetHolderClass="@((h) => _getHolderClass(dwCaptured, h))"
+                          StaticOnly="@false">
+                </DewarSvg>
+            }
+        }
+        
+        @if (_guiStatus == TubeSelectorGuiStatus.SelectingTube)
+        {
+            <div class="d-flex justify-content-end">
+                <button @onclick="_backToDewars" class="btn btn-outline-secondary">&lt; Back to dewars</button>
+            </div>
+            <div class="text-center">Select a tube in the holder</div>
+            
+            <HolderSvg HolderId="@_tube.TrimmedId"
+                       GetTubeClass="_getTubeClass"
+                       StaticOnly = "@false"
+                       TubeClicked="@((tup) => _selectDeckAndPosition(tup.Deck, tup.Position))"></HolderSvg>
+            
+        }
+        
+        @if (_guiStatus == TubeSelectorGuiStatus.Editing)
+        {
+            <div class="d-flex justify-content-end">
+                <button @onclick="_backToHolder" class="btn btn-outline-secondary me-1">&lt; Back to the holder</button>
+                <button @onclick="_backToDewars" class="btn btn-outline-secondary">&lt;&lt; Back to dewars</button>
+            </div>
+            <div class="text-center">Edit details of the tube</div>
+            <DetailedTubeId Tube="_tube"></DetailedTubeId>
+            
+            <div class="px-5">
+                <div class="form-group">
+                    <label class="form-label">User</label>
+                    <input @bind="_tube.User" type="text" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Sample</label>
+                    <input @bind="_tube.Description" class="form-control" />
+                </div>
+        
+                <div class="d-flex">
+                    <div class="">Last change: @_tube.LastChange.StandardFormat()</div>
+                    <div class="flex-grow-1"></div> <!-- Spacer -->
+                    <button @onclick="_okClick" class="btn btn-primary me-2">Save</button>
+                    <button @onclick="_clearClicked" class="btn btn-primary">Clear</button>
+                </div>
+            </div>
+        }
+</div>
+
+
+@code {
+
+    private enum TubeSelectorGuiStatus
+    {
+        SelectingDewarAndHolder,
+        SelectingTube,
+        Editing
+    }
+    
+    private Tube _tube = new();
+
+    public void ApplyTube(Tube tube)
+    {
+        _tube = tube;
+        _guiStatus = TubeSelectorGuiStatus.Editing;
+        StateHasChanged();
+    }
+
+    private TubeSelectorGuiStatus _guiStatus;
+    [Parameter, EditorRequired] public EventCallback<Tube> TubeUpdated { get; set; }
+    [Parameter, EditorRequired] public IOrganization Organization { get; set; }
+    [Parameter, EditorRequired] public TubesService TubesService { get; set; } 
+    
+    private void _selectDewarAndHodler(string dewar, string holder)
+    {
+        Console.WriteLine("Selecting dewar {0} and holder {1}", dewar, holder);
+        _tube.Dewar = dewar;
+        _tube.Holder = holder;
+        _guiStatus = TubeSelectorGuiStatus.SelectingTube;
+    }
+
+    private async Task _selectDeckAndPosition(string deck, string postion)
+    {
+        _tube = (await TubesService.GetTube(Organization, _tube.Dewar, _tube.Holder, deck, postion)) ?? 
+                new Tube() {Dewar = _tube.Dewar, Holder = _tube.Holder, Position = postion, Deck = deck};
+        _guiStatus = TubeSelectorGuiStatus.Editing;
+    }
+
+    private async Task _updateTube()
+    {
+        await TubesService.UpdateTubeAsync(_tube);
+        await TubeUpdated.InvokeAsync(_tube);
+    }
+
+    private string _getHolderClass(string dewar, string holder)
+    {
+        string result = "";
+        if (dewar == _tube.Dewar && holder == _tube.Holder)
+        {
+            result += "selected";
+        }
+
+        return result;
+    }
+
+    private string _getTubeClass((string deck, string position) tube)
+    {
+        string result = "";
+        if (tube.deck == _tube.Deck && tube.position == _tube.Position)
+        {
+            result += "selected";
+        }
+        
+        return result;
+    }
+
+    private async Task _clearClicked()
+    {
+        _tube.Description = "";
+        _tube.User = "";
+        await _updateTube();
+    }
+
+    private async Task _okClick()
+    {
+        await _updateTube();
+        _backToDewars();
+    }
+
+    private void _backToDewars()
+    {
+        _tube = new Tube();
+        _guiStatus = TubeSelectorGuiStatus.SelectingDewarAndHolder;
+    }
+
+    private void _backToHolder()
+    {
+        if (string.IsNullOrEmpty(_tube.Holder))
+        {
+            _backToDewars();
+            return;
+        }
+
+        _tube = new Tube() {Dewar = _tube.Dewar, Holder = _tube.Holder};
+        _guiStatus = TubeSelectorGuiStatus.SelectingTube;
+    }
+}

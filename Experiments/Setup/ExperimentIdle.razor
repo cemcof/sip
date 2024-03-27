@@ -1,0 +1,51 @@
+@using sip.Experiments.Model
+@inject ILogger<ExperimentIdle> Logger
+
+@* <div> Needed to apply ::deep in css *@
+<div>
+    <CEditForm TModelType="Experiment" novalidate OnSubmit="@ExpHandler.RequestStart" OnInvalidSubmit="@(() => _btnRun!.Unlock())"
+               class="cform exp-idle-form"
+               FormFooter="@(CEditForm<Experiment>.EmptyFooter)"
+               Model="Exp">
+        
+        <div class="exp-form-flex-container">
+            <div class="exp-form-data-part">
+                <OperatorPickerPart Exp="Exp"/>
+                <UserPickerPart Exp="Exp" ExpMeta="@ExpMeta"/>
+                <ProjectPickerPart Exp="Exp"/>
+                <SamplePickerPart Exp="Exp"/>
+                <DataLifecyclePart Exp="Exp" ExpMeta="ExpMeta"/>
+
+            </div>
+
+            <div class="exp-form-processing-part">
+                <DataProcessingPart Exp="Exp" ExpMeta="@ExpMeta"/>
+            </div>
+
+        </div>
+        <div class="exp-form-button-part group">
+            <OneoffButton @ref="@_btnRun"
+                          type="submit"
+                          class="btn btn-primary"
+                          UsedCaption="Please wait..."
+                          UnusedCaption="Run job"/>
+        </div>
+
+
+    </CEditForm>
+    
+</div>
+
+@code {
+
+    [Parameter]
+    public IExperimentHandler ExpHandler { get; set; } = null!;
+
+    [Parameter]
+    public Experiment Exp { get; set; } = null!;
+    
+    [Parameter]
+    public ExperimentOptions ExpMeta { get; set; } = null!;
+    
+    private OneoffButton? _btnRun;
+}

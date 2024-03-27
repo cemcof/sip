@@ -1,0 +1,3 @@
+::deep a.user-link:hover, ::deep a.user-link:active {
+    font-weight: bold;
+}

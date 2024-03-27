@@ -1,0 +1,17 @@
+
+<CEditForm TModelType="NewUserModel"
+           OnCancel="@OnCancel"
+           OnSubmit="@OnConfirm">
+    
+    <UserCreateForm Model="@context.Model"></UserCreateForm>
+    
+</CEditForm>
+
+
+@code {
+    [Parameter]
+    public EventCallback OnCancel { get; set; }
+    
+    [Parameter]
+    public EventCallback<NewUserModel> OnConfirm { get; set; }
+}

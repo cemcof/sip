@@ -1,0 +1,24 @@
+@* Navigation link that bypasses routing and works as simple a tag *@
+@inject NavigationManager NavigationManager
+
+<a @attributes="@AdditionalAttributes" @onclick="@LinkClick" @onclick:preventDefault="@true">
+    @ChildContent
+</a>
+
+@code {
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+    
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    private void LinkClick()
+    {
+        if (AdditionalAttributes is not null && AdditionalAttributes.ContainsKey("href"))
+        {
+            var href = (string)AdditionalAttributes["href"];
+            NavigationManager.NavigateTo(href, forceLoad:true);
+        }
+    }
+
+}

@@ -1,0 +1,90 @@
+@inject NavigationManager NavigationManager
+@inject IOptionsMonitor<MainGuiOptions> GuiOpts
+
+@using sip.Userman
+@using Microsoft.AspNetCore.Authorization.Infrastructure
+@using sip.Core
+
+<div class="identity-panel">
+    <div class="user-icon"><i class="bi bi-person-circle"></i></div>
+
+    @* According to login state, render userinfo, login button or IP address *@
+    <AuthorizeViewByRequirements Requirements="@_GetUserLoggedInRequirement().ToArray()">
+        @* The user is logged in *@
+        <Authorized>
+            <NavLink href="/authinfo" class="user-link">
+                @context.GetFullname()
+            </NavLink>
+        </Authorized>
+        
+        @* No user is logged in *@
+        <NotAuthorized>
+            @* Do we permit login? The render login button *@
+            <AuthorizeViewByRequirements Requirements="@_GetLoginableRequirements().ToArray()">
+                <Authorized Context="ctx">
+                    <a class="bt-transparent" href="/login?returnUrl=@WebUtility.UrlEncode(NavigationManager.Uri)">Login</a>
+                </Authorized>
+                
+                @* Login not permitted, so show only IP *@
+                <NotAuthorized Context="ctx">
+                    @context.GetRemoteIp()
+                </NotAuthorized>
+            </AuthorizeViewByRequirements>
+        </NotAuthorized>
+        
+    </AuthorizeViewByRequirements>
+    
+    
+    @* Logout button, if should be displayed *@
+    <AuthorizeViewByRequirements Requirements="@_GetLogoutableRequirements().ToArray()">
+        <ALink href="/logout" title="Logout">
+            <i class="bi bi-box-arrow-right"></i>
+        </ALink>
+    </AuthorizeViewByRequirements>
+
+</div>
+
+
+
+@code {
+    [Parameter]
+    public IOrganization? Organization { get; set; }
+
+    private IEnumerable<IAuthorizationRequirement> _GetLoginableRequirements()
+    {
+        yield return new AssertionRequirement(a => !a.User.IsAppAuthenticated());
+        var opts = (Organization is null) ? GuiOpts.CurrentValue : GuiOpts.Get(Organization);
+        foreach (var address in opts.NoSignInNetworks)
+        {
+            yield return new NotRemoteIpRequirement(address);
+        }
+    }
+    
+    private IEnumerable<IAuthorizationRequirement> _GetLogoutableRequirements()
+    {
+        yield return new AssertionRequirement(a => a.User.IsAppAuthenticated());
+    }
+
+    private IEnumerable<IAuthorizationRequirement> _GetUserLoggedInRequirement()
+    {
+        yield return new AppUserRolesRequirement();
+    }
+
+    // TODO - check if this is necessary, otherwise del
+    // private void StateChange(object? sender, LocationChangedEventArgs locationChangedEventArgs)
+    // {
+    //     InvokeAsync(StateHasChanged);
+    // }
+    //
+    // protected override void OnInitialized()
+    // {
+    //     NavigationManager.LocationChanged += StateChange;
+    // }
+    //
+    //
+    // public void Dispose()
+    // {
+    //     NavigationManager.LocationChanged -= StateChange;
+    // }
+
+}

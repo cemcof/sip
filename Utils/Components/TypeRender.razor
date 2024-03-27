@@ -1,0 +1,15 @@
+@typeparam TValue
+
+@if (Value is TValue && ChildContent is not null)
+{
+    @ChildContent
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public object? Value { get; set; }
+
+    [Parameter, EditorRequired]
+    public RenderFragment<TValue>? ChildContent { get; set; }
+
+}

@@ -1,0 +1,27 @@
+@using sip.Core
+@using sip.Utils.Components
+@model sip.Documents.DocumentHost
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject IOptions<AppOptions> Options
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <base href="/"> 
+    <link rel="stylesheet" href="_content/Kopla/css/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="_content/Kopla/css/kopla.css"/>
+    <link rel="stylesheet" href="css/@(Options.Value.Identifier).css"/>
+    <link rel="stylesheet" href="@(Options.Value.Identifier).styles.css"/>
+    <title></title>
+</head>
+<body>
+
+<component type="@typeof(DynamicComponentDelegator)" param-RenderInfo="@(Model!.RenderInfo)" render-mode="Static"/>
+
+</body>
+</html>

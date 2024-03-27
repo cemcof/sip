@@ -1,0 +1,37 @@
+@typeparam TNumberType where TNumberType : struct, IConvertible
+@using System.ComponentModel
+@inherits CInputBase<TNumberType>
+
+<div class="form-group cinput-container cnumberinput-container rendering-strategy-@(RenderingStrategy) @(HasLabel ? "labeled" : "labelless") @(IsRequired ? "required" : "")">
+    @if (HasLabel)
+    {
+        <div class="clabel-container" style="@GetFlexStyleForIndex(0)">
+            <CLabelAndTip Id="@InputId" Tip="@Tip">@DisplayName</CLabelAndTip>
+        </div>
+    }
+    
+    <div class="cinput-input-container" style="@GetFlexStyleForIndex(1)">
+        <input type="number" min="@RangeMin" max="@RangeMax" class="form-control @FieldCssClass" @bind="CurrentValueAsString" id="@InputId" readonly="@IsReadonly" disabled="@IsDisabled" />
+        <div class="invalid-feedback">
+            <ValidationMessage For="ValueExpression"></ValidationMessage>
+        </div>
+    </div>
+    
+    @if (!string.IsNullOrEmpty(Unit))
+    {
+        <div class="cnumberinput-unit" style="@GetFlexStyleForIndex(2)">
+            @((MarkupString)Unit)
+        </div>
+    }
+</div>        
+
+@code {
+
+    protected override bool TryParseValueFromString(string? value, out TNumberType result, [NotNullWhen(returnValue: false)] out string? validationErrorMessage)
+    {
+        result = (TNumberType)(TypeDescriptor.GetConverter(typeof(TNumberType)).ConvertFromString(value ?? "0") ?? 0);
+        validationErrorMessage = null;
+        return true;
+    }
+
+}

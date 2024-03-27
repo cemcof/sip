@@ -1,0 +1,69 @@
+.project-status-flow {
+    display: flex;
+    width: 100%;
+    position: relative;
+    justify-content: space-between;
+}
+
+.status-linecross {
+    position: absolute;
+    width: 100%;
+    background-color: black;
+    height: 2px;
+    top: 2.65rem;
+    z-index: -1;
+}
+
+.status-flow-item {
+    text-align: center;
+}
+
+
+
+.status-name {
+    white-space: nowrap;
+    display: block;
+    text-align: center;
+    vertical-align: center;
+    font-size: 90%;
+    height: 20px;
+}
+
+
+.status-marker-container {
+    display: flex;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    height: 20px;
+    width: 100%;    
+}
+
+.status-marker {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: black;
+    flex: 0 0 20px;
+    /*margin-left: calc(50% - 10px);*/
+}
+
+.status-marker-start, .status-marker-end {
+    flex-grow: 1;
+    background-color: transparent;
+}
+
+.status-flow-item:nth-child(2) .status-marker-start, .status-flow-item:last-child .status-marker-end {
+    background-color: white;
+}
+
+.status-flow-item.active .status-marker {
+    background-color: #a1a105;
+}
+
+.status-flow-item.used { 
+}
+
+.status-flow-item.used .status-marker {
+    background-color: #9a9898;
+}
+

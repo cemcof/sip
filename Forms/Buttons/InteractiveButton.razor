@@ -1,0 +1,219 @@
+@* This is basically a button on steroids. *@
+@* It executes given action, handles errors, state transfers, waiting, tooltip messages, action confirming... *@
+@* It is made to provide best user experience and feedback while executing an arbitrary action *@
+@inject ILogger<InteractiveButton> Logger
+@implements IDisposable
+
+<TooltipContainer class="@("interactive-button-container state-" + _buttonState + " " + ContainerClass + " " + TooltipTheme)" 
+                  TooltipDirection="@TooltipDirection">
+    
+    <button type="button" class="@BtnClass" disabled="@(!IsBtnReady)"
+            @onclick="ClickHandler"
+            @onmouseover="MouseOverHandler"
+            @onmouseout="MouseOutHandler">
+        @if (IsBtnWorking)
+        {
+            @(InButtonWorkingTemplate ?? _inButtonWorkingTemplateDefault)
+        }
+        else
+        {
+            <i class="btn-icon @CssIcon @(string.IsNullOrEmpty(CssIcon) ? "hidden" : "")"></i>
+            @if (!RenderAsIcon) @Caption
+        }
+    </button>
+
+    <ToolTip ShowIf="@(_buttonState is ButtonState.ShowTip && !string.IsNullOrWhiteSpace(Tip))">
+        <div class="tip-content">@Tip</div>
+    </ToolTip>
+    
+    <ToolTipContexted Ctx="@(this)"
+                      ShowIf="@(ConfirmTemplate is not null && _buttonState is ButtonState.Confirming)"
+                      CtxChildContent="ConfirmTemplate">
+    </ToolTipContexted>
+    <ToolTipContexted Ctx="@(this)"
+                      ShowIf="@(_buttonState is ButtonState.Errored)"
+                      CtxChildContent="@(ErrorFlashTemplate ?? _defaultErrorFlashTemplate)">
+    </ToolTipContexted>
+    
+    <ToolTipContexted Ctx="@(this)"  
+                      ShowIf="@(SuccessFlashTemplate is not null && _buttonState is ButtonState.Succeeded)"
+                      CtxChildContent="@SuccessFlashTemplate">
+    </ToolTipContexted>
+</TooltipContainer>
+
+@code {
+
+    private enum ButtonState { Idle, ShowTip, Confirming, Pending, Succeeded, Errored }
+    private ButtonState _buttonState = ButtonState.Idle;
+    private bool IsBtnReady => _buttonState is ButtonState.Idle or ButtonState.ShowTip;
+    private bool IsBtnWorking => _buttonState is ButtonState.Pending;
+
+    private string? _error = "";
+    private string _defaultError = "An internal error occured, please refresh the page and try again or try again later";
+    private CancellationTokenSource _internalCts = new(); 
+    
+    public string Error => string.IsNullOrWhiteSpace(_error) ? _defaultError : _error;
+
+
+    [Parameter]
+    public string Caption { get; set; } = string.Empty;
+
+    [Parameter]
+    public string CssIcon { get; set; } = string.Empty;
+
+    [Parameter]
+    public string? Tip { get; set; }
+
+    [Parameter]
+    public bool RenderAsIcon { get; set; }
+
+    [Parameter]
+    public string BtnClass { get; set; } = "bt bt-primary";
+
+    [Parameter]
+    public string ContainerClass { get; set; } = "";
+    
+    [Parameter] 
+    public TimeSpan ReviveAfterSuccess { get; set; } = TimeSpan.FromMilliseconds(2000);
+    
+    [Parameter] 
+    public TimeSpan ReviveAfterError { get; set; } = TimeSpan.FromMilliseconds(4000);
+    
+    [Parameter]
+    public EventCallback OnClick { get; set; } 
+
+    [Parameter]
+    public RenderFragment<InteractiveButton>? ConfirmTemplate { get; set; }
+
+    [Parameter]
+    public RenderFragment<InteractiveButton>? SuccessFlashTemplate { get; set; } 
+    
+    [Parameter]
+    public RenderFragment<InteractiveButton>? ErrorFlashTemplate { get; set; }
+
+    private RenderFragment<InteractiveButton> _defaultErrorFlashTemplate = ctx => @<div class="error-container-default">@ctx.Error</div>;
+    
+    [Parameter]
+    public RenderFragment? InButtonWorkingTemplate { get; set; }
+
+    private RenderFragment _inButtonWorkingTemplateDefault = @<div class="dots-loader">
+                                                                  <div class="dot"></div>
+                                                                  <div class="dot"></div>
+                                                                  <div class="dot"></div>
+                                                              </div>;
+
+    [Parameter]
+    public string TooltipTheme { get; set; } = "tt-arrowbox";
+    
+    [Parameter]
+    public TooltipDirection TooltipDirection { get; set; }
+
+
+    public bool IsConfirmable => ConfirmTemplate is not null;
+
+    public static RenderFragment SimpleSuccessTemplate(string message)
+    {
+        return ctx =>
+        {
+            ctx.OpenElement(1, "i");
+            ctx.AddAttribute(2, "class", "btn-icon fas fa-check-circle");
+            ctx.CloseElement();
+            ctx.OpenElement(3, "span");
+            ctx.AddContent(4, message);
+            ctx.CloseElement();
+        };
+    }
+
+    private async Task ClickHandler()
+    {
+        Logger.LogDebug("ClickHandler run, IsBtnReady={}", IsBtnReady);
+        if (!IsBtnReady) return;
+
+        if (IsConfirmable)
+        {
+            _buttonState = ButtonState.Confirming;
+            return;
+        }
+        
+        await ExecuteAsync();
+    }
+
+    public async Task ExecuteAsync()
+    {
+        Logger.LogDebug("Executing interactive button from state: {} (state is set to pending)", _buttonState);
+        _buttonState = ButtonState.Pending;
+        var ct = _internalCts.Token;
+
+        try
+        {
+            await OnClick.InvokeAsync();
+            _buttonState = ButtonState.Succeeded;
+            StateHasChanged();
+
+            Logger.LogDebug("Execution successful, now waiting for {} and displaying success message, if any", ReviveAfterSuccess);
+            if (SuccessFlashTemplate is not null)
+            {
+                await Task.Delay(ReviveAfterSuccess, ct);
+            }
+            
+            _buttonState = ButtonState.Idle;
+        }
+        catch (UserException ex)
+        {
+            _buttonState = ButtonState.Errored;
+            _error = ex.Message;
+            StateHasChanged();
+            await Task.Delay(ReviveAfterError, ct);
+            _buttonState = ButtonState.Idle;
+        }
+        catch (TaskCanceledException)
+        {
+            // This is fine, task is cancelled, do nothing special
+        } 
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Action invoked by {} ({}={}, {}={}) failed",
+                nameof(InteractiveButton), nameof(Caption), Caption, nameof(CssIcon), CssIcon);
+            _buttonState = ButtonState.Errored;
+        }
+    }
+
+    public Task ConfirmAsync()
+    {
+        if (!IsConfirmable || _buttonState is not ButtonState.Confirming)
+        {
+            throw new InvalidOperationException("Bad state, button not confirmable or not in confirming state");
+        }
+
+        return ExecuteAsync();
+    }
+
+    public Task CancelAsync()
+    {
+        if (!IsConfirmable || _buttonState is not ButtonState.Confirming)
+        {
+            throw new InvalidOperationException("Bad state, button not confirmable or not in confirming state");
+        }
+
+        _buttonState = ButtonState.Idle;
+
+        return Task.CompletedTask;
+    }
+
+
+    private void MouseOutHandler()
+    {
+        if (_buttonState is ButtonState.ShowTip) _buttonState = ButtonState.Idle;
+    }
+
+    private void MouseOverHandler()
+    {
+        if (_buttonState is ButtonState.Idle) _buttonState = ButtonState.ShowTip;
+    }
+
+    public void Dispose()
+    {
+        Logger.LogDebug("Disposing button");
+        _internalCts.Cancel();
+    }
+}

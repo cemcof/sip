@@ -1,0 +1,120 @@
+@* A wrapper around Virtualize component *@
+@* The reason this wrapper exists is that Virtualize component does not enable user to get current item list by any event or property. *@
+@* For that reason, this wrapper always enumerates result into the list and stores it for any extending component (aka ListView) for use *@
+@* Normally I would extend the actual virtualize component with these features instead, but framework authors sealed it for unknown reason, hence the need for wrapper and code duplicating :/ *@
+
+@typeparam TItem
+
+@inject ILogger<ItemsRenderer<TItem>> Logger
+
+<Virtualize @ref="VirtualizeRef" ChildContent="@ChildContent"
+            ItemContent="@ItemContent"
+            Placeholder="@Placeholder"
+            ItemSize="@ItemSize"
+            OverscanCount="@OverscanCount"
+            ItemsProvider="@ItemProviderWrapper">
+</Virtualize>
+
+
+@code {
+    
+    [Parameter]
+    public EventCallback<IReadOnlyList<TItem>> OnItemsLoaded { get; set; }
+
+    // Whether to request new items automatically and rerender always after OnParametersSet is invoked
+    [Parameter]
+    public bool Autorefresh { get; set; } = true;
+
+    public List<TItem> CurrentItems { get; private set; } = new();
+
+    public Task RequestItems()
+    {
+        return VirtualizeRef?.RefreshDataAsync() ?? throw new InvalidOperationException("Manually requesting items too early - component reference is not set yet");
+    }
+
+    // Flag for rerendering the component, if true, OnAfterRenderAsync will re-request the data and rerender the component
+    // ! After use, set to false in order to avoid rendering loop !
+    private bool _refresh = false;
+    
+    protected async ValueTask<ItemsProviderResult<TItem>> ItemProviderWrapper(ItemsProviderRequest request)
+    {
+        var result = await ItemsProvider(request);
+        // Enumerate result, save it and notify consumer
+        CurrentItems = result.Items.ToList();
+        await OnResult(CurrentItems);
+        await OnItemsLoaded.InvokeAsync(CurrentItems);
+        Logger.LogDebug("ItemsRenderer: finished wrapper - itemcount = {}", result.TotalItemCount);
+        return result;
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (Autorefresh)
+        {
+            _refresh = true; // Set the refresh flag, unset it in OnAfterRender
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        // On first render, virtualize component should request the items automatically, but later it does not 
+        if (_refresh && !firstRender)
+        {
+            _refresh = false; // Very important to avoid rendering loop
+            await RequestItems();
+            StateHasChanged(); // Rerender
+        }
+    }
+
+    /// <summary>
+    /// Enables descendants to react to the event when new results are available.
+    /// Consumers should use <see cref="OnItemsLoaded"/> EventCallback instead. 
+    /// </summary>
+    protected virtual Task OnResult(List<TItem> items)
+    {
+        return Task.CompletedTask;
+    }
+
+    // Original parameters from Virtualize component
+
+    /// <summary>
+    /// Gets or sets the item template for the list.
+    /// </summary>
+    [Parameter]
+    public RenderFragment<TItem>? ChildContent { get; set; }
+
+    /// <summary>
+    /// Gets or sets the item template for the list.
+    /// </summary>
+    [Parameter]
+    public RenderFragment<TItem>? ItemContent { get; set; }
+
+    /// <summary>
+    /// Gets or sets the template for items that have not yet been loaded in memory.
+    /// </summary>
+    [Parameter]
+    public RenderFragment<PlaceholderContext>? Placeholder { get; set; }
+
+    /// <summary>
+    /// Gets the size of each item in pixels. Defaults to 50px.
+    /// </summary>
+    [Parameter]
+    public float ItemSize { get; set; } = 50f;
+
+    /// <summary>
+    /// Gets or sets the function providing items to the list.
+    /// </summary>
+    [Parameter, EditorRequired]
+    public ItemsProviderDelegate<TItem> ItemsProvider { get; set; } = null!;
+    
+    /// <summary>
+    /// Gets or sets a value that determines how many additional items will be rendered
+    /// before and after the visible region. This help to reduce the frequency of rendering
+    /// during scrolling. However, higher values mean that more elements will be present
+    /// in the page.
+    /// </summary>
+    [Parameter]
+    public int OverscanCount { get; set; } = 3;
+
+    protected Virtualize<TItem>? VirtualizeRef;
+}

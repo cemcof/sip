@@ -1,0 +1,41 @@
+@implements IDisposable
+
+@if (ShowIf && ChildContent is not null)
+{
+    <div @attributes="@AdditionalAttributes" class="tt-slave @AdditionalAttributes?.GetValueOrDefault("class")">
+        @ChildContent
+    </div>
+}
+
+@code {
+
+    
+    private bool _previousShowIf;
+    [Parameter] public bool ShowIf { get; set; }
+    
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    
+    [Parameter(CaptureUnmatchedValues = true)] 
+    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+    
+    [CascadingParameter]
+    public TooltipContainerContext? ContainerContext { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (_previousShowIf != ShowIf)
+        {
+            ContainerContext?.TooltipShowChanged.InvokeAsync(ShowIf);
+        }
+        
+        _previousShowIf = ShowIf;
+    }
+    
+
+    public void Dispose()
+    {
+        ContainerContext?.TooltipShowChanged.InvokeAsync(ShowIf);
+    }
+
+}

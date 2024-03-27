@@ -1,0 +1,100 @@
+@using sip.Userman
+@using sip.Messaging
+@typeparam TProposal        where TProposal : Proposal
+
+@inject NavigationManager NavigationManager
+@inject IDocumentFactory<TProposal> DocumentFactory
+@inject GeneralMessageBuilderProvider MessageBuilderProvider
+@inject AppUserManager UserManager
+
+@if (!_isAuth && !_isSent)
+{
+    <div class="container">
+        <h3 class="text-center mt-3">
+            You are about to create a new project proposal. We must first verify your email address. You can either:
+        </h3>
+        
+        
+        <div class="p-3">
+            <div class="text-center fw-bold fs-5 my-3">Let us send you a link to the new proposal to your email address, please stick to using your same instututional address</div>
+            
+            <div class="d-flex mb-3">
+                <SearchBar RequestSearch="EmailChange" Placeholder="Enter your email address"></SearchBar>
+                <button class="btn btn-primary" disabled="@(string.IsNullOrEmpty(_searchEmail))" @onclick="@OnSendClick">Send me a link</button>
+            </div>
+            
+            @if (_searchEmail is not null && _searchUser is null)
+            {
+                <div class="text-success text-center">
+                    This email does not exist in the system yet. This is correct if you are a new user.
+                    If not, please try to use email address that you used previously. 
+                </div>
+            }
+            
+        </div>
+        
+        <div class="orer">
+            <hr/>
+            <div class="or">or</div>
+        </div>
+        
+        <div class="p-3">
+            <Login ReturnUrl="@NavigationManager.Uri"></Login>
+        </div>
+    </div>
+}
+
+@if (!_isAuth && _isSent)
+{
+    <div class="text-center mt-4">
+        We have sent you a link to your new proposal. Please check your mailbox @_searchEmail .
+    </div>
+}
+
+@code {
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthenticationState { get; set; } = null!;
+
+    private bool _isSent;
+    private bool _isAuth;
+    private AppUser? _searchUser;
+    private string? _searchEmail; 
+    
+    protected override async Task OnInitializedAsync()
+    {
+        var authstate = await AuthenticationState;
+        _isAuth = authstate.User.IsAppAuthenticated();
+
+        if (_isAuth)
+        {
+            var propos = await DocumentFactory.CreateDocumentAsync();
+            NavigationManager.NavigateTo($"/proposal/{propos.Id}/submit");
+        }
+    }
+
+    private async Task OnSendClick()
+    {
+        _searchUser ??= await UserManager.EnsureUserByEmailAsync(_searchEmail!);
+        var propos = await DocumentFactory.CreateDocumentAsync();
+        var targetUrl = $"/proposal/{propos.Id}/submit";
+        var mb = MessageBuilderProvider.CreateBuilder();
+        mb.AddRecipient(_searchUser);
+        mb.BodyFromFileTemplate(new {ProposalLink = targetUrl}, "NewProjectProposal.hbs");
+        await mb.BuildAndSendAsync();
+        _isSent = true;
+    }
+
+    private async Task EmailChange((string, CancellationToken) arg)
+    {
+        // Validate the email 
+        var isvalid = new EmailAddressAttribute().IsValid(arg.Item1);
+        
+        _searchEmail = isvalid ? arg.Item1 : null;
+        if (!isvalid) return;
+        
+        var user = await UserManager.FindByEmailAsync(arg.Item1, arg.Item2);
+        _searchUser = user;
+        
+    }
+
+}

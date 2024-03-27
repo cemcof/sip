@@ -1,0 +1,40 @@
+ul, li {
+    list-style: none;
+    padding: 0;
+}
+
+ul { 
+    padding: 0.3rem;
+}
+
+
+.log-level-text {
+    /*font-weight: bold;    */
+}
+
+
+li.level-Debug {
+    color: #b4b4b4;
+}
+
+li.level-Error .log-level-text {
+    color: #d72a2a;
+}
+
+li.level-Warning .log-level-text {
+    color: #da7201;
+}
+
+li.level-Error .log-brief {
+    color: #d72a2a;
+}
+
+li.level-Warning .log-brief {
+    color: #da7201;
+}
+
+pre {
+    display: inline;
+    white-space: pre-line;
+}
+

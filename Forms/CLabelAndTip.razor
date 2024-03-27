@@ -1,0 +1,22 @@
+<label class="clabel @CssClass" title="@Tip" for="@Id">
+    @ChildContent
+    @if (!string.IsNullOrEmpty(Tip))
+    {
+        <sup>?</sup>
+    }
+</label>
+
+@code {
+    [Parameter]
+    public string? Tip { get; set; }
+
+    [Parameter]
+    public string? Id { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string CssClass { get; set; } = "";
+
+}

@@ -1,0 +1,37 @@
+<div class="tube-id-container @CssClass">
+    <h4>@Tube.TrimmedId</h4>
+    
+    <div class="tube-id-details">
+        <table>
+            <tr>
+                <td>Dewar</td>
+                <td>@Tube.Dewar</td>
+            </tr>
+            
+            <tr>
+                <td>Holder</td>
+                <td>@Tube.Holder</td>
+            </tr>
+            
+            <tr>
+                <td>Floor (T = Top, B = Bottom)</td>
+                <td>@Tube.Deck</td>
+            </tr>
+            
+            <tr>
+                <td>Tube position (clock based, holder handle pointing to 12)</td>
+                <td>@Tube.Position</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public Tube Tube { get; set; } = new();
+
+    [Parameter]
+    public string CssClass { get; set; } = String.Empty;
+
+}

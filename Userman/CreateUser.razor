@@ -1,0 +1,29 @@
+<VerticalLayout>
+    <CTextInput @ref="_focusCompRef" IsRequired="@true" @bind-Value="@Model.PrimaryContact.Firstname" DisplayName="Firstname"></CTextInput>
+    <CTextInput IsRequired="@true" @bind-Value="@Model.PrimaryContact.Lastname"></CTextInput>
+    <CTextInput IsRequired="@true" @bind-Value="@Model.PrimaryContact.Email"></CTextInput>
+    <CTextInput @bind-Value="@Model.PrimaryContact.Affiliation" DisplayName="Affiliation"></CTextInput>
+</VerticalLayout>
+
+
+@code {
+
+    [Parameter, EditorRequired]
+    public AppUser Model { get; set; } = null!;
+
+    private CTextInput? _focusCompRef;
+
+    protected override void OnParametersSet()
+    {
+        if (Model is null) throw new ArgumentNullException(nameof(Model));
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && _focusCompRef is not null)
+        {
+            await _focusCompRef.FocusAsync();
+        }
+    }
+
+}

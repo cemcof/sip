@@ -1,0 +1,8 @@
+.document-preview-header {
+    padding: 0.4rem;
+}
+
+.document-preview-container {
+    display: flex;
+    flex-direction: column;
+}

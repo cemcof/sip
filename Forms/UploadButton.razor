@@ -1,0 +1,42 @@
+
+<div class="btn-browse-container">
+    <button @onclick="BrowseClickInvoke" type="button" class="@BtnClass" disabled="@IsDisabled">@Caption</button>
+    <InputFile class="browse-input" @ref="_inputFileComponent" OnChange="FilePickHandlerClickInvoke" multiple="@IsMultiple" accept="@Accept"></InputFile>
+</div>
+
+@code {
+
+    [Parameter]
+    public string Caption { get; set; } = "Browse";
+    
+    [Parameter] 
+    public string BtnClass { get; set; } = "";
+
+    [Parameter]
+    public bool IsDisabled { get; set; }
+
+    [Parameter]
+    public string Accept { get; set; } = "*";
+
+    [Parameter]
+    public bool IsMultiple { get; set; }
+
+    [Parameter]
+    public EventCallback<IEnumerable<IBrowserFile>> OnFilesPick { get; set; }
+
+    private InputFile? _inputFileComponent;
+
+    private async Task FilePickHandlerClickInvoke(InputFileChangeEventArgs e)
+    {
+        var files = IsMultiple ? e.GetMultipleFiles() : new List<IBrowserFile>() {e.File};
+        await OnFilesPick.InvokeAsync(files);
+    }
+
+    private Task BrowseClickInvoke()
+    {
+        // if (_inputFileComponent is null) return Task.CompletedTask;
+        // return _js.InvokeVoidAsync("clickElement", _inputFileComponent.Element).AsTask();
+        return Task.CompletedTask;
+    }
+
+}

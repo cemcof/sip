@@ -1,0 +1,64 @@
+@inject TubesService TubesService
+
+<div class="tube-preview-container d-flex" @onclick="@(() => PreviewClicked.InvokeAsync(Tube))">
+    <div class="position-selection-container">
+        <HolderSvg HolderId="@Tube.TrimmedId"
+                   GetTubeClass="_getTubeClass"
+                    StaticOnly = "@true"></HolderSvg>
+    </div>
+
+    <div class="details-container">
+        <div class="text-center fw-bold">@Tube.Structure</div>
+        <div class="">
+            <span class="fw-bold">User: </span> @Tube.User
+        </div>
+
+        <div class="">
+            <span class="fw-bold">Description: </span> @Tube.Description
+        </div>
+        
+        <div class="small">
+            Last change: @Tube.LastChange.StandardFormat()
+        </div>
+    </div>
+</div>
+
+
+@code {
+    
+    [Parameter]
+    public EventCallback<Tube> PreviewClicked { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public Tube Tube { get; set; } = null!;
+
+    protected override void OnParametersSet()
+    {
+        if (Tube is null) throw new ArgumentNullException(nameof(Tube), "Tube is require to render TubePreview");
+    }
+
+
+    private string _getHolderClass(string dewar, string holder)
+    {
+        string result = "";
+        if (dewar == Tube.Dewar && holder == Tube.Holder)
+        {
+            result += "selected";
+        }
+
+        return result;
+    }
+
+    private string _getTubeClass((string deck, string position) tube)
+    {
+        string result = "";
+        if (tube.deck == Tube.Deck && tube.position == Tube.Position)
+        {
+            result += "selected";
+        }
+        
+        return result;
+    }
+
+}

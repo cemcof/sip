@@ -1,0 +1,13 @@
+.orer .or {
+    top: -26px;
+    width: 6rem;
+    background: white;
+    display: inline-block;
+    left: calc(50% - 3rem);
+    position: relative;
+    font-size: 120%;
+    text-align: center;
+}
+
+.orer hr {
+}

@@ -1,0 +1,334 @@
+
+
+.cform {
+    
+}
+
+
+.cform .layout-vertical > * {
+    flex: 0;
+}
+
+
+.cform .group {
+    margin: 0.2rem;
+}
+
+
+.form-control {
+    width: 100%;
+    padding: 0.1rem 0.5rem;
+    /*padding: 0.375rem 0.75rem; This is from bootstrap, but better is more compact below*/ 
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    font-size: 0.9rem;
+}
+
+.cform .form-control {
+    
+}
+
+
+.cform .csingleuploadinput-container
+{
+    align-items: center;
+}
+
+
+.cform .clabel-container
+{
+    flex: 0 0 40%;
+    text-align: right;
+    margin-right: 1rem;
+}
+
+.cfilesystem-container .cinput-input-container,
+.clinemultiinput-container .cinput-input-container,
+.csingleuploadinput-container .cinput-input-container,
+.cdate-container .cinput-input-container
+{
+    flex: 1;
+}
+
+.cradiogroup-container .cinput-input-container > label {
+     display: block;
+    
+    & > input[type=radio] {
+        /*margin-right: 0.5rem;*/
+    }
+    
+    & > span {
+        margin-left: 0.3rem;
+    }
+}
+
+
+
+.cform .cinput-container {
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+    flex-grow: 1;
+    display: flex;
+}
+
+.cform .cinput-input-container { 
+    flex-grow: 1;
+}
+
+/* Required fields have bold labels */
+.cform .required > .clabel-container {
+    font-weight: bold;
+}
+
+.cdropdown-container .searchbar input {
+    width: 100%;
+}
+
+.cdropdown-container .dropdown-tooltip {
+    background-color: white;
+    padding: 0.5rem;
+    box-shadow: 0 3px 13px 2px rgba(0,0,0,0.46);
+    
+}
+
+.cdropdown-container .cinput-input-container .selected-item {
+    display: block;
+    width: 100%;
+    border-radius: .24rem;
+    border: 1px solid #ced4da;
+    color: #212529;
+    background-color: #fff;
+    padding: 1.4px 7px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.cdropdown-container .cinput-input-container .selected-item:hover {
+    background-color: #dadada;
+}
+
+.cform-in-button {
+    min-width: 40rem;
+}
+
+
+.cform .cform-panel {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.cform .cform-panel > * {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+}
+
+
+.aligned-items-render .item {
+    display: flex;
+    width: 100%;
+}
+
+.aligned-items-render .item > *:first-child {
+    flex: 0 0 25%;
+    text-align: right;
+    margin-right: 1rem;
+}
+
+.aligned-items-render .item > *:nth-child(2) {
+    flex-grow: 1;
+}
+
+
+
+.cradiogroup-container.inline { 
+    
+}
+
+.cradiogroup-container.inline .cinput-input-container {
+    display: flex;
+    align-items: center;
+}
+
+.cradiogroup-container.inline .cinput-input-container label {
+    margin-right: 1.5rem;
+    padding-left: 0;
+    white-space: nowrap;
+}
+
+.cradiogroup-container.inline .cinput-input-container input[type=radio] {
+    margin-right: 0.5rem;
+}
+
+.cform .noalign .clabel-container {
+    flex: 0 0 auto !important;
+}
+
+
+
+.cnumberinput-container .cinput-input-container,
+.cselectgroup-container .cinput-input-container {
+    flex: 0 0 6rem;
+    margin-right: 0.2rem;
+}
+
+.cfilesystem-container,
+.clinemultiinput-container {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+.cradiogroup-container .clabel {
+    flex-basis: 40%;
+}
+
+/*Checkbox*/
+
+.ccheckbox-container .cinput-input-container,
+.ccheckboxlist-container .cinput-input-container {
+    display: flex;
+    align-items: center;
+    
+    & > input[type=checkbox] {
+        margin-right: 0.5rem;
+        width: 1rem;
+        height: 1rem;
+    }
+}
+/* Big radiolist */
+.big-radiolist label {
+    display: flex!important;
+    align-items: center;
+    border: 1px solid #ced4da;
+    padding: 1rem;
+}
+
+.big-radiolist label .fake-radio {
+    border-radius: 50%;
+    border: 1px solid #ced4da;
+    flex: 0 0 1.4rem;
+    height: 1.4rem;
+    margin-right: 1rem;
+}
+
+.big-radiolist .heading {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+} 
+
+.big-radiolist .description {
+    color: #8d8d8d;
+    font-size: 80%;
+}
+
+.big-radiolist input[type=radio] {
+    display: none;
+}
+
+.big-radiolist label[selected],
+.big-radiolist label:hover {
+    border-color: #007bff;
+    cursor: pointer;
+}
+
+.big-radiolist label[selected] .fake-radio {
+    background-color: #007bff;
+}
+
+/*C Create proposal */
+
+.ccreate-proposal {
+    
+    & .clabel-container {
+        flex: 0 0 25%;
+    }
+    
+    /*Groups*/
+    
+    /*Container*/
+    & .cform-part,
+    & .file-uploader,
+    & .cmultiobject-container,
+    & .cselecter-item {
+        width: 100%;
+        margin-left: 0.6rem;
+        margin-right: 0.6rem;
+        border: 1px solid rgba(128, 128, 128, 0.61);
+        border-radius: 5px;
+        margin-top: 0.5rem;
+    }
+    
+    /*Header*/
+    & .cform-part-header,
+    & .file-uploader > .header,
+    & .cmultiobject-container > .clabel-container,
+    & .cselecter-item > .clabel-container {
+        background-color: #e5e5e5;
+        padding: 0.5rem;
+        font-weight: bold;
+        font-size: 120%;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.61);
+    }
+    
+    /*Body*/
+    & .cform-part-body,
+    & .file-uploader > .file-list,
+    & .cmultiobject-container > .cinput-input-container {
+        padding: 0.5rem;
+    }
+    
+    & .cform-part.group-compactbox {
+        width: 50rem;
+        margin: 0.6rem;
+    }
+    
+    /*File uploader*/
+    & .file-uploader > .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    /*Selecters */
+    & .cselecter-item {
+        & > .cinput-input-container > .cform-part {
+            margin: 0;
+            border: none;
+            border-radius: 0; 
+            & > .cform-part-header {
+                display: none;
+            }
+        }
+        
+        & > .clabel-container {
+            text-align: left;
+            margin-right: 0;
+
+            & > .check-container {
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+    
+    
+    /*Multiobject */
+    & .cmultiobject-container {
+        display: block;
+        
+        & > .clabel-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: row-reverse;
+            margin-right: 0;
+            text-align: left;
+        }
+    }
+    
+}

@@ -1,0 +1,57 @@
+@using sip.Experiments.Model
+@using sip.Experiments.Samples
+
+@inject SampleRepo SampleRepo
+
+<GroupVertical>
+    <Header>
+        <strong> Sample </strong>
+        <CDropdown HasLabel="@false" TValue="Sample" ItemsProvider="_GetSamples" @bind-Value="@Exp.Sample">
+            <ItemTemplate>
+                <div class="basic-item-template">
+                    @context.Name <br/>
+                </div>
+            </ItemTemplate>
+
+            <AlternativeBody Context="dropdown">
+                <CEditForm TModelType="Sample" Context="form"
+                           ModelFactory="@(SampleRepo.CreateItem)"
+                           OnSubmit="@((s) => _createSampleSubmit(s, dropdown))"
+                           OnCancel="@(() => dropdown.SelectItem(null))">
+                    <CreateSample Model="@form.Model"></CreateSample>
+                </CEditForm>
+            </AlternativeBody>
+
+            <Footer Context="dropdown">
+
+                @if (dropdown.State is not CDropdown<Sample>.DropdownState.AlternativeMode)
+                {
+                    <button @onmousedown:preventDefault="true" @onmousedown="@(_ => { })"
+                            type="button" @onclick="@(() => dropdown.EnterAltMode())">
+                        Create new sample
+                    </button>
+                }
+            </Footer>
+
+        </CDropdown>
+
+    </Header>
+</GroupVertical>
+
+@code
+{
+    [Parameter]
+    public Experiment Exp { get; set; } = null!;
+
+    private async ValueTask<ItemsProviderResult<Sample>> _GetSamples(ItemsProviderRequest request, string? searchstring)
+    {
+        var samplesResult = await SampleRepo.LoadSamplesAsync(request.ToFilter());
+        return new ItemsProviderResult<Sample>(samplesResult.Items, samplesResult.TotalCount);
+    }
+
+    private async Task _createSampleSubmit(Sample sample, CDropdown<Sample> dropdownControl)
+    {
+        await SampleRepo.PersistItem(sample);
+        await dropdownControl.SelectItem(sample);
+    }
+}

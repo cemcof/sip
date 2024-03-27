@@ -1,0 +1,49 @@
+@page "/documents"
+
+@* @inject IOptions<DocumentsOptions> _documentsOptions *@
+@* *@
+@* <div class="d-flex"> *@
+@*      *@
+@*     <div class="doc-selector-panel"> *@
+@*          *@
+@*         <CEditForm TModelType="DocumentManager" Model="@this" OnFieldChanged="@(() => { })"> *@
+@*             <CSelectDropdown @bind-Value="@SelectedDocumentType" *@
+@*                              HasLabel="@false" *@
+@*                              ItemsProvider="@(IDW<DocumentTypeOptions>.WrapList(_documentsOptions.Value.DocumentTypeOptions.Where(x => x.DocumentSelectorComponent is not null).ToList()))" *@
+@*                              DisplayNameMapper="@(options => options.DisplayName)"> *@
+@*             </CSelectDropdown>         *@
+@*         </CEditForm> *@
+@*          *@
+@*         @if (SelectedDocumentType is not null) *@
+@*         { *@
+@*             <DynamicComponent Type="@SelectedDocumentType.DocumentSelectorComponent" Parameters="@SelectorParams"> *@
+@*             </DynamicComponent> *@
+@*         } *@
+@*          *@
+@*     </div> *@
+@*      *@
+@*      *@
+@*     <div class="file-selector-panel"> *@
+@*         @if (SelectedDocumentId != default) *@
+@*         { *@
+@*             <DocumentSelector DocumentId="@SelectedDocumentId"> *@
+@*                  *@
+@*             </DocumentSelector> *@
+@*         } *@
+@*     </div> *@
+@* </div> *@
+@* *@
+@* *@
+@* @code { *@
+@* *@
+@*     public DocumentTypeOptions? SelectedDocumentType { get; set; } *@
+@*     public Guid SelectedDocumentId { get; set; } *@
+@* *@
+@*     private Dictionary<string, object> SelectorParams => new() { { "OnDocumentSelected", EventCallback.Factory.Create<Guid>(this, DocumentSelectedHandler) } }; *@
+@* *@
+@*     private Task DocumentSelectedHandler(Guid selectedId) *@
+@*     { *@
+@*         throw new NotImplementedException(); *@
+@*     }  *@
+@*      *@
+@* } *@

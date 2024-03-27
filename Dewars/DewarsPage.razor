@@ -1,0 +1,120 @@
+@page "/{OrganizationId}/dewars"
+@inherits OrganizationComponentBase
+@inject TubesService TubesService
+@attribute [Authorize(Policy = "LabOverview")]
+
+<PageTitle>Dewars</PageTitle>
+
+<div class="tubes-page-container">
+    <div class="card tubes-edit-container">
+        <div class="tube-selector-caption card-header">Edit tube</div>
+        <div class="card card-body">
+            <TubeSelector TubesService="TubesService"
+                          Organization="Organization"
+                          TubeUpdated="@(StateHasChanged)"
+                          @ref="_tubeSelectorRef">
+            </TubeSelector>
+        </div>
+    </div>
+
+
+    <div class="card tubes-search-container">
+        <div class="card-header d-flex align-items-center">
+            <input @bind="_searchText" type="text" placeholder="Search tubes by user, description or id" 
+                   class="text-center w-50 flex-grow-1" 
+                   @oninput="@((args) => _search(args.Value?.ToString() ?? string.Empty))"
+                   @onfocus="@(() => _search(string.Empty))"/>
+            <a style="cursor: pointer" class="link-primary d-block mx-3" @onclick="_showAllClicked">Show all</a>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" @bind="@_compactView" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Compact view</label>
+            </div>
+        </div>
+        
+        @if (ShowEmptyTubesList)
+        {
+            <h4 class="text-center mt-4">Free positions</h4>    
+        }
+        
+        @if (FilteredTubes.Any())
+        {
+            @if (_compactView)
+            {
+                <div class="overflow-auto h-100">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Tube</th>
+                            <th>Responsible</th>
+                            <th>Sample</th>
+                            <th>Last change</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var ft in FilteredTubes)
+                        {
+                            <tr @onclick="@(() => _tubeSelectorRef.ApplyTube(ft))" @key="ft" Tube="ft">
+                                <td>@ft.Structure</td>
+                                <td>@ft.User</td>
+                                <td>@ft.Description</td>
+                                <td class="text-nowrap">@ft.LastChange.StandardFormat()</td>
+                            </tr>
+
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="card-body search-tubepreview-container">
+                    @foreach (var ft in FilteredTubes)
+                    {
+                        <TubePreview PreviewClicked="@((t) => _tubeSelectorRef.ApplyTube(t))" @key="ft" Tube="ft"></TubePreview>
+                    }
+                </div>
+            }
+        }
+    </div>
+
+</div>
+
+@code {
+
+    private IEnumerable<Tube> FilteredTubes { get; set; } = Enumerable.Empty<Tube>();
+    private TubeSelector _tubeSelectorRef = null!;
+    private bool _compactView;
+    private string _searchText = string.Empty;
+    private bool ShowEmptyTubesList => _searchText == string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await _search(_searchText);
+    }
+
+    private async Task _search(string searchText)
+    {
+        _searchText = searchText;
+        
+        if (ShowEmptyTubesList)
+        {
+            FilteredTubes = (await TubesService.GetAllTubesAsync(Organization)).Where(t => t.IsEmpty);
+            return;
+        }
+        
+        if (searchText == "*")
+        {
+            FilteredTubes = await TubesService.GetAllTubesAsync(Organization);
+            return;
+        }
+        
+        FilteredTubes = await TubesService.SearchTubesAsync(Organization, searchText);
+    }
+
+    private async Task _showAllClicked()
+    {
+        _searchText = "*";
+        await _search(_searchText);
+    }
+
+}

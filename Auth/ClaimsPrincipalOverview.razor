@@ -1,0 +1,28 @@
+
+<NullAware TValue="ClaimsPrincipal" Value="Principal">
+    <WhenReady Context="context">
+        @foreach (var i in context.Identities)
+        {
+            <div>Identity: Primary=@(context.Identity == i) Label=@i.Label, AuthenticationType=@i.AuthenticationType, IsAuthenticated=@i.IsAuthenticated, Name=@i.Name</div>
+            <ul>
+                @foreach (var c in i.Claims)
+                {
+                    <li>
+                        @c.Type = @c.Value
+                    </li>
+                }
+            </ul>
+        }
+    </WhenReady>
+    
+    <WhenNull>Principal not available</WhenNull>
+</NullAware>
+
+
+
+@code {
+
+    [Parameter]
+    public ClaimsPrincipal? Principal { get; set; } = null!;
+
+}

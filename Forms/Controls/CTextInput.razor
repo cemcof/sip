@@ -1,0 +1,60 @@
+@inherits CInputBase<string>
+
+<div class="form-group cinput-container CTextInput-container rendering-strategy-@(RenderingStrategy) @(HasLabel ? "labeled" : "labelless") @(IsRequired ? "required" : "")">
+    @if (HasLabel)
+    {
+        <div class="clabel-container" style="@GetFlexStyleForIndex(0)">
+            <CLabelAndTip Id="@InputId" Tip="@Tip">@DisplayName</CLabelAndTip>
+        </div>
+    }
+    
+    <div class="cinput-input-container" style="@GetFlexStyleForIndex(1)">
+        @if (IsArea)
+        {
+            <textarea @ref="InputRef" disabled="@IsDisabled" required="@IsRequired" readonly="@IsReadonly" maxlength="@MaxLength"
+                   class="form-control @FieldCssClass " placeholder="@NoteIn" @bind="CurrentValue" id="@InputId" rows="@((int)Sizing * 3)"></textarea>
+        }
+        else
+        {
+            <input @ref="InputRef" disabled="@IsDisabled" required="@IsRequired" readonly="@IsReadonly" maxlength="@MaxLength"
+                   placeholder="@NoteIn"
+                   type="text" class="form-control @FieldCssClass" @bind="CurrentValue" id="@InputId"/>
+        }
+        
+        <div class="invalid-feedback">
+            <ValidationMessage For="ValueExpression"></ValidationMessage>
+        </div>
+    </div>
+</div>        
+
+@code {
+    
+    [Parameter]
+    public string? Regex { get; set; }
+
+    public bool IsArea => Sizing is not Sizing.Default;
+    
+    protected override bool TryParseValueFromString(string? value, out string result, [NotNullWhen(false)] out string? validationErrorMessage)
+    {
+        result = value ?? "";
+        validationErrorMessage = null;
+        return true;
+    }
+
+    public override IEnumerable<string> SelfValidate(ValidationContext validationContext)
+    {
+        foreach (var s in base.SelfValidate(validationContext))
+        {
+            yield return s;
+        }
+        
+        // Check regex, if any
+        if (!string.IsNullOrEmpty(Regex))
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(CurrentValue ?? "", Regex))
+            {
+                yield return "Invalid format.";
+            }
+        }
+    }
+}

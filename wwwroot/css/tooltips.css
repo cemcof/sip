@@ -1,0 +1,219 @@
+@keyframes opacityAppear {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes tinyFromRightSlide {
+    0% {
+        transform: translate(15px, -50%);
+    }
+    100% {
+        transform: translate(0, -50%);
+    }
+}
+
+@keyframes tinyFromLeftSlide {
+    0% {
+        transform: translate(-15px, -50%);
+    }
+    100% {
+        transform: translate(0, -50%);
+    }
+}
+
+@keyframes tinyFromTopSlide {
+    0% {
+        transform: translate(-50%, -15px);
+    }
+    100% {
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes tinyFromBottomSlide {
+    0% {
+        transform: translate(-50%, 15px);
+    }
+    100% {
+        transform: translate(-50%, 0);
+    }
+}
+
+/** Tooltips **/
+
+.tt-container {
+    position: relative;
+
+    &[hidden] > .tt-slave, & > .tt-slave[hidden] {
+        display: none;
+    }
+
+    & > .tt-slave {
+        position: absolute;
+        z-index: 1;
+        width: max-content;
+    }
+    
+    &.tt-topleft > .tt-slave {
+        bottom: 100%;
+        right: 0;
+    }
+    
+    &.tt-top > .tt-slave {
+        margin-bottom: 0;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    &.tt-topright > .tt-slave {
+        bottom: 100%;
+        right: 0;
+    }
+    
+    
+    &.tt-right > .tt-slave {
+        margin-left: 0;
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    &.tt-bottomright > .tt-slave {
+        top: 100%;
+        left: 0;
+    }
+    
+    
+    &.tt-bottom > .tt-slave {
+        margin-top: 0;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    &.tt-bottomleft > .tt-slave {
+        right: 0;
+        top: 100%;
+    }
+    
+    &.tt-left > .tt-slave {
+        margin-right: 0;
+        right: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    /*Fullsize theme*/
+    &.tt-fullsize {
+        /*Horizontal full widht*/
+        &.tt-topleft, &.tt-topright, &.tt-top,
+        &.tt-bottomleft, &.tt-bottomright, &.tt-bottom {
+            & > .tt-slave {
+                width: 100%;
+                max-width: 100%;
+                min-width: 100%;
+            }
+        }
+        
+        /*Vertical full height*/
+        &.tt-right, &.tt-left {
+            & > .tt-slave {
+                height: 100%;
+                max-height: 100%;
+                min-height: 100%;
+            }
+        }
+    }
+    
+    /* Arrow box tooltip theme */
+    &.tt-arrowbox[tt-visible] { 
+        & > .tt-slave {
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 0, 0, 0.52);
+            box-shadow: 0 3px 13px 2px rgba(0,0,0,0.46);
+            background-color: #efefef;
+        }
+        
+        /*General arrow style*/
+        &::after {
+            content: " ";
+            position: absolute;
+            border-style: solid;
+            border-width: 7px;
+        }
+        
+        /*Top arrow style*/
+        &.tt-topleft, &.tt-top, &.tt-topright {
+            &::after {
+                bottom: 0;
+                left: 50%; /* To the middle of the tooltip container */
+                transform: translateX(-50%);
+                border-color: black transparent transparent transparent;
+            }
+
+            & > .tt-slave {
+                bottom: calc(100% + 13px);
+            }
+        }
+        
+        /*Right arrow style*/
+        &.tt-right {
+            &::after {
+                top: 50%; /* To the middle of the tooltip container */
+                left: 0;
+                border-color: transparent black transparent transparent;
+            }
+        }
+        
+        /*Bottom arrow styles*/
+        &.tt-bottomleft, &.tt-bottom, &.tt-bottomright {
+            &::after {
+                top: 100%;
+                transform: translateX(-50%);
+                left: 50%; /* To the middle of the tooltip container */
+                border-color: transparent transparent black transparent;
+            }
+            
+            & > .tt-slave {
+                top: calc(100% + 13px);
+            }
+        }
+        
+        /*Left arrow style*/
+        &.tt-left {
+            &::after {
+                top: 50%; /* To the middle of the tooltip container */
+                right: 0;
+                border-color: transparent transparent transparent black;
+            }
+        }
+    }
+    
+}
+
+/*TODO reimplement animations */
+/*.tt-container.tt-light > .tt-slave.tt-left, .tt-slave.tt-light.tt-left {*/
+/*    animation: 0.3s ease-out 0s 1 tinyFromLeftSlide, 0.3s ease-out 0s 1 opacityAppear;*/
+/*}*/
+
+
+/*.tt-container.tt-light > .tt-slave.tt-right, .tt-slave.tt-light.tt-right {*/
+/*    animation: 0.3s ease-out 0s 1 tinyFromRightSlide, 0.3s ease-out 0s 1 opacityAppear;*/
+/*}*/
+
+
+/*.tt-container.tt-light > .tt-slave.tt-bottom, .tt-slave.tt-light.tt-bottom {*/
+/*    animation: 0.3s ease-out 0s 1 tinyFromBottomSlide, 0.3s ease-out 0s 1 opacityAppear;*/
+/*}*/
+
+
+/*.tt-container.tt-light > .tt-slave.tt-top, .tt-slave.tt-light.tt-top {*/
+/*    animation: 0.3s ease-out 0s 1 tinyFromTopSlide, 0.3s ease-out 0s 1 opacityAppear;*/
+/*}*/
+

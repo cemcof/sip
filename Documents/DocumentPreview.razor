@@ -1,0 +1,116 @@
+@using sip.Utils
+@inject IServiceProvider ServiceProvider
+@inject DocumentService DocumentService 
+
+<div @attributes="@AdditionalAttributes" class="document-preview-container @AdditionalAttributes?.GetValueOrDefault("class")">
+    @if (RenderHeader)
+    {
+        <div class="document-preview-header d-flex align-items-center">
+            @if (Caption is not null)
+            {
+                <div class="fw-bold me-2">@(Caption ?? Document.Name.Humanize())</div>
+            }
+
+            @if (Document.Attachments.Any())
+            {
+                <ul class="header-attachments list-inline">
+                    @* Attachments: *@
+                    @foreach (var atmeta in Document.Attachments)
+                    {
+                        <li class="list-inline-item">
+                            <a class="link-light" target="_blank" href="/files/@atmeta.Id">@atmeta.FileNameNormalized</a>    
+                        </li>
+                    }
+                </ul>
+            }
+
+            <div class="flex-grow-1"></div>
+
+            @if (Pdfizable)
+            {
+                <a class="btn btn-success btn-sm" target="_blank" href="/documents/@Document.Id/pdf">Download as PDF</a>
+            }
+        </div>    
+        
+    }
+    
+    <div class="d-flex flex-column flex-grow-1">
+        
+        @if ((PreferComponentRendering && CanComponentRender) || (!HasAnyRenderableFile && CanComponentRender))
+        {
+            <DynamicComponent Type="@_renderInfo!.Value.Component" Parameters="@_renderInfo.Value.Parameters"></DynamicComponent>
+        }
+        else if (HasAnyRenderableFile)
+        {
+            @if (ShouldZip)
+            {
+                <div class="text-center">Cannot render preview - there is more than one file in the document:</div>
+                @foreach (var f in Document.ActivePrimaryFiles)
+                {
+                    <a class="text-center" target="_blank" href="/files/@f.FileMetadataId">@f.FileMetadata.FileName - @f.FileMetadata.ContentType.ToMimeTypeString()</a>
+                    <br/>
+                }
+
+                <a target="_blank" class="btn btn-success text-center" href="/documents/@Document.Id/zip">Download all as ZIP</a>
+            }
+            else if (ShouldImage)
+            {
+                <img src="/files/@Document.ActivePrimaryFiles.First().Id" alt="document image"/>
+            }
+            else
+            {
+                // Embedded resource
+                <iframe class="flex-grow-1" src="/files/@TargetRenderFile.Id"></iframe>
+            }
+        }
+        else
+        {
+            @DocumentNotAvailable
+        }
+    </div>
+</div>
+
+
+@code {
+
+    [Parameter]
+    public Document Document { get; set; } = null!;
+    
+    [Parameter] public string? Caption { get; set; } 
+
+    [Parameter]
+    public bool RenderHeader { get; set; } = true;
+
+    [Parameter]
+    public bool PreferComponentRendering { get; set; } = true;
+    
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+
+    /// <summary>
+    /// Placeholder to show when the document preview is not available
+    /// </summary>
+    [Parameter]
+    public RenderFragment DocumentNotAvailable { get; set; } = @<em class="text-center my-3">Unable to render a preview of the document</em>;
+
+    private ComponentRenderInfo? _renderInfo;
+    private bool CanComponentRender => _renderInfo is not null;
+    private bool Pdfizable => HasAnyRenderableFile && (CanComponentRender || Document.ActivePrimaryFiles.First().FileMetadata.ContentType.IsPdf());
+    private bool HasAnyRenderableFile => Document.ActivePrimaryFiles.Any();
+    private bool ShouldZip => Document.ActivePrimaryFiles.Count() > 1;
+    private bool ShouldImage => Document.ActivePrimaryFiles.Count() == 1 && Document.ActivePrimaryFiles.First().FileMetadata.ContentType.IsImage();
+    private FileMetadata TargetRenderFile => Document.ActivePrimaryFiles.First().FileMetadata;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Document is null)
+            throw new ArgumentNullException(nameof(Document));
+        
+        _renderInfo = DocumentService.GetDocumentRenderInfo(Document)?.ViewRender;
+        
+        // Reload the document
+        await DocumentService.LoadDocumentAsync(Document);
+    }
+
+
+}

@@ -1,0 +1,614 @@
+@import "bootstrap/bootstrap-reboot.css";
+@import "bootstrap/icons/bootstrap-icons.css";
+
+@import "buttons.css";
+@import "forms.css";
+@import "tooltips.css";
+@import "navbars.css";
+
+html {
+    font-size: 14px;
+}
+
+main {
+    display: flex;
+    overflow: hidden;
+    min-height: 100vh;
+    height: 100vh;
+    
+    .main-menu-container {
+        flex: 0 0 13rem;
+        color: white;
+        
+        & hr {
+            margin: 0.5rem 0;
+        }
+        
+        & a {
+            text-decoration: none;
+            color: white;
+        }
+        
+        & a.brand {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            white-space: nowrap;
+            & img { 
+               max-height: 30px;  
+            }
+            & div {
+                font-weight: bold;
+                font-size: 120%;
+                padding: 1rem;
+            }
+        }
+        
+        & .identity-panel {
+            display: flex;
+            align-items: center;
+            
+            & i {
+                padding: 0.5rem;
+                font-size: 110%;
+            }
+            
+            & .user-link {
+                flex-grow: 1;
+                text-align: center;
+            }
+        }
+        
+        & .navlinks-header {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+
+        & ul.navlinks {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            
+            & li {
+                & a {
+                    display: block;
+                    padding: 0.5rem 0.7rem;
+                    margin-top: 0.3rem;
+                }
+                
+                & a:hover, & a.active {
+                    background-color: #005400;
+                }
+            }
+            
+        }
+    }
+    
+    .main-body-container {
+        padding: 0.5rem;
+    }
+    
+    /* Lightgreen theme */
+    &.lightgreen .main-menu-container {
+        background-color: rgb(109, 178, 64);
+    }
+    
+    &.lightgreen .main-body-container {
+        background-color: white;
+    }
+
+    .main-body-container {
+        flex-grow: 1;
+        overflow: auto;
+    }
+}
+
+.pointer { cursor: pointer }
+
+.layout > * {
+    flex: 1;
+}
+
+
+.layout-vertical {
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+}
+
+.layout-horizontal {
+    display: flex;
+    flex-direction: row;
+}
+
+.group-scroll-auto .card-body {
+    overflow: auto;
+}
+
+.content {
+    padding-top: 1.1rem;
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+@media print {
+    .print-btn {
+        display: none;
+    }
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.tabcontrol-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    white-space: nowrap;
+}
+
+.tabcontrol-content {
+    padding: 0.5rem;
+    border: 1px solid #e7e7e7;
+}
+
+.tab {
+    cursor: pointer;
+    opacity: 0.7;
+    padding: 0.5rem 1rem;
+    position: relative;
+    background-color: white;
+}
+
+.tab.active {
+    border: 1px solid #e7e7e7;
+    /* border-bottom: none; */
+    opacity: 1;
+    top: 2px;
+}
+
+.validation-message {
+    color: red;
+}
+
+button {
+    white-space: nowrap;
+}
+
+.small-tip {
+    opacity: 0.8;
+}
+
+.spacer {
+    flex-grow: 1;
+}
+
+.space-between-panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon-item-template {
+    display: flex;
+    align-items: center;
+    
+    & i {
+        padding: 0 0.5rem;
+        font-size: 150%;
+    }
+}
+
+.card {
+    margin: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: .25rem;
+}
+
+.card-header {
+    padding: .5rem 1rem;
+    margin-bottom: 0;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+.slistview-container.default .listview-item {
+    line-height: 1.3;
+    background-color: white;
+    padding: 0.2rem 1rem;
+    cursor: pointer;
+}
+
+.slistview-container.default small {
+    opacity: 0.8;
+}
+
+.slistview-container.default .listview-item:hover, .slistview-container.default .listview-item[selected]  {
+    background: #0964ea;
+    color: white;
+}
+
+.value-container {
+    border: 1px solid gray;
+    background-color: white;
+    padding: 0.2rem 0.7rem;
+}
+
+.value-container:hover {
+    cursor: pointer;
+    background-color: #e8e8e8;
+}
+
+
+.nav-mics {
+    padding: 0 1rem;
+    
+    & .inst-name {
+        color: black;
+        display: block;
+        text-decoration: none;
+        font-weight: bold;
+        padding: .5rem;
+    }
+
+    & .inst-name:hover {
+        background-color: #eeeeee;
+    }
+
+    & .nav-item {
+        margin-left: 1rem;
+        margin-right: 1rem;
+
+        & a {
+            text-decoration: none;
+            border-radius: .25rem;
+            color: black;
+            display: block;
+            padding: 0.15rem 1rem;
+        }
+
+        & a.active {
+            background-color: #2f2f2f;
+            color: white;
+        }
+    }
+}
+
+
+.confirm-dialog {
+    display: flex;
+    justify-content: center;
+    padding: 0.4rem;
+    width: 30rem;
+}
+
+.confirm-dialog *:first-child {
+    flex: 1;
+}
+
+.confirm-dialog *:nth-child(2) {
+    white-space: nowrap;
+}
+
+.fs-130 {
+    font-size: 130%;
+}
+
+.minw-30r {
+    min-width: 30rem;
+}
+
+.minw-25r {
+    min-width: 25rem;
+}
+
+
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 4px;
+    animation: pulse 1s infinite;
+    background-color: #808080;
+}
+
+@keyframes pulse {
+    0%, 20%, 80%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* Layout for page that has a column with items on the left and "page" for selected item next to it */
+.itemspage-layout {
+    display: flex;
+}
+
+.itemspage-layout > * {
+    margin: 0.6rem;
+}
+
+.itemspage-layout > *:first-child {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 30rem;
+}
+
+.itemspage-layout > *:first-child .item-viewer-body {
+    height: calc(100vh - 7rem);
+    overflow: auto;
+}
+
+.itemspage-layout > *:nth-child(2) {
+    flex-grow: 1;
+}
+
+.badg {
+    font-size: 60%;
+    border-radius: 3px;
+    padding: 2px;
+    text-align: center;
+    background-color: black;
+    color: white;
+    margin: 0 0.5rem;
+}
+
+.alert-center {
+    color: var(--bs-danger);
+    text-align: center;
+}
+
+/*Themes*/
+
+.default {
+    background-color: white;
+    color: black;
+}
+
+.lightblue {
+    background-color: #e8f0fe;
+    color: black;
+}
+
+.blue {
+    background-color: #0964ea;
+    color: white;
+}
+
+.orange {
+    background-color: #f5a623;
+    color: white;
+}
+
+.yellow {
+    background-color: #f8e71c;
+    color: black;
+}
+
+.green {
+    background-color: #26b050;
+    color: white;
+}
+
+.lightgreen {
+    background-color: #e8f0fe;
+    color: black;
+}
+
+.red {
+    background-color: #f44336;
+    color: white;
+}
+
+.purple {
+    background-color: #9c27b0;
+    color: white;
+}
+
+.gray {
+    background-color: #808080;
+    color: white;
+}
+
+
+/* Key-value lists (dl) */
+
+dl.key-val > div {
+    display: flex;
+    align-items: center;
+}
+
+dl.key-val > div > dt {
+    font-weight: bold;
+    text-align: right;
+    flex: 0 0 13rem;
+}
+
+dl.key-val.left > div > dt {
+    text-align: left;
+}
+
+dl.key-val > div > dd {
+    flex: 1;
+    margin-left: 1rem;
+    margin-bottom: 0;
+}
+
+.note {
+    font-size: 80%;
+    opacity: 0.7;
+    font-style: italic;
+}
+
+
+/*TODO del*/
+.listview-container.default .listview-item {
+    line-height: 1.3;
+    background-color: white;
+    padding: 0.2rem 1rem;
+    cursor: pointer;
+}
+
+.listview-container.default small {
+    opacity: 0.8;
+}
+
+.listview-container.default .listview-item:hover, .listview-container.default .listview-item.selected  {
+    background: #0964ea;
+    color: white;
+}
+
+.cobject-container[readonly] .value-container {
+    background-color: #e9ecef;
+    cursor: default;
+}
+
+
+/*From projman*/
+
+
+.projectlist-container a {
+    display: block;
+    text-decoration: none;
+}
+
+.project-item {
+    text-decoration: none;
+    margin: 0;
+    padding: 0.2rem 0.5rem;
+    color: black;
+}
+
+.project-mid-container {
+    height: calc(100vh - 18rem);
+    align-items: stretch;
+}
+
+.panel-card[selected] {
+    box-shadow: 0 0 3px 2px rgba(0,0,0,0.6)
+}
+
+.a4doc {
+    width: 210mm;
+    height: 297mm;
+    margin: 2rem;
+}
+
+.a4doc footer {
+    font-style: italic;
+}
+
+.a4doc img {
+    width: 10rem;
+}
+
+
+.listitem-badged-container {
+    display: flex;
+    align-items: center;
+    & > listitem-
+}
+
+.ccreate-proposal .cform-part {
+    /*padding: 1rem;*/
+    /*margin-left: 2rem;*/
+}
+
+
+.ccreate-proposal .cmultiobject-container {
+    /*display: block !important;*/
+    /*margin-left: 2rem;*/
+}
+
+/*.ccreate-proposal .cmultiobject-container > .cinput-input-container {*/
+/*    margin-left: 3rem;*/
+/*}*/
+
+/*.ccreate-proposal .cmultiobject-container > .clabel-container {*/
+/*    display: flex;*/
+/*    text-align: left;*/
+/*    border-bottom: 1px solid black;*/
+/*    flex-direction: row-reverse;*/
+/*    padding: 1rem;*/
+/*    margin-left: 2rem;*/
+/*}*/
+
+/*.ccreate-proposal .cmultiobject-container > .clabel-container label {*/
+/*    flex-grow: 1;*/
+/*    font-size: 120%;*/
+/*}*/
+
+/*.ccreate-proposal .cmultiobject-container .item-remove {*/
+/*    text-align: right;*/
+/*    margin: 0 1rem;*/
+/*}*/
+
+
+/*.ccreate-proposal .file-uploader {*/
+/*    margin: 1rem;*/
+/*}*/
+
+/*.ccreate-proposal .cselecter-container {*/
+/*    display: block !important;*/
+/*}*/
+
+/*.ccreate-proposal .cselecter-container > .clabel-container {*/
+/*    display: none;*/
+/*}*/
+
+/*.ccreate-proposal .cselecter-item > .clabel-container .check-container {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    padding: 0.5rem 1rem;*/
+/*    font-size: 120%;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.ccreate-proposal .cselecter-item > .clabel-container .check-container label {*/
+/*    flex-grow: 1;*/
+/*}*/
+
+/*.ccreate-proposal .cselecter-item > .clabel-container .check-container input {*/
+/*    margin-top: 0;*/
+/*    margin-right: 1rem;*/
+/*}*/
+
+/*.ccreate-proposal .cinput-CeitecCoreFacilities > *,*/
+/*.ccreate-proposal .cinput-BiocevCoreFacilities > * {*/
+/*    margin-left: 2rem;*/
+/*}*/
+
+/*.ccreate-proposal .cselecter-item > .cinput-input-container > .cform-part > .cform-part-header {*/
+/*    !*display: none;*!*/
+/*}*/

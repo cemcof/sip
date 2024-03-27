@@ -1,0 +1,312 @@
+@using sip.Organizations
+@using sip.Utils
+@inject ScheduleService ScheduleService
+
+<PageTitle>Planningboard</PageTitle>
+<RefreshTimer Action="@(() => {})"></RefreshTimer>
+
+<ComponentRenderHelper T="ScheduleData" ActionProvider="@(() => ScheduleService.GetReservationsDataAsync(Organization))" >
+    <Available Context="scheduleData">
+        <div id="schedule-container">
+            <div class="schedule-container-header d-flex mx-2">
+                <div class="link-group">
+                    <button @onclick="PreviousWeek" class="bt-link">&lt; Previous week</button>
+                    <button @onclick="Now" class="bt-link">Now</button>
+                    <button @onclick="NextWeek" class="bt-link">Next week &gt;</button>
+                </div>
+                
+                <div class="flex-grow-1"></div>
+                <div class="">
+                    Last data update: <strong>@scheduleData.DtDataGathered.HappenAgo()</strong>
+                </div>
+            </div>
+            
+             <div class="schedule-container-body">
+                 <div class="schedule-header">
+                     <div class="week-caption">@DaysOfWeek.First().StandardFormat() - @DaysOfWeek.Last().StandardFormat()</div>
+                     <div class="hour-numbers">
+                         @for (var h = 0; h < 24; h++)
+                         {
+                             <div style="@GetHourOffsetStyle(h)" class="hour-number" highlighted="@(DateTime.Now.Hour == h && WeekOffset == 0)">@h</div>
+                         }
+                         
+                         @if (WeekOffset == 0)
+                         {
+                            <div class="time-marker" style="@GetMarkerOffsetStyle()"></div>
+                         }
+                     </div>
+                 </div>
+                
+                 @foreach (var day in DaysOfWeek)
+                 {
+                     <div class="day-container">
+                         <div class="day-caption" highlighted="@(DateTime.Today == day)">
+                             <div>@day.DayOfWeek.ToString() <br/>@day.ToString("dd.MM")</div>
+                         </div>
+                        
+                         <div class="instruments-container">
+                             @foreach (var inst in scheduleData.InstrumentsToRender)
+                             {
+                                 <div class="instrument-container" style="@GetRowStyle(scheduleData)">
+                                     <div class="instrument-caption" style="@GetInstrumentStyle(inst)">
+                                         <div class="instrument-caption-text">@inst.InstrumentSubject.Name</div>
+                                     </div>
+                                     <div class="instrument-reservations">
+                                         @foreach (var res in inst.Reservations)
+                                         {
+                                             var renderInfo = GetEntryDayRenderInfo(res, day);
+                                             @if (renderInfo.HasValue)
+                                             {
+                                                 <div @onclick="@(_ => ShowResDetails(res))" class="reservation" style="@GetReservationStyle(res, inst, renderInfo.Value)">
+                                                     <div class="reservation-caption">@res.ForUser.Lastname (@res.CreatedBy.Lastname)</div>
+                                                 </div>
+                                             }
+                                         }
+        
+                                     </div>
+                                 </div>
+                             }
+                         </div>
+                    
+                     </div>
+                 }
+             </div>
+             
+             @if (_selectedReservationDetails is not null)
+             {
+                 <div @onclick="DetailsClose" class="reservation-details-container">
+                     <div class="reservation-details">
+                         
+                         <h4 class="text-center">@_selectedReservationDetails.ForUser.Lastname @_selectedReservationDetails.ForUser.Firstname 
+                             (@_selectedReservationDetails.CreatedBy.Lastname @_selectedReservationDetails.CreatedBy.Firstname)</h4>
+                         <hr/>
+                         
+                         <div class="details-item">
+                             <div>Starts</div>
+                             <div>@_selectedReservationDetails.Since.StandardFormat()</div>
+                         </div>
+                         
+                         <div class="details-item">
+                             <div>Ends</div>
+                             <div>@_selectedReservationDetails.Until.StandardFormat()</div>
+                         </div>
+                         
+                         <div class="details-item">
+                             <div>Customer</div>
+                             <div>@_selectedReservationDetails.ForUser.Lastname @_selectedReservationDetails.ForUser.Firstname</div>
+                         </div>
+                         
+                         <div class="details-item">
+                             <div>Research group</div>
+                             <div>@_selectedReservationDetails.ResearchGroup</div>
+                         </div>
+                         
+                         <div class="details-item">
+                             <div>Project</div>
+                             <div>@_selectedReservationDetails.Project</div>
+                         </div>
+        
+                         <div class="details-item">
+                             <div>Reservation subtype</div>
+                             <div>@_selectedReservationDetails.Subtype</div>
+                         </div>
+                         
+                         
+                         <div class="details-item">
+                             <div>Reservation created</div>
+                             <div>@_selectedReservationDetails.CreatedAt.StandardFormat() 
+                                 @_selectedReservationDetails.CreatedBy.Lastname @_selectedReservationDetails.CreatedBy.Firstname</div>
+                         </div>
+                         
+                         @* <div class="details-item"> *@
+                         @*      <div>Last modification</div> *@
+                         @*      <div>@_selectedReservationDetails.Modifiedon.StandardFormat()</div> *@
+                         @*  </div> *@
+                          
+                          <div class="details-item mb-2">
+                              <div>Reservation ID</div>
+                              <div>@_selectedReservationDetails.Subject</div>
+                          </div>
+         
+        
+                         <button type="button" @onclick="DetailsClose" class="btn btn-outline-secondary w-100">Close</button>
+        
+                     </div>
+                 </div>    
+             }
+             
+         </div>
+    </Available>
+        
+    <NotAvailable>
+        <div class="alert alert-danger text-center">No planningboard data currently available</div>
+    </NotAvailable>
+</ComponentRenderHelper>
+
+@code {
+
+    [Parameter]
+    public IOrganization Organization { get; set; } = null!;
+    
+    [Parameter, EditorRequired]
+    public int WeekOffset { get; set; }
+
+    [Parameter, EditorRequired]
+    public EventCallback<int> OnWeekOffsetRequest { get; set; }
+
+    private IEnumerable<DateTime> DaysOfWeek
+    {
+        get
+        {
+            var tmpdayofweek = DateTime.Today.DayOfWeek == DayOfWeek.Sunday ? 6 : (int)DateTime.Now.DayOfWeek - 1;
+            var thisMonday = DateTime.Today.AddDays(-tmpdayofweek);
+            
+            for (var d = 0; d < 7; d++)
+            {
+                yield return thisMonday.AddDays(WeekOffset * 7 + d);
+            }
+        }
+    }
+
+
+    private static double _halfPw = 100 / 48.0;
+    private static double _standardPw = 100 / 16.0;
+
+    private ScheduleReservation? _selectedReservationDetails;
+
+    private readonly double[] _dayDistribution = {
+        _halfPw, // 0
+        _halfPw, // 1
+        _halfPw, // 2
+        _halfPw, // 3
+        _halfPw, // 4
+        _halfPw, // 5
+        _standardPw, // 6
+        _standardPw, // 7
+        _standardPw, // 8
+        _standardPw, // 9
+        _standardPw, // 10
+        _standardPw, // 11
+        _standardPw, // 12
+        _standardPw, // 13
+        _standardPw, // 14
+        _standardPw, // 15
+        _standardPw, // 16
+        _standardPw, // 17
+        _halfPw, // 18
+        _halfPw, // 19
+        _halfPw, // 20
+        _halfPw, // 21
+        _halfPw, // 22
+        _halfPw, // 23
+    };
+
+    private (double offset, double width)? GetEntryDayRenderInfo(ScheduleReservation reservation, DateTime forDay)
+    {
+        var schstart = reservation.Since.ToLocalTime();
+        var schend = reservation.Until.ToLocalTime();
+        
+        var forDayStart = forDay.Date;
+        var forDayEnd = forDay.AddDays(1).Date;
+        
+        // Does the reservation intersect with the desired day?
+        // Start or end must be within the day range
+        var intersets = (schstart >= forDayStart && schstart <= forDayEnd)
+                        || (schend >= forDayStart && schend <= forDayEnd) 
+                        || (schend >= forDayEnd && schstart <= forDayStart);
+        if (!intersets)
+            return null;
+
+        var dayTimeToStart = schstart - forDay.Date < TimeSpan.Zero ? TimeSpan.Zero : schstart - forDay.Date;
+        var dayTimeToEnd = schend - forDay.Date > TimeSpan.FromDays(1) ? TimeSpan.FromDays(1) : schend - forDay.Date;
+        
+        // Now compute percentages.
+        var start = 0d;
+        var end = 0d;
+        
+        for (var i = 0; i < _dayDistribution.Length; i++)
+        {
+            if ((int)dayTimeToStart.TotalHours > i) start += _dayDistribution[i];
+            if ((int)dayTimeToStart.TotalHours == i) start += (_dayDistribution[i] * (dayTimeToStart.Minutes / 60d));
+            
+            if ((int)dayTimeToEnd.TotalHours > i) end += _dayDistribution[i];
+            if ((int)dayTimeToEnd.TotalHours == i) end += (_dayDistribution[i] * (dayTimeToEnd.Minutes / 60d));
+        }
+
+        return (start, end - start);
+    }
+
+    private string GetInstrumentStyle(ScheduleInstrument si)
+    {
+        return $"background-color: {si.InstrumentSubject.DisplayTheme}";
+    }
+
+    private string GetReservationColour(ScheduleReservation sr)
+    {
+        return sr.Type switch {
+            ReservationType.Normal => "#101010",
+            ReservationType.Warning => "#f01010",
+            ReservationType.Special => "#f0f010",
+            _ => throw new ArgumentOutOfRangeException()};
+    }
+
+    private string GetReservationStyle(ScheduleReservation sr, 
+        ScheduleInstrument scheduleInstrument, 
+        (double offset, double width) renderInfo)
+    {
+        return $"color: {GetReservationColour(sr)}; " +
+               $"margin-left: {renderInfo.offset}%; " +
+               $"width: {renderInfo.width}%; " +
+               $"background-color: {scheduleInstrument.InstrumentSubject.DisplayTheme}";
+    }
+
+    private string GetHourOffsetStyle(int hour)
+    {
+        var offset = _dayDistribution.Take(hour).Sum();
+        return $"margin-left: {offset}%; width: {_dayDistribution[hour]}%";
+    }
+
+    private string GetRowStyle(ScheduleData scheduleData)
+    {
+        var height = ComputeVhRowHeight(scheduleData.InstrumentsToRender.Count());
+        return $"height: {height}vh; font-size: {height * 0.5}vh";  
+    }
+
+    private double ComputeVhRowHeight(int instrumentCount) => 90.0 / (instrumentCount * 7);
+    
+    private string GetMarkerOffsetStyle()
+    {
+        var now = DateTime.Now;
+        
+        var offset = _dayDistribution.Take(now.Hour).Sum(); // Hours
+        offset += _dayDistribution[now.Hour] * (now.Minute / 60d); // Minutes
+        return $"margin-left: {offset}%";
+    }
+
+    private void PreviousWeek()
+    {
+        OnWeekOffsetRequest.InvokeAsync(WeekOffset - 1);
+    }
+
+    private void NextWeek()
+    {
+        OnWeekOffsetRequest.InvokeAsync(WeekOffset + 1);
+    }
+
+    private void Now()
+    {
+        OnWeekOffsetRequest.InvokeAsync(0);
+    }
+
+    private void ShowResDetails(ScheduleReservation res)
+    {
+        _selectedReservationDetails = res;
+    }
+
+    private void DetailsClose()
+    {
+        _selectedReservationDetails = null;
+    }
+    
+   
+}

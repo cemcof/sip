@@ -1,0 +1,58 @@
+
+<div class="a4doc d-flex flex-column">
+    
+<header>
+    <img src="/img/logos/ciisb_logo.png" />
+</header>
+
+<div class="body">
+    <h3 class="text-center my-2">Technical feasibility evaluation for project <span class="fw-bold">@Document.ProjectId</span></h3>
+    
+    <div class="aligned-items-render">
+        <div class="item">
+            <div>Facility</div>
+            <div>@Document.Organization.Abbreviation - @Document.Organization.Name</div>
+        </div>
+        
+        <div class="item">
+            <div>Evaluation date</div>
+            <div>@Document.DtEvaluated.StandardFormat()</div>
+        </div>
+        
+        <div class="item">
+            <div>Evaluated by</div>
+            <div>@Document.EvaluatedBy?.Fullcontact</div>
+        </div>
+        
+        <div class="item">
+            <div>Comments</div>
+            <div>@Document.Comments</div>
+        </div>
+        
+        <div class="item">
+            <div>Evaluation result</div>
+            <div class="fw-bold eval-result-@Document.Result">@Document.Result.Humanize()</div>
+        </div>
+    </div>
+</div>
+
+    <div class="footer-spacer flex-grow-1"></div>
+    
+    <footer>
+    <div class="d-flex justify-content-between">
+        <div>
+            CIISB (Czech Infrastructure for Integrative Structural Biology), ID number LM2018127, is funded by the Ministry of Education,
+            Youth and Sports of the Czech Republic.
+        </div>
+        <img src="/img/logos/msmt.png"/>
+    </div>
+</footer>
+
+</div>
+
+@code {
+
+    [Parameter]
+    public TechnicalFeasiblility Document { get; set; } = null!;
+
+}

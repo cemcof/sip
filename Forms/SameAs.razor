@@ -1,0 +1,49 @@
+@typeparam TFrom
+@typeparam TTo
+@implements IDisposable
+
+<ReadonlyStatus Enabled="@Active">
+    @ChildContent
+</ReadonlyStatus>
+
+@code {
+#nullable disable // TODO - fix
+    [Parameter] public bool Active { get; set; }
+    [Parameter] public TFrom From { get; set; }
+    [Parameter] public TTo To { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [CascadingParameter]
+    public EditContext EditContext { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+        EditContext.OnFieldChanged += _fieldChangeHandler;
+    }
+
+    private void _fieldChangeHandler(object sender, FieldChangedEventArgs e)
+    {
+        if (!Active) return;
+        
+        // Check whether this field is contained on the source object
+        var fid = e.FieldIdentifier;
+            
+        if (fid.Model.Equals(From))
+        {
+            fid.Model.CopyPropertyTo(fid.FieldName, To);
+            StateHasChanged();
+        }
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (Active)
+            From.CopyObjectTo(To);
+    }
+
+    public void Dispose()
+    {
+        EditContext.OnFieldChanged -= _fieldChangeHandler;
+    }
+
+}

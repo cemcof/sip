@@ -1,0 +1,47 @@
+@using sip.Forms
+@if (!string.IsNullOrEmpty(Workflow.Diagram))
+{
+    <div class="wf-diagram">
+        <img src="@Workflow.Diagram" alt="@Workflow.Title"/>
+    </div>
+}
+
+<div class="wf-prot-properties">
+                                
+    <CEditForm TModelType="WorkflowGeneralRenderer" Model="@(this)" FormFooter="@(CEditForm<WorkflowGeneralRenderer>.EmptyFooter)" Context="ctxx">
+        <InputAligner Flex="0 0 40%, 1, 0 0 20%">
+            @foreach (var protocol in Workflow.Protocols.GetChildren())
+            {
+                <div class="wf-protocol-headline">
+                    <div class="fw-bold">@protocol[Workflow.PROTOCOL_NAME_KEY]</div>
+                    <small>@protocol[Workflow.PROTOCOL_DESCRIPTION_KEY]</small>
+                </div>
+                
+                var protValue = GetProtocol(protocol[Workflow.PROTOCOL_ID_KEY]!);
+                @foreach (var prop in protocol.GetChildren())
+                {
+                    <DynamicFormElement Key="@prop.Key" Setup="@DynamicElementSetup.FromObject(prop)" ValueTarget="@protValue" />
+                }
+                
+            }
+            
+        </InputAligner>
+    </CEditForm>
+</div>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public Workflow Workflow { get; set; } = null!;
+
+    [Parameter, EditorRequired]
+    public List<Dictionary<string, object>> TargetProtocols { get; set; } = null!;
+    
+    private Dictionary<string, dynamic> GetProtocol(string protocolid) 
+    {
+        var result = TargetProtocols.FirstOrDefault(wf => wf[Workflow.PROTOCOL_ID_KEY]!.ToString() == protocolid);
+        if (result is null) throw new InvalidOperationException($"Cannot find protocol with id {protocolid} on TargetProtocols list with {TargetProtocols.Count} items");
+        return result;
+    }
+
+}

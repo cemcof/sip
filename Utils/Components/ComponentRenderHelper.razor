@@ -1,0 +1,62 @@
+@typeparam T
+@inherits ComponentBase  
+@if (RefreshInterval != default)
+{
+    <RefreshTimer Action="OnRefresh" Interval="@RefreshInterval" />
+}
+
+@if (_value is null)
+{
+    @NotAvailable
+}
+else
+{
+    
+    @Available(_value)
+}
+
+@code {
+
+    private T? _value;
+
+    [Parameter, EditorRequired]
+    public Func<Task<T>> ActionProvider { get; set; } = null!;
+
+    [Parameter, EditorRequired]
+    public RenderFragment<T> Available { get; set; } = null!;
+
+    [Parameter]
+    public RenderFragment NotAvailable { get; set; } = @<div class="bg-danger text-danger text-center p-2">Not available</div>;
+
+    [Parameter]
+    public TimeSpan RefreshInterval { get; set; } = TimeSpan.FromMinutes(1);
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (ActionProvider is null)
+            throw new ArgumentNullException(nameof(ActionProvider));
+
+        if (Available is null)
+            throw new ArgumentNullException(nameof(Available));
+
+        await RefreshValue();
+    }
+
+    private async Task RefreshValue()
+    {
+        try
+        {
+            _value = await ActionProvider();
+        }
+        catch (NotAvailableException)
+        {
+            _value = default;
+        }
+    }
+
+    private async Task OnRefresh()
+    {
+        await RefreshValue();
+    }
+
+}

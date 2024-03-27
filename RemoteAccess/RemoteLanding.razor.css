@@ -1,0 +1,24 @@
+﻿.remote-landing-container {
+    text-align: center;
+    
+    & span {
+        color: var(--bs-red);
+        font-weight: bold;
+    }
+    
+    & .heading {
+        font-weight: bold;
+        font-size: 120%;
+        margin: 1rem;
+    }
+}
+
+.session-buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    & > button {
+        margin-top: 0.7rem;
+    }
+}

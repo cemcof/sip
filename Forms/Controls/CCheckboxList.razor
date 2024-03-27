@@ -1,0 +1,104 @@
+@typeparam TValue
+@inherits CInputBase<List<TValue>>
+
+<div class="form-group cinput-container ccheckboxlist-container rendering-strategy-@(RenderingStrategy) @(HasLabel ? "labeled" : "labelless") @(IsRequired ? "required" : "")">
+    @if (HasLabel)
+    {
+        <div class="clabel-container" style="@GetFlexStyleForIndex(0)">
+            <CLabelAndTip Id="@InputId" Tip="@Tip">@DisplayName</CLabelAndTip>
+        </div>
+    }
+    
+    <div class="cinput-input-container">
+        @foreach (var opt in _currentOptions)
+        {
+            <div class="cinput-input-container">
+                <input readonly="@IsReadonly" disabled="@(IsDisabled || IsReadonly)" class="@FieldCssClass" @attributes="AdditionalAttributes" type="checkbox" id="@(InputId + opt.Key)" 
+                       checked="@opt.Value!.Equals(CurrentValue)" @onchange="@((cargs) => OnChange(opt, cargs.Value))" />
+                <label for="@(InputId + opt.Key)">
+                    @ItemTemplate(opt.Value)
+                </label>                                                                        
+            </div>
+        }
+    </div>
+</div>
+
+
+@code {
+    
+    [Parameter]
+    public ItemsProviderDelegate<TValue> ItemsProvider { get; set; } = null!;
+
+    // If item template is not given
+    [Parameter]
+    public Func<TValue, string> DisplayNameMapper { get; set; } = value => value?.ToString().Humanize() ?? "";
+    
+    [Parameter]
+    public RenderFragment<TValue> ItemTemplate { get; set; } = val => @<span>@val?.ToString().Humanize()</span>;
+
+    private Dictionary<string,TValue> _currentOptions = new();
+    
+    protected override async Task OnParametersSetAsync()
+    {
+        // Try to gather options from the render attribute if no items at all are provided and dropdown uses simple strings
+        // Items provider might be null here because we are still handling parameters
+        var selectionAttr = ModelPropertyType.GetCustomAttribute<SelectionAttribute>();
+
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+        if (ItemsProvider is null && selectionAttr is not null)
+        {
+            if (typeof(TValue) == typeof(string))
+            {
+                var items = selectionAttr.GetKeyValues().ToList();
+                ItemsProvider = _ => ValueTask.FromResult(
+                    new ItemsProviderResult<TValue>(
+                        items.Select(i => i.Key).Cast<TValue>(), items.Count
+                        )
+                    );
+                DisplayNameMapper = value => items.First(x => x.Key.Equals(value)).Value;
+            }
+        }
+
+        if (ItemsProvider is null) throw new InvalidOperationException($"No item source found for {nameof(CCheckboxList<TValue>)}");
+        
+        // Load items 
+        var result = await ItemsProvider(new ItemsProviderRequest(default, default, default));
+        var resultItems = result.Items.ToList();
+        
+        if (typeof(TValue).IsPrimitive || typeof(TValue) == typeof(string))
+        {
+            // It type of the item is string, enum, or primitive, supply key directly as value.ToString
+            _currentOptions = resultItems.ToDictionary(i => i?.ToString() ?? "", i => i);
+        }
+        else
+        {
+            // However, if it is a custom type, attach guid to each item
+            _currentOptions = resultItems.ToDictionary(i => Guid.NewGuid().ToString(), i => i);
+        }
+    }
+
+    private void OnChange(KeyValuePair<string, TValue> args, object? cargsValue)
+    {
+        if (CurrentValue is null) CurrentValue = new List<TValue>();
+        
+        if (cargsValue is not null)
+        {
+            // Check
+            if (!CurrentValue.Contains(args.Value))
+            {
+                CurrentValue.Add(args.Value);
+            }
+        }
+        else
+        {
+            // Uncheck
+            if (CurrentValue.Contains(args.Value))
+            {
+                CurrentValue.Remove(args.Value);
+            }
+        }
+    }
+    
+    protected override bool TryParseValueFromString(string? value, out List<TValue> result, [NotNullWhen(false)] out string? validationErrorMessage)
+        => throw new NotSupportedException($"This component does not parse string inputs. Bind to the '{nameof(CurrentValue)}' property, not '{nameof(CurrentValueAsString)}'.");
+}

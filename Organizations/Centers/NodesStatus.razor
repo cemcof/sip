@@ -1,0 +1,51 @@
+@inject INodeStatusProvider NodeStatusProvider
+@inject IOptionsMonitor<NodesOptions> NodesOptions
+
+    <div class="nodes-status-container">
+        
+        @foreach (var node in _expectedNodes.Select(GetNodeStateStyle))
+        {
+            
+            <div class="node-item @node.State">
+                <i class="bi bi-server"></i>&nbsp; @node.Name
+            </div>
+        }
+        
+    </div>
+
+
+@code {
+
+    private record NodeStateInfo(string Name, string State, TimeSpan IdleFor);
+    
+    
+    [Parameter, EditorRequired]
+    public IOrganization Organization { get; set; } = null!;
+
+    private Dictionary<string, CenterNodeStatus> _nodes = new();
+
+    private List<string> _expectedNodes = new();
+    
+    
+    protected override async Task OnParametersSetAsync()
+    {
+        _expectedNodes = NodesOptions.Get(Organization).NodeNames.ToList();
+        _nodes = await NodeStatusProvider.GetNodesStatusAsync(Organization);
+    }
+
+    private NodeStateInfo GetNodeStateStyle(string node)
+    {
+        _nodes.TryGetValue(node, out var cstatus);
+        if (cstatus is null)
+        {
+            return new NodeStateInfo(node, "inactive", default);
+        } 
+        
+        var idleFor = DateTime.UtcNow - cstatus.LastPing;
+        
+        if (idleFor < TimeSpan.FromSeconds(30)) return new NodeStateInfo(node, "active", idleFor);
+
+        return new NodeStateInfo(node, "inactive", idleFor);
+    }
+
+}

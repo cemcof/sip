@@ -1,0 +1,38 @@
+@* Consumes edit context, hooks on its event and enables user of the component to get *@
+@* notified whenever an input is changed. *@
+@implements IDisposable
+
+@ChildContent
+
+@code {
+    [CascadingParameter] EditContext CascadedEditContext { get; set; } = default!;
+
+    
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    
+    [Parameter]
+    public EventCallback<FieldIdentifier> OnFieldChanged { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (CascadedEditContext is null) throw new ArgumentException();
+    }
+
+    protected override void OnInitialized()
+    {
+        CascadedEditContext.OnFieldChanged += _changedHandler;
+    }
+
+    public void Dispose()
+    {
+        CascadedEditContext.OnFieldChanged -= _changedHandler;
+    }
+
+    private void _changedHandler(object? sender, FieldChangedEventArgs fieldChangedEventArgs)
+    {
+        OnFieldChanged.InvokeAsync(fieldChangedEventArgs.FieldIdentifier);
+    }
+
+
+}

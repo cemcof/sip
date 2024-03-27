@@ -1,0 +1,19 @@
+<VerticalLayout>
+    <CTextInput @ref="_focusCompRef" @bind-Value="@Model.Title" DisplayName="Name"></CTextInput>
+</VerticalLayout>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public Project Model { get; set; } = null!;
+    
+    private CTextInput? _focusCompRef;
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && _focusCompRef is not null)
+        {
+            await _focusCompRef.FocusAsync();
+        }
+    }
+}

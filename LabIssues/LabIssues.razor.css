@@ -1,0 +1,53 @@
+.issues-upper-container {
+    display: flex;
+}
+
+
+.issues-side-container {
+    flex: 0 0 40rem;
+}
+
+.issues-container {
+    margin-top: 0.5rem;
+    height: 90vh;
+    overflow: auto;
+    width: 100%;
+}
+
+
+/* TODO - reuse this style (same as in schedule) */
+.create-issue-container {
+    /*position: fixed;*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    /*inset: 0;*/
+    /*background-color: rgba(255, 255, 255, 0.8);*/
+}
+
+
+::deep .create-issue-form {
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    padding: 2rem;
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 0 3px 13px 2px rgba(0,0,0,0.46);
+    width: 50rem;
+    height: 90vh;
+}
+
+
+.issues-header {
+    display: flex;
+    align-items: center;
+}
+
+.issues-header, .issues-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.issues-header input {
+    width: 50rem;
+}

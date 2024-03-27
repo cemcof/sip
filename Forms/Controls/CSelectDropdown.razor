@@ -1,0 +1,122 @@
+@* This is a dropdown input component that renders as default browser select *@
+@* Does not support searching (but browser usually provide some native searching by typing first letter) *@
+@* Does not support item templates - options in select renders only as simple strings. *@
+@* Does not support footer *@
+@* Does not support loading on scrolling (always load everything) *@
+@* To support these things, use more sophisticated component CDropdown that does not render as native browser select but has  *@
+@* custom rendering logic implemented. *@
+
+@typeparam TItem
+@inherits CInputBase<TItem>
+
+
+<div class="form-group select-group cinput-container cselectdropdown-container rendering-strategy-@(RenderingStrategy) @(HasLabel ? "labeled" : "labelless") @(IsRequired ? "required" : "")">
+    @if (HasLabel)
+    {
+        <div class="clabel-container" style="@GetFlexStyleForIndex(0)">
+            <CLabelAndTip Id="@InputId" Tip="@Tip">@DisplayName</CLabelAndTip>
+        </div>
+    }
+    
+    <div class="cinput-input-container" style="@GetFlexStyleForIndex(1)">
+        <select
+             readonly="@IsReadonly"
+             disabled="@IsDisabled"
+             class="@("form-control " + FieldCssClass) form-select"
+             id="@(InputId)" name="@InputId" @bind="@CurrentValueAsString">
+
+            @foreach (var opt in _currentOptions)
+            {
+                <option value="@opt.Key">@DisplayNameMapper(opt.Value)</option>
+            }
+        </select>
+
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public ItemsProviderDelegate<TItem> ItemsProvider { get; set; } = null!;
+
+    [Parameter]
+    public Func<TItem, string> DisplayNameMapper { get; set; } = value => value?.ToString().Humanize() ?? "";
+    
+
+    private Dictionary<string,TItem> _currentOptions = new();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        // Try to gather options from the render attribute if no items at all are provided and dropdown uses simple strings
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+        // Items provider might be null here because we are still handling parameters
+        if (ItemsProvider is null)
+        {
+            var items = ModelPropertyType.GetCustomAttribute<SelectionAttribute>()?.GetKeyValues().ToList() ?? new List<KeyValuePair<string, string>>();
+            if (typeof(TItem) == typeof(string))
+            {
+                ItemsProvider = _ => ValueTask.FromResult(
+                    new ItemsProviderResult<TItem>(
+                            items.Select(i => i.Key).Cast<TItem>(), items.Count
+                        )
+                    );
+                
+                DisplayNameMapper = value => items.First(x => x.Key.Equals(value)).Value;
+            }
+            else if (typeof(TItem) == typeof(int))
+            {
+                ItemsProvider = _ => ValueTask.FromResult(
+                    new ItemsProviderResult<TItem>(
+                        items.Select(i => (TItem)(object)int.Parse(i.Key)), items.Count
+                        )
+                    );
+                DisplayNameMapper = value => items.First(x => Convert.ToInt32(x.Key).Equals(value)).Value;
+
+            }
+            else
+            {
+                throw new InvalidOperationException("Dropdown cannot find any item source");
+            }
+            
+        }
+        
+        
+        // Load items 
+        // TODO - there might be a problem with Guid key and binding after another OnParametersSet async call
+        var result = await ItemsProvider(new ItemsProviderRequest(default, Int32.MaxValue, default));
+        var resultItems = result.Items.ToList();
+        
+        
+        if (typeof(TItem).IsPrimitive || typeof(TItem) == typeof(string))
+        {
+            // It type of the item is string, enum, or primitive, supply key directly as value.ToString
+            _currentOptions = resultItems.ToDictionary(i => i?.ToString() ?? "", i => i);
+        }
+        else
+        {
+            // However, if it is a custom type, attach guid to each item
+            _currentOptions = resultItems.ToDictionary(i => Guid.NewGuid().ToString(), i => i);
+        }
+    }
+
+    protected override string? FormatValueAsString(TItem? value)
+    {
+        if (value is null) return null;
+
+        var opt = _currentOptions.FirstOrDefault(kvp => value.Equals(kvp.Value));
+        return opt.Key;
+    }
+
+
+    protected override bool TryParseValueFromString(string? value, out TItem result, [NotNullWhen(false)] out string? validationErrorMessage)
+    {
+        if (value is not null && _currentOptions.ContainsKey(value))
+        {
+            result = _currentOptions[value];
+            validationErrorMessage = null;
+            return true;
+        }
+
+        throw new InvalidOperationException();
+    }
+}

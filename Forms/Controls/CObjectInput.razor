@@ -1,0 +1,198 @@
+@* This is rather complex input that enables user to search object within collection of objects. If  *@
+
+@* Uses CDropdown internally  *@
+
+@typeparam TItem
+@inherits CInputBase<TItem>
+@inject ILogger<CObjectInput<TItem>> Logger
+
+
+
+        @if (SearchMode)
+        {
+            <div onkeydown="preventDefaultIfEnter(event); preventDefaultIfUp(event); preventDefaultIfDown(event)"
+                 onkeypress="preventDefaultIfEnter(event); preventDefaultIfUp(event); preventDefaultIfDown(event)"
+                 class="cinput-input-container @FieldCssClass">
+                <ListView TItem="TItem" ItemsCount="10" OnItemConfirmed="@_onItemConfirmed" ItemTemplate="@ItemTemplate" Items="_items"
+                           HideBodyAndFooter="@(!_showItems)" OnCancelled="_cancel">
+                    <Header>
+                        <div class="input-group">
+                            <input @ref="@InputRef" disabled="@IsDisabled" readonly="@IsReadonly" type="text" class="form-control ps-2 @FieldCssClass" id="@InputId" @bind="_searchText"
+                                   @onclick="@(() => _showItems = true)"
+                                   @onfocus="_inputFocused"
+                                   @onblur="_inputBlurred"
+                                   @oninput="_inputOnInput"/>
+                        </div>
+
+                    </Header>
+
+                    <Footer>
+                        @if (CreateItemTemplate is not null && ItemPersister is not null && ItemFactory is not null)
+                        {
+                            <div class="d-flex">
+                                <div class="flex-grow-1"></div>
+                                <button class="btn btn-sm btn-outline-primary mt-1" type="button" @onclick="_createItemClicked">Create new</button>
+                            </div>
+                        }
+                    </Footer>
+                </ListView>
+            </div>
+
+            @if (_creatingEditContext is not null && CreateItemTemplate is not null)
+            {
+                <div class="creation-dialog">
+                    <CascadingValue Value="@_creatingEditContext">
+                        <InputBasedValidator></InputBasedValidator>
+                        @CreateItemTemplate((TItem) _creatingEditContext.Model)
+                    </CascadingValue>
+
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-sm btn-primary me-1 mt-1" @onclick="_onCreateConfirm">Create</button>
+                        <button type="button" class="btn btn-sm btn-secondary ms-1 mt-1" @onclick="_onCreateCancel">Cancel</button>
+                    </div>
+                </div>
+            }
+
+        }
+        else
+        {
+            <div class="@FieldCssClass value-container" @onclick="@_refreshItemClicked">@ItemTemplate(CurrentValue!)</div>
+        }
+
+        <div class="invalid-feedback">
+            <ValidationMessage For="ValueExpression"></ValidationMessage>
+        </div>
+
+
+@code {
+
+    [Parameter, EditorRequired]
+    public Func<string?, CancellationToken, Task<IEnumerable<TItem>>> ItemProvider { get; set; } = null!;
+    [Parameter] public Func<TItem>? ItemFactory { get; set; }
+    [Parameter] public Func<TItem, Task>? ItemPersister { get; set; }
+
+    [Parameter]
+    public RenderFragment<TItem> ItemTemplate { get; set; } = null!;
+    
+    [Parameter]
+    public RenderFragment<TItem>? CreateItemTemplate { get; set; }
+
+    [Parameter] 
+    public EventCallback<TItem> OnNewItem { get; set; }
+
+    private bool SearchMode => Value is null;
+
+    private EditContext? _creatingEditContext;
+    private string _searchText = string.Empty;
+    private bool _refocus = false;
+    private bool _showItems = false;
+    private List<TItem> _items = new();
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if (ItemTemplate is null || ItemProvider is null)
+            throw new ArgumentException($"{nameof(ItemTemplate)} and {nameof(ItemProvider)} are required arguments to {nameof(CObjectInput<TItem>)}");
+    }
+
+    protected override bool TryParseValueFromString(string? value, out TItem result, [NotNullWhen(returnValue: false)] out string? validationErrorMessage)
+    {
+        throw new NotSupportedException("CObjectInput does not support value from string conversion.");
+    }
+
+    private async Task _inputOnInput(ChangeEventArgs e)
+    {
+        _showItems = true;
+        await _search((string) e.Value!);
+    }
+
+    private async Task _search(string searchText)
+    {
+        _searchText = searchText;
+        _items = (await ItemProvider(_searchText, CancellationToken.None)).ToList();
+        Logger.LogDebug( "Applied search text {}", _searchText);
+        Logger.LogDebug( "Found {} results {}", _items.Count, _items);
+        
+    }
+
+    private async Task _inputFocused()
+    {
+        _reset();
+        _showItems = true;
+        await _search(string.Empty);
+    }
+
+    private void _refreshItemClicked()
+    {
+        if (IsReadonly || IsDisabled)
+            return;
+        
+        _refocus = true;
+        _reset();
+    }
+
+    private void _inputBlurred()
+    {
+        _showItems = false;
+        _searchText = string.Empty;
+    }
+
+    private void _cancel()
+    {
+        _reset();
+        _showItems = false;
+    }
+
+    private void _reset()
+    {
+        _searchText = string.Empty;
+        _creatingEditContext = null;
+        CurrentValue = default;
+        IsDisabled = false;
+    }
+
+    private void _onCreateCancel()
+    {
+        _reset();        
+    }
+
+    private async Task _onCreateConfirm()
+    {
+        if (ItemPersister is null) throw new ArgumentException($"{nameof(ItemPersister)} argument is missing");
+        var validationResult = _creatingEditContext?.Validate() ?? false;
+        if (!validationResult || _creatingEditContext is null)
+        {
+            return;
+        }
+
+        await ItemPersister((TItem)_creatingEditContext.Model);
+        CurrentValue = (TItem)_creatingEditContext.Model;
+        _creatingEditContext = null;
+        await OnNewItem.InvokeAsync(CurrentValue);
+    }
+
+    private void _onItemConfirmed(TItem confirmedItem)
+    {
+        CurrentValue = confirmedItem;
+        _showItems = false;
+    }
+
+    private void _createItemClicked()
+    {
+        if (ItemFactory is null) throw new ArgumentException($"{nameof(ItemFactory)} argument is missing");
+        Logger.LogInformation("At the end of create item clicked, {}", _creatingEditContext);
+        var item = ItemFactory()!;
+        _creatingEditContext = new EditContext(item);
+        _creatingEditContext.SetFieldCssClassProvider(new BsFieldClassProvider());
+        IsDisabled = true;
+        _showItems = false;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_refocus)
+            await FocusAsync();
+        _refocus = false;
+    }
+
+}

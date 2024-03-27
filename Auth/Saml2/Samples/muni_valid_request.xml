@@ -1,0 +1,7 @@
+<samlp:AuthnRequest
+        AssertionConsumerServiceURL="https://stigmator.ceitec.muni.cz/Shibboleth.sso/SAML2/POST"
+        Destination="https://id.muni.cz/simplesaml/saml2/idp/SSOService.php"
+        ID="_a62b18e688d75fade1687bb3a768c31f" IssueInstant="2022-01-22T11:36:06Z"
+        ProtocolBinding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Version="2.0"
+        xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol">
+    <saml:Issuer xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">https://stigmator.ceitec.muni.cz/authzone</saml:Issuer><samlp:NameIDPolicy AllowCreate="1"/></samlp:AuthnRequest>

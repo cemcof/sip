@@ -1,0 +1,11 @@
+.node-item.inactive i {
+    color: red;
+}
+
+.node-item.active i {
+    color: green;
+}
+
+.nodes-status-container {
+    padding: 1rem;
+}

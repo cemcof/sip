@@ -1,0 +1,233 @@
+@inherits OrganizationComponentBase
+@using sip.Utils
+@using sip.Experiments.Model
+@using sip.Organizations.Centers
+@implements IDisposable
+
+@page "/{OrganizationId}/microscopes"
+@page "/{OrganizationId}/microscopes/{InstrumentId}"
+@page "/{OrganizationId}/microscopes/{InstrumentId}/{ExperimentType}"
+
+@inject NavigationManager NavigationManager
+@inject ExperimentEngine ExperimentEngine
+@inject IAuthorizationService AuthorizationService
+@inject ILogger<MicroscopesPage> Logger
+@inject IOptionsMonitor<InstrumentsOptions> InstrumentOptions
+@inject IOptionsMonitor<ExperimentsOptions> ExperimentsOptions
+
+<PageTitle>Microscopes - @InstrumentId</PageTitle>
+
+@* Probably useless, event is enough *@
+@* <RefreshTimer Action="OnParametersSetAsyncByTimer" Interval="@(TimeSpan.FromSeconds(5))" DueTime="@(TimeSpan.FromSeconds(5))"></RefreshTimer> *@
+
+<div class="microscopes-page">
+    <nav>
+        <div class="nav-mics">
+            @if (InternalView)
+            {
+                <div class="instrument-container" active="@true">
+                    <div class="inst-name ">
+                        <i class="bi bi-chevron-down"></i>&nbsp;
+                        @_selectedInstrument!.Name
+                    </div>
+                    
+                    @foreach (var job in _jobsAvailable[_selectedInstrument])
+                    {
+                        <div class="nav-item">
+                            <NavLink href="@UrlProvider($"microscopes/{_selectedInstrument.Name}{job.Key}")">
+                                @job.Value.DisplayName
+                            </NavLink>
+                        </div>
+                    }
+
+                </div>
+            }
+            else
+            {
+                @foreach (var inst in _jobsAvailable)
+                {
+                    <div class="instrument-container" active="@(inst.Key.Name == InstrumentId)">
+                        <NavLink href="@UrlProvider($"microscopes/" + inst.Key.Name)"
+                                 class="inst-name ">
+                            <i class="bi @(inst.Key.Name == InstrumentId ? "bi-chevron-down" : "bi-chevron-right")"></i>&nbsp;
+                            @inst.Key.DisplayName
+                        </NavLink>
+                        @if (InstrumentId == inst.Key.Name)
+                        {
+                            @foreach (var exp in inst.Value)
+                            {
+                                <div class="nav-item">
+                                    <NavLink href="@UrlProvider($"microscopes/{inst.Key.Name}/{exp.Key}")">
+                                        @exp.Value.DisplayName
+                                    </NavLink>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                    <div style="height: 0.2rem"></div>
+                }
+            
+
+            }
+        </div>
+        
+        <NodesStatus Organization="@Organization"></NodesStatus>
+    </nav>
+    
+    <div>
+        @if (_currentExperiment is not null)
+        {
+            <ExperimentComponent ExpMeta="@_currentExperimentMeta" ExpHandler="ExperimentEngine" Exp="@_currentExperiment" />
+        }
+        else
+        {
+            <span class="note">You cannot utilize @((ExperimentType is null) ? "any" : "this") instrument at the moment.</span>        
+        }
+    </div>
+</div>
+
+
+@code {
+
+    [Parameter] public string? ExperimentType { get; set; }
+    [Parameter] public string? InstrumentId { get; set; }
+    [Parameter] public bool InternalView { get; set; }
+
+    private CancellationTokenSource _cts = new();
+    private bool _renderReady = true;
+    private Dictionary<IInstrument, Dictionary<string, ExperimentOptions>> _jobsAvailable = new();
+    private IInstrument? _selectedInstrument = null!;
+    private ExperimentOptions? _selecteJob = null!;
+    private Experiment? _currentExperiment;
+    private ExperimentOptions? _currentExperimentMeta;
+
+   
+
+    private async Task RefreshState()
+    {
+        var jobsAvailable = new Dictionary<IInstrument, Dictionary<string, ExperimentOptions>>();
+        IInstrument? selectedInstrument = null;
+        ExperimentOptions? selectedJob = null;
+        ExperimentOptions? currentExperimentMeta = null;
+        Experiment? currentExperiment = null; 
+        
+        var instrumentJobs = ExperimentsOptions.Get(Organization).InstrumentJobs;
+        var instruments = InstrumentOptions.Get(Organization);
+        foreach (var (inst, jobs) in instrumentJobs)
+        {
+            var requirements = new[] { new IntrumentJobsUseRequirement(inst) };
+            var auth = await AuthorizationService.AuthorizeAsync(AuthUser, null, requirements);
+            if (auth.Succeeded)
+                jobsAvailable[inst] = jobs;
+        }
+        
+        if (jobsAvailable.Count > 0)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(InstrumentId))
+                {
+                    var instname = jobsAvailable.First();
+                    NavigationManager.NavigateTo(UrlProvider($"microscopes/" + instname.Key.Name));
+                    return;
+                }
+            
+                selectedInstrument = instruments.Instruments.First(i => i.Name == InstrumentId);
+
+                if (string.IsNullOrEmpty(ExperimentType))
+                {
+                    NavigationManager.NavigateTo(UrlProvider($"microscopes/" + InstrumentId + "/" + 
+                                                              instrumentJobs[selectedInstrument].First().Key));
+                    return;
+                }
+
+                selectedJob = instrumentJobs[selectedInstrument][ExperimentType];
+
+                var expkey = (Organization.Id, selectedInstrument.Name, ExperimentType);
+                currentExperimentMeta = jobsAvailable[selectedInstrument][ExperimentType];
+                // We should always have an experiment.
+                // If there is active experiment in the engine, there is nothing to discuss
+                var crexp = await ExperimentEngine.GetRunningExperimentAsync(expkey);
+                if (crexp is not null)
+                {
+                    currentExperiment = crexp;
+                    Logger.LogTrace("Setcrrentactiveexp available {}", currentExperiment.Id);
+                }
+                // There is not experiment in the engine, create new, but only if not already created previously!
+                else if (_currentExperiment is null || _currentExperiment.KeyIdentif != expkey || _currentExperiment.Id != default)
+                {
+                    currentExperiment = ExperimentEngine.CreateExperiment(expkey.Item1, expkey.Item2, expkey.ExperimentType);
+                    Logger.LogTrace("Created new exp {}", currentExperiment.Id);
+                }
+                else 
+                {
+                    // Keep current experiment
+                    currentExperiment = _currentExperiment;
+                }
+
+                if (!ReferenceEquals(_currentExperiment, currentExperiment))
+                {
+                    Logger.LogTrace("Experiment reference changed, ids: {} {}", _currentExperiment?.Id, currentExperiment?.Id);
+                }
+            }
+            catch (Exception e) when (e is InvalidOperationException or KeyNotFoundException)
+            {
+                Logger.LogError(e, "Failed to display selected experiment");
+                currentExperiment = null!;
+                currentExperimentMeta = null!;
+            }
+        }
+        
+        _currentExperiment = currentExperiment;
+        _selecteJob = selectedJob;
+        _selectedInstrument = selectedInstrument;
+        _currentExperimentMeta = currentExperimentMeta;
+        _jobsAvailable = jobsAvailable;
+        
+        Logger.LogTrace("Refresh done: meta_display_name={}, current_exp_id={}, current_exp_key_identif={}, current_exp_state={}", _currentExperimentMeta?.DisplayName, _currentExperiment?.Id, _currentExperiment?.KeyIdentifStr, _currentExperiment?.State);
+    }
+    // protected override bool ShouldRender() => !_refreshing;
+
+    // public Task OnParametersSetAsyncByTimer() {
+    //     return RefreshState(default);
+    // }
+
+    protected override Task OnParametersSetAsync() => RefreshState(); 
+
+    bool _refreshing = false;
+
+    
+    // Refreshing experiment: should cause render immediately such that gui seems faster
+    private void _onEventRefresh()
+    {
+        Logger.LogTrace("Refresh event invoked!");
+        if (!_refreshing)
+        {
+            InvokeAsync(async () =>
+            {
+                await Task.Delay(300); // To avoid refresh cumulation
+                try
+                {
+                    await RefreshState();
+                }
+                finally
+                {
+                    _refreshing = false;
+                    StateHasChanged();
+                }
+            });
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        ExperimentEngine.ExperimentChanged += _onEventRefresh;
+    }
+
+    public void Dispose()
+    {
+        ExperimentEngine.ExperimentChanged -= _onEventRefresh;
+    }
+
+}

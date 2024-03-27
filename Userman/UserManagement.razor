@@ -1,0 +1,83 @@
+@using sip.Utils.Items
+
+
+@inject AppUserManager UserManager
+@inject NavigationManager NavigationManager
+
+<PageTitle>User management</PageTitle>
+
+<div class="userman-layout">
+    <FilteredItemViewer TItem="AppUser" ItemsProvider="@UserItemsProvider" SearchPlaceholder="Quickly search users by name or email...">
+        <ItemTemplate>
+            <NavLink href="@LinkProvider("/userman/" + context.Id)">@context.Fullcontact</NavLink>
+        </ItemTemplate>
+        
+        <NextToSearchBarRight>
+            <InteractiveButtonForm
+                TFormModel="NewUserModel"
+                BtnClass="bt-icon"
+                CssIcon="bi bi-plus-circle"
+                TooltipDirection="TooltipDirection.Bottom"
+                Caption="+"
+                RenderAsIcon="@true"
+                OnSubmit="@OnNewUser"
+                Tip="Create new user within the system">
+            
+                <UserCreateForm Model="@context.Model"></UserCreateForm>
+                
+            </InteractiveButtonForm>
+        </NextToSearchBarRight>
+    </FilteredItemViewer>
+
+    <NullAware Value="@_selectedUser">
+        
+        <WhenReady Context="user">
+            <div class="admin-user-view-container">
+                <AdminUserView User="user"></AdminUserView>
+            </div>
+            
+        </WhenReady>
+        
+        <WhenNull>
+        </WhenNull>
+
+    </NullAware>
+</div>
+
+@code {
+    
+    [Parameter]
+    public Guid SelectedUserId { get; set; }
+
+    [Parameter]
+    public Func<string, string> LinkProvider { get; set; } = s => s;
+
+    private AppUser? _selectedUser;
+    
+    
+
+    protected override Task OnInitializedAsync()
+    {
+        return Task.CompletedTask;
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (SelectedUserId != default)
+        {
+            _selectedUser = (await UserManager.GetAsync(u => u.Id == SelectedUserId)).FirstOrDefault();
+        }
+    }
+
+    private async Task OnNewUser(NewUserModel model)
+    {
+        await UserManager.NewUserAsync(model);
+    }
+
+    private async ValueTask<ItemsProviderResult<AppUser>> UserItemsProvider(ItemsProviderRequest request, string? searchstring)
+    {
+        var result = await UserManager.GetUsersAsync(request.ToFilter(searchstring));
+        return new ItemsProviderResult<AppUser>(result.Items, result.TotalCount);
+    }
+
+}

@@ -1,0 +1,14 @@
+.searchbar {
+    position: relative;
+    flex-grow: 1;
+}
+
+.clear-icon {
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0.5rem;
+    font-size: 60%;
+}

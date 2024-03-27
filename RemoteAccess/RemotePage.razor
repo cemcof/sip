@@ -1,0 +1,23 @@
+﻿@page "/{OrganizationId}/remote"
+
+@using sip.Experiments
+@inherits OrganizationComponentBase
+
+@* Just decide whether to show admin page or not  *@
+<AuthorizeViewByRequirements Requirements="@_GetAdminRequirements()">
+    <Authorized>
+        <RemoteAdmin />
+    </Authorized>
+    <NotAuthorized>
+        <RemoteLanding />
+    </NotAuthorized>
+</AuthorizeViewByRequirements>
+
+@code {
+    
+    private IReadOnlyCollection<IAuthorizationRequirement> _GetAdminRequirements()
+        => new List<IAuthorizationRequirement>
+            {
+                new InstrumentRemoteDesktopRequirement(Organization, null, true)
+            };
+}

@@ -1,0 +1,548 @@
+Db:
+    user: radem
+    password: radem
+    host: localhost
+    port: 3306
+    database: lims-dev
+
+Log:
+    target_folder: logs
+Actions:
+    - target: job.ExpFileBrowser
+      enabled: True
+      initial_invoke: True
+      interval: "00:00:00.500000"
+    - target: configuration.ConfigToDbSyncer
+      enabled: True
+      initial_invoke: True
+      interval: "00:00:05.000000"
+#    - module: job
+#      method: get_infra_config
+#      enabled: True
+#      initial_invoke: True
+#      interval: 01:00:00
+#    - module: job
+#      method: refresh_infra_config
+#      enabled: True
+#      initial_invoke: False
+#      interval: 00:00:05
+#    - module: job
+#      method: sync
+#      enabled: True
+#      interval: 00:00:03
+#      initial_invoke: False
+#    - module: job
+#      method: sync_full
+#      enabled: True
+#      initial_invoke: True
+#    - module: job
+#      method: sync_data
+#      enabled: True
+#      interval: 00:00:10
+#      initial_invoke: False
+#    - module: job
+#      method: job_start_request
+#      enabled: True
+#    - module: job
+#      method: job_stop_request
+#      enabled: True
+#    - module: job
+#      method: job_stop_finished
+#      enabled: True
+#    - module: job
+#      method: list_directory
+#      enabled: True
+#      priority: 0
+#      skip_if_running: False
+
+
+Center: center_dev
+Organization: CeitecEmOrg
+ControllerPath: dev_data/lims_jobmanager # The base path where job controller resides.
+AutopickingModelsPath: dev_data/lims_jobmanager/autopicking_models/
+InternalNetworks: [ 147.251.155.85, 147.251.155.115 ]
+
+Protocols:
+    ProtImportMovies: &protImportMovies
+        "object.className": "ProtImportMovies"
+        "object.id": "426"
+        "object.label": "scipion - import movies"
+        "object.comment": ""
+        "runName": null
+        "runMode": 0
+        "importFrom": 0
+        "filesPath":
+            Type: folder
+            IsRequired: True
+            General: True
+        "filesPattern": "*_Fractions.mrc"
+        "copyFiles": false
+        "haveDataBeenPhaseFlipped": false
+        "acquisitionWizard": null
+        "voltage": &voltage
+            Type: float
+            DisplayName: Voltage
+            Unit: kV
+            Min: 40
+            Max: 200
+            Default: 200
+        "sphericalAberration": &sphericalAbberation
+            Type: float
+            Title: CS
+            Default: 2.0
+            IsReadonly: True
+            Unit: mm
+        "amplitudeContrast": 0.1
+        "magnification": 50000
+        "samplingRateMode": 0
+        "samplingRate": 0.855
+        "scannedPixelSize": &scannedPixelSize
+            Type: float
+            DisplayName: Pixel Size
+            Unit: Å/px
+            Default: 1.23
+            IsRequired: True
+        "doseInitial":
+            Type: float
+            DisplayName: Initial Dose
+            Unit: "e/Å<sup>2</sup>"
+            Default: 1
+            IsRequired: True
+        "dosePerFrame":
+            Type: float
+            DisplayName: Frame Dose
+            Unit: "e/Å<sup>2</sup>"
+            Default: 1
+            Min: 0
+            Max: 100
+            IsRequired: True
+        "particleDiameter":  # TODO - does not belong here, probably to some particle picking protocol
+            Type: float
+            Unit: A
+            Default: 200
+            IsRequired: True
+            Important: True
+        "binning":   # TODO - where does this belong?
+            Type: int
+            DisplayName: Binning
+            Selection: [ 1, 2, 4, 8 ]
+            Default: 1
+            IsRequired: True
+        "autopickingModel": # TODO - does not belong here, probably to some particle picking protocl
+            Type: file
+            Scope: autopicking
+            DisplayName: Autopicking Model
+        "gainFile":
+            Type: file
+            DisplayName: Gain File
+        "darkFile": null
+        "dataStreaming": true
+        "timeout": 43200
+        "fileTimeout": 30
+        "inputIndividualFrames": false
+        "numberOfIndividualFrames": null
+        "stackFrames": false
+        "writeMoviesInProject": false
+        "movieSuffix": "_frames.mrcs"
+        "deleteFrames": false
+        "streamingSocket": false
+        "socketPort": 5000
+    ProtMonitorSummary: &protMonitorSummary
+        "object.className": "ProtMonitorSummary"
+        "object.id": "168"
+        "object.label": "Summary Monitor (copy)"
+        "object.comment": ""
+        "runName": null
+        "runMode": 0
+        "inputProtocols": [ "503", "426", "121" ]
+        "samplingInterval": 30
+        "stddevValue": 0.04
+        "ratio1Value": 1.15
+        "ratio2Value": 4.5
+        "maxDefocus": 40000.0
+        "minDefocus": 1000.0
+        "astigmatism": 0.2
+        "monitorTime": 30000.0
+        "cpuAlert": 101.0
+        "memAlert": 101.0
+        "swapAlert": 101.0
+        "doGpu": true
+        "gpusToUse": "0 1"
+        "doNetwork": true
+        "netInterfaces": 2
+        "doDiskIO": true
+        "doMail": false
+        "emailFrom": "noreply-scipionbox@cnb.csic.es"
+        "emailTo": "user@domain"
+        "smtp": "localhost"
+        "publishCmd": "rsync -Lav %(REPORT_FOLDER)s scipionbox@nolan.cnb.csic.es:public_html/"
+    ProtMotionCorr: &protMotionCorr
+        "object.className": "ProtMotionCorr"
+        "object.id": "503"
+        "object.label": "Motioncorr (copy 2)"
+        "object.comment": ""
+        "runName": null
+        "runMode": 0
+        "gpuMsg": "True"
+        "gpuList": "0 1"
+        "alignFrame0": 1
+        "alignFrameN": 0
+        "useAlignToSum": true
+        "sumFrame0": 1
+        "sumFrameN": 0
+        "binFactor": 1.0
+        "cropOffsetX": 0
+        "cropOffsetY": 0
+        "cropDimX": 0
+        "cropDimY": 0
+        "doSaveAveMic": true
+        "doSaveMovie": false
+        "doComputePSD": false
+        "doComputeMicThumbnail": false
+        "computeAllFramesAvg": false
+        "extraParams": ""
+        "extraProtocolParams": ""
+        "useMotioncor2": true
+        "doApplyDoseFilter": true
+        "patchX": 3
+        "patchY": 3
+        "patchOverlap": 20
+        "group": 1
+        "tol": 0.5
+        "doMagCor": false
+        "useEst": true
+        "scaleMaj": 1.0
+        "scaleMin": 1.0
+        "angDist": 0.0
+        "defectFile":
+            Type: file
+            DisplayName: Defect File
+        "extraParams2": ""
+        "doSaveUnweightedMic": true
+        "hostName": "localhost"
+        "numberOfThreads": 3
+        "numberOfMpi": 1
+        "inputMovies": "426.outputMovies"
+    ProtCtfFind: &protCtfFind
+        "object.className": "ProtCTFFind"
+        "object.id": "121"
+        "object.label": "Ctffind"
+        "object.comment": ""
+        "runName": null
+        "runMode": 0
+        "recalculate": false
+        "sqliteFile": null
+        "ctfDownFactor": 1.0
+        "useCtffind4": true
+        "astigmatism": 1000.0
+        "findPhaseShift": false
+        "minPhaseShift": 0.0
+        "maxPhaseShift": 3.15
+        "stepPhaseShift": 0.2
+        "phasePlate":
+            DisplayName: Phase Plate
+            Type: bool
+            Default: false
+        "resamplePix": true
+        "slowSearch": true
+        "lowRes": 0.025
+        "highRes": 0.4
+        "minDefocus": &minDefocus
+            Type: float
+            DisplayName: Defocus min
+            Min: 0.0
+            Max: 1000000.0
+            Default: 10000.0
+            Unit: Å
+            Shared: True
+        "maxDefocus": &maxDefocus
+            Type: float
+            DisplayName: Defocus max
+            Min: 0.0
+            Max: 1000000.0
+            Default: 35000.0
+            Unit: Å
+            Shared: True
+        "windowSize": 512
+        "hostName": "localhost"
+        "numberOfThreads": 3
+        "numberOfMpi": 1
+        "streamingWarning": null
+        "streamingSleepOnWait": 0
+        "streamingBatchSize": 1
+        "inputMicrographs": "503.outputMicrographs"
+
+Instruments:
+    TalosArctica:
+        DisplayName: Talos Arctica
+        Drives:
+            -   Label: Arctica - OffloadData
+                PathFromProcessingPC: dev_data/jm_drives/arctica_falconstorage
+                PathFromControllerPC: dev_data/jm_drives/arctica_falconstorage
+        Jobs:
+            #            TRANSFER:
+            #                TransferFiles: [ .jpg, .png, .tif, .mrc ]
+            #                InputModelComponent: TransferFormPart
+            SPA:
+                DisplayName: SPA
+                # TransferFiles: [ Fractions.mrc, Fractions.tiff, .mrcs, .tif ]
+                GeneralProperties: &genProps
+                    OriginalDataPath: &filesPathGen
+                        DisplayName: Data path
+                        Type: folder
+                        IsRequired: True
+                        Scope: TalosArctica/SPA
+                        Flex: 0 0 5rem
+                        Populate: filesPath
+                    RelevantFiles:
+                        DisplayName: Relevant Files
+                        Type: strlist
+                        Default: [ "*_Fractions.mrc" ]
+                        Populate: filesPattern
+                        Flex: 0 0 5rem
+                        IsRequired: True
+                    Clean:
+                        DisplayName: Remove all data from the microscope after job termination
+                        Type: bool
+                        Default: False
+                        Flex: 0 1 0rem, 1
+                    Archive:
+                        DisplayName: Archive data
+                        Type: bool
+                        Default: false
+                        Flex: 0 1 0rem, 1
+
+                Workflows:
+                    basic1: &basicSpaWorfklow
+                        Title: Basic - acquire -> motionCorr -> ctf -> report
+                        Description: Basic workflow
+                        Engines: [ scipion ]
+                        Protocols:
+                            - *protMonitorSummary
+                            - *protImportMovies
+                            - *protCtfFind
+                            - *protMotionCorr
+                    basic2:
+                        Title: Basic2 - import -> motionCorr -> ctf -> report
+                        Description: Basic workflow 2, same as 1, but different cs
+                        Engines: [ scipion ]
+                        Protocols:
+                            - *protMonitorSummary
+                            - <<: *protImportMovies
+                              sphericalAberration:
+                                  <<: *sphericalAbberation
+                                  Default: 4
+                            - *protCtfFind
+                            - *protMotionCorr
+            TOMO:
+                DisplayName: Tomo
+                GeneralProperties:
+                    <<: *genProps
+                    OriginalDataPath:
+                        <<: *filesPathGen
+                        Scope: TalosArctica/TOMO
+                Workflows:
+                    basic1:
+                        <<: *basicSpaWorfklow
+                        Protocols:
+                            - <<: *protImportMovies
+                              scannedPixelSize:
+                                  <<: *scannedPixelSize
+                                  Default: 3.5
+                            - *protCtfFind
+                            - *protMonitorSummary
+                            - *protMotionCorr
+    TitanKrios:
+        DisplayName: Titan Krios
+        Drives:
+            -   Label: Krios Falconstorage
+                PathFromProcessingPC: dev_data/jm_drives/krios_falconstorage/
+                PathFromControllerPC: dev_data/jm_drives/krios_falconstorage/
+            -   Label: User Data
+                PathFromControllerPC: dev_data/jm_drives/UserData/
+                PathFromProcessingPC: null
+            -   Label: Krios K2 Dosefractions
+                PathFromProcessingPC: dev_data/jm_drives/k2_dosefractions/
+                PathFromControllerPC: dev_data/jm_drives/k2_dosefractions/
+        Jobs:
+            SPA:
+                DisplayName: SPA
+                # TransferFiles: [ Fractions.mrc, Fractions.tiff, .mrcs, .tif ]
+                GeneralProperties:
+                    <<: *genProps
+                    OriginalDataPath:
+                        <<: *filesPathGen
+                        Scope: TitanKrios/SPA
+                Workflows:
+                    basic1:
+                        <<: *basicSpaWorfklow
+                        Protocols:
+                            - <<: *protImportMovies
+                              scannedPixelSize:
+                                  <<: *scannedPixelSize
+                                  Default: 0.818
+                              voltage:
+                                  <<: *voltage
+                                  Default: 300
+                                  Max: 300
+                                  Min: 60
+                            - <<: *protCtfFind
+                              minDefocus:
+                                  <<: *minDefocus
+                                  Default: 7000
+                              maxDefocus:
+                                  <<: *maxDefocus
+                                  Default: 28000
+                            - *protMonitorSummary
+                            - *protMotionCorr
+            TOMO:
+                DisplayName: Tomo
+                GeneralProperties:
+                    <<: *genProps
+                    OriginalDataPath:
+                        <<: *filesPathGen
+                        Scope: TitanKrios/TOMO
+                Workflows:
+                    basic1:
+                        <<: *basicSpaWorfklow
+                        Protocols:
+                            - <<: *protImportMovies
+                              scannedPixelSize:
+                                  <<: *scannedPixelSize
+                                  Default: 3.473
+                              voltage:
+                                  <<: *voltage
+                                  Default: 300
+                                  Max: 300
+                            - <<: *protCtfFind
+                              minDefocus:
+                                  <<: *minDefocus
+                                  Default: 7000
+                              maxDefocus:
+                                  <<: *maxDefocus
+                                  Default: 28000
+                            - *protMonitorSummary
+                            - *protMotionCorr
+    TalosF200C:
+        DisplayName: Talos F200C
+        Drives:
+            -   Label: User Data
+                PathFromProcessingPC: null
+                PathFromControllerPC: dev_data/jm_drives/UserData/
+        Jobs:
+            SPA:
+                # TransferFiles: [ Fractions.mrc, Fractions.tiff, .mrcs, .tif ]
+                DisplayName: SPA
+                GeneralProperties:
+                    <<: *genProps
+                    OriginalDataPath:
+                        <<: *filesPathGen
+                        Scope: TalosF200C/SPA
+                Workflows:
+                    basic1:
+                        <<: *basicSpaWorfklow
+                        Protocols:
+                            - <<: *protImportMovies
+                              scannedPixelSize:
+                                  <<: *scannedPixelSize
+                                  Default: 1.598
+                            - <<: *protCtfFind
+                              minDefocus:
+                                  <<: *minDefocus
+                                  Default: 18000
+                              maxDefocus:
+                                  <<: *maxDefocus
+                                  Default: 40000
+                            - *protMonitorSummary
+                            - *protMotionCorr
+            TOMO:
+                DisplayName: Tomo
+                GeneralProperties:
+                    <<: *genProps
+                    OriginalDataPath:
+                        <<: *filesPathGen
+                        Scope: TalosF200C/TOMO
+                Workflows:
+                    basic1:
+                        <<: *basicSpaWorfklow
+                        Protocols:
+                            -   <<: *protImportMovies
+                                scannedPixelSize:
+                                    <<: *scannedPixelSize
+                                    Default: 5.311
+                            -   <<: *protCtfFind
+                                minDefocus:
+                                    <<: *minDefocus
+                                    Default: 18000
+                                maxDefocus:
+                                    <<: *maxDefocus
+                                    Default: 40000
+                            - *protMonitorSummary
+                            - *protMotionCorr
+    CryoARM:
+        DisplayName: CryoARM
+        Drives:
+            -   Label: CryoARM
+                PathFromProcessingPC: dev_data/jm_drives/krios_falconstorage
+                PathFromControllerPC: dev_data/jm_drives/krios_falconstorage
+        Jobs:
+            #            TRANSFER:
+            #                TransferFiles: [ .jpg, .png, .tif, .mrc ]
+            #                InputModelComponent: TransferFormPart
+            SPA:
+                DisplayName: SPA
+                # TransferFiles: [ Fractions.mrc, Fractions.tiff, .mrcs, .tif ]
+                GeneralProperties:
+                    <<: *genProps
+                    OriginalDataPath:
+                        <<: *filesPathGen
+                        Scope: CryoARM/SPA
+                Workflows:
+                    basic1:
+                        Title: Basic - import -> motionCorr -> ctf -> report
+                        Engines: [ scipion, em-processor ]
+                        Description: Basic workflow
+                        Protocols:
+                            - *protMonitorSummary
+                            - *protImportMovies
+                            - *protCtfFind
+                            - *protMotionCorr
+                    basic2:
+                        Title: Basic2 - import -> motionCorr -> ctf -> report
+                        Description: Basic workflow 2, same as 1, but different cs
+                        Protocols:
+                            - *protMonitorSummary
+                            -   <<: *protImportMovies
+                                sphericalAberration:
+                                    <<: *sphericalAbberation
+                                    Default: 4
+                            - *protCtfFind
+                            - *protMotionCorr
+
+
+ProxyDataLocation: # This is a location that is accessible by both processor and controller. Controller should prepare data to this location in case they are not accessible from the processor.
+    Label: Krios Falconstorage Proxy
+    PathFromProcessingPC: dev_data/jm_drives/proxy_drive/
+    PathFromControllerPC: dev_data/jm_drives/proxy_drive/
+
+Job:
+    StoragePath: dev_data/jm_drives/storage/
+    RunningJobLabel: job_run
+    StopJobRequestLabel: job_stop_request
+    StopJobConfirmLabel: job_stop_confirm
+    JobModelFileName: job.yml
+    ProcessorLogFileName: log_processor.yml
+    ControllerLogFileName: log_controller.yml
+    Processing:
+        cemcof1:
+            ProcessJobs: [ TalosArctica/SPA, TitanKrios/SPA ]
+            LimsWorkspace: "../lims-controller/dev_data/lims_jobmanager"
+        "MacBook-Air.local":
+            SCIPION_HOME: scipion
+            LimsWorkspace: "../lims-controller/dev_data/lims_jobmanager"
+            ProjectsDirectory: tmp/projects
+            ProcessJobs: [ TalosArctica/SPA, TitanKrios/SPA ]
+            PathMappings:
+                "/todo/t": "/kokot"
+                "T:/todo/t": "/kokot"
+

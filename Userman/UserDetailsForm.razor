@@ -1,0 +1,10 @@
+<CTextInput IsRequired="@true" @bind-Value="@Model.PrimaryContact.Email"></CTextInput>
+<CTextInput IsRequired="@true" @bind-Value="@Model.PrimaryContact.Firstname"></CTextInput>
+<CTextInput IsRequired="@true" @bind-Value="@Model.PrimaryContact.Lastname"></CTextInput>
+<CTextInput @bind-Value="@Model.PrimaryContact.Phone"></CTextInput>
+<CTextInput @bind-Value="@Model.PrimaryContact.Affiliation"></CTextInput>
+
+
+@code {
+    [Parameter] public AppUser Model { get; set; } = AppUser.NewEmpty();
+}

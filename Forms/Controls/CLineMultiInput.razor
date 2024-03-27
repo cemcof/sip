@@ -1,0 +1,62 @@
+@using System.Text.RegularExpressions
+@inherits CInputBase<List<string>>
+
+<div class="form-group cinput-container clinemultiinput-container rendering-strategy-@(RenderingStrategy) @(HasLabel ? "labeled" : "labelless") @(IsRequired ? "required" : "")">
+    @if (HasLabel)
+    {
+        <div class="clabel-container" style="@GetFlexStyleForIndex(0)">
+            <CLabelAndTip Id="@InputId" Tip="@Tip">@DisplayName</CLabelAndTip>
+        </div>
+    }
+    
+    <div class="cinput-input-container" style="@GetFlexStyleForIndex(1)">
+        <input type="text" class="form-control @FieldCssClass" @bind="CurrentValueAsString" id="@InputId" />
+        <div class="invalid-feedback">
+            <ValidationMessage For="ValueExpression"></ValidationMessage>
+        </div>
+    </div>
+</div>        
+
+@code {
+#nullable enable
+
+    protected override string? FormatValueAsString(List<string>? value)
+    {
+        if (value == null) return "";
+        
+        return string.Join("; ", value);
+    }
+
+    protected override bool TryParseValueFromString(string? value, out List<string> result, [NotNullWhen(returnValue: false)] out string? validationErrorMessage)
+    {
+        validationErrorMessage = null;
+        
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            result = new List<string>();
+            return true;
+        }
+        
+        result = Regex.Split(value, "\\s*[,;]\\s*").ToList();
+        return true;
+    }
+
+    public override IEnumerable<string> SelfValidate(ValidationContext validationContext)
+    {
+        // Base validation
+        foreach (var mess in base.SelfValidate(validationContext))
+        {
+            yield return mess;
+        }
+        
+        // Min length validation 
+        var attr = (MinLength is null) ? ModelPropertyType.GetCustomAttribute<MinLengthAttribute>() : new MinLengthAttribute(MinLength.Value);
+        if (attr is null) yield break;
+        var validationResult = attr.GetValidationResult(CurrentValue, validationContext);
+        if (validationResult?.ErrorMessage is not null)
+        {
+            yield return validationResult.ErrorMessage;
+        }
+    }
+
+}

@@ -1,0 +1,74 @@
+<div class="autoloader-container">
+    <div class="autoloader-header">
+        <h3>@Instrument</h3>
+
+        <NullAware TValue="AutoloaderGroupInfo" Value="SelectedRecord">
+            <WhenReady>
+                <div> @context.TimeFirst.StandardFormat() (@context.TimeFirst.HappenAgo(stripSeconds:false)) <br/>
+                      @context.TimeLast.StandardFormat() (@context.TimeLast.HappenAgo(stripSeconds:false))
+                </div>
+                <div class="btn-group-sm ms-2">
+                    <button @onclick="@(() => ChangePage(-10))">&lt;&lt;</button>
+                    <button @onclick="@(() => ChangePage(-1))">&lt;</button>
+                    <button @onclick="@(() => ChangePage(1))">&gt;</button>
+                    <button @onclick="@(() => ChangePage(10))">&gt;&gt;</button>
+                </div>
+
+            </WhenReady>
+        </NullAware>
+
+    </div>
+
+    <hr/>
+    <div class="autoloader-body">
+        <NullAware TValue="AutoloaderGroupInfo" Value="SelectedRecord">
+            <WhenReady>
+                <pre class="sample-loadings">@context.SampleLoadings</pre>
+                <pre>@context.SampleDescriptions</pre>
+            </WhenReady>
+
+            <WhenNull>
+                <div class="note">No data available for this instrument</div>
+            </WhenNull>
+        </NullAware>
+    </div>
+
+</div>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public string Instrument { get; set; } = string.Empty;
+
+    [Parameter, EditorRequired]
+    public List<AutoloaderGroupInfo> Records { get; set; } = new();
+
+
+    private int _selectedIndex = -1;
+    private AutoloaderGroupInfo? SelectedRecord => (_selectedIndex != -1) ? Records[_selectedIndex] : null;
+
+    private void ChangePage(int delta)
+    {
+        
+        // var index = _selectedRecord is null ? -1 : Records.IndexOf(_selectedRecord);
+        // var targetIndex = index + delta;
+        // if (targetIndex < 0) targetIndex = 0;
+        // if (targetIndex >= Records.Count) targetIndex = Records.Count - 1;
+        //
+        // _selectedRecord = Records[targetIndex];
+
+        _selectedIndex = Math.Clamp(_selectedIndex + delta, 0, Records.Count - 1);
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (_selectedIndex == -1)// || !Records.Contains(SelectedRecord))
+        {
+            // Invalid selected record, select default
+            _selectedIndex = Records.Count - 1; // Last item (newest)
+        }
+    }
+
+}

@@ -1,0 +1,32 @@
+<div class="card group group-vertical @ContainerClasses" @attributes="@AllOtherAttributes">
+    
+    @if (Header is not null)
+    {
+        <div class="card-header @HeadClasses">
+            @Header
+        </div>
+    }
+    
+    @if (Body is not null)
+    {
+         <div class="card-body d-flex flex-column layout layout-vertical @BodyClasses">
+            @Body
+        </div>
+    }
+    
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment? Header { get; set; }
+    
+    [Parameter]
+    public RenderFragment? Body { get; set; }
+    
+    [Parameter] public string ContainerClasses { get; set; } = string.Empty;
+    [Parameter] public string BodyClasses { get; set; } = string.Empty;
+    [Parameter] public string HeadClasses { get; set; } = string.Empty;    
+    
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object>? AllOtherAttributes { get; set; }
+}

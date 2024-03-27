@@ -1,0 +1,36 @@
+.projects-page-layout {
+    height: 100vh;
+    display: flex;
+}
+
+.projectlist-container {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 25rem;
+    
+    & .project-markers {
+        max-height: 20rem;    
+    }
+    
+    & .search-filters-container {
+        
+    }
+    
+    & .projectlist {
+        flex-grow: 1;
+        overflow-y: auto;
+    }
+}
+
+.project-container {
+    padding: 0 2rem;
+    flex-grow: 1;
+}
+
+a {
+    text-decoration: none;
+    display: block;
+}
+::deep a.active, ::deep a:hover {
+    font-weight: bold;
+}

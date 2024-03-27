@@ -1,0 +1,71 @@
+@using sip.Experiments.Model
+
+@* For expired data  *@
+@if (Exp is {Storage.State: StorageState.Expired or StorageState.ExpirationRequested or StorageState.Expiring})
+{
+    <section class="card border-info text-center my-0 w-25">
+        <div class="card-body">
+            <span class="card-text">Data expired @Exp.Storage.DtExpiration.StandardFormat() (@Exp.Storage.DtExpiration.HappenAgo())</span>
+        </div>
+    </section>
+}
+
+
+@* For data to be expired, not archived *@
+
+@if (!Exp.Storage.Archive && Exp is {Storage.State: StorageState.Idle})
+{
+    <section class="card border-warning text-center my-0 w-25">
+        <div class="card-body">
+            <p class="card-title fw-bold">Data expiration: @Exp.Storage.DtExpiration.StandardFormat() (@Exp.Storage.DtExpiration.HappenAgo())</p>
+            <p class="card-text">Since this dataset has not been marked to be archived, it will be deleted from our storage services by the date above. 
+                Please download the dataset before this moment to your storage as described below.</p>
+        </div>
+    </section>
+}
+
+
+@* For data to be archived and published *@
+
+@if (Exp.Storage.Archive && Exp.Publication.State is PublicationState.DraftCreated or PublicationState.PublicationRequested)
+{
+    <section class="card border-success text-center my-0 w-25">
+        <div class="card-body">
+            <p class="card-title fw-bold">Data embargo ends: @Exp.Publication.DtEmbargo.StandardFormat() (@Exp.Publication.DtEmbargo.HappenAgo())</p>
+            <p class="card-text">Since this dataset has been marked to be archived, it is expected to be assigned public identifier (DOI) and made publicly available either automatically after embargo period or earlier on your decision.</p>
+        </div>
+        
+        <div class="card-footer">
+            @if (Exp.Publication.State is PublicationState.PublicationRequested)
+            {
+                <p class="text-info">Publication has been requested</p>
+            }
+            else
+            {
+                <InteractiveButton Caption="Request publication now"
+                                   BtnClass="btn btn-secondary btn-sm w-100"
+                                   ContainerClass="w-100"
+                                   OnClick="@(() => OnPublicationRequest.InvokeAsync(Exp))">
+                </InteractiveButton>
+            }
+        </div>
+    </section>
+}
+
+@* For published data *@
+
+@if (Exp.Publication.State is PublicationState.Published)
+{
+    <section class="card border-success text-center my-0 w-25">
+        <div class="card-body">
+            <p class="card-title">@if (Exp.Publication.Doi is not null) {<span>DOI: <a href="@Doi.GetDoiUrl(Exp.Publication.Doi)">@Exp.Publication.Doi}</a></span>}</p>
+        </div>
+    </section>
+}
+
+
+@code {
+    [Parameter] public Experiment Exp { get; set; } = null!;
+    
+    [Parameter] public EventCallback<Experiment> OnPublicationRequest { get; set; }
+}

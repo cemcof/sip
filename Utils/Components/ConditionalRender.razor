@@ -1,0 +1,35 @@
+@if (Render)
+{
+    @TrueContent
+}
+else
+{
+    @FalseContent
+}
+
+
+@code {
+    private RenderFragment? _trueTemplate;
+    private RenderFragment? _falseTemplate;
+    
+    [Parameter]
+    public RenderFragment? TrueContent { get; set; }
+    
+    [Parameter]
+    public RenderFragment? FalseContent { get; set; }
+    
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    private bool Render => Condition;
+    
+    [Parameter]
+    public bool Condition { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        _trueTemplate = ChildContent ?? TrueContent;
+        _falseTemplate = FalseContent;
+    }
+
+}

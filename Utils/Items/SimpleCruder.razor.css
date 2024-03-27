@@ -1,0 +1,23 @@
+.simple-cruder-deletor {
+    font-weight: bold;
+    color: darkred;
+}
+
+.simple-cruder-item {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.simple-cruder-adder {
+    display: flex;
+}
+
+.simple-cruder-adder > * {
+    margin-left: 0.5rem;
+}
+
+.item-cruder .card-header {
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,175 @@
+@using System.Linq.Expressions
+@using System.Collections
+
+
+@if (Model is not null)
+{
+    @foreach (var ri in DeterimineRenderInfos())
+    {
+        <DynamicComponent Parameters="ri.Parameters" Type="ri.Component"></DynamicComponent>
+    }
+}
+
+
+@code {
+
+    private struct RenderInfo
+    {
+        public Type Component { get; set; }
+        public Dictionary<string, object?> Parameters { get; set; }
+        public string? Container { get; set; }
+    }
+    
+    
+    [Parameter] public object? Model { get; set; }
+
+    private IEnumerable<RenderInfo> DeterimineRenderInfos()
+    {
+        
+        
+        foreach (var propertyInfo in Model!.GetType().GetProperties())
+        {
+            var isSelection = propertyInfo.GetCustomAttribute<SelectionAttribute>() is not null;
+            var renderAttr = propertyInfo.GetCustomAttribute<RenderAttribute>() ?? new RenderAttribute();
+            if (renderAttr.Ignore) continue;
+
+            // Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback()
+            
+            if (propertyInfo.PropertyType == typeof(string) && !isSelection)
+            {
+                // Simple text field
+                yield return new RenderInfo()
+                {
+                    Component = typeof(CTextInput),
+                    Parameters = PrepareParameters<string>(propertyInfo)
+                };
+            }
+
+            if (propertyInfo.PropertyType == typeof(bool) && !isSelection)
+            {
+                // Simple boolean checkbox
+                yield return new RenderInfo()
+                {
+                    Component = typeof(CCheckBox),
+                    Parameters = PrepareParameters<bool>(propertyInfo)
+                };
+            }
+
+            if (propertyInfo.PropertyType == typeof(string) && isSelection)
+            {
+                // Radios or selects
+                yield return new RenderInfo()
+                {
+                    Component = typeof(CSelectDropdown<string>),
+                    Parameters = PrepareParameters<string>(propertyInfo)
+                };
+            }
+
+            if (propertyInfo.PropertyType == typeof(List<string>) && isSelection)
+            {
+                // Checkboxes
+                
+            }
+
+            if (propertyInfo.PropertyType == typeof(List<string>) && !isSelection)
+            {
+                // Multi test input
+                yield return new RenderInfo()
+                {
+                    Component = typeof(CLineMultiInput),
+                    Parameters = PrepareParameters<List<string>>(propertyInfo)
+                };
+            }
+            
+            
+            // This type is probably custom user type
+            // Now determine the type - it can be in list
+            var isList = propertyInfo.PropertyType.IsGenericType && propertyInfo.PropertyType.IsAssignableTo(typeof(IList));
+            var type = isList ?
+                propertyInfo.PropertyType.GetGenericArguments().First() :
+                propertyInfo.PropertyType;
+            if (type.IsPrimitive || type == typeof(string)) continue;
+            var recurseMethod = GetType().GetMethod(nameof(RecurseChildContent), BindingFlags.Instance | BindingFlags.NonPublic)!.MakeGenericMethod(type);
+            var prepareParamsMethod = GetType().GetMethod(nameof(PrepareParameters), BindingFlags.Instance | BindingFlags.NonPublic)!.MakeGenericMethod(propertyInfo.PropertyType);
+            
+            
+            // Custom type
+
+
+            if (!isList && !isSelection)
+            {
+                // It is not list nor selection, it is just ordinary form part
+                // Prepare child content - recurse into the model and render it automatically
+                yield return new RenderInfo()
+                {
+                    Component = typeof(FormPart<>).MakeGenericType(type),
+                    Parameters = new Dictionary<string, object?>()
+                    {
+                        {nameof(FormPart<object>.Model), propertyInfo.GetValue(Model)},
+                        {nameof(FormPart<object>.Name), propertyInfo.Name},
+                        {nameof(FormPart<object>.ChildContent), recurseMethod.Invoke(this, null)}
+                    }
+                };
+            }
+            
+            if (!isList && isSelection)
+            {
+                // Well, this is an object but specified to be the selection, such
+                // object should be rendered as checkbox selector
+                
+                yield return new RenderInfo
+                {
+                    Component = typeof(SelecterAutorenderHelper<>).MakeGenericType(type),
+                    Parameters = new Dictionary<string, object?>
+                    {
+                        {nameof(SelecterAutorenderHelper<object>.Value), propertyInfo.GetValue(Model)},
+                    }
+                };
+            }
+
+            if (isList && !isSelection)
+            {
+                // List of arbitrary items - this is rendered as CMultiObject
+                // Such component allows user to remove and add items
+                var paramsss = (Dictionary<string, object?>)prepareParamsMethod.Invoke(this, new object[] {propertyInfo})!;
+                paramsss.Add(nameof(CMultiObject<object>.ChildContent), recurseMethod.Invoke(this, null));
+                
+                yield return new RenderInfo
+                {
+                    Component = typeof(CMultiObject<>).MakeGenericType(type),
+                    Parameters = paramsss
+                };
+            }
+
+            if (isList && isSelection)
+            {
+                // Such thing is not yet supported
+                throw new NotSupportedException();
+            }
+        }
+    }
+
+    private RenderFragment<TType> RecurseChildContent<TType>()
+    {
+        return value => builder =>
+        {
+            builder.OpenComponent<AutoformRenderer>(69);
+            builder.AddAttribute(70, nameof(Model), value);
+            builder.CloseComponent();
+        };
+    }
+
+    private Dictionary<string, object?> PrepareParameters<TValue>(PropertyInfo propertyInfo)
+    {
+        return new Dictionary<string, object?>
+        {
+            {"Value", propertyInfo.GetValue(Model)},
+            {"ValueChanged", EventCallback.Factory.Create<TValue>(this, value => propertyInfo.SetValue(Model, value))},
+            {
+                "ValueExpression", Expression.Lambda<Func<TValue>>(
+                    Expression.MakeMemberAccess(Expression.Constant(Model), propertyInfo)
+                    )
+            }
+        };
+    }
+}

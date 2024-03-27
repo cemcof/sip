@@ -1,0 +1,13 @@
+<UserDetailsForm Model="Model.UserDetails"></UserDetailsForm>
+
+<CTextInput @bind-Value="@Model.Orcid" DisplayName="ORCID" Tip="Identifier - 16 digit number - e.g. 0000-0003-4013-3898"
+            IsRequired="@true" Regex="^(\d{4}-){3}(\d|X){4}$"></CTextInput>
+
+<CCheckBox @bind-Value="@Model.InviteToTheSystem"
+           Tip="If checked, user will receive an email with a link that can be used to activate account in the system, using one of available external providers.">
+</CCheckBox>
+
+
+@code {
+    [Parameter] public NewUserModel Model { get; set; } = new();
+}

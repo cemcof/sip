@@ -1,0 +1,16 @@
+.code-block {
+    background-color: #f1f1f1;
+    padding: 1.3rem;
+    position: relative;
+    border-radius: 4px;
+}
+
+.code-block code {
+    white-space: pre-line;
+}
+
+.code-block ::deep button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}

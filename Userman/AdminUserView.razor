@@ -1,0 +1,187 @@
+@using sip.Organizations
+@using sip.Utils.Items
+@using sip.Auth
+@inject AppUserManager UserManager
+@inject OrganizationService OrganizationService
+@inject NavigationManager NavigationManager
+@inject ILogger<AdminUserView> Logger
+
+<div class="user-view-heading">
+    <span>@User</span>
+    <div class="link-group">
+        <InteractiveButton
+            Caption="Remove user"
+            BtnClass="bt-link"
+            TooltipDirection="@TooltipDirection.BottomLeft"
+            Tip="Attempts to remove user from the system. Additional entities depending on the user might get removed as well."
+            OnClick="DeleteUser">
+            <ConfirmTemplate>
+                <div class="confirm-dialog">
+                    <div>Please confirm removal of user @User</div>
+                    <div>
+                        <button class="btn btn-danger" @onclick="context.ConfirmAsync">Yes, delete</button>
+                        <button class="btn btn-primary" @onclick="context.CancelAsync">No, cancel</button>
+                    </div>
+                </div>
+            </ConfirmTemplate>
+        </InteractiveButton>
+    
+        @* TODO *@
+        <InteractiveButtonForm TFormModel="AdminUserView"
+            Model="@(this)"
+            Caption="Merge to"
+            BtnClass="bt-link"
+            Tip="Merge this user to the selected user, preserving selected user and removing this user."
+            TooltipDirection="@TooltipDirection.BottomLeft"
+            OnSubmit="MergeUser"
+            Context="ctx">
+        
+            <CDropdown @bind-Value="@ctx.Model.UserMergeTo" TValue="AppUser"
+                       ItemsProvider="@(IDW<AppUser>.WrapSimpleSearch((fil, ct) => UserManager.GetItemsExcept(User, fil, ct)))">
+                <ItemTemplate>@context</ItemTemplate>
+            </CDropdown>
+        
+        </InteractiveButtonForm>
+        
+        <InteractiveButton Caption="Invalidate sessions"
+                           TooltipDirection="@TooltipDirection.BottomLeft"
+                           BtnClass="bt-link"
+                           Tip="Updates security stamp for the user, rendering login cookie of the the user invalid, which signs the user out."
+                           OnClick="@(()=>UserManager.UpdateSecurityStampAsync(User))" />
+        
+        @* <AuthorizeView Policy="@ImpersonationOptions.ImpersonatorPolicy"> *@
+            @* TODO auth  *@
+            <NavLink class="bt-link" href="@($"/impersonation/impersonate/?userId={User.Id}")">Impersonate this user</NavLink>
+        @* </AuthorizeView> *@
+        
+    </div>
+</div>
+
+<hr/>
+
+<div class="user-view-body">
+    <div class="card minw-30r">
+        <div class="card-header">
+            User details
+        </div>
+        
+        <div class="card-body">
+            
+            <CEditForm OnSubmit="@UserManager.UpdateAsync" class="cform" TModelType="AppUser" Model="User" FormFooter="@(CEditForm<AppUser>.SaveFooter)">
+                <UserDetailsForm Model="context.Model"></UserDetailsForm>
+            </CEditForm>
+
+        </div>
+    </div>
+
+    <SimpleCruder CssClass="minw-30r" TCrudItem="UserInRole" Caption="User Roles" ItemDeletor="RemoveRole"
+                  ItemsProvider="@(IDW<UserInRole>.WrapList(() => UserManager.GetUserRolesAsync(User)))">
+    
+        <ItemAdderTemplate>
+            <InteractiveButtonForm TFormModel="AdminUserView"
+                                   Model="@(this)"
+                                   Caption="+"
+                                   CssTheme="cform"
+                                   CssIcon="bi bi-plus-circle"
+                                   BtnClass="bt-icon"
+                                   RenderAsIcon="@true"
+                                   OnSubmit="@AddRole"
+                                   TooltipDirection="TooltipDirection.BottomLeft"
+                                   Context="ctx">
+                <CDropdown @bind-Value="@ctx.Model.SelectedRole" TValue="AppRole" ItemsProvider="@UserManager.GetRolesAsync">
+                    <ItemTemplate Context="role">@role.DisplayName</ItemTemplate>
+                </CDropdown>
+                
+                <CDropdown @bind-Value="@ctx.Model.SelectedOrganization" TValue="Organization" ItemsProvider="@OrganizationService.GetOrganizationsAsync">
+                    <ItemTemplate Context="org">@org.Name</ItemTemplate>
+                </CDropdown>
+            </InteractiveButtonForm>
+        </ItemAdderTemplate>
+    
+        <ChildContent>
+            @context.Role.Name / @context.Organization?.Abbreviation
+        </ChildContent>
+    
+    </SimpleCruder>
+    
+    <SimpleCruder CssClass="minw-30r" TCrudItem="UserLoginInfo" Caption="User external logins" ItemDeletor="DeleteExternalLogin"
+                  ItemsProvider="@(IDW<UserLoginInfo>.WrapList(() => UserManager.GetLoginsAsync(User)))">
+    
+        <ItemAdderTemplate>
+            <InteractiveButtonForm TFormModel="AdminUserView"
+                                               Model="@(this)"
+                                               Caption="+"
+                                               RenderAsIcon="@true"
+                                               CssTheme="cform"
+                                               BtnClass="bt-icon"
+                                               CssIcon="bi bi-plus-circle"
+                                               OnSubmit="@AddExternalLogin"
+                                               TooltipDirection="TooltipDirection.BottomLeft"
+                                               Context="ctx">
+                <CTextInput @bind-Value="@ctx.Model.LoginProvider" Default="orcid"></CTextInput>
+                <CTextInput @bind-Value="@ctx.Model.ProviderKey"></CTextInput>
+            </InteractiveButtonForm>
+            
+            <InteractiveButton
+                TooltipDirection="TooltipDirection.Left"
+                BtnClass="bt-link"
+                Caption="Send login invitation"
+                Tip="Emails user with a link that offers login via an external provider, mapping that external account to the internal user in the system"
+                OnClick="InviteUser">
+
+                <SuccessFlashTemplate Context="_ctx">Email invitation has been sent successfully</SuccessFlashTemplate>
+            </InteractiveButton>
+        </ItemAdderTemplate>
+    
+        <ChildContent>
+            @context.ProviderDisplayName (@context.LoginProvider) - @context.ProviderKey
+        </ChildContent>
+    
+    </SimpleCruder>
+
+</div>
+
+
+@code {
+
+    [Parameter, EditorRequired]
+    public AppUser User { get; set; } = null!;
+
+    protected override Task OnParametersSetAsync()
+    {
+        if (User is null) throw new ArgumentException($"{nameof(User)} is required argument");
+        return Task.CompletedTask;
+    }
+
+    
+    // Internal form model items
+    [Required] public Organization SelectedOrganization = null!;
+    [Required] public AppRole SelectedRole = null!;
+    [Required] public AppUser UserMergeTo = null!;
+    [Required] public string ProviderKey = string.Empty;
+    [Required] public string LoginProvider = string.Empty;
+    
+    private async Task DeleteUser()
+    {
+        await UserManager.DeleteUser(User);
+        NavigationManager.NavigateTo($"/userman");
+    }
+
+    private async Task MergeUser()
+    {
+        await UserManager.MergeUsers(User, UserMergeTo);
+        // Navigate to the user that was merge target (the old one is no longer relevant)
+        NavigationManager.NavigateTo($"/userman/{UserMergeTo.Id}");
+    }
+
+    private Task InviteUser() => UserManager.InviteNewUser(User);
+    private Task RemoveRole(UserInRole userInRole) => UserManager.EnsureUserNotInRole(userInRole);
+    private Task DeleteExternalLogin(UserLoginInfo userLoginInfo) => UserManager.EnsureUserNotHaveLogin(User, userLoginInfo);
+    private Task AddExternalLogin() => UserManager.AddLoginAsync(User, new UserLoginInfo(LoginProvider, ProviderKey, LoginProvider.Humanize()));
+    private Task AddRole()
+    {
+        Logger.LogDebug("Adding user to role {}, {}, {}", User, SelectedRole.Id, SelectedOrganization.Id);        
+        return UserManager.EnsureUserInRole(User, SelectedRole, SelectedOrganization);
+    }
+
+}

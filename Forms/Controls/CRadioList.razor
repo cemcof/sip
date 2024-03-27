@@ -1,0 +1,138 @@
+@typeparam TValue
+@using sip.Utils
+@inherits CInputBase<TValue>
+
+@* Component for selecting one of arbitrary items *@
+@* All options are rendered, which is main difference from select element *@
+@* It uses the native input element but generally supports custom item template,
+   which can by fully customized via css. *@
+@* For that, label serves as the item input container and toggles it's selected attribute accordingly *@
+
+
+<div class="form-group radio-group cinput-container cradiogroup-container 
+    rendering-strategy-@(RenderingStrategy) @(HasLabel ? "labeled" : "labelless") @(IsRequired ? "required" : "") @CssClass">
+    @if (HasLabel)
+    {
+        <div class="clabel-container" style="@GetFlexStyleForIndex(0)">
+            <CLabelAndTip Id="@InputId" Tip="@Tip">@DisplayName</CLabelAndTip>
+        </div>
+    }
+    
+    <div class="cinput-input-container">
+        @foreach (var opt in _currentOptions)
+        {
+            <label selected="@IsValue(opt.Value)">
+                <input readonly="@IsReadonly" disabled="@(IsDisabled || IsReadonly)" class="form-check-input @FieldCssClass" @attributes="AdditionalAttributes" type="radio" id="@(InputId + opt.Key)" name="@InputId" value="@opt.Key" 
+                       checked="@IsValue(opt.Value)" @onchange="@(() => OnChange(opt))" />
+                    @if (ItemTemplate is not null)
+                    {
+                        @ItemTemplate(opt.Value)
+                    }
+                    else
+                    {
+                        <span>@DisplayNameMapper(opt.Value)</span>
+                    }
+            </label>
+        }
+    </div>
+</div>
+
+
+@code {
+
+    public static ItemsProviderDelegate<string> SimpleStringProvider(IEnumerable<string> strings)
+    {
+        var strs = strings
+            .Select(s => s.Split("=>", StringSplitOptions.TrimEntries).First())
+            .ToList();
+        
+        return _ => ValueTask.FromResult(new ItemsProviderResult<string>(strs, strs.Count));
+    }
+
+    public static Func<string, string> SimpleStringDisplayNameMapper(IEnumerable<string> strings)
+    {
+        var map = strings.ToDictionary(
+            str => str.Split("=>", StringSplitOptions.TrimEntries).First(),
+            str => str.Split("=>", StringSplitOptions.TrimEntries).Last()
+            );
+
+        return val => map[val!.ToString()!];
+    }
+
+    public static ItemsProviderDelegate<TValue> StaticItems(IEnumerable<TValue> fromlist)
+    {
+        var enumerated = fromlist.ToList();
+        return _ => ValueTask.FromResult(new ItemsProviderResult<TValue>(enumerated, enumerated.Count()));
+    } 
+
+    [Parameter]
+    public ItemsProviderDelegate<TValue>? ItemsProvider { get; set; }
+
+    // If item template is not given
+    [Parameter]
+    public Func<TValue, string> DisplayNameMapper { get; set; } = value => value?.ToString().Humanize() ?? "";
+    
+    [Parameter]
+    public RenderFragment<TValue>? ItemTemplate { get; set; } //  val => @<span>@val?.ToString().Humanize()</span>;
+
+    private Dictionary<string,TValue> _currentOptions = new();
+    
+    private bool IsValue(TValue value) => value!.Equals(CurrentValue);
+    
+    protected override async Task OnParametersSetAsync()
+    {
+        // Try to gather options from the render attribute if no items at all are provided and dropdown uses simple strings
+        // Items provider might be null here because we are still handling parameters
+        var selectionAttr = ModelPropertyType.GetCustomAttribute<SelectionAttribute>();
+
+        if (ItemsProvider is null && selectionAttr is not null)
+        {
+            if (typeof(TValue) == typeof(string))
+            {
+                var items = selectionAttr.GetKeyValues().ToList();
+                ItemsProvider = _ => ValueTask.FromResult(
+                    new ItemsProviderResult<TValue>(
+                        items.Select(i => i.Key).Cast<TValue>(), items.Count
+                        )
+                    );
+                DisplayNameMapper = value => items.First(x => x.Key.Equals(value)).Value;
+            }
+        }
+
+        if (ItemsProvider is null && CurrentValue is Enum) // TODO not sure about this enum check
+        {
+            var items = EnumUtils.EnumToOptions(typeof(TValue)).ToList();
+            ItemsProvider = _ => ValueTask.FromResult(
+                new ItemsProviderResult<TValue>(
+                    items.Select(i => (TValue)Enum.Parse(typeof(TValue), i.Key)), items.Count
+                    )
+                );
+            DisplayNameMapper = value => items.First(x => x.Key.Equals(value)).Value;
+        }
+
+        if (ItemsProvider is null) throw new InvalidOperationException($"No item source found for {nameof(CRadioList<TValue>)}");
+        
+        // Load items 
+        var result = await ItemsProvider(new ItemsProviderRequest(default, default, default));
+        var resultItems = result.Items.ToList();
+        
+        if (typeof(TValue).IsPrimitive || typeof(TValue) == typeof(string))
+        {
+            // It type of the item is string, enum, or primitive, supply key directly as value.ToString
+            _currentOptions = resultItems.ToDictionary(i => i?.ToString() ?? "", i => i);
+        }
+        else
+        {
+            // However, if it is a custom type, attach guid to each item
+            _currentOptions = resultItems.ToDictionary(i => Guid.NewGuid().ToString(), i => i);
+        }
+    }
+
+    private void OnChange(KeyValuePair<string, TValue> args)
+    {
+        CurrentValue = args.Value;
+    }
+    
+    protected override bool TryParseValueFromString(string? value, out TValue result, [NotNullWhen(false)] out string? validationErrorMessage)
+        => throw new NotSupportedException($"This component does not parse string inputs. Bind to the '{nameof(CurrentValue)}' property, not '{nameof(CurrentValueAsString)}'.");
+}

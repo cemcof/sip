@@ -1,0 +1,4950 @@
+DtDataGathered: 2021-12-08T00:51:00.0000000Z
+Instruments:
+- Colour: '#6ab04c'
+  Name: Titan Krios
+  Reservations:
+  - Createdon: 2021-11-08T11:21:02.0000000Z
+    Modifiedon: 2021-11-08T11:21:02.0000000Z
+    Scheduledstart: 2021-11-09T08:00:00.0000000Z
+    Scheduledend: 2021-11-11T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-264910/CF-06
+    Subtype: Measurement
+    Project: '#UID: aae7773a-9dd3-e911-80ca-005056914121'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Wilson
+    - Daniel
+    Colour: '#101010'
+  - Createdon: 2021-11-08T09:47:42.0000000Z
+    Modifiedon: 2021-11-08T09:47:42.0000000Z
+    Scheduledstart: 2021-11-11T08:00:00.0000000Z
+    Scheduledend: 2021-11-12T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-264853/CF-06
+    Subtype: Service / Servis
+    Project: CEMCOF - service - downtime
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Nováček
+    - Jiří
+    Colour: '#f0f010'
+  - Createdon: 2021-10-25T07:45:46.0000000Z
+    Modifiedon: 2021-11-08T09:46:32.0000000Z
+    Scheduledstart: 2021-11-12T08:00:00.0000000Z
+    Scheduledend: 2021-11-12T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262620/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-11-08T11:21:51.0000000Z
+    Modifiedon: 2021-11-11T18:23:50.0000000Z
+    Scheduledstart: 2021-11-12T14:00:00.0000000Z
+    Scheduledend: 2021-11-13T20:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-264912/CF-06
+    Subtype: Measurement
+    Project: Instruct-ERIC access according to Service Level Agreement
+    ResearchGroup: external academic - foreign
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Bauda
+    - Elda
+    Colour: '#101010'
+  - Createdon: 2020-12-01T08:46:41.0000000Z
+    Modifiedon: 2021-11-08T11:21:21.0000000Z
+    Scheduledstart: 2021-11-13T20:00:00.0000000Z
+    Scheduledend: 2021-11-14T22:59:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2020-214704/CF-06
+    Subtype: Maintenance / Udrzba
+    Project: CEMCOF - service
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#f0f010'
+  - Createdon: 2021-10-11T07:14:38.0000000Z
+    Modifiedon: 2021-11-08T11:22:55.0000000Z
+    Scheduledstart: 2021-11-15T08:00:00.0000000Z
+    Scheduledend: 2021-11-19T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-260303/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Plevka
+    - Pavel
+    Customer:
+    - Plevka
+    - Pavel
+    Colour: '#101010'
+  - Createdon: 2021-11-08T11:23:25.0000000Z
+    Modifiedon: 2021-11-08T11:23:25.0000000Z
+    Scheduledstart: 2021-11-19T08:00:00.0000000Z
+    Scheduledend: 2021-11-22T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-264914/CF-06
+    Subtype: Measurement
+    Project: '#UID: aae7773a-9dd3-e911-80ca-005056914121'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Wilson
+    - Daniel
+    Colour: '#101010'
+  - Createdon: 2021-10-27T13:00:41.0000000Z
+    Modifiedon: 2021-10-27T13:00:41.0000000Z
+    Scheduledstart: 2021-11-22T08:00:00.0000000Z
+    Scheduledend: 2021-11-25T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-263148/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Plevka
+    - Pavel
+    Customer:
+    - Plevka
+    - Pavel
+    Colour: '#101010'
+  - Createdon: 2021-10-25T07:46:20.0000000Z
+    Modifiedon: 2021-10-25T07:46:20.0000000Z
+    Scheduledstart: 2021-11-25T08:00:00.0000000Z
+    Scheduledend: 2021-11-26T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262621/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-10-29T15:00:09.0000000Z
+    Modifiedon: 2021-10-29T15:00:09.0000000Z
+    Scheduledstart: 2021-11-26T08:00:00.0000000Z
+    Scheduledend: 2021-11-27T20:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-263373/EA-T
+    Subtype: Measurement
+    Project: '#UID: 41f0073d-2550-eb11-80cb-005056914121'
+    ResearchGroup: '#UID: e174bdca-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Rozbesky
+    - Daniel
+    Colour: '#101010'
+  - Createdon: 2020-12-01T08:46:42.0000000Z
+    Modifiedon: 2021-10-29T14:59:43.0000000Z
+    Scheduledstart: 2021-11-27T20:00:00.0000000Z
+    Scheduledend: 2021-11-28T22:59:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2020-214705/CF-06
+    Subtype: Maintenance / Udrzba
+    Project: CEMCOF - service
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#f0f010'
+  - Createdon: 2021-11-05T09:12:58.0000000Z
+    Modifiedon: 2021-11-05T09:12:58.0000000Z
+    Scheduledstart: 2021-11-29T08:00:00.0000000Z
+    Scheduledend: 2021-12-01T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-264531/EA-Z
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: external academic - foreign
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Kouba
+    - Tomáš
+    Colour: '#101010'
+  - Createdon: 2021-11-16T12:32:25.0000000Z
+    Modifiedon: 2021-11-16T12:32:26.0000000Z
+    Scheduledstart: 2021-12-01T08:00:00.0000000Z
+    Scheduledend: 2021-12-06T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266468/EA-T
+    Subtype: Measurement
+    Project: '#UID: d7df1482-3de2-ea11-80cb-005056914121'
+    ResearchGroup: '#UID: e174bdca-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Nedvědová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-11-12T13:36:42.0000000Z
+    Modifiedon: 2021-11-12T13:37:35.0000000Z
+    Scheduledstart: 2021-12-06T08:00:00.0000000Z
+    Scheduledend: 2021-12-10T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265959/RG-3-10
+    Subtype: Measurement
+    Project: '#UID: 69e14f71-cbfd-e211-b8a6-005056991551'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Kubíček
+    - Karel
+    Customer:
+    - Kubíček
+    - Karel
+    Colour: '#101010'
+  - Createdon: 2020-12-01T08:46:45.0000000Z
+    Modifiedon: 2020-12-01T08:46:45.0000000Z
+    Scheduledstart: 2021-12-10T15:00:00.0000000Z
+    Scheduledend: 2021-12-12T22:59:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2020-214706/CF-06
+    Subtype: Maintenance / Udrzba
+    Project: CEMCOF - service
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#f0f010'
+  - Createdon: 2021-11-14T22:52:28.0000000Z
+    Modifiedon: 2021-11-14T22:52:29.0000000Z
+    Scheduledstart: 2021-12-13T08:00:00.0000000Z
+    Scheduledend: 2021-12-18T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266111/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Plevka
+    - Pavel
+    Customer:
+    - Plevka
+    - Pavel
+    Colour: '#101010'
+  - Createdon: 2021-11-15T15:17:06.0000000Z
+    Modifiedon: 2021-11-15T15:17:33.0000000Z
+    Scheduledstart: 2021-12-17T13:00:00.0000000Z
+    Scheduledend: 2021-12-20T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266309/RG-3-10
+    Subtype: Measurement
+    Project: '#UID: 69e14f71-cbfd-e211-b8a6-005056991551'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Kubíček
+    - Karel
+    Customer:
+    - Kubíček
+    - Karel
+    Colour: '#101010'
+  - Createdon: 2021-11-15T13:48:16.0000000Z
+    Modifiedon: 2021-11-15T13:48:16.0000000Z
+    Scheduledstart: 2021-12-20T08:00:00.0000000Z
+    Scheduledend: 2021-12-23T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266285/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Plevka
+    - Pavel
+    Customer:
+    - Plevka
+    - Pavel
+    Colour: '#101010'
+  - Createdon: 2021-11-16T12:26:24.0000000Z
+    Modifiedon: 2021-11-16T12:26:24.0000000Z
+    Scheduledstart: 2021-12-23T08:00:00.0000000Z
+    Scheduledend: 2021-12-27T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266466/EA-Z
+    Subtype: Measurement
+    Project: '#UID: aae7773a-9dd3-e911-80ca-005056914121'
+    ResearchGroup: external academic - foreign
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Wilson
+    - Daniel
+    Colour: '#101010'
+  - Createdon: 2021-11-15T15:18:54.0000000Z
+    Modifiedon: 2021-11-15T15:18:54.0000000Z
+    Scheduledstart: 2021-12-27T08:00:00.0000000Z
+    Scheduledend: 2021-12-30T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266310/RG-3-10
+    Subtype: Measurement
+    Project: '#UID: 69e14f71-cbfd-e211-b8a6-005056991551'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Kubíček
+    - Karel
+    Customer:
+    - Kubíček
+    - Karel
+    Colour: '#101010'
+  - Createdon: 2021-11-16T12:27:10.0000000Z
+    Modifiedon: 2021-11-16T12:27:10.0000000Z
+    Scheduledstart: 2021-12-30T08:00:00.0000000Z
+    Scheduledend: 2022-01-06T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266467/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - service
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Nováček
+    - Jiří
+    Colour: '#101010'
+  - Createdon: 2021-12-01T15:19:45.0000000Z
+    Modifiedon: 2021-12-01T15:19:45.0000000Z
+    Scheduledstart: 2022-01-06T08:00:00.0000000Z
+    Scheduledend: 2022-01-10T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269213/RG-3-10
+    Subtype: Measurement
+    Project: '#UID: 69e14f71-cbfd-e211-b8a6-005056991551'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Kubíček
+    - Karel
+    Customer:
+    - Kubíček
+    - Karel
+    Colour: '#101010'
+  - Createdon: 2021-12-01T15:20:42.0000000Z
+    Modifiedon: 2021-12-01T15:20:42.0000000Z
+    Scheduledstart: 2022-01-10T08:00:00.0000000Z
+    Scheduledend: 2022-01-12T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269214/RG-3-10
+    Subtype: Measurement
+    Project: '#UID: 69e14f71-cbfd-e211-b8a6-005056991551'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Kubíček
+    - Karel
+    Customer:
+    - Kubíček
+    - Karel
+    Colour: '#101010'
+  - Createdon: 2021-12-03T12:07:14.0000000Z
+    Modifiedon: 2021-12-03T12:07:14.0000000Z
+    Scheduledstart: 2022-01-12T08:00:00.0000000Z
+    Scheduledend: 2022-01-13T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269636/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Pálková
+    - Lenka
+    Customer:
+    - Pálková
+    - Lenka
+    Colour: '#101010'
+- Colour: '#00a8ff'
+  Name: Talos Arctica
+  Reservations:
+  - Createdon: 2021-10-29T06:53:18.0000000Z
+    Modifiedon: 2021-10-29T06:53:18.0000000Z
+    Scheduledstart: 2021-11-08T07:00:00.0000000Z
+    Scheduledend: 2021-11-08T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-263269/EA-Z
+    Subtype: Measurement
+    Project: Instruct-ERIC access according to Service Level Agreement
+    ResearchGroup: external academic - foreign
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Galera Prat
+    - Albert
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:05:14.0000000Z
+    Modifiedon: 2021-11-10T07:09:34.0000000Z
+    Scheduledstart: 2021-11-08T14:30:00.0000000Z
+    Scheduledend: 2021-11-08T15:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262497/CF-06
+    Subtype: Measurement
+    Project: '#UID: fd6debab-0f1f-e311-8a73-005056991551'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Zapletal
+    - David
+    Colour: '#101010'
+  - Createdon: 2021-11-10T07:22:22.0000000Z
+    Modifiedon: 2021-11-10T07:22:22.0000000Z
+    Scheduledstart: 2021-11-08T15:30:00.0000000Z
+    Scheduledend: 2021-11-08T20:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265363/RG-403
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: IMCF IBT Barinka
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Nedvědová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-11-10T07:23:44.0000000Z
+    Modifiedon: 2021-11-10T07:23:44.0000000Z
+    Scheduledstart: 2021-11-08T20:00:00.0000000Z
+    Scheduledend: 2021-11-09T04:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265365/RG-3-21
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Biology of Coupled Transcription-Translation
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Demo
+    - Gabriel
+    Colour: '#101010'
+  - Createdon: 2021-11-02T11:38:06.0000000Z
+    Modifiedon: 2021-11-02T11:38:06.0000000Z
+    Scheduledstart: 2021-11-09T06:00:00.0000000Z
+    Scheduledend: 2021-11-09T09:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-263878/RG-3-12
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Valentová
+    - Lucie
+    Customer:
+    - Valentová
+    - Lucie
+    Colour: '#101010'
+  - Createdon: 2021-09-01T06:50:19.0000000Z
+    Modifiedon: 2021-09-01T06:50:19.0000000Z
+    Scheduledstart: 2021-11-09T09:00:00.0000000Z
+    Scheduledend: 2021-11-09T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-253947/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-10-19T06:50:58.0000000Z
+    Modifiedon: 2021-11-10T12:23:23.0000000Z
+    Scheduledstart: 2021-11-09T13:00:00.0000000Z
+    Scheduledend: 2021-11-10T07:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-261674/RG-3-08
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: RNA based regulation of Gene Expression
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Shakoor
+    - Huma
+    Colour: '#101010'
+  - Createdon: 2021-11-10T12:23:40.0000000Z
+    Modifiedon: 2021-11-10T12:23:40.0000000Z
+    Scheduledstart: 2021-11-10T07:00:00.0000000Z
+    Scheduledend: 2021-11-10T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265484/RG-3-10
+    Subtype: Measurement
+    Project: '#UID: fd6debab-0f1f-e311-8a73-005056991551'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Zapletal
+    - David
+    Colour: '#101010'
+  - Createdon: 2021-10-27T13:07:30.0000000Z
+    Modifiedon: 2021-10-27T13:07:30.0000000Z
+    Scheduledstart: 2021-11-10T13:00:00.0000000Z
+    Scheduledend: 2021-11-11T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-263153/RG-3-10
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Škubník
+    - Karel
+    Customer:
+    - Šebesta
+    - Marek
+    Colour: '#101010'
+  - Createdon: 2021-11-01T09:32:09.0000000Z
+    Modifiedon: 2021-11-01T09:32:09.0000000Z
+    Scheduledstart: 2021-11-11T08:00:00.0000000Z
+    Scheduledend: 2021-11-11T12:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-263581/RG-212
+    Subtype: Measurement
+    Project: '#UID: 274566ec-8e31-e711-8654-005056991551'
+    ResearchGroup: '#UID: 000c876e-a0c6-e611-9f54-005056991551'
+    Createdby:
+    - Škubník
+    - Karel
+    Customer:
+    - Jekabsons
+    - Atis
+    Colour: '#101010'
+  - Createdon: 2021-09-22T07:11:04.0000000Z
+    Modifiedon: 2021-11-10T09:31:27.0000000Z
+    Scheduledstart: 2021-11-11T12:00:00.0000000Z
+    Scheduledend: 2021-11-11T16:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-257277/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-11-09T12:41:20.0000000Z
+    Modifiedon: 2021-11-10T09:32:37.0000000Z
+    Scheduledstart: 2021-11-11T16:05:00.0000000Z
+    Scheduledend: 2021-11-11T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265254/RG-3-12
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Valentová
+    - Lucie
+    Customer:
+    - Valentová
+    - Lucie
+    Colour: '#101010'
+  - Createdon: 2020-12-01T14:00:34.0000000Z
+    Modifiedon: 2020-12-01T14:00:34.0000000Z
+    Scheduledstart: 2021-11-12T07:01:00.0000000Z
+    Scheduledend: 2021-11-12T14:59:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2020-214910/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#101010'
+  - Createdon: 2021-11-01T16:09:23.0000000Z
+    Modifiedon: 2021-11-01T16:09:23.0000000Z
+    Scheduledstart: 2021-11-12T15:00:00.0000000Z
+    Scheduledend: 2021-11-12T19:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-263758/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Mukhamedova
+    - Liya
+    Customer:
+    - Mukhamedova
+    - Liya
+    Colour: '#101010'
+  - Createdon: 2021-11-09T07:55:28.0000000Z
+    Modifiedon: 2021-11-09T07:56:02.0000000Z
+    Scheduledstart: 2021-11-12T19:00:00.0000000Z
+    Scheduledend: 2021-11-15T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265129/EA-Z
+    Subtype: Measurement
+    Project: Instruct-ERIC access according to Service Level Agreement
+    ResearchGroup: external academic - foreign
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Galera Prat
+    - Albert
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:05:14.0000000Z
+    Modifiedon: 2021-11-15T20:23:12.0000000Z
+    Scheduledstart: 2021-11-15T14:00:00.0000000Z
+    Scheduledend: 2021-11-15T20:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262498/CF-06
+    Subtype: Measurement
+    Project: '#UID: fd6debab-0f1f-e311-8a73-005056991551'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Zapletal
+    - David
+    Colour: '#101010'
+  - Createdon: 2021-11-11T12:51:29.0000000Z
+    Modifiedon: 2021-11-11T12:51:29.0000000Z
+    Scheduledstart: 2021-11-16T06:00:00.0000000Z
+    Scheduledend: 2021-11-16T09:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265754/RG-164
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Department of Experimental Programmes
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Polovinkin
+    - Vitaly
+    Colour: '#101010'
+  - Createdon: 2021-09-01T06:50:19.0000000Z
+    Modifiedon: 2021-09-01T06:50:19.0000000Z
+    Scheduledstart: 2021-11-16T09:00:00.0000000Z
+    Scheduledend: 2021-11-16T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-253948/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:07:33.0000000Z
+    Modifiedon: 2021-11-17T05:59:51.0000000Z
+    Scheduledstart: 2021-11-16T13:00:00.0000000Z
+    Scheduledend: 2021-11-17T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262509/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-11-11T18:25:55.0000000Z
+    Modifiedon: 2021-11-11T18:25:55.0000000Z
+    Scheduledstart: 2021-11-18T07:00:00.0000000Z
+    Scheduledend: 2021-11-18T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265829/EA-Z
+    Subtype: Measurement
+    Project: Instruct-ERIC access according to Service Level Agreement
+    ResearchGroup: external academic - foreign
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Galera Prat
+    - Albert
+    Colour: '#101010'
+  - Createdon: 2021-09-22T07:11:05.0000000Z
+    Modifiedon: 2021-09-22T07:11:05.0000000Z
+    Scheduledstart: 2021-11-18T14:00:00.0000000Z
+    Scheduledend: 2021-11-18T19:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-257278/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2020-12-01T14:00:36.0000000Z
+    Modifiedon: 2021-11-11T08:49:56.0000000Z
+    Scheduledstart: 2021-11-19T07:00:00.0000000Z
+    Scheduledend: 2021-11-20T20:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2020-214911/CF-06
+    Subtype: Measurement
+    Project: Instruct-ERIC access according to Service Level Agreement
+    ResearchGroup: external academic - foreign
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Galera Prat
+    - Albert
+    Colour: '#101010'
+  - Createdon: 2020-12-01T08:52:56.0000000Z
+    Modifiedon: 2021-11-11T08:49:23.0000000Z
+    Scheduledstart: 2021-11-20T20:00:00.0000000Z
+    Scheduledend: 2021-11-21T22:59:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2020-214756/CF-06
+    Subtype: Maintenance / Udrzba
+    Project: CEMCOF - service
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#f0f010'
+  - Createdon: 2021-11-12T17:39:57.0000000Z
+    Modifiedon: 2021-11-12T17:39:58.0000000Z
+    Scheduledstart: 2021-11-22T10:00:00.0000000Z
+    Scheduledend: 2021-11-22T12:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265999/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:05:15.0000000Z
+    Modifiedon: 2021-10-23T19:05:15.0000000Z
+    Scheduledstart: 2021-11-22T14:00:00.0000000Z
+    Scheduledend: 2021-11-22T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262499/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-11-22T17:09:55.0000000Z
+    Modifiedon: 2021-11-22T17:09:55.0000000Z
+    Scheduledstart: 2021-11-23T07:00:00.0000000Z
+    Scheduledend: 2021-11-23T09:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267377/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-09-01T06:50:19.0000000Z
+    Modifiedon: 2021-11-22T09:24:33.0000000Z
+    Scheduledstart: 2021-11-23T09:00:00.0000000Z
+    Scheduledend: 2021-11-23T11:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-253949/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-11-22T10:01:12.0000000Z
+    Modifiedon: 2021-11-22T10:01:12.0000000Z
+    Scheduledstart: 2021-11-23T11:00:00.0000000Z
+    Scheduledend: 2021-11-23T16:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267224/EA-Z
+    Subtype: Measurement
+    Project: Instruct-ERIC access according to Service Level Agreement
+    ResearchGroup: external academic - foreign
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Galera Prat
+    - Albert
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:07:33.0000000Z
+    Modifiedon: 2021-10-23T19:07:33.0000000Z
+    Scheduledstart: 2021-11-23T16:00:00.0000000Z
+    Scheduledend: 2021-11-24T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262510/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-11-04T12:55:14.0000000Z
+    Modifiedon: 2021-11-04T12:55:14.0000000Z
+    Scheduledstart: 2021-11-24T08:00:00.0000000Z
+    Scheduledend: 2021-11-25T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-264390/RG-3-10
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Škubník
+    - Karel
+    Customer:
+    - Šebesta
+    - Marek
+    Colour: '#101010'
+  - Createdon: 2021-11-23T07:52:20.0000000Z
+    Modifiedon: 2021-11-23T07:52:20.0000000Z
+    Scheduledstart: 2021-11-25T08:00:00.0000000Z
+    Scheduledend: 2021-11-25T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267415/EA-T
+    Subtype: Measurement
+    Project: '#UID: 63df575c-3ac4-eb11-80cb-005056914121'
+    ResearchGroup: '#UID: e174bdca-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Pinkas
+    - Daniel
+    Customer:
+    - Zoll
+    - Sebastian
+    Colour: '#101010'
+  - Createdon: 2021-09-22T07:11:05.0000000Z
+    Modifiedon: 2021-09-22T07:11:05.0000000Z
+    Scheduledstart: 2021-11-25T14:00:00.0000000Z
+    Scheduledend: 2021-11-25T19:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-257279/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-11-26T15:27:55.0000000Z
+    Modifiedon: 2021-11-26T15:27:55.0000000Z
+    Scheduledstart: 2021-11-26T07:01:00.0000000Z
+    Scheduledend: 2021-11-26T14:59:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268354/EA-Z
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: external academic - foreign
+    Createdby:
+    - Pinkas
+    - Daniel
+    Customer:
+    - Bello
+    - Gianluca
+    Colour: '#101010'
+  - Createdon: 2021-11-22T10:00:40.0000000Z
+    Modifiedon: 2021-11-22T10:00:40.0000000Z
+    Scheduledstart: 2021-11-26T15:00:00.0000000Z
+    Scheduledend: 2021-11-29T07:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267222/EA-Z
+    Subtype: Measurement
+    Project: Instruct-ERIC access according to Service Level Agreement
+    ResearchGroup: external academic - foreign
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Galera Prat
+    - Albert
+    Colour: '#101010'
+  - Createdon: 2020-12-01T14:00:37.0000000Z
+    Modifiedon: 2021-11-26T15:27:05.0000000Z
+    Scheduledstart: 2021-11-29T07:01:00.0000000Z
+    Scheduledend: 2021-11-29T12:59:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2020-214912/CF-06
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: external academic - foreign
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Bello
+    - Gianluca
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:05:15.0000000Z
+    Modifiedon: 2021-11-24T10:38:30.0000000Z
+    Scheduledstart: 2021-11-29T13:00:00.0000000Z
+    Scheduledend: 2021-11-29T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262500/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-11-30T05:20:33.0000000Z
+    Modifiedon: 2021-11-30T05:20:34.0000000Z
+    Scheduledstart: 2021-11-30T07:00:00.0000000Z
+    Scheduledend: 2021-11-30T09:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268728/CF-06
+    Subtype: Maintenance / Udrzba
+    Project: CEMCOF - service
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Nováček
+    - Jiří
+    Colour: '#f0f010'
+  - Createdon: 2021-09-01T06:50:20.0000000Z
+    Modifiedon: 2021-09-01T06:50:20.0000000Z
+    Scheduledstart: 2021-11-30T09:00:00.0000000Z
+    Scheduledend: 2021-11-30T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-253950/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-11-25T16:01:38.0000000Z
+    Modifiedon: 2021-11-25T16:01:38.0000000Z
+    Scheduledstart: 2021-11-30T13:00:00.0000000Z
+    Scheduledend: 2021-11-30T16:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268160/CF-06
+    Subtype: Teaching / Vyuka
+    Project: CF teaching
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Nováček
+    - Jiří
+    Colour: '#f0f010'
+  - Createdon: 2021-10-23T19:07:33.0000000Z
+    Modifiedon: 2021-10-23T19:07:33.0000000Z
+    Scheduledstart: 2021-11-30T16:00:00.0000000Z
+    Scheduledend: 2021-12-01T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262511/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-11-11T14:22:08.0000000Z
+    Modifiedon: 2021-11-11T14:22:08.0000000Z
+    Scheduledstart: 2021-12-01T08:00:00.0000000Z
+    Scheduledend: 2021-12-01T10:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265777/RG-3-12
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Valentová
+    - Lucie
+    Customer:
+    - Valentová
+    - Lucie
+    Colour: '#101010'
+  - Createdon: 2021-11-12T15:02:19.0000000Z
+    Modifiedon: 2021-11-12T15:02:19.0000000Z
+    Scheduledstart: 2021-12-01T10:30:00.0000000Z
+    Scheduledend: 2021-12-02T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265981/RG-3-10
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Škubník
+    - Karel
+    Customer:
+    - Šebesta
+    - Marek
+    Colour: '#101010'
+  - Createdon: 2021-11-18T11:34:21.0000000Z
+    Modifiedon: 2021-11-18T11:36:21.0000000Z
+    Scheduledstart: 2021-12-02T08:00:00.0000000Z
+    Scheduledend: 2021-12-02T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266793/RG-3-18
+    Subtype: Measurement
+    Project: '#UID: 2d52e76a-4a28-e811-b2ea-005056991551'
+    ResearchGroup: Protein Structure and Dynamics
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Kučinskas
+    - Gytis
+    Colour: '#101010'
+  - Createdon: 2021-09-22T07:11:05.0000000Z
+    Modifiedon: 2021-12-02T15:44:33.0000000Z
+    Scheduledstart: 2021-12-02T14:00:00.0000000Z
+    Scheduledend: 2021-12-02T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-257280/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2020-12-01T14:00:38.0000000Z
+    Modifiedon: 2021-11-29T14:12:15.0000000Z
+    Scheduledstart: 2021-12-03T07:01:00.0000000Z
+    Scheduledend: 2021-12-03T14:59:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2020-214913/CF-06
+    Subtype: Measurement
+    Project: '#UID: c2e8eca7-c29e-eb11-80cb-005056914121'
+    ResearchGroup: Structural Biology of Coupled Transcription-Translation
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Demo
+    - Gabriel
+    Colour: '#101010'
+  - Createdon: 2021-11-30T10:14:35.0000000Z
+    Modifiedon: 2021-12-02T07:37:01.0000000Z
+    Scheduledstart: 2021-12-03T15:00:00.0000000Z
+    Scheduledend: 2021-12-04T19:59:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268834/EA-T
+    Subtype: Measurement
+    Project: '#UID: c2e8eca7-c29e-eb11-80cb-005056914121'
+    ResearchGroup: Structural Biology of Coupled Transcription-Translation
+    Createdby:
+    - Pinkas
+    - Daniel
+    Customer:
+    - Demo
+    - Gabriel
+    Colour: '#101010'
+  - Createdon: 2020-12-01T09:00:15.0000000Z
+    Modifiedon: 2021-11-30T10:04:08.0000000Z
+    Scheduledstart: 2021-12-04T20:00:00.0000000Z
+    Scheduledend: 2021-12-05T22:59:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2020-214766/RG-3-21
+    Subtype: Maintenance / Udrzba
+    Project: CEMCOF - R&D
+    ResearchGroup: Structural Biology of Coupled Transcription-Translation
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#f0f010'
+  - Createdon: 2021-11-18T11:37:40.0000000Z
+    Modifiedon: 2021-11-18T11:37:40.0000000Z
+    Scheduledstart: 2021-12-06T08:00:00.0000000Z
+    Scheduledend: 2021-12-06T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266794/RG-3-18
+    Subtype: Measurement
+    Project: '#UID: 2d52e76a-4a28-e811-b2ea-005056991551'
+    ResearchGroup: Protein Structure and Dynamics
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Kučinskas
+    - Gytis
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:05:15.0000000Z
+    Modifiedon: 2021-12-03T12:59:07.0000000Z
+    Scheduledstart: 2021-12-06T14:00:00.0000000Z
+    Scheduledend: 2021-12-07T06:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262501/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-11-30T14:26:43.0000000Z
+    Modifiedon: 2021-11-30T14:29:19.0000000Z
+    Scheduledstart: 2021-12-07T06:00:00.0000000Z
+    Scheduledend: 2021-12-07T09:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268917/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Moravcová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-09-01T06:50:20.0000000Z
+    Modifiedon: 2021-09-01T06:50:20.0000000Z
+    Scheduledstart: 2021-12-07T09:00:00.0000000Z
+    Scheduledend: 2021-12-07T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-253951/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-11-23T16:20:30.0000000Z
+    Modifiedon: 2021-11-23T16:20:30.0000000Z
+    Scheduledstart: 2021-12-07T13:00:00.0000000Z
+    Scheduledend: 2021-12-07T16:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267591/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Šiborová
+    - Marta
+    Customer:
+    - Šiborová
+    - Marta
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:07:34.0000000Z
+    Modifiedon: 2021-10-23T19:07:34.0000000Z
+    Scheduledstart: 2021-12-07T16:00:00.0000000Z
+    Scheduledend: 2021-12-08T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262512/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-11-12T15:02:42.0000000Z
+    Modifiedon: 2021-11-12T15:02:42.0000000Z
+    Scheduledstart: 2021-12-08T08:00:00.0000000Z
+    Scheduledend: 2021-12-09T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265982/RG-3-10
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Škubník
+    - Karel
+    Customer:
+    - Šebesta
+    - Marek
+    Colour: '#101010'
+  - Createdon: 2021-12-01T14:36:43.0000000Z
+    Modifiedon: 2021-12-03T07:45:33.0000000Z
+    Scheduledstart: 2021-12-09T08:00:00.0000000Z
+    Scheduledend: 2021-12-09T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269196/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-09-22T07:11:05.0000000Z
+    Modifiedon: 2021-09-22T07:11:05.0000000Z
+    Scheduledstart: 2021-12-09T14:00:00.0000000Z
+    Scheduledend: 2021-12-09T19:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-257281/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2020-12-01T14:00:39.0000000Z
+    Modifiedon: 2021-12-06T07:39:58.0000000Z
+    Scheduledstart: 2021-12-10T07:00:00.0000000Z
+    Scheduledend: 2021-12-13T07:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2020-214914/CF-06
+    Subtype: Measurement
+    Project: Instruct-ERIC access according to Service Level Agreement
+    ResearchGroup: external academic - foreign
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Galera Prat
+    - Albert
+    Colour: '#101010'
+  - Createdon: 2021-12-07T08:03:21.0000000Z
+    Modifiedon: 2021-12-07T08:03:21.0000000Z
+    Scheduledstart: 2021-12-13T10:00:00.0000000Z
+    Scheduledend: 2021-12-13T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-270078/RG-3-10
+    Subtype: Measurement
+    Project: '#UID: 256cfbc9-76ae-eb11-80cb-005056914121'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Pinkas
+    - Daniel
+    Customer:
+    - Kabzinski
+    - Tomasz
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:05:16.0000000Z
+    Modifiedon: 2021-10-23T19:05:16.0000000Z
+    Scheduledstart: 2021-12-13T14:00:00.0000000Z
+    Scheduledend: 2021-12-13T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262502/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-09-01T06:50:20.0000000Z
+    Modifiedon: 2021-09-01T06:50:20.0000000Z
+    Scheduledstart: 2021-12-14T09:00:00.0000000Z
+    Scheduledend: 2021-12-14T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-253952/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:07:34.0000000Z
+    Modifiedon: 2021-10-23T19:07:34.0000000Z
+    Scheduledstart: 2021-12-14T16:00:00.0000000Z
+    Scheduledend: 2021-12-15T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262513/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-12-02T14:00:31.0000000Z
+    Modifiedon: 2021-12-02T14:00:31.0000000Z
+    Scheduledstart: 2021-12-15T08:00:00.0000000Z
+    Scheduledend: 2021-12-16T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269417/RG-3-10
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Škubník
+    - Karel
+    Customer:
+    - Šebesta
+    - Marek
+    Colour: '#101010'
+  - Createdon: 2021-09-22T07:11:06.0000000Z
+    Modifiedon: 2021-09-22T07:11:06.0000000Z
+    Scheduledstart: 2021-12-16T14:00:00.0000000Z
+    Scheduledend: 2021-12-16T19:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-257282/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2020-12-01T14:00:41.0000000Z
+    Modifiedon: 2020-12-01T14:00:41.0000000Z
+    Scheduledstart: 2021-12-17T07:01:00.0000000Z
+    Scheduledend: 2021-12-17T14:59:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2020-214915/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#101010'
+  - Createdon: 2020-12-01T09:00:32.0000000Z
+    Modifiedon: 2020-12-01T09:00:32.0000000Z
+    Scheduledstart: 2021-12-17T15:00:00.0000000Z
+    Scheduledend: 2021-12-19T22:59:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2020-214767/RG-3-21
+    Subtype: Maintenance / Udrzba
+    Project: CEMCOF - R&D
+    ResearchGroup: Structural Biology of Coupled Transcription-Translation
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#f0f010'
+  - Createdon: 2021-10-23T19:05:16.0000000Z
+    Modifiedon: 2021-10-23T19:05:16.0000000Z
+    Scheduledstart: 2021-12-20T14:00:00.0000000Z
+    Scheduledend: 2021-12-20T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262503/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-09-01T06:50:21.0000000Z
+    Modifiedon: 2021-09-01T06:50:21.0000000Z
+    Scheduledstart: 2021-12-21T09:00:00.0000000Z
+    Scheduledend: 2021-12-21T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-253953/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:07:34.0000000Z
+    Modifiedon: 2021-10-23T19:07:34.0000000Z
+    Scheduledstart: 2021-12-21T16:00:00.0000000Z
+    Scheduledend: 2021-12-22T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262514/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:05:16.0000000Z
+    Modifiedon: 2021-10-23T19:05:16.0000000Z
+    Scheduledstart: 2021-12-27T14:00:00.0000000Z
+    Scheduledend: 2021-12-27T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262504/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-09-01T06:50:21.0000000Z
+    Modifiedon: 2021-09-01T06:50:21.0000000Z
+    Scheduledstart: 2021-12-28T09:00:00.0000000Z
+    Scheduledend: 2021-12-28T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-253954/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:07:35.0000000Z
+    Modifiedon: 2021-10-23T19:07:35.0000000Z
+    Scheduledstart: 2021-12-28T16:00:00.0000000Z
+    Scheduledend: 2021-12-29T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262515/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-09-22T07:11:06.0000000Z
+    Modifiedon: 2021-09-22T07:11:06.0000000Z
+    Scheduledstart: 2021-12-30T14:00:00.0000000Z
+    Scheduledend: 2021-12-30T19:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-257284/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2020-12-01T09:00:55.0000000Z
+    Modifiedon: 2020-12-01T09:00:56.0000000Z
+    Scheduledstart: 2021-12-31T15:00:00.0000000Z
+    Scheduledend: 2022-01-02T22:59:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2020-214768/RG-3-21
+    Subtype: Maintenance / Udrzba
+    Project: CEMCOF - R&D
+    ResearchGroup: Structural Biology of Coupled Transcription-Translation
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#f0f010'
+  - Createdon: 2021-10-23T19:05:16.0000000Z
+    Modifiedon: 2021-10-23T19:05:16.0000000Z
+    Scheduledstart: 2022-01-03T14:00:00.0000000Z
+    Scheduledend: 2022-01-03T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262505/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-09-01T06:50:21.0000000Z
+    Modifiedon: 2021-09-01T06:50:21.0000000Z
+    Scheduledstart: 2022-01-04T09:00:00.0000000Z
+    Scheduledend: 2022-01-04T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-253955/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:07:35.0000000Z
+    Modifiedon: 2021-10-23T19:07:35.0000000Z
+    Scheduledstart: 2022-01-04T16:00:00.0000000Z
+    Scheduledend: 2022-01-05T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262516/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-12-06T14:23:53.0000000Z
+    Modifiedon: 2021-12-06T14:24:12.0000000Z
+    Scheduledstart: 2022-01-05T08:00:00.0000000Z
+    Scheduledend: 2022-01-06T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269991/RG-3-18
+    Subtype: Measurement
+    Project: '#UID: 2d52e76a-4a28-e811-b2ea-005056991551'
+    ResearchGroup: Protein Structure and Dynamics
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Kučinskas
+    - Gytis
+    Colour: '#101010'
+  - Createdon: 2021-09-22T07:11:06.0000000Z
+    Modifiedon: 2021-09-22T07:11:06.0000000Z
+    Scheduledstart: 2022-01-06T14:00:00.0000000Z
+    Scheduledend: 2022-01-06T19:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-257285/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:05:17.0000000Z
+    Modifiedon: 2021-10-23T19:05:17.0000000Z
+    Scheduledstart: 2022-01-10T14:00:00.0000000Z
+    Scheduledend: 2022-01-10T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262506/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-09-01T06:50:21.0000000Z
+    Modifiedon: 2021-09-01T06:50:21.0000000Z
+    Scheduledstart: 2022-01-11T09:00:00.0000000Z
+    Scheduledend: 2022-01-11T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-253956/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:07:35.0000000Z
+    Modifiedon: 2021-10-23T19:07:35.0000000Z
+    Scheduledstart: 2022-01-11T16:00:00.0000000Z
+    Scheduledend: 2022-01-12T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262517/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-09-22T07:11:06.0000000Z
+    Modifiedon: 2021-09-22T07:11:06.0000000Z
+    Scheduledstart: 2022-01-13T14:00:00.0000000Z
+    Scheduledend: 2022-01-13T19:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-257286/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:05:17.0000000Z
+    Modifiedon: 2021-10-23T19:05:17.0000000Z
+    Scheduledstart: 2022-01-17T14:00:00.0000000Z
+    Scheduledend: 2022-01-17T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262507/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:07:36.0000000Z
+    Modifiedon: 2021-10-23T19:07:36.0000000Z
+    Scheduledstart: 2022-01-18T16:00:00.0000000Z
+    Scheduledend: 2022-01-19T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262518/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-09-22T07:11:07.0000000Z
+    Modifiedon: 2021-09-22T07:11:07.0000000Z
+    Scheduledstart: 2022-01-20T14:00:00.0000000Z
+    Scheduledend: 2022-01-20T19:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-257287/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:05:17.0000000Z
+    Modifiedon: 2021-10-23T19:05:17.0000000Z
+    Scheduledstart: 2022-01-24T14:00:00.0000000Z
+    Scheduledend: 2022-01-24T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262508/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-10-23T19:07:36.0000000Z
+    Modifiedon: 2021-10-23T19:07:36.0000000Z
+    Scheduledstart: 2022-01-25T16:00:00.0000000Z
+    Scheduledend: 2022-01-26T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262519/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-09-22T07:11:07.0000000Z
+    Modifiedon: 2021-09-22T07:11:07.0000000Z
+    Scheduledstart: 2022-01-27T14:00:00.0000000Z
+    Scheduledend: 2022-01-27T19:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-257288/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+- Colour: '#a29bfe'
+  Name: Talos F200C
+  Reservations:
+  - Createdon: 2021-11-01T11:32:14.0000000Z
+    Modifiedon: 2021-11-01T11:32:14.0000000Z
+    Scheduledstart: 2021-11-08T08:00:00.0000000Z
+    Scheduledend: 2021-11-08T16:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-263639/RG-3-18
+    Subtype: Measurement
+    Project: '#UID: 2d52e76a-4a28-e811-b2ea-005056991551'
+    ResearchGroup: Protein Structure and Dynamics
+    Createdby:
+    - Kučinskas
+    - Gytis
+    Customer:
+    - Kučinskas
+    - Gytis
+    Colour: '#101010'
+  - Createdon: 2021-11-09T07:43:23.0000000Z
+    Modifiedon: 2021-11-09T07:43:23.0000000Z
+    Scheduledstart: 2021-11-09T12:00:00.0000000Z
+    Scheduledend: 2021-11-09T15:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265121/RG-3-18
+    Subtype: Measurement
+    Project: '#UID: 2d52e76a-4a28-e811-b2ea-005056991551'
+    ResearchGroup: Protein Structure and Dynamics
+    Createdby:
+    - Kučinskas
+    - Gytis
+    Customer:
+    - Kučinskas
+    - Gytis
+    Colour: '#101010'
+  - Createdon: 2021-11-08T14:23:58.0000000Z
+    Modifiedon: 2021-11-08T14:24:51.0000000Z
+    Scheduledstart: 2021-11-10T08:00:00.0000000Z
+    Scheduledend: 2021-11-10T10:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265029/CF-06
+    Subtype: Measurement
+    Project: '#UID: c89a244b-551a-ea11-80ca-005056914121'
+    ResearchGroup: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    Createdby:
+    - Vykoukal
+    - Vít
+    Customer:
+    - Pinkas
+    - Jiří
+    Colour: '#101010'
+  - Createdon: 2021-11-01T14:21:43.0000000Z
+    Modifiedon: 2021-11-04T11:23:29.0000000Z
+    Scheduledstart: 2021-11-10T12:00:00.0000000Z
+    Scheduledend: 2021-11-10T19:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-263712/RG-212
+    Subtype: Measurement
+    Project: '#UID: 274566ec-8e31-e711-8654-005056991551'
+    ResearchGroup: '#UID: 000c876e-a0c6-e611-9f54-005056991551'
+    Createdby:
+    - Jekabsons
+    - Atis
+    Customer:
+    - Jekabsons
+    - Atis
+    Colour: '#101010'
+  - Createdon: 2021-11-08T14:59:44.0000000Z
+    Modifiedon: 2021-11-08T14:59:44.0000000Z
+    Scheduledstart: 2021-11-11T07:00:00.0000000Z
+    Scheduledend: 2021-11-11T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265040/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Dopitová
+    - Radka
+    Customer:
+    - Dopitová
+    - Radka
+    Colour: '#101010'
+  - Createdon: 2021-11-05T14:14:42.0000000Z
+    Modifiedon: 2021-11-08T14:19:02.0000000Z
+    Scheduledstart: 2021-11-11T13:00:00.0000000Z
+    Scheduledend: 2021-11-11T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-264644/CF-06
+    Subtype: Measurement
+    Project: '#UID: 34e0fc3a-1ba8-eb11-80cb-005056914121'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Vykoukal
+    - Vít
+    Customer:
+    - Pinkas
+    - Jiří
+    Colour: '#101010'
+  - Createdon: 2021-11-04T11:23:17.0000000Z
+    Modifiedon: 2021-11-04T11:23:17.0000000Z
+    Scheduledstart: 2021-11-12T08:00:00.0000000Z
+    Scheduledend: 2021-11-12T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-264357/RG-212
+    Subtype: Measurement
+    Project: '#UID: 274566ec-8e31-e711-8654-005056991551'
+    ResearchGroup: '#UID: 000c876e-a0c6-e611-9f54-005056991551'
+    Createdby:
+    - Jekabsons
+    - Atis
+    Customer:
+    - Jekabsons
+    - Atis
+    Colour: '#101010'
+  - Createdon: 2021-11-11T09:03:08.0000000Z
+    Modifiedon: 2021-11-11T09:03:08.0000000Z
+    Scheduledstart: 2021-11-15T08:00:00.0000000Z
+    Scheduledend: 2021-11-15T12:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265679/RG-212
+    Subtype: Measurement
+    Project: '#UID: 274566ec-8e31-e711-8654-005056991551'
+    ResearchGroup: '#UID: 000c876e-a0c6-e611-9f54-005056991551'
+    Createdby:
+    - Jekabsons
+    - Atis
+    Customer:
+    - Jekabsons
+    - Atis
+    Colour: '#101010'
+  - Createdon: 2021-11-08T14:22:02.0000000Z
+    Modifiedon: 2021-11-08T14:22:15.0000000Z
+    Scheduledstart: 2021-11-16T06:00:00.0000000Z
+    Scheduledend: 2021-11-16T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265028/CF-06
+    Subtype: Measurement
+    Project: '#UID: 34e0fc3a-1ba8-eb11-80cb-005056914121'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Vykoukal
+    - Vít
+    Customer:
+    - Pinkas
+    - Jiří
+    Colour: '#101010'
+  - Createdon: 2021-11-11T08:50:44.0000000Z
+    Modifiedon: 2021-11-11T18:25:30.0000000Z
+    Scheduledstart: 2021-11-17T07:00:00.0000000Z
+    Scheduledend: 2021-11-17T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265675/EA-Z
+    Subtype: Measurement
+    Project: Instruct-ERIC access according to Service Level Agreement
+    ResearchGroup: external academic - foreign
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Galera Prat
+    - Albert
+    Colour: '#101010'
+  - Createdon: 2021-11-12T08:47:36.0000000Z
+    Modifiedon: 2021-11-12T08:47:36.0000000Z
+    Scheduledstart: 2021-11-18T08:00:00.0000000Z
+    Scheduledend: 2021-11-18T16:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265885/EA-T
+    Subtype: Measurement
+    Project: '#UID: 96fc66ad-b8c1-ea11-80ca-005056914121'
+    ResearchGroup: '#UID: e174bdca-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Mrázová
+    - Kateřina
+    Colour: '#101010'
+  - Createdon: 2021-10-25T13:43:32.0000000Z
+    Modifiedon: 2021-10-25T13:43:32.0000000Z
+    Scheduledstart: 2021-11-19T08:00:00.0000000Z
+    Scheduledend: 2021-11-19T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262758/RG-3-10
+    Subtype: Training / Skoleni
+    Project: '-'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Láníček
+    - Matyáš
+    Colour: '#f0f010'
+  - Createdon: 2021-11-16T10:23:32.0000000Z
+    Modifiedon: 2021-11-18T10:50:19.0000000Z
+    Scheduledstart: 2021-11-22T09:35:00.0000000Z
+    Scheduledend: 2021-11-22T17:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266421/RG-3-18
+    Subtype: Measurement
+    Project: '#UID: 2d52e76a-4a28-e811-b2ea-005056991551'
+    ResearchGroup: Protein Structure and Dynamics
+    Createdby:
+    - Narasimhan
+    - Subhash
+    Customer:
+    - Narasimhan
+    - Subhash
+    Colour: '#101010'
+  - Createdon: 2021-11-09T05:36:47.0000000Z
+    Modifiedon: 2021-11-09T05:36:47.0000000Z
+    Scheduledstart: 2021-11-23T07:00:00.0000000Z
+    Scheduledend: 2021-11-23T18:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265097/CF-06
+    Subtype: Teaching / Vyuka
+    Project: CF teaching
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Nováček
+    - Jiří
+    Colour: '#f0f010'
+  - Createdon: 2021-11-12T10:01:01.0000000Z
+    Modifiedon: 2021-11-12T10:01:01.0000000Z
+    Scheduledstart: 2021-11-24T07:00:00.0000000Z
+    Scheduledend: 2021-11-24T11:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265912/RG-3-18
+    Subtype: Measurement
+    Project: '#UID: 2d52e76a-4a28-e811-b2ea-005056991551'
+    ResearchGroup: Protein Structure and Dynamics
+    Createdby:
+    - Kučinskas
+    - Gytis
+    Customer:
+    - Kučinskas
+    - Gytis
+    Colour: '#101010'
+  - Createdon: 2021-11-19T13:31:59.0000000Z
+    Modifiedon: 2021-11-19T13:31:59.0000000Z
+    Scheduledstart: 2021-11-24T11:30:00.0000000Z
+    Scheduledend: 2021-11-24T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267021/RG-3-10
+    Subtype: Measurement
+    Project: '#UID: 69e14f71-cbfd-e211-b8a6-005056991551'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Kubíček
+    - Karel
+    Customer:
+    - Kubíček
+    - Karel
+    Colour: '#101010'
+  - Createdon: 2021-11-22T10:02:45.0000000Z
+    Modifiedon: 2021-11-22T10:02:45.0000000Z
+    Scheduledstart: 2021-11-25T07:00:00.0000000Z
+    Scheduledend: 2021-11-25T18:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267227/CF-06
+    Subtype: Teaching / Vyuka
+    Project: CF teaching
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Nováček
+    - Jiří
+    Colour: '#f0f010'
+  - Createdon: 2021-11-25T12:21:33.0000000Z
+    Modifiedon: 2021-11-25T12:21:53.0000000Z
+    Scheduledstart: 2021-11-26T07:00:00.0000000Z
+    Scheduledend: 2021-11-26T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268078/CF-06
+    Subtype: Teaching / Vyuka
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#f0f010'
+  - Createdon: 2021-11-19T08:34:24.0000000Z
+    Modifiedon: 2021-11-19T08:34:24.0000000Z
+    Scheduledstart: 2021-11-26T13:00:00.0000000Z
+    Scheduledend: 2021-11-26T16:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266910/RG-3-10
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Škubník
+    - Karel
+    Customer:
+    - Šebesta
+    - Marek
+    Colour: '#101010'
+  - Createdon: 2021-11-22T08:17:31.0000000Z
+    Modifiedon: 2021-11-22T12:03:57.0000000Z
+    Scheduledstart: 2021-11-30T07:00:00.0000000Z
+    Scheduledend: 2021-11-30T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267176/RG-3-12
+    Subtype: Training / Skoleni
+    Project: '-'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Pálková
+    - Lenka
+    Colour: '#f0f010'
+  - Createdon: 2021-11-29T06:38:57.0000000Z
+    Modifiedon: 2021-11-29T06:39:09.0000000Z
+    Scheduledstart: 2021-11-30T13:00:00.0000000Z
+    Scheduledend: 2021-11-30T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268476/CF-06
+    Subtype: Measurement
+    Project: '#UID: 34e0fc3a-1ba8-eb11-80cb-005056914121'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Vykoukal
+    - Vít
+    Customer:
+    - Pinkas
+    - Jiří
+    Colour: '#101010'
+  - Createdon: 2021-11-29T15:38:50.0000000Z
+    Modifiedon: 2021-11-29T15:38:50.0000000Z
+    Scheduledstart: 2021-12-01T08:00:00.0000000Z
+    Scheduledend: 2021-12-01T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268691/RG-212
+    Subtype: Measurement
+    Project: '#UID: 274566ec-8e31-e711-8654-005056991551'
+    ResearchGroup: '#UID: 000c876e-a0c6-e611-9f54-005056991551'
+    Createdby:
+    - Škubník
+    - Karel
+    Customer:
+    - Jekabsons
+    - Atis
+    Colour: '#101010'
+  - Createdon: 2021-12-01T14:06:09.0000000Z
+    Modifiedon: 2021-12-01T14:06:09.0000000Z
+    Scheduledstart: 2021-12-02T08:00:00.0000000Z
+    Scheduledend: 2021-12-02T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269185/RG-3-18
+    Subtype: Measurement
+    Project: '#UID: 2d52e76a-4a28-e811-b2ea-005056991551'
+    ResearchGroup: Protein Structure and Dynamics
+    Createdby:
+    - Narasimhan
+    - Subhash
+    Customer:
+    - Narasimhan
+    - Subhash
+    Colour: '#101010'
+  - Createdon: 2021-11-30T07:38:35.0000000Z
+    Modifiedon: 2021-12-02T07:38:14.0000000Z
+    Scheduledstart: 2021-12-02T13:00:00.0000000Z
+    Scheduledend: 2021-12-02T16:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268743/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Daniel
+    Customer:
+    - Pinkas
+    - Daniel
+    Colour: '#101010'
+  - Createdon: 2021-12-01T15:02:15.0000000Z
+    Modifiedon: 2021-12-01T15:02:23.0000000Z
+    Scheduledstart: 2021-12-03T06:00:00.0000000Z
+    Scheduledend: 2021-12-03T07:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269209/RG-349
+    Subtype: Measurement
+    Project: '#UID: 34e0fc3a-1ba8-eb11-80cb-005056914121'
+    ResearchGroup: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    Createdby:
+    - Vykoukal
+    - Vít
+    Customer:
+    - Pinkas
+    - Jiří
+    Colour: '#101010'
+  - Createdon: 2021-11-22T12:03:46.0000000Z
+    Modifiedon: 2021-11-22T12:03:47.0000000Z
+    Scheduledstart: 2021-12-03T07:00:00.0000000Z
+    Scheduledend: 2021-12-03T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267284/RG-3-10
+    Subtype: Training / Skoleni
+    Project: '-'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Láníček
+    - Matyáš
+    Colour: '#f0f010'
+  - Createdon: 2021-11-23T07:41:02.0000000Z
+    Modifiedon: 2021-12-06T10:32:08.0000000Z
+    Scheduledstart: 2021-12-06T08:00:00.0000000Z
+    Scheduledend: 2021-12-06T18:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267408/RG-212
+    Subtype: Measurement
+    Project: '#UID: 274566ec-8e31-e711-8654-005056991551'
+    ResearchGroup: '#UID: 000c876e-a0c6-e611-9f54-005056991551'
+    Createdby:
+    - Jekabsons
+    - Atis
+    Customer:
+    - Jekabsons
+    - Atis
+    Colour: '#101010'
+  - Createdon: 2021-11-30T17:16:23.0000000Z
+    Modifiedon: 2021-11-30T17:16:30.0000000Z
+    Scheduledstart: 2021-12-07T08:00:00.0000000Z
+    Scheduledend: 2021-12-07T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268984/CF-06
+    Subtype: Measurement
+    Project: '#UID: 34e0fc3a-1ba8-eb11-80cb-005056914121'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Vykoukal
+    - Vít
+    Customer:
+    - Pinkas
+    - Jiří
+    Colour: '#101010'
+  - Createdon: 2021-12-06T16:01:43.0000000Z
+    Modifiedon: 2021-12-06T16:01:44.0000000Z
+    Scheduledstart: 2021-12-08T08:00:00.0000000Z
+    Scheduledend: 2021-12-08T10:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-270020/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-12-06T07:38:41.0000000Z
+    Modifiedon: 2021-12-06T07:38:41.0000000Z
+    Scheduledstart: 2021-12-08T11:30:00.0000000Z
+    Scheduledend: 2021-12-08T18:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269822/CF-06
+    Subtype: Maintenance / Udrzba
+    Project: CEMCOF - service
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Nováček
+    - Jiří
+    Colour: '#f0f010'
+  - Createdon: 2021-12-06T07:38:15.0000000Z
+    Modifiedon: 2021-12-06T07:38:15.0000000Z
+    Scheduledstart: 2021-12-09T08:00:00.0000000Z
+    Scheduledend: 2021-12-09T19:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269821/CF-06
+    Subtype: Maintenance / Udrzba
+    Project: CEMCOF - service
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Nováček
+    - Jiří
+    Colour: '#f0f010'
+  - Createdon: 2021-12-02T08:54:54.0000000Z
+    Modifiedon: 2021-12-02T08:54:54.0000000Z
+    Scheduledstart: 2021-12-10T08:00:00.0000000Z
+    Scheduledend: 2021-12-10T16:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269322/RG-212
+    Subtype: Measurement
+    Project: '#UID: 274566ec-8e31-e711-8654-005056991551'
+    ResearchGroup: '#UID: 000c876e-a0c6-e611-9f54-005056991551'
+    Createdby:
+    - Jekabsons
+    - Atis
+    Customer:
+    - Jekabsons
+    - Atis
+    Colour: '#101010'
+  - Createdon: 2021-12-06T10:20:22.0000000Z
+    Modifiedon: 2021-12-06T10:20:22.0000000Z
+    Scheduledstart: 2021-12-13T07:00:00.0000000Z
+    Scheduledend: 2021-12-13T11:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269892/RG-3-10
+    Subtype: Measurement
+    Project: '#UID: 69e14f71-cbfd-e211-b8a6-005056991551'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Kubíček
+    - Karel
+    Customer:
+    - Kubíček
+    - Karel
+    Colour: '#101010'
+  - Createdon: 2021-12-01T09:16:49.0000000Z
+    Modifiedon: 2021-12-01T09:16:49.0000000Z
+    Scheduledstart: 2021-12-14T08:00:00.0000000Z
+    Scheduledend: 2021-12-14T16:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269060/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-12-06T13:32:57.0000000Z
+    Modifiedon: 2021-12-06T13:33:07.0000000Z
+    Scheduledstart: 2021-12-15T09:32:00.0000000Z
+    Scheduledend: 2021-12-15T16:32:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269972/RG-3-18
+    Subtype: Measurement
+    Project: '#UID: 2d52e76a-4a28-e811-b2ea-005056991551'
+    ResearchGroup: Protein Structure and Dynamics
+    Createdby:
+    - Narasimhan
+    - Subhash
+    Customer:
+    - Narasimhan
+    - Subhash
+    Colour: '#101010'
+  - Createdon: 2021-12-07T11:18:55.0000000Z
+    Modifiedon: 2021-12-07T11:18:55.0000000Z
+    Scheduledstart: 2021-12-16T08:00:00.0000000Z
+    Scheduledend: 2021-12-16T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-270156/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Holbová
+    - Radka
+    Customer:
+    - Holbová
+    - Radka
+    Colour: '#101010'
+  - Createdon: 2021-12-07T12:31:09.0000000Z
+    Modifiedon: 2021-12-07T12:31:16.0000000Z
+    Scheduledstart: 2021-12-17T07:00:00.0000000Z
+    Scheduledend: 2021-12-17T16:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-270193/CF-06
+    Subtype: Measurement
+    Project: '#UID: 34e0fc3a-1ba8-eb11-80cb-005056914121'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Vykoukal
+    - Vít
+    Customer:
+    - Pinkas
+    - Jiří
+    Colour: '#101010'
+- Colour: '#fdcb6e'
+  Name: Versa 3D
+  Reservations:
+  - Createdon: 2021-09-30T10:52:52.0000000Z
+    Modifiedon: 2021-09-30T10:52:52.0000000Z
+    Scheduledstart: 2021-11-08T06:00:00.0000000Z
+    Scheduledend: 2021-11-08T18:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-258641/RG-349
+    Subtype: Measurement
+    Project: '#UID: 70268b10-7fd9-eb11-80cb-005056914121'
+    ResearchGroup: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    Createdby:
+    - Vykoukal
+    - Vít
+    Customer:
+    - Heger
+    - Dominik
+    Colour: '#101010'
+  - Createdon: 2021-10-26T11:32:01.0000000Z
+    Modifiedon: 2021-11-05T08:31:50.0000000Z
+    Scheduledstart: 2021-11-09T06:00:00.0000000Z
+    Scheduledend: 2021-11-09T17:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262944/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Moravcová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-11-09T08:42:41.0000000Z
+    Modifiedon: 2021-11-09T08:42:41.0000000Z
+    Scheduledstart: 2021-11-10T04:30:00.0000000Z
+    Scheduledend: 2021-11-10T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265147/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-10-04T08:41:35.0000000Z
+    Modifiedon: 2021-10-04T08:41:35.0000000Z
+    Scheduledstart: 2021-11-10T08:00:00.0000000Z
+    Scheduledend: 2021-11-10T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-259090/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#101010'
+  - Createdon: 2021-08-31T14:16:26.0000000Z
+    Modifiedon: 2021-09-10T09:09:50.0000000Z
+    Scheduledstart: 2021-11-10T14:00:00.0000000Z
+    Scheduledend: 2021-11-10T21:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-253878/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Procházková
+    - Michaela
+    Customer:
+    - Procházková
+    - Michaela
+    Colour: '#101010'
+  - Createdon: 2020-12-02T10:55:03.0000000Z
+    Modifiedon: 2020-12-02T10:55:03.0000000Z
+    Scheduledstart: 2021-11-11T06:00:00.0000000Z
+    Scheduledend: 2021-11-11T18:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2020-215177/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Moravcová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-10-04T08:41:13.0000000Z
+    Modifiedon: 2021-10-04T08:41:13.0000000Z
+    Scheduledstart: 2021-11-12T08:00:00.0000000Z
+    Scheduledend: 2021-11-12T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-259089/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#101010'
+  - Createdon: 2021-11-12T15:02:03.0000000Z
+    Modifiedon: 2021-11-12T15:02:03.0000000Z
+    Scheduledstart: 2021-11-12T15:15:00.0000000Z
+    Scheduledend: 2021-11-12T19:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265980/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Polák 2
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-10-15T09:29:15.0000000Z
+    Modifiedon: 2021-10-15T09:29:15.0000000Z
+    Scheduledstart: 2021-11-13T08:00:00.0000000Z
+    Scheduledend: 2021-11-13T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-261222/RG-349
+    Subtype: Measurement
+    Project: '#UID: 335df9b5-e961-ea11-80ca-005056914121'
+    ResearchGroup: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Prysiazhnyi
+    - Vadym
+    Colour: '#101010'
+  - Createdon: 2021-10-04T08:42:19.0000000Z
+    Modifiedon: 2021-10-04T08:42:19.0000000Z
+    Scheduledstart: 2021-11-15T08:00:00.0000000Z
+    Scheduledend: 2021-11-15T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-259091/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#101010'
+  - Createdon: 2021-09-30T06:14:14.0000000Z
+    Modifiedon: 2021-09-30T06:14:14.0000000Z
+    Scheduledstart: 2021-11-16T06:00:00.0000000Z
+    Scheduledend: 2021-11-16T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-258545/RG-3-12
+    Subtype: Measurement
+    Project: (bez specifikace projektu)
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-11-15T11:35:47.0000000Z
+    Modifiedon: 2021-11-15T11:35:48.0000000Z
+    Scheduledstart: 2021-11-16T15:00:00.0000000Z
+    Scheduledend: 2021-11-16T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266225/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Polák 2
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-11-08T14:13:53.0000000Z
+    Modifiedon: 2021-11-08T14:13:53.0000000Z
+    Scheduledstart: 2021-11-17T06:00:00.0000000Z
+    Scheduledend: 2021-11-17T18:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265022/RG-349
+    Subtype: Measurement
+    Project: '#UID: 70268b10-7fd9-eb11-80cb-005056914121'
+    ResearchGroup: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    Createdby:
+    - Vykoukal
+    - Vít
+    Customer:
+    - Heger
+    - Dominik
+    Colour: '#101010'
+  - Createdon: 2021-11-10T09:03:25.0000000Z
+    Modifiedon: 2021-11-10T09:03:25.0000000Z
+    Scheduledstart: 2021-11-18T06:00:00.0000000Z
+    Scheduledend: 2021-11-18T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265412/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Pálková
+    - Lenka
+    Customer:
+    - Pálková
+    - Lenka
+    Colour: '#101010'
+  - Createdon: 2021-10-15T09:13:13.0000000Z
+    Modifiedon: 2021-10-15T09:13:13.0000000Z
+    Scheduledstart: 2021-11-19T08:00:00.0000000Z
+    Scheduledend: 2021-11-19T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-261220/RG-349
+    Subtype: Measurement
+    Project: '#UID: 335df9b5-e961-ea11-80ca-005056914121'
+    ResearchGroup: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    Createdby:
+    - Prysiazhnyi
+    - Vadym
+    Customer:
+    - Prysiazhnyi
+    - Vadym
+    Colour: '#101010'
+  - Createdon: 2021-11-09T10:17:59.0000000Z
+    Modifiedon: 2021-11-09T10:17:59.0000000Z
+    Scheduledstart: 2021-11-20T07:00:00.0000000Z
+    Scheduledend: 2021-11-20T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265188/RG-331
+    Subtype: Measurement
+    Project: '#UID: 5761f3bc-13ec-e811-80c3-005056914121'
+    ResearchGroup: '#UID: 8b179451-c0db-e611-9f54-005056991551'
+    Createdby:
+    - Vrchovecká
+    - Kateřina
+    Customer:
+    - Vrchovecká
+    - Kateřina
+    Colour: '#101010'
+  - Createdon: 2021-10-04T08:42:59.0000000Z
+    Modifiedon: 2021-10-04T08:42:59.0000000Z
+    Scheduledstart: 2021-11-22T08:00:00.0000000Z
+    Scheduledend: 2021-11-22T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-259092/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#101010'
+  - Createdon: 2021-11-15T06:45:38.0000000Z
+    Modifiedon: 2021-11-15T06:45:38.0000000Z
+    Scheduledstart: 2021-11-22T15:00:00.0000000Z
+    Scheduledend: 2021-11-22T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266126/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Moravcová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-09-30T06:14:32.0000000Z
+    Modifiedon: 2021-09-30T06:14:32.0000000Z
+    Scheduledstart: 2021-11-23T06:00:00.0000000Z
+    Scheduledend: 2021-11-23T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-258546/RG-3-12
+    Subtype: Measurement
+    Project: (bez specifikace projektu)
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-11-20T20:51:03.0000000Z
+    Modifiedon: 2021-11-20T20:51:04.0000000Z
+    Scheduledstart: 2021-11-23T15:00:00.0000000Z
+    Scheduledend: 2021-11-23T19:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267115/EA-T
+    Subtype: Teaching / Vyuka
+    Project: '#UID: c89a244b-551a-ea11-80ca-005056914121'
+    ResearchGroup: '#UID: e174bdca-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Mrázková
+    - Jana
+    Colour: '#f0f010'
+  - Createdon: 2021-10-21T14:41:11.0000000Z
+    Modifiedon: 2021-10-21T14:41:11.0000000Z
+    Scheduledstart: 2021-11-24T08:00:00.0000000Z
+    Scheduledend: 2021-11-24T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262243/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Holbová
+    - Radka
+    Customer:
+    - Holbová
+    - Radka
+    Colour: '#101010'
+  - Createdon: 2021-08-31T14:17:22.0000000Z
+    Modifiedon: 2021-09-10T09:10:09.0000000Z
+    Scheduledstart: 2021-11-24T14:00:00.0000000Z
+    Scheduledend: 2021-11-24T21:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-253880/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Procházková
+    - Michaela
+    Customer:
+    - Procházková
+    - Michaela
+    Colour: '#101010'
+  - Createdon: 2020-12-02T10:55:07.0000000Z
+    Modifiedon: 2020-12-02T10:55:07.0000000Z
+    Scheduledstart: 2021-11-25T06:00:00.0000000Z
+    Scheduledend: 2021-11-25T18:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2020-215179/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Moravcová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-10-15T09:15:32.0000000Z
+    Modifiedon: 2021-10-15T09:15:32.0000000Z
+    Scheduledstart: 2021-11-26T08:00:00.0000000Z
+    Scheduledend: 2021-11-26T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-261221/RG-349
+    Subtype: Measurement
+    Project: '#UID: 335df9b5-e961-ea11-80ca-005056914121'
+    ResearchGroup: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    Createdby:
+    - Prysiazhnyi
+    - Vadym
+    Customer:
+    - Prysiazhnyi
+    - Vadym
+    Colour: '#101010'
+  - Createdon: 2021-10-04T08:43:16.0000000Z
+    Modifiedon: 2021-10-04T08:43:16.0000000Z
+    Scheduledstart: 2021-11-29T08:00:00.0000000Z
+    Scheduledend: 2021-11-29T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-259093/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#101010'
+  - Createdon: 2021-11-20T20:52:47.0000000Z
+    Modifiedon: 2021-11-20T20:52:47.0000000Z
+    Scheduledstart: 2021-11-29T15:00:00.0000000Z
+    Scheduledend: 2021-11-29T19:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267116/EA-T
+    Subtype: Teaching / Vyuka
+    Project: '#UID: c89a244b-551a-ea11-80ca-005056914121'
+    ResearchGroup: '#UID: e174bdca-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Mrázková
+    - Jana
+    Colour: '#f0f010'
+  - Createdon: 2021-11-03T15:20:16.0000000Z
+    Modifiedon: 2021-11-03T15:20:16.0000000Z
+    Scheduledstart: 2021-11-30T06:00:00.0000000Z
+    Scheduledend: 2021-11-30T16:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-264217/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Moravcová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-10-21T14:41:37.0000000Z
+    Modifiedon: 2021-10-21T14:41:37.0000000Z
+    Scheduledstart: 2021-12-01T08:00:00.0000000Z
+    Scheduledend: 2021-12-01T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262244/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Holbová
+    - Radka
+    Customer:
+    - Holbová
+    - Radka
+    Colour: '#101010'
+  - Createdon: 2021-08-31T14:17:42.0000000Z
+    Modifiedon: 2021-11-30T16:19:26.0000000Z
+    Scheduledstart: 2021-12-01T15:00:00.0000000Z
+    Scheduledend: 2021-12-01T21:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-253881/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Procházková
+    - Michaela
+    Customer:
+    - Procházková
+    - Michaela
+    Colour: '#101010'
+  - Createdon: 2020-12-02T10:55:08.0000000Z
+    Modifiedon: 2021-11-03T15:20:59.0000000Z
+    Scheduledstart: 2021-12-02T06:00:00.0000000Z
+    Scheduledend: 2021-12-02T16:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2020-215180/CF-06
+    Subtype: Measurement
+    Project: '#UID: 084a7ecb-45de-e611-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-11-02T11:26:22.0000000Z
+    Modifiedon: 2021-11-02T11:26:22.0000000Z
+    Scheduledstart: 2021-12-04T08:00:00.0000000Z
+    Scheduledend: 2021-12-04T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-263866/RG-349
+    Subtype: Measurement
+    Project: '#UID: 335df9b5-e961-ea11-80ca-005056914121'
+    ResearchGroup: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    Createdby:
+    - Prysiazhnyi
+    - Vadym
+    Customer:
+    - Prysiazhnyi
+    - Vadym
+    Colour: '#101010'
+  - Createdon: 2021-10-04T08:43:38.0000000Z
+    Modifiedon: 2021-10-04T08:43:38.0000000Z
+    Scheduledstart: 2021-12-06T08:00:00.0000000Z
+    Scheduledend: 2021-12-06T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-259094/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#101010'
+  - Createdon: 2021-11-29T12:28:24.0000000Z
+    Modifiedon: 2021-11-29T12:28:24.0000000Z
+    Scheduledstart: 2021-12-06T15:00:00.0000000Z
+    Scheduledend: 2021-12-06T18:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268629/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Moravcová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-10-16T12:27:10.0000000Z
+    Modifiedon: 2021-10-16T12:27:10.0000000Z
+    Scheduledstart: 2021-12-07T08:00:00.0000000Z
+    Scheduledend: 2021-12-07T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-261354/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Polák 2
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-10-21T14:41:55.0000000Z
+    Modifiedon: 2021-10-21T14:41:55.0000000Z
+    Scheduledstart: 2021-12-08T08:00:00.0000000Z
+    Scheduledend: 2021-12-08T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262245/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Holbová
+    - Radka
+    Customer:
+    - Holbová
+    - Radka
+    Colour: '#101010'
+  - Createdon: 2021-12-06T15:57:49.0000000Z
+    Modifiedon: 2021-12-06T15:57:50.0000000Z
+    Scheduledstart: 2021-12-08T14:00:00.0000000Z
+    Scheduledend: 2021-12-08T20:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-270018/RG-349
+    Subtype: Measurement
+    Project: '#UID: 70268b10-7fd9-eb11-80cb-005056914121'
+    ResearchGroup: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    Createdby:
+    - Vykoukal
+    - Vít
+    Customer:
+    - Heger
+    - Dominik
+    Colour: '#101010'
+  - Createdon: 2020-12-02T10:55:09.0000000Z
+    Modifiedon: 2021-12-07T14:19:06.0000000Z
+    Scheduledstart: 2021-12-09T06:00:00.0000000Z
+    Scheduledend: 2021-12-09T18:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2020-215181/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#101010'
+  - Createdon: 2021-10-26T11:47:24.0000000Z
+    Modifiedon: 2021-11-04T08:07:27.0000000Z
+    Scheduledstart: 2021-12-10T06:30:00.0000000Z
+    Scheduledend: 2021-12-10T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262950/RG-331
+    Subtype: Measurement
+    Project: '#UID: 5761f3bc-13ec-e811-80c3-005056914121'
+    ResearchGroup: '#UID: 8b179451-c0db-e611-9f54-005056991551'
+    Createdby:
+    - Vrchovecká
+    - Kateřina
+    Customer:
+    - Vrchovecká
+    - Kateřina
+    Colour: '#101010'
+  - Createdon: 2021-11-02T11:27:31.0000000Z
+    Modifiedon: 2021-11-02T11:27:31.0000000Z
+    Scheduledstart: 2021-12-11T08:00:00.0000000Z
+    Scheduledend: 2021-12-11T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-263867/RG-349
+    Subtype: Measurement
+    Project: '#UID: 335df9b5-e961-ea11-80ca-005056914121'
+    ResearchGroup: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    Createdby:
+    - Prysiazhnyi
+    - Vadym
+    Customer:
+    - Prysiazhnyi
+    - Vadym
+    Colour: '#101010'
+  - Createdon: 2021-10-04T08:43:46.0000000Z
+    Modifiedon: 2021-10-04T08:43:46.0000000Z
+    Scheduledstart: 2021-12-13T08:00:00.0000000Z
+    Scheduledend: 2021-12-13T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-259095/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#101010'
+  - Createdon: 2021-10-16T12:14:57.0000000Z
+    Modifiedon: 2021-10-16T12:14:57.0000000Z
+    Scheduledstart: 2021-12-14T08:00:00.0000000Z
+    Scheduledend: 2021-12-14T16:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-261351/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Polák 2
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-10-21T14:42:16.0000000Z
+    Modifiedon: 2021-10-21T14:42:16.0000000Z
+    Scheduledstart: 2021-12-15T08:00:00.0000000Z
+    Scheduledend: 2021-12-15T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262246/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Holbová
+    - Radka
+    Customer:
+    - Holbová
+    - Radka
+    Colour: '#101010'
+  - Createdon: 2021-08-31T14:18:25.0000000Z
+    Modifiedon: 2021-11-30T16:27:10.0000000Z
+    Scheduledstart: 2021-12-15T15:00:00.0000000Z
+    Scheduledend: 2021-12-15T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-253884/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Procházková
+    - Michaela
+    Customer:
+    - Procházková
+    - Michaela
+    Colour: '#101010'
+  - Createdon: 2020-12-02T10:55:10.0000000Z
+    Modifiedon: 2020-12-02T10:55:11.0000000Z
+    Scheduledstart: 2021-12-16T06:00:00.0000000Z
+    Scheduledend: 2021-12-16T18:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2020-215182/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Moravcová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-10-26T11:48:10.0000000Z
+    Modifiedon: 2021-10-26T11:48:10.0000000Z
+    Scheduledstart: 2021-12-17T06:30:00.0000000Z
+    Scheduledend: 2021-12-17T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262951/RG-331
+    Subtype: Measurement
+    Project: '#UID: 5761f3bc-13ec-e811-80c3-005056914121'
+    ResearchGroup: '#UID: 8b179451-c0db-e611-9f54-005056991551'
+    Createdby:
+    - Vrchovecká
+    - Kateřina
+    Customer:
+    - Vrchovecká
+    - Kateřina
+    Colour: '#101010'
+  - Createdon: 2021-11-29T13:11:58.0000000Z
+    Modifiedon: 2021-11-29T13:11:58.0000000Z
+    Scheduledstart: 2021-12-18T10:00:00.0000000Z
+    Scheduledend: 2021-12-18T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268641/RG-3-16
+    Subtype: Measurement
+    Project: '#UID: b09bb85d-9093-ea11-80ca-005056914121'
+    ResearchGroup: Structure of Biosystems and Molecular Materials
+    Createdby:
+    - Chattopadhyay
+    - Subhasis
+    Customer:
+    - Chattopadhyay
+    - Subhasis
+    Colour: '#101010'
+  - Createdon: 2021-10-04T08:44:01.0000000Z
+    Modifiedon: 2021-10-04T08:44:01.0000000Z
+    Scheduledstart: 2021-12-20T08:00:00.0000000Z
+    Scheduledend: 2021-12-20T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-259096/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Babiak
+    - Michal
+    Colour: '#101010'
+  - Createdon: 2021-10-21T14:43:27.0000000Z
+    Modifiedon: 2021-10-21T14:43:28.0000000Z
+    Scheduledstart: 2021-12-21T08:00:00.0000000Z
+    Scheduledend: 2021-12-21T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262248/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Holbová
+    - Radka
+    Customer:
+    - Holbová
+    - Radka
+    Colour: '#101010'
+  - Createdon: 2021-11-11T13:46:18.0000000Z
+    Modifiedon: 2021-11-11T13:46:18.0000000Z
+    Scheduledstart: 2022-01-04T08:00:00.0000000Z
+    Scheduledend: 2022-01-04T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265770/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Holbová
+    - Radka
+    Customer:
+    - Holbová
+    - Radka
+    Colour: '#101010'
+  - Createdon: 2021-11-11T17:13:31.0000000Z
+    Modifiedon: 2021-11-11T17:13:31.0000000Z
+    Scheduledstart: 2022-01-05T06:00:00.0000000Z
+    Scheduledend: 2022-01-05T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265808/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-11-30T16:21:03.0000000Z
+    Modifiedon: 2021-11-30T16:21:03.0000000Z
+    Scheduledstart: 2022-01-05T15:00:00.0000000Z
+    Scheduledend: 2022-01-05T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268960/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Procházková
+    - Michaela
+    Customer:
+    - Procházková
+    - Michaela
+    Colour: '#101010'
+  - Createdon: 2021-11-17T15:48:49.0000000Z
+    Modifiedon: 2021-11-17T15:48:50.0000000Z
+    Scheduledstart: 2022-01-06T06:00:00.0000000Z
+    Scheduledend: 2022-01-06T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266649/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Pálková
+    - Lenka
+    Customer:
+    - Pálková
+    - Lenka
+    Colour: '#101010'
+  - Createdon: 2021-12-03T21:59:00.0000000Z
+    Modifiedon: 2021-12-03T21:59:01.0000000Z
+    Scheduledstart: 2022-01-10T06:00:00.0000000Z
+    Scheduledend: 2022-01-10T18:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269732/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Moravcová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-10-21T14:42:28.0000000Z
+    Modifiedon: 2021-11-11T13:47:00.0000000Z
+    Scheduledstart: 2022-01-11T08:00:00.0000000Z
+    Scheduledend: 2022-01-11T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-262247/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Holbová
+    - Radka
+    Customer:
+    - Holbová
+    - Radka
+    Colour: '#101010'
+  - Createdon: 2021-11-11T17:13:52.0000000Z
+    Modifiedon: 2021-11-11T17:13:52.0000000Z
+    Scheduledstart: 2022-01-12T06:00:00.0000000Z
+    Scheduledend: 2022-01-12T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265809/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-11-30T16:21:34.0000000Z
+    Modifiedon: 2021-11-30T16:21:34.0000000Z
+    Scheduledstart: 2022-01-12T15:00:00.0000000Z
+    Scheduledend: 2022-01-12T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268961/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Procházková
+    - Michaela
+    Customer:
+    - Procházková
+    - Michaela
+    Colour: '#101010'
+  - Createdon: 2021-11-17T15:49:42.0000000Z
+    Modifiedon: 2021-11-17T15:49:42.0000000Z
+    Scheduledstart: 2022-01-13T06:00:00.0000000Z
+    Scheduledend: 2022-01-13T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266650/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Pálková
+    - Lenka
+    Customer:
+    - Pálková
+    - Lenka
+    Colour: '#101010'
+  - Createdon: 2021-12-07T14:40:51.0000000Z
+    Modifiedon: 2021-12-07T14:40:51.0000000Z
+    Scheduledstart: 2022-01-17T07:00:00.0000000Z
+    Scheduledend: 2022-01-17T19:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-270246/RG-164
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Department of Experimental Programmes
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Polovinkin
+    - Vitaly
+    Colour: '#101010'
+  - Createdon: 2021-11-11T17:14:16.0000000Z
+    Modifiedon: 2021-11-11T17:14:16.0000000Z
+    Scheduledstart: 2022-01-18T06:00:00.0000000Z
+    Scheduledend: 2022-01-18T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265810/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-11-17T15:54:34.0000000Z
+    Modifiedon: 2021-11-17T15:54:34.0000000Z
+    Scheduledstart: 2022-01-19T06:00:00.0000000Z
+    Scheduledend: 2022-01-19T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266655/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Pálková
+    - Lenka
+    Customer:
+    - Pálková
+    - Lenka
+    Colour: '#101010'
+  - Createdon: 2021-11-30T16:21:56.0000000Z
+    Modifiedon: 2021-11-30T16:21:56.0000000Z
+    Scheduledstart: 2022-01-19T15:00:00.0000000Z
+    Scheduledend: 2022-01-19T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268962/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Procházková
+    - Michaela
+    Customer:
+    - Procházková
+    - Michaela
+    Colour: '#101010'
+  - Createdon: 2021-12-03T22:01:26.0000000Z
+    Modifiedon: 2021-12-03T22:01:26.0000000Z
+    Scheduledstart: 2022-01-20T06:00:00.0000000Z
+    Scheduledend: 2022-01-20T18:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269733/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Moravcová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-11-11T17:14:36.0000000Z
+    Modifiedon: 2021-11-11T17:14:36.0000000Z
+    Scheduledstart: 2022-01-25T06:00:00.0000000Z
+    Scheduledend: 2022-01-25T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265811/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-11-17T15:56:12.0000000Z
+    Modifiedon: 2021-11-17T15:56:12.0000000Z
+    Scheduledstart: 2022-01-26T06:00:00.0000000Z
+    Scheduledend: 2022-01-26T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266656/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Pálková
+    - Lenka
+    Customer:
+    - Pálková
+    - Lenka
+    Colour: '#101010'
+  - Createdon: 2021-11-30T16:22:17.0000000Z
+    Modifiedon: 2021-11-30T16:22:17.0000000Z
+    Scheduledstart: 2022-01-26T15:00:00.0000000Z
+    Scheduledend: 2022-01-26T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268963/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Procházková
+    - Michaela
+    Customer:
+    - Procházková
+    - Michaela
+    Colour: '#101010'
+  - Createdon: 2021-12-07T14:41:27.0000000Z
+    Modifiedon: 2021-12-07T14:41:27.0000000Z
+    Scheduledstart: 2022-01-27T07:00:00.0000000Z
+    Scheduledend: 2022-01-27T19:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-270247/RG-164
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Department of Experimental Programmes
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Polovinkin
+    - Vitaly
+    Colour: '#101010'
+  - Createdon: 2021-11-11T17:15:12.0000000Z
+    Modifiedon: 2021-11-11T17:15:12.0000000Z
+    Scheduledstart: 2022-02-01T06:00:00.0000000Z
+    Scheduledend: 2022-02-01T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265812/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-11-17T16:07:57.0000000Z
+    Modifiedon: 2021-11-17T16:07:57.0000000Z
+    Scheduledstart: 2022-02-02T06:00:00.0000000Z
+    Scheduledend: 2022-02-02T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266657/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Pálková
+    - Lenka
+    Customer:
+    - Pálková
+    - Lenka
+    Colour: '#101010'
+  - Createdon: 2021-11-30T16:22:44.0000000Z
+    Modifiedon: 2021-11-30T16:22:44.0000000Z
+    Scheduledstart: 2022-02-02T15:00:00.0000000Z
+    Scheduledend: 2022-02-02T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268964/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Procházková
+    - Michaela
+    Customer:
+    - Procházková
+    - Michaela
+    Colour: '#101010'
+  - Createdon: 2021-11-11T17:15:34.0000000Z
+    Modifiedon: 2021-11-11T17:15:34.0000000Z
+    Scheduledstart: 2022-02-08T06:00:00.0000000Z
+    Scheduledend: 2022-02-08T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265813/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-11-17T16:08:43.0000000Z
+    Modifiedon: 2021-11-17T16:08:43.0000000Z
+    Scheduledstart: 2022-02-09T06:00:00.0000000Z
+    Scheduledend: 2022-02-09T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266658/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Pálková
+    - Lenka
+    Customer:
+    - Pálková
+    - Lenka
+    Colour: '#101010'
+  - Createdon: 2021-11-30T16:23:06.0000000Z
+    Modifiedon: 2021-11-30T16:23:06.0000000Z
+    Scheduledstart: 2022-02-09T15:00:00.0000000Z
+    Scheduledend: 2022-02-09T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268965/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Procházková
+    - Michaela
+    Customer:
+    - Procházková
+    - Michaela
+    Colour: '#101010'
+  - Createdon: 2021-11-11T17:15:50.0000000Z
+    Modifiedon: 2021-11-11T17:15:50.0000000Z
+    Scheduledstart: 2022-02-15T06:00:00.0000000Z
+    Scheduledend: 2022-02-15T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265814/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-11-30T16:23:24.0000000Z
+    Modifiedon: 2021-11-30T16:23:24.0000000Z
+    Scheduledstart: 2022-02-16T15:00:00.0000000Z
+    Scheduledend: 2022-02-16T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268966/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Procházková
+    - Michaela
+    Customer:
+    - Procházková
+    - Michaela
+    Colour: '#101010'
+  - Createdon: 2021-11-11T17:16:10.0000000Z
+    Modifiedon: 2021-11-11T17:16:10.0000000Z
+    Scheduledstart: 2022-02-22T06:00:00.0000000Z
+    Scheduledend: 2022-02-22T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265815/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-11-30T16:23:42.0000000Z
+    Modifiedon: 2021-11-30T16:23:42.0000000Z
+    Scheduledstart: 2022-02-23T15:00:00.0000000Z
+    Scheduledend: 2022-02-23T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268968/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Procházková
+    - Michaela
+    Customer:
+    - Procházková
+    - Michaela
+    Colour: '#101010'
+  - Createdon: 2021-11-11T17:19:36.0000000Z
+    Modifiedon: 2021-11-11T17:19:36.0000000Z
+    Scheduledstart: 2022-03-01T06:00:00.0000000Z
+    Scheduledend: 2022-03-01T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265816/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-11-30T16:24:06.0000000Z
+    Modifiedon: 2021-11-30T16:24:06.0000000Z
+    Scheduledstart: 2022-03-02T15:00:00.0000000Z
+    Scheduledend: 2022-03-02T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268969/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Procházková
+    - Michaela
+    Customer:
+    - Procházková
+    - Michaela
+    Colour: '#101010'
+  - Createdon: 2021-11-11T17:19:50.0000000Z
+    Modifiedon: 2021-11-11T17:19:50.0000000Z
+    Scheduledstart: 2022-03-08T06:00:00.0000000Z
+    Scheduledend: 2022-03-08T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265817/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-11-30T16:24:59.0000000Z
+    Modifiedon: 2021-11-30T16:24:59.0000000Z
+    Scheduledstart: 2022-03-09T15:00:00.0000000Z
+    Scheduledend: 2022-03-09T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268970/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Procházková
+    - Michaela
+    Customer:
+    - Procházková
+    - Michaela
+    Colour: '#101010'
+  - Createdon: 2021-11-11T17:20:07.0000000Z
+    Modifiedon: 2021-11-11T17:20:08.0000000Z
+    Scheduledstart: 2022-03-15T06:00:00.0000000Z
+    Scheduledend: 2022-03-15T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265818/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-11-30T16:25:16.0000000Z
+    Modifiedon: 2021-11-30T16:25:16.0000000Z
+    Scheduledstart: 2022-03-16T15:00:00.0000000Z
+    Scheduledend: 2022-03-16T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268971/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Procházková
+    - Michaela
+    Customer:
+    - Procházková
+    - Michaela
+    Colour: '#101010'
+  - Createdon: 2021-11-11T17:20:21.0000000Z
+    Modifiedon: 2021-11-11T17:20:21.0000000Z
+    Scheduledstart: 2022-03-22T06:00:00.0000000Z
+    Scheduledend: 2022-03-22T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265819/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-11-30T16:25:30.0000000Z
+    Modifiedon: 2021-11-30T16:25:30.0000000Z
+    Scheduledstart: 2022-03-23T15:00:00.0000000Z
+    Scheduledend: 2022-03-23T21:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268972/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Procházková
+    - Michaela
+    Customer:
+    - Procházková
+    - Michaela
+    Colour: '#101010'
+  - Createdon: 2021-11-11T17:20:35.0000000Z
+    Modifiedon: 2021-11-11T17:20:35.0000000Z
+    Scheduledstart: 2022-03-29T05:00:00.0000000Z
+    Scheduledend: 2022-03-29T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265820/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-11-30T16:25:52.0000000Z
+    Modifiedon: 2021-11-30T16:25:52.0000000Z
+    Scheduledstart: 2022-03-30T14:00:00.0000000Z
+    Scheduledend: 2022-03-30T20:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268973/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Procházková
+    - Michaela
+    Customer:
+    - Procházková
+    - Michaela
+    Colour: '#101010'
+- Colour: '#c7ecee'
+  Name: Vitrobot
+  Reservations:
+  - Createdon: 2021-11-08T08:20:34.0000000Z
+    Modifiedon: 2021-11-08T08:20:34.0000000Z
+    Scheduledstart: 2021-11-08T08:00:00.0000000Z
+    Scheduledend: 2021-11-08T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-264764/CF-06
+    Subtype: Service / Servis
+    Project: CEMCOF - service - downtime
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Nováček
+    - Jiří
+    Colour: '#f0f010'
+  - Createdon: 2021-11-08T08:00:07.0000000Z
+    Modifiedon: 2021-11-08T08:07:55.0000000Z
+    Scheduledstart: 2021-11-08T13:00:00.0000000Z
+    Scheduledend: 2021-11-08T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-264752/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-11-08T09:57:32.0000000Z
+    Modifiedon: 2021-11-08T09:57:32.0000000Z
+    Scheduledstart: 2021-11-08T16:30:00.0000000Z
+    Scheduledend: 2021-11-08T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-264858/RG-3-12
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Valentová
+    - Lucie
+    Customer:
+    - Valentová
+    - Lucie
+    Colour: '#101010'
+  - Createdon: 2021-11-09T07:51:58.0000000Z
+    Modifiedon: 2021-11-09T07:51:58.0000000Z
+    Scheduledstart: 2021-11-09T08:30:00.0000000Z
+    Scheduledend: 2021-11-09T11:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265127/EA-Z
+    Subtype: Measurement
+    Project: Instruct-ERIC access according to Service Level Agreement
+    ResearchGroup: external academic - foreign
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Galera Prat
+    - Albert
+    Colour: '#101010'
+  - Createdon: 2021-11-08T17:59:26.0000000Z
+    Modifiedon: 2021-11-08T17:59:26.0000000Z
+    Scheduledstart: 2021-11-09T11:00:00.0000000Z
+    Scheduledend: 2021-11-09T12:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265068/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-11-02T17:28:53.0000000Z
+    Modifiedon: 2021-11-02T17:28:54.0000000Z
+    Scheduledstart: 2021-11-09T15:00:00.0000000Z
+    Scheduledend: 2021-11-09T16:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-264016/RG-3-10
+    Subtype: Measurement
+    Project: '#UID: fd6debab-0f1f-e311-8a73-005056991551'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Zapletal
+    - David
+    Customer:
+    - Zapletal
+    - David
+    Colour: '#101010'
+  - Createdon: 2021-11-10T05:27:11.0000000Z
+    Modifiedon: 2021-11-10T05:27:55.0000000Z
+    Scheduledstart: 2021-11-10T06:00:00.0000000Z
+    Scheduledend: 2021-11-10T07:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265357/RG-3-12
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Valentová
+    - Lucie
+    Customer:
+    - Valentová
+    - Lucie
+    Colour: '#101010'
+  - Createdon: 2021-11-09T09:59:51.0000000Z
+    Modifiedon: 2021-11-09T09:59:51.0000000Z
+    Scheduledstart: 2021-11-10T12:00:00.0000000Z
+    Scheduledend: 2021-11-10T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265181/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Mukhamedova
+    - Liya
+    Customer:
+    - Mukhamedova
+    - Liya
+    Colour: '#101010'
+  - Createdon: 2021-11-02T17:29:55.0000000Z
+    Modifiedon: 2021-11-02T17:29:55.0000000Z
+    Scheduledstart: 2021-11-10T15:00:00.0000000Z
+    Scheduledend: 2021-11-10T16:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-264017/RG-3-10
+    Subtype: Measurement
+    Project: '#UID: fd6debab-0f1f-e311-8a73-005056991551'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Zapletal
+    - David
+    Customer:
+    - Zapletal
+    - David
+    Colour: '#101010'
+  - Createdon: 2021-11-10T16:40:03.0000000Z
+    Modifiedon: 2021-11-10T16:40:03.0000000Z
+    Scheduledstart: 2021-11-11T15:00:00.0000000Z
+    Scheduledend: 2021-11-11T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265594/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Mukhamedova
+    - Liya
+    Customer:
+    - Mukhamedova
+    - Liya
+    Colour: '#101010'
+  - Createdon: 2021-11-15T08:53:35.0000000Z
+    Modifiedon: 2021-11-15T08:53:35.0000000Z
+    Scheduledstart: 2021-11-15T13:00:00.0000000Z
+    Scheduledend: 2021-11-15T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266164/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-11-15T13:24:01.0000000Z
+    Modifiedon: 2021-11-15T13:24:01.0000000Z
+    Scheduledstart: 2021-11-16T08:30:00.0000000Z
+    Scheduledend: 2021-11-16T10:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266271/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Holbová
+    - Radka
+    Customer:
+    - Holbová
+    - Radka
+    Colour: '#101010'
+  - Createdon: 2021-11-12T13:20:32.0000000Z
+    Modifiedon: 2021-11-12T13:20:32.0000000Z
+    Scheduledstart: 2021-11-16T10:00:00.0000000Z
+    Scheduledend: 2021-11-16T12:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265956/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Moravcová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-11-15T18:50:25.0000000Z
+    Modifiedon: 2021-11-16T07:57:25.0000000Z
+    Scheduledstart: 2021-11-16T12:00:00.0000000Z
+    Scheduledend: 2021-11-16T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266336/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-11-16T14:49:00.0000000Z
+    Modifiedon: 2021-11-16T14:49:00.0000000Z
+    Scheduledstart: 2021-11-18T12:00:00.0000000Z
+    Scheduledend: 2021-11-18T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266523/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-11-12T15:07:05.0000000Z
+    Modifiedon: 2021-11-12T15:08:32.0000000Z
+    Scheduledstart: 2021-11-18T14:00:00.0000000Z
+    Scheduledend: 2021-11-18T17:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265983/RG-3-10
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Škubník
+    - Karel
+    Customer:
+    - Šebesta
+    - Marek
+    Colour: '#101010'
+  - Createdon: 2021-11-12T17:32:56.0000000Z
+    Modifiedon: 2021-11-19T07:43:42.0000000Z
+    Scheduledstart: 2021-11-19T09:00:00.0000000Z
+    Scheduledend: 2021-11-19T10:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265998/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-11-18T10:39:53.0000000Z
+    Modifiedon: 2021-11-18T10:39:53.0000000Z
+    Scheduledstart: 2021-11-19T10:30:00.0000000Z
+    Scheduledend: 2021-11-19T12:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-266776/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Holbová
+    - Radka
+    Customer:
+    - Holbová
+    - Radka
+    Colour: '#101010'
+  - Createdon: 2021-11-22T09:58:37.0000000Z
+    Modifiedon: 2021-11-22T09:58:37.0000000Z
+    Scheduledstart: 2021-11-22T10:00:00.0000000Z
+    Scheduledend: 2021-11-22T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267219/EA-Z
+    Subtype: Measurement
+    Project: Instruct-ERIC access according to Service Level Agreement
+    ResearchGroup: external academic - foreign
+    Createdby:
+    - Nováček
+    - Jiří
+    Customer:
+    - Galera Prat
+    - Albert
+    Colour: '#101010'
+  - Createdon: 2021-11-22T09:24:04.0000000Z
+    Modifiedon: 2021-11-22T09:24:04.0000000Z
+    Scheduledstart: 2021-11-22T13:00:00.0000000Z
+    Scheduledend: 2021-11-22T13:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267197/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-11-22T08:07:48.0000000Z
+    Modifiedon: 2021-11-22T08:07:48.0000000Z
+    Scheduledstart: 2021-11-23T08:30:00.0000000Z
+    Scheduledend: 2021-11-23T11:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267169/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Holbová
+    - Radka
+    Customer:
+    - Holbová
+    - Radka
+    Colour: '#101010'
+  - Createdon: 2021-11-22T09:38:33.0000000Z
+    Modifiedon: 2021-11-22T09:38:33.0000000Z
+    Scheduledstart: 2021-11-23T11:00:00.0000000Z
+    Scheduledend: 2021-11-23T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267203/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Moravcová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-11-22T14:10:07.0000000Z
+    Modifiedon: 2021-11-22T14:10:07.0000000Z
+    Scheduledstart: 2021-11-23T13:00:00.0000000Z
+    Scheduledend: 2021-11-23T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267332/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-11-24T07:02:06.0000000Z
+    Modifiedon: 2021-11-24T10:25:53.0000000Z
+    Scheduledstart: 2021-11-24T11:00:00.0000000Z
+    Scheduledend: 2021-11-24T11:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267666/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-11-24T10:05:20.0000000Z
+    Modifiedon: 2021-11-24T10:05:47.0000000Z
+    Scheduledstart: 2021-11-24T12:00:00.0000000Z
+    Scheduledend: 2021-11-24T12:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267737/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-11-23T14:12:05.0000000Z
+    Modifiedon: 2021-11-24T10:07:44.0000000Z
+    Scheduledstart: 2021-11-24T13:00:00.0000000Z
+    Scheduledend: 2021-11-24T15:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267566/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Moravcová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-11-22T09:39:04.0000000Z
+    Modifiedon: 2021-11-22T09:39:04.0000000Z
+    Scheduledstart: 2021-11-26T09:00:00.0000000Z
+    Scheduledend: 2021-11-26T11:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267204/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Moravcová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-11-22T17:10:32.0000000Z
+    Modifiedon: 2021-11-24T10:38:40.0000000Z
+    Scheduledstart: 2021-11-29T11:30:00.0000000Z
+    Scheduledend: 2021-11-29T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-267378/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-11-29T08:58:18.0000000Z
+    Modifiedon: 2021-11-29T08:58:18.0000000Z
+    Scheduledstart: 2021-11-29T13:00:00.0000000Z
+    Scheduledend: 2021-11-29T13:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268527/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-11-29T09:12:51.0000000Z
+    Modifiedon: 2021-11-29T09:12:51.0000000Z
+    Scheduledstart: 2021-11-30T08:00:00.0000000Z
+    Scheduledend: 2021-11-30T10:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268537/CF-06
+    Subtype: Measurement
+    Project: CEMCOF - R&D
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Holbová
+    - Radka
+    Customer:
+    - Holbová
+    - Radka
+    Colour: '#101010'
+  - Createdon: 2021-11-29T07:17:17.0000000Z
+    Modifiedon: 2021-11-29T07:17:17.0000000Z
+    Scheduledstart: 2021-11-30T10:00:00.0000000Z
+    Scheduledend: 2021-11-30T11:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268486/RG-3-12
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Valentová
+    - Lucie
+    Customer:
+    - Valentová
+    - Lucie
+    Colour: '#101010'
+  - Createdon: 2021-11-29T12:57:15.0000000Z
+    Modifiedon: 2021-11-29T12:57:15.0000000Z
+    Scheduledstart: 2021-11-30T12:00:00.0000000Z
+    Scheduledend: 2021-11-30T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268637/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Mukhamedova
+    - Liya
+    Customer:
+    - Mukhamedova
+    - Liya
+    Colour: '#101010'
+  - Createdon: 2021-11-28T20:56:46.0000000Z
+    Modifiedon: 2021-11-28T20:56:46.0000000Z
+    Scheduledstart: 2021-11-30T13:00:00.0000000Z
+    Scheduledend: 2021-11-30T14:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268456/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-11-30T08:09:17.0000000Z
+    Modifiedon: 2021-11-30T08:09:26.0000000Z
+    Scheduledstart: 2021-12-01T06:30:00.0000000Z
+    Scheduledend: 2021-12-01T09:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268755/RG-3-18
+    Subtype: Measurement
+    Project: '#UID: 2d52e76a-4a28-e811-b2ea-005056991551'
+    ResearchGroup: Protein Structure and Dynamics
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Kučinskas
+    - Gytis
+    Colour: '#101010'
+  - Createdon: 2021-11-29T12:13:55.0000000Z
+    Modifiedon: 2021-11-29T12:13:55.0000000Z
+    Scheduledstart: 2021-12-01T09:00:00.0000000Z
+    Scheduledend: 2021-12-01T11:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268613/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Moravcová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-11-29T15:25:03.0000000Z
+    Modifiedon: 2021-11-29T15:25:46.0000000Z
+    Scheduledstart: 2021-12-01T12:00:00.0000000Z
+    Scheduledend: 2021-12-01T15:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268687/RG-3-21
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Biology of Coupled Transcription-Translation
+    Createdby:
+    - Hiriyur Nagaraj
+    - Pradeep
+    Customer:
+    - Hiriyur Nagaraj
+    - Pradeep
+    Colour: '#101010'
+  - Createdon: 2021-11-29T12:14:17.0000000Z
+    Modifiedon: 2021-11-29T12:14:17.0000000Z
+    Scheduledstart: 2021-12-02T09:00:00.0000000Z
+    Scheduledend: 2021-12-02T11:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268614/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Moravcová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-11-29T15:25:12.0000000Z
+    Modifiedon: 2021-11-29T15:25:12.0000000Z
+    Scheduledstart: 2021-12-02T12:00:00.0000000Z
+    Scheduledend: 2021-12-02T15:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-268688/RG-3-21
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Biology of Coupled Transcription-Translation
+    Createdby:
+    - Hiriyur Nagaraj
+    - Pradeep
+    Customer:
+    - Hiriyur Nagaraj
+    - Pradeep
+    Colour: '#101010'
+  - Createdon: 2021-12-02T18:58:18.0000000Z
+    Modifiedon: 2021-12-02T18:58:18.0000000Z
+    Scheduledstart: 2021-12-06T09:00:00.0000000Z
+    Scheduledend: 2021-12-06T12:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269484/RG-3-10
+    Subtype: Measurement
+    Project: '#UID: fd6debab-0f1f-e311-8a73-005056991551'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Zapletal
+    - David
+    Customer:
+    - Zapletal
+    - David
+    Colour: '#101010'
+  - Createdon: 2021-12-03T12:58:10.0000000Z
+    Modifiedon: 2021-12-03T12:58:28.0000000Z
+    Scheduledstart: 2021-12-06T12:00:00.0000000Z
+    Scheduledend: 2021-12-06T13:15:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269654/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-12-06T10:24:24.0000000Z
+    Modifiedon: 2021-12-06T11:35:06.0000000Z
+    Scheduledstart: 2021-12-06T13:30:00.0000000Z
+    Scheduledend: 2021-12-06T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269900/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-12-03T07:53:50.0000000Z
+    Modifiedon: 2021-12-03T07:53:51.0000000Z
+    Scheduledstart: 2021-12-06T14:00:00.0000000Z
+    Scheduledend: 2021-12-06T15:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269521/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-12-02T14:08:51.0000000Z
+    Modifiedon: 2021-12-02T14:08:51.0000000Z
+    Scheduledstart: 2021-12-07T09:00:00.0000000Z
+    Scheduledend: 2021-12-07T12:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269421/RG-3-10
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Biology of Gene Regulation
+    Createdby:
+    - Škubník
+    - Karel
+    Customer:
+    - Šebesta
+    - Marek
+    Colour: '#101010'
+  - Createdon: 2021-12-05T20:05:14.0000000Z
+    Modifiedon: 2021-12-05T20:05:14.0000000Z
+    Scheduledstart: 2021-12-07T12:00:00.0000000Z
+    Scheduledend: 2021-12-07T12:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269788/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Moravcová
+    - Jana
+    Customer:
+    - Moravcová
+    - Jana
+    Colour: '#101010'
+  - Createdon: 2021-12-03T09:48:00.0000000Z
+    Modifiedon: 2021-12-03T09:48:00.0000000Z
+    Scheduledstart: 2021-12-07T12:30:00.0000000Z
+    Scheduledend: 2021-12-07T14:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269577/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'
+  - Createdon: 2021-12-03T13:00:06.0000000Z
+    Modifiedon: 2021-12-03T13:00:06.0000000Z
+    Scheduledstart: 2021-12-07T14:30:00.0000000Z
+    Scheduledend: 2021-12-07T15:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269656/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-12-06T15:59:03.0000000Z
+    Modifiedon: 2021-12-06T15:59:03.0000000Z
+    Scheduledstart: 2021-12-08T11:00:00.0000000Z
+    Scheduledend: 2021-12-08T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-270019/CF-06
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Pinkas
+    - Matyáš
+    Customer:
+    - Pinkas
+    - Matyáš
+    Colour: '#101010'
+  - Createdon: 2021-12-06T10:20:18.0000000Z
+    Modifiedon: 2021-12-06T10:20:18.0000000Z
+    Scheduledstart: 2021-12-09T09:00:00.0000000Z
+    Scheduledend: 2021-12-09T10:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269890/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Pálková
+    - Lenka
+    Customer:
+    - Pálková
+    - Lenka
+    Colour: '#101010'
+  - Createdon: 2021-12-07T08:40:49.0000000Z
+    Modifiedon: 2021-12-07T08:40:49.0000000Z
+    Scheduledstart: 2021-12-09T14:00:00.0000000Z
+    Scheduledend: 2021-12-09T15:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-270097/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Procházková
+    - Michaela
+    Customer:
+    - Procházková
+    - Michaela
+    Colour: '#101010'
+  - Createdon: 2021-12-06T09:55:41.0000000Z
+    Modifiedon: 2021-12-06T09:55:41.0000000Z
+    Scheduledstart: 2021-12-10T09:30:00.0000000Z
+    Scheduledend: 2021-12-10T11:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269873/CF-06
+    Subtype: Measurement
+    Project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    ResearchGroup: CEMCOF
+    Createdby:
+    - Monková
+    - Katarína
+    Customer:
+    - Monková
+    - Katarína
+    Colour: '#101010'
+  - Createdon: 2021-12-06T14:25:09.0000000Z
+    Modifiedon: 2021-12-06T14:25:09.0000000Z
+    Scheduledstart: 2022-01-04T10:00:00.0000000Z
+    Scheduledend: 2022-01-04T13:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-269992/RG-3-18
+    Subtype: Measurement
+    Project: '#UID: 2d52e76a-4a28-e811-b2ea-005056991551'
+    ResearchGroup: Protein Structure and Dynamics
+    Createdby:
+    - Babiak
+    - Michal
+    Customer:
+    - Kučinskas
+    - Gytis
+    Colour: '#101010'
+- Colour: '#25DAF1'
+  Name: Leica GP2
+  Reservations:
+  - Createdon: 2021-11-05T06:50:22.0000000Z
+    Modifiedon: 2021-11-05T10:42:14.0000000Z
+    Scheduledstart: 2021-11-08T12:00:00.0000000Z
+    Scheduledend: 2021-11-08T13:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-264497/RG-3-12
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Valentová
+    - Lucie
+    Customer:
+    - Valentová
+    - Lucie
+    Colour: '#101010'
+  - Createdon: 2021-11-10T05:28:08.0000000Z
+    Modifiedon: 2021-11-10T05:28:08.0000000Z
+    Scheduledstart: 2021-11-10T07:00:00.0000000Z
+    Scheduledend: 2021-11-10T08:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265358/RG-3-12
+    Subtype: Measurement
+    Project: '-'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Valentová
+    - Lucie
+    Customer:
+    - Valentová
+    - Lucie
+    Colour: '#101010'
+  - Createdon: 2021-11-11T08:06:28.0000000Z
+    Modifiedon: 2021-11-11T08:06:28.0000000Z
+    Scheduledstart: 2021-11-11T09:30:00.0000000Z
+    Scheduledend: 2021-11-11T10:30:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265652/K-T
+    Subtype: Measurement
+    Project: CEMCOF - commercial - EYEN
+    ResearchGroup: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    Createdby:
+    - Polák
+    - Martin
+    Customer:
+    - Polák
+    - Martin
+    Colour: '#101010'
+  - Createdon: 2021-11-11T10:33:01.0000000Z
+    Modifiedon: 2021-11-11T10:33:01.0000000Z
+    Scheduledstart: 2021-11-11T13:00:00.0000000Z
+    Scheduledend: 2021-11-11T14:00:00.0000000Z
+    Statecode: 3
+    Statuscode: 4
+    Subject: 2021-265711/RG-3-12
+    Subtype: Measurement
+    Project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    ResearchGroup: Structural Virology
+    Createdby:
+    - Trebichalská
+    - Zuzana
+    Customer:
+    - Trebichalská
+    - Zuzana
+    Colour: '#101010'

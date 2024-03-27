@@ -1,0 +1,83 @@
+<samlp:Response Destination="https://stigmator.ceitec.muni.cz/Shibboleth.sso/SAML2/POST"
+                ID="_b4e83c340724a6f4ed4b2151f6cbe7103ad718a22c" InResponseTo="_a62b18e688d75fade1687bb3a768c31f"
+                IssueInstant="2022-01-22T11:36:52Z" Version="2.0" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+                xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol">
+    <saml:Issuer>https://idp2.ics.muni.cz/idp/shibboleth</saml:Issuer>
+    <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+            <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+            <ds:Reference URI="#_b4e83c340724a6f4ed4b2151f6cbe7103ad718a22c">
+                <ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                <ds:DigestValue>UinNAaDLBV/w7U3C8kuxQYhk0UtFw78eEkO+/IyS598=</ds:DigestValue>
+            </ds:Reference>
+        </ds:SignedInfo>
+        <ds:SignatureValue>ioDWtNAUM0pI/LkVCv27hGQnbwZ8bFmmIErNP/126UodnwXw46GxWydWGVwYqjLu2g7dlLNfvNg3DtCDkB9QG3gTXwKK19sUegCqka/rg1InZbtMkMx81hN0iwkh+uRnfpJL2G+YOU9JCKCTtJc462TnCD0QLbbhBAJNWJfIkOOjuvQfSbXShfKhgrAjEZZfgVvlzDivviLTI72csGZ/4qkZqBOY56awiaNy2l78GHbmPUoBuZ9V6z1gu5rk3zhdNGFruiGyIXeatl0ZP+I86w9Cxfz56iO91u7I2we57Z7dVi2DBSC7CIOB1o8V9UO1lPxh7ZbFg5wpNGkldhcSoQ==</ds:SignatureValue>
+        <ds:KeyInfo>
+            <ds:X509Data>
+                <ds:X509Certificate>MIIC/TCCAeWgAwIBAgIJAJ18Q00DtkMIMA0GCSqGSIb3DQEBCwUAMBUxEzARBgNVBAMMCmlkLm11bmkuY3owHhcNMTYxMTA0MTQ0OTMwWhcNMjYxMTAyMTQ0OTMwWjAVMRMwEQYDVQQDDAppZC5tdW5pLmN6MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwDHZ5X2M7lJN7t2e5zw3L3m3mme777OG0Qgoct5NpmgNbsHJ+9bh3sLxTkkf7F7I0kaCyxNyrFOaIvWQ75ndr4XHQRj5r/n+bp+8/sjn3Fnp2yzxNae8Sg74G8Sw1du74coJ8Ftjqo/ODyamRW4wgk+DkNIk8VSOD0CJkEpFxdwwBMsPZMgXRYIxRCOIzjpyo/R38ai4w+rf0zVry+duX0Xyv1ByNgrYAG02/AgRcXcFsODvxL1M47ubbpgmks1gcXxR4+jINz0mQNpEGtu/EZ5JZerZM2J99CVpTcI6KP4anf3yDgKYjoQTzdBQALFIwpt5BseYI7E1yxeLZBu9/QIDAQABo1AwTjAdBgNVHQ4EFgQUibREYbTm5VVSnoTFcZxMvWsH+mUwHwYDVR0jBBgwFoAUibREYbTm5VVSnoTFcZxMvWsH+mUwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAQoIIi4XnqWbGRZ1gXmhcJVTiDdcf39dp1IiQZ7X0fAWLR4h9AO5ww8JFzj5aQMeybM+ZSl8t6HspVAKNz3fqEoYPSixK32uKV/GP46sos/Dwp04U4XR+smAsc5jbTwndP7tiMPMf03Own4mG1ZeR2s9LYf8sFV+FSjOBP3zlwWK8RAOJwRQXs5Bn9rtYAOdDrqqqwUWUSNXE2o9hq0/W65DmqbnUTOCOAe72FqLryS0ytFZGXm8R1gMZI1uMfEM76/+WvYFuCeMvROAoVwJH8aK7davxoM0w3JqUpzZy1dqQ9rTys3u2GffiPCsju+OJ7uEsbhR7eYegxCpRKLp58Q==</ds:X509Certificate>
+            </ds:X509Data>
+        </ds:KeyInfo>
+    </ds:Signature>
+    <samlp:Status><samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/></samlp:Status>
+    <saml:Assertion ID="_ebeecd42e5aa58fae7ba7cc62b7c458c5ca6a24d92" IssueInstant="2022-01-22T11:36:52Z"
+                    Version="2.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <saml:Issuer>https://idp2.ics.muni.cz/idp/shibboleth</saml:Issuer>
+        <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+            <ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+                <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+                <ds:Reference URI="#_ebeecd42e5aa58fae7ba7cc62b7c458c5ca6a24d92">
+                    <ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                    <ds:DigestValue>HIoPauZeccblcThkG6JEoWVMoWpKXQ2vgRa8Z45RASw=</ds:DigestValue>
+                </ds:Reference>
+            </ds:SignedInfo>
+            <ds:SignatureValue>VHOQkEJXDYx/m37+qY0bf8ycidxQSAwABjuRYtfRFBleS9bVVgURMrYZURf1steB1vxsvzmabHOEh7ghNNATxpyqhEhJrDNyYYJk3i23bksTsNe8697Fojp7FGRWpUAK1FrOlGEbtfdrt4j/6mpfnsLfITNpy5h0gl8qsUK6QgeJXT82FAuxa9HGKOoS18lLmKYWMYMSG3Vs7X0idKH0wnpWVbO/YPakfPGM6Rp7zcX9XkHZcXAjt2/ZleBuJyVDk02jP5dNUAiE/BKeDFnggMqcbB9APlP6+yVAOi683I8w0XY5sfS9RrFy0R+JaZ2BblG2y2m23qfKnSKK2LblMw==</ds:SignatureValue>
+            <ds:KeyInfo>
+                <ds:X509Data>
+                    <ds:X509Certificate>MIIC/TCCAeWgAwIBAgIJAJ18Q00DtkMIMA0GCSqGSIb3DQEBCwUAMBUxEzARBgNVBAMMCmlkLm11bmkuY3owHhcNMTYxMTA0MTQ0OTMwWhcNMjYxMTAyMTQ0OTMwWjAVMRMwEQYDVQQDDAppZC5tdW5pLmN6MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwDHZ5X2M7lJN7t2e5zw3L3m3mme777OG0Qgoct5NpmgNbsHJ+9bh3sLxTkkf7F7I0kaCyxNyrFOaIvWQ75ndr4XHQRj5r/n+bp+8/sjn3Fnp2yzxNae8Sg74G8Sw1du74coJ8Ftjqo/ODyamRW4wgk+DkNIk8VSOD0CJkEpFxdwwBMsPZMgXRYIxRCOIzjpyo/R38ai4w+rf0zVry+duX0Xyv1ByNgrYAG02/AgRcXcFsODvxL1M47ubbpgmks1gcXxR4+jINz0mQNpEGtu/EZ5JZerZM2J99CVpTcI6KP4anf3yDgKYjoQTzdBQALFIwpt5BseYI7E1yxeLZBu9/QIDAQABo1AwTjAdBgNVHQ4EFgQUibREYbTm5VVSnoTFcZxMvWsH+mUwHwYDVR0jBBgwFoAUibREYbTm5VVSnoTFcZxMvWsH+mUwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAQoIIi4XnqWbGRZ1gXmhcJVTiDdcf39dp1IiQZ7X0fAWLR4h9AO5ww8JFzj5aQMeybM+ZSl8t6HspVAKNz3fqEoYPSixK32uKV/GP46sos/Dwp04U4XR+smAsc5jbTwndP7tiMPMf03Own4mG1ZeR2s9LYf8sFV+FSjOBP3zlwWK8RAOJwRQXs5Bn9rtYAOdDrqqqwUWUSNXE2o9hq0/W65DmqbnUTOCOAe72FqLryS0ytFZGXm8R1gMZI1uMfEM76/+WvYFuCeMvROAoVwJH8aK7davxoM0w3JqUpzZy1dqQ9rTys3u2GffiPCsju+OJ7uEsbhR7eYegxCpRKLp58Q==</ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </ds:Signature>
+        <saml:Subject>
+            <saml:NameID Format="urn:oasis:names:tc:SAML:2.0:nameid-format:transient"
+                         SPNameQualifier="https://stigmator.ceitec.muni.cz/authzone">_1be92c2ac5bbf72dc7bbc296d014c6b781c6cda2d3</saml:NameID>
+            <saml:SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:bearer"><saml:SubjectConfirmationData InResponseTo="_a62b18e688d75fade1687bb3a768c31f"
+                                                                                                                   NotOnOrAfter="2022-01-22T11:41:52Z"
+                                                                                                                   Recipient="https://stigmator.ceitec.muni.cz/Shibboleth.sso/SAML2/POST"/></saml:SubjectConfirmation>
+        </saml:Subject>
+        <saml:Conditions NotBefore="2022-01-22T11:36:22Z" NotOnOrAfter="2022-01-22T11:41:52Z">
+            <saml:AudienceRestriction>
+                <saml:Audience>https://stigmator.ceitec.muni.cz/authzone</saml:Audience>
+            </saml:AudienceRestriction>
+        </saml:Conditions>
+        <saml:AuthnStatement AuthnInstant="2022-01-22T11:36:52Z"
+                             SessionIndex="_bcbe605d0ad7cb3174e81075917333b167ab6d1886"
+                             SessionNotOnOrAfter="2022-01-27T11:36:52Z">
+            <saml:AuthnContext>
+                <saml:AuthnContextClassRef>https://refeds.org/profile/sfa</saml:AuthnContextClassRef>
+            </saml:AuthnContext>
+        </saml:AuthnStatement>
+        <saml:AttributeStatement>
+            <saml:Attribute Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6"
+                            NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+                <saml:AttributeValue xsi:type="xs:string">241995@muni.cz</saml:AttributeValue>
+            </saml:Attribute>
+            <saml:Attribute Name="urn:oid:2.5.4.3" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+                <saml:AttributeValue xsi:type="xs:string">Radek Veverka</saml:AttributeValue>
+            </saml:Attribute>
+            <saml:Attribute Name="urn:oid:2.5.4.4" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+                <saml:AttributeValue xsi:type="xs:string">Veverka</saml:AttributeValue>
+            </saml:Attribute>
+            <saml:Attribute Name="urn:oid:2.5.4.42" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+                <saml:AttributeValue xsi:type="xs:string">Radek</saml:AttributeValue>
+            </saml:Attribute>
+            <saml:Attribute Name="urn:oid:2.5.4.10" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+                <saml:AttributeValue xsi:type="xs:string">Masarykova univerzita</saml:AttributeValue>
+            </saml:Attribute>
+            <saml:Attribute Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.13"
+                            NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+                <saml:AttributeValue xsi:type="xs:string">6eb45c589baf9066b513df8ebc4762bcd465c496556158a30fafc9e60882a0a1@muni.cz</saml:AttributeValue>
+            </saml:Attribute>
+        </saml:AttributeStatement>
+    </saml:Assertion>
+</samlp:Response>

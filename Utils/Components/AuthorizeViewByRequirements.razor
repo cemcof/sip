@@ -1,0 +1,77 @@
+@inject IAuthorizationService AuthorizationService
+
+@if (_authResult is not null)
+{
+    @if (_authResult.Succeeded)
+    {
+        // Authorized
+        @if (ChildContent is not null) 
+            @ChildContent(ComponentContext.PrincipalUser)
+        @if (Authorized is not null) 
+            @Authorized(ComponentContext.PrincipalUser)
+    }
+    else
+    {
+        // Not authorized
+        @if (NotAuthorized is not null)
+        {
+            @NotAuthorized(ComponentContext.PrincipalUser)
+        }
+    }
+    
+}
+else
+{
+    // Authorizing
+    @Authorizing
+}
+
+
+@code {
+
+    [Parameter]
+    public IReadOnlyCollection<IAuthorizationRequirement> Requirements { get; set; } = new List<IAuthorizationRequirement>();
+    
+    // From AuthorizeViewCore component 
+    
+    /// <summary>
+    /// The content that will be displayed if the user is authorized.
+    /// </summary>
+    [Parameter] public RenderFragment<ClaimsPrincipal>? ChildContent { get; set; }
+
+    /// <summary>
+    /// The content that will be displayed if the user is not authorized.
+    /// </summary>
+    [Parameter] public RenderFragment<ClaimsPrincipal>? NotAuthorized { get; set; }
+
+    /// <summary>
+    /// The content that will be displayed if the user is authorized.
+    /// If you specify a value for this parameter, do not also specify a value for <see cref="ChildContent"/>.
+    /// </summary>
+    [Parameter] public RenderFragment<ClaimsPrincipal>? Authorized { get; set; }
+
+    /// <summary>
+    /// The content that will be displayed while asynchronous authorization is in progress.
+    /// </summary>
+    [Parameter] public RenderFragment? Authorizing { get; set; }
+
+
+    [CascadingParameter]
+    public OrganizationComponentContext ComponentContext { get; set; } = null!;
+
+
+    private AuthorizationResult? _authResult;
+    
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Requirements.Any())
+        {
+            _authResult = await AuthorizationService.AuthorizeAsync(ComponentContext.PrincipalUser, null, Requirements);
+        }
+        else
+        {
+            _authResult = AuthorizationResult.Success();
+        }
+    }
+
+}

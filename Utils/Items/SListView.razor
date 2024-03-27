@@ -1,0 +1,124 @@
+@typeparam TItem where TItem : IEquatable<TItem>
+@inherits ItemsRenderer<TItem>
+@inject ILogger<SListView<TItem>> Logger 
+@inject IJSRuntime Js
+
+<div class="slistview-container @ClassName" style="@_GetContainerStyle()">
+    
+    <Virtualize @ref="VirtualizeRef" Placeholder="@Placeholder"
+                ItemSize="@ItemSize"
+                OverscanCount="@OverscanCount"
+                ItemsProvider="@ItemProviderWrapper">
+        
+        <ItemContent Context="i">
+            @if (i.Equals(_selectedItem))
+            {
+                <div @ref="@_selectedItemElementRef" class="listview-item selectable" selected="@true"
+                     @onmousedown="@(() => _itemClick(i))" @onmousedown:preventDefault="@true">
+                    @ItemContent!(i)
+                </div>
+            }
+            else
+            {
+                <div class="listview-item @(ItemSelectable(i) ? "selectable" : "unselectable")"
+                     @onmousedown="@(() => _itemClick(i))" @onmousedown:preventDefault="@true">
+                    @ItemContent!(i)
+                </div>
+            }
+        </ItemContent>
+        
+    </Virtualize>
+
+</div>
+
+@code {
+
+    [Parameter]
+    public string ClassName { get; set; } = "default";
+    
+
+    [Parameter]
+    public Func<TItem, bool> ItemSelectable { get; set; } = (_) => true;
+
+    private TItem? _selectedItem;
+    private int SelectedIndex => _selectedItem is null ? -1 : CurrentItems.IndexOf(_selectedItem); 
+    
+    [Parameter] public EventCallback<TItem> OnItemSelected { get; set; }
+    [Parameter] public EventCallback<TItem> OnItemConfirmed { get; set; }
+    [Parameter] public EventCallback OnCancelled { get; set; }
+    
+    [Parameter] public int VisibleItems { get; set; } = 12;
+
+    private string _GetContainerStyle()
+    {
+        return $"max-height: {ItemSize * VisibleItems}px;";    
+    }
+    
+    public void MoveSelection(int direction)
+    {
+        if (direction < 0) SelectPreviousItem();
+        else SelectNextItem();
+    } 
+    
+    public TItem? SelectNextItem()
+    {
+        // Find first selectable next item
+        var searchFromIndex = SelectedIndex + 1;
+        var targetItem = CurrentItems.Skip(searchFromIndex)
+            .Concat(CurrentItems.Take(searchFromIndex))
+            .FirstOrDefault(x => ItemSelectable(x));
+        SelectItem(targetItem);
+        return _selectedItem;
+    }
+
+    public TItem? SelectPreviousItem()
+    {
+        // Find first selectable previous item
+        var searchFromIndex = (CurrentItems.Count - 1 - SelectedIndex) + 1 ;
+        var targetItem = ((IEnumerable<TItem>)CurrentItems).Reverse()
+            .Skip(searchFromIndex)
+            .Concat(((IEnumerable<TItem>)CurrentItems).Reverse().Take(searchFromIndex))
+            .FirstOrDefault(x => ItemSelectable(x));
+        SelectItem(targetItem);
+        return _selectedItem;
+    }
+
+    public void SelectItem(TItem? item)
+    {
+        if (item is null || !CurrentItems.Contains(item)) item = default;
+        if (item is not null && item.Equals(_selectedItem)) return;
+        if (item is not null && !ItemSelectable(item)) return;
+        _selectedItem = item;
+        OnItemSelected.InvokeAsync(item);
+    }
+    
+    public void ConfirmCurrentItem()
+    {
+        if (_selectedItem is null) return;
+        ConfirmItem(_selectedItem);
+    }
+
+    public TItem ConfirmItem(TItem item)
+    {
+        OnItemConfirmed.InvokeAsync(item);
+        return item;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_selectedItemElementRef is not null)
+        {
+            // Ensure that selected element is always visible
+            await Js.InvokeVoidAsync("scrollIntoViewIfNeeded", _selectedItemElementRef);
+        }
+    }
+
+    private void _itemClick(TItem item)
+    {
+        Logger.LogDebug("Item clicked {}", item);
+        SelectItem(item);
+        ConfirmCurrentItem();
+    }
+
+    private ElementReference? _selectedItemElementRef;
+}

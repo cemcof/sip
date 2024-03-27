@@ -1,0 +1,88 @@
+@using sip.Experiments.Model
+@inherits OrganizationComponentBase
+
+@page "/{OrganizationId}/experiments"
+@page "/{OrganizationId}/experiments/{ExperimentId:guid}"
+
+@inject ILogger<ExperimentsOverview> Logger
+@inject ExperimentsService ExperimentsService
+@inject IOptionsMonitor<ExperimentsOptions> ExperimentsOptions;
+
+<PageTitle>Experiments</PageTitle>
+
+@* Simple visualisation of experiments (table) *@
+
+<div class="exp-overview-container itemspage-layout">
+    
+    @* Render side panel with list of filtered items *@
+    <FilteredItemViewer TItem="Experiment" 
+                        ItemsProvider="@ExperimentsService.GetFilteredExperimentsProviderByOrg(Organization)" 
+                        SearchPlaceholder="Search experiments...">
+        
+        <ItemTemplate>
+            <NavLink class="exp-item" href="@UrlProvider("/experiments/" + context.Id)">
+                <div class="badge @_FindTheme(context)">
+                    <div>@context.Technique</div>
+                    <div>@context.InstrumentName</div>
+                </div>
+                <span class="sample">@context.SecondaryId.Truncate(22)</span> 
+                <span class="names">@context.Operator.Lastname -&gt; @context.User.Lastname <br/>@context.DtCreated.HappenAgo()</span>
+            </NavLink>
+        </ItemTemplate>
+
+    </FilteredItemViewer>
+    
+    @* Render selected item in main panel *@
+    <div class="experiment-view-container">
+        <NullAware Value="@_selectedExperiment">
+            <WhenReady>
+                <ExperimentView Exp="context"></ExperimentView>
+            </WhenReady>
+            
+            <WhenNull>
+                <span>No experiment selected</span>
+            </WhenNull>
+        </NullAware>
+    </div>
+</div>
+
+
+@code {
+
+    private Experiment? _selectedExperiment;
+    
+    [Parameter]
+    public Guid ExperimentId { get; set; }
+
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        Logger.LogTrace("! Set params async, {@Parameters}, {@ParamsOriginal}", parameters.ToDictionary(), parameters);
+        return base.SetParametersAsync(parameters);
+    }
+    
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (ExperimentId != default)
+        {
+            Logger.LogTrace("Loading experiment {ExperimentId}...", ExperimentId);
+            _selectedExperiment = await ExperimentsService.GetExperimentAsync(ExperimentId);
+            Logger.LogTrace("Selected/loaded experiment {ExperimentId}... {}", _selectedExperiment.SecondaryId, _selectedExperiment.Id);
+        }
+    }
+
+    private string _FindTheme(Experiment experiment)
+    {
+        var instjobs = ExperimentsOptions.Get(Organization).InstrumentJobs;
+        // Find instrument
+        var instjob = instjobs.First(kv => kv.Key.Name == experiment.InstrumentName);
+        return instjob.Key.DisplayTheme;
+        
+        // TODO - also consider technique theme ?
+        // Find technique
+        // instjob.Value.TryGetValue(experiment.Technique, out var technique);
+    } 
+    
+    // private ItemsRenderer<Experiment>? _itemsRendererRef;
+
+}

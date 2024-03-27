@@ -1,0 +1,16 @@
+@inherits ToolTip
+@typeparam TContext
+
+@if (ShowIf && CtxChildContent is not null)
+{
+    <div class="tt-slave">@CtxChildContent(Ctx)</div>
+}
+
+@code {
+    
+    [Parameter]
+    public TContext? Ctx { get; set; }
+    
+    [Parameter]
+    public RenderFragment<TContext?>? CtxChildContent { get; set; }
+}

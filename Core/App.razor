@@ -1,0 +1,125 @@
+﻿@* Main entry component of the application  *@
+@* Does routing and provides organization and current user context to nested components *@
+@* Does top level page authorization based on global or organization-specific configuration *@
+
+@inject IOptionsMonitor<MainGuiOptions> Options
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject AppUserManager AppUserManager
+@inject IOrganizationProvider OrganizationProvider
+
+<Router AppAssembly="@typeof(AppOptions).Assembly">
+    <Found Context="routeData">
+        @if (_ready)
+        {
+            var componentContext = _GetOrganizationComponentContext(routeData);
+            var orgSpecified = _GetOrganizationIdFromRoute(routeData) is not null;
+            
+            @if (componentContext.Organization is null && orgSpecified)
+            {
+                // Organization requested but not found, in that case, use not found component as well
+                <DynamicComponent Type="@Options.CurrentValue.NotFoundComponent"></DynamicComponent>
+            }
+            else
+            {
+                // All good, lets render normally
+                <CascadingAuthenticationState>
+                    <CascadingValue TValue="OrganizationComponentContext" Value="@componentContext" IsFixed="@true">
+
+                        <AuthorizeViewByRequirements Requirements="@_GetPageAuthorizationRequirements(routeData).ToArray()">
+                            <Authorized>
+                                <RouteView RouteData="routeData"
+                                           DefaultLayout="@Options.CurrentValue.DefaultLayoutComponent"/>
+                            </Authorized>
+
+                            <NotAuthorized>
+                                <DynamicComponent Type="@Options.CurrentValue.UnauthorizedComponent"/>
+                            </NotAuthorized>
+                        </AuthorizeViewByRequirements>
+
+                    </CascadingValue>
+                </CascadingAuthenticationState>
+            }
+        }
+
+    </Found>
+    
+    <NotFound>
+        <DynamicComponent Type="@Options.CurrentValue.NotFoundComponent"></DynamicComponent>
+    </NotFound>
+</Router>
+
+@code {
+
+    private ClaimsPrincipal _cp = null!;
+    private AppUser? _user;
+
+    private bool _ready = false;
+
+    // protected override bool ShouldRender() => _ready;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Get authenticated claims principal
+        var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        _cp = authenticationState.User;
+        // From that, see if our user is logged in
+        _user = await AppUserManager.FindByCpAsync(_cp);
+        // We have enough info and can render
+        _ready = true;
+    }
+
+    private string? _GetOrganizationIdFromRoute(RouteData routeData)
+    {
+        routeData.RouteValues.TryGetValue("OrganizationId", out var tmporgId);
+        return tmporgId?.ToString();
+    }
+    
+    private IEnumerable<IAuthorizationRequirement> _GetPageAuthorizationRequirements(RouteData routeData)
+    {
+        // By default, we use global configuration of gui
+        var guiOpts = Options.CurrentValue;
+        // However, if we have an organization, we use that instead
+        IOrganization? org = null;
+
+        var orgid = _GetOrganizationIdFromRoute(routeData);
+        if (orgid is not null)
+        {
+            org = OrganizationProvider.GetFromString(orgid);
+            Debug.Assert(org is not null); // We are sure now that the organization exists
+            guiOpts = Options.Get(org);
+        }
+        
+        // Determine name of page/module
+        var modName = routeData.PageType.Name.Replace("Page", "").ToLower();
+        
+        // Now we have everything to determine authorization requirements
+        // We search for this module in options and see if it requires some auth
+        var modOpts = guiOpts.Modules.GetValueOrDefault(modName);
+        if (modOpts is not null)
+        {
+            foreach (var authorizationRequirement in modOpts.GetAuthorizationRequirements(org))
+            {
+                yield return authorizationRequirement;
+            }
+        }
+    }
+    
+    private OrganizationComponentContext _GetOrganizationComponentContext(RouteData routeData)
+    {
+        // Find organization from route data
+        var organizationId = _GetOrganizationIdFromRoute(routeData);
+        
+        if (organizationId is not null)
+        {
+            var organization = OrganizationProvider.GetFromStringOrDefault(organizationId);
+            if (organization is not null)
+            {
+                string UrlProvider(string url) => $"/{organization.LinkId}/{url.TrimStart('/')}";
+                return new OrganizationComponentContext(organization, _cp, _user, UrlProvider);
+            }
+        }
+
+        return new OrganizationComponentContext(null, _cp, _user, x => x);
+    }
+
+}

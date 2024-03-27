@@ -1,0 +1,24 @@
+@inject IOptions<AppOptions> AppOptions
+@inject NavigationManager NavigationManager
+
+<AuthorizeView>
+    <Authorized>
+        <div class="container mt-2">
+            <div class="alert alert-danger">
+                <p>Unauthorized to use this page, <NavLink href="/">Go Home</NavLink></p>
+            </div>
+        </div>
+    </Authorized>
+    
+    <NotAuthorized>
+        <div class="container mt-3">
+            <Login ReturnUrl="@NavigationManager.Uri"></Login>    
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+    
+    
+
+@code {
+    
+}

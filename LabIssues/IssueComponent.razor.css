@@ -1,0 +1,67 @@
+.issue {
+    padding: 0.7rem 1rem;
+    display: flex;
+    width: 100%;
+    border: 1px solid #000000;
+    margin-bottom: -1px;
+    text-decoration: none!important;
+    color: black;
+}
+
+.issue > div {
+    white-space: nowrap;
+    overflow: hidden;
+    flex: 0 0 7rem;
+    margin: 0 0.5rem;
+}
+
+/*.issue:not([selected]):hover > div {*/
+/*    white-space: pre-line;*/
+/*}*/
+
+.issue:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #0c63e4!important;
+}
+
+.issue[selected] {
+    background-color: #0c63e4!important;
+    color:white;
+}
+
+.issue > div:nth-child(3) {
+    flex-basis: 20rem;
+}
+
+.issue > div:nth-child(4) {
+    flex-basis: 10rem;
+}
+
+
+.issue > div:nth-child(5),
+.issue > div:nth-child(6) {
+    flex-grow: 1;
+}
+
+
+.issue.status-Initiated {
+    background-color: #ececec;
+}
+
+.issue.status-InProgress.urgency-Low {
+    background-color: #e3e397;
+}
+
+.issue.status-InProgress.urgency-Medium {
+    background-color: #e1b177;
+}
+
+.issue.status-InProgress.urgency-High {
+    background-color: #e58d8d;
+}
+
+.issue.status-Resolved {
+    background-color: #b3e8b3;
+}
+

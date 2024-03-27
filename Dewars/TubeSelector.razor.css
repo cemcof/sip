@@ -1,0 +1,24 @@
+.tube-selector-container {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+.tube-selector-container > div {
+    margin: 0.5rem 0;
+}
+
+.tube-selector-container ::deep svg.dewar-svg {
+    
+}
+
+.tube-selector-container ::deep svg.holder-svg {
+    height: 80%;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+

@@ -1,0 +1,27 @@
+@inherits CInputBase<bool>
+<div class="cinput-container ccheckbox-container rendering-strategy-@(RenderingStrategy) @(IsRequired ? "required" : "")">
+    
+    @if (HasLabel)
+    {
+        <div class="clabel-container" style="@GetFlexStyleForIndex(0)"></div>
+    }
+    
+    <div class="cinput-input-container" style="@GetFlexStyleForIndex(1)">
+        <input type="checkbox" readonly="@IsReadonly" disabled="@IsDisabled" @bind="CurrentValue" id="@InputId"/>
+        @if (!string.IsNullOrEmpty(DisplayName))
+        {
+            <CLabelAndTip Id="@InputId" CssClass="form-check-label">@DisplayName</CLabelAndTip>
+        }
+    </div>
+
+
+    <div class="invalid-feedback">
+        <ValidationMessage For="ValueExpression"></ValidationMessage>
+    </div>
+
+</div>        
+
+@code {
+    protected override bool TryParseValueFromString(string? value, out bool result, [NotNullWhen(false)] out string? validationErrorMessage)
+        => throw new NotSupportedException($"This component does not parse string inputs. Bind to the '{nameof(CurrentValue)}' property, not '{nameof(CurrentValueAsString)}'.");
+}

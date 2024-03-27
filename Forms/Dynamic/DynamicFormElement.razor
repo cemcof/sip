@@ -1,0 +1,302 @@
+@using System.Collections
+@using System.Linq.Expressions
+@using sip.Utils
+@using YamlDotNet.Core.Tokens
+@inject IFilesystemProvider FilesystemProvider
+@inject ILogger<DynamicFormElement> Logger
+
+@if (_renderMode is RenderMode.Input && string.IsNullOrEmpty(_error) && _componentType is not null)
+{
+    <DynamicComponent Type="@_componentType" Parameters="@_componentParamsProvider()"></DynamicComponent>
+}
+
+@if (RenderError && !string.IsNullOrEmpty(_error))
+{
+    <div class="error">Error: @_error</div>
+}
+
+@code {
+
+    public enum RenderMode
+    {
+        // Do not render this item at all
+        None,
+        // Render this item but just show the value, do not render any editable input
+        Info,
+        // Render this as an input (can be further disabled by Readonly setting)
+        Input
+    }
+    
+    // ============ Key configuration constant names ==============
+    const string PARAM_MAX = "Max";    
+    const string PARAM_MIN = "Min";
+    public const string PARAM_DEFAULT = "Default";
+    const string PARAM_READONLY = "IsReadonly";
+    const string PARAM_REQUIRED = "IsRequired";
+    public const string PARAM_DISPLAYNAME = "DisplayName";
+    public const string PARAM_TYPE = "Type";
+    const string PARAM_UNIT = "Unit";
+    const string PARAM_SCOPE = "Scope";
+    const string PARAM_FLEX = "Flex";
+    const string PARAM_SELECTION = "Selection";
+    const string PARAM_RENDER_MODE = "Render";
+    const string PARAM_TIP = "Tip";
+
+    // ============== For creating dummy ValueExpression ==============
+    // There might be an option to to this better that I am not yet aware of 
+    public String StringValueBinder { get; set; } = string.Empty;
+    public Boolean BooleanValueBinder { get; set; }
+
+    public Byte ByteValueBinder { get; set; }
+    public Int16 Int16ValueBinder { get; set; }
+    public Int32 Int32ValueBinder { get; set; }
+    public Int64 Int64ValueBinder { get; set; }
+    
+    public Single SingleValueBinder { get; set; }
+    public Double DoubleValueBinder { get; set; }
+    public List<string> StringListValueBinder { get; set; } = null!;
+    
+
+    public PropertyInfo GetBinderProperty<TType>()
+    {
+        var targetName = typeof(TType).Name + "ValueBinder";
+        if (typeof(TType) == typeof(List<string>)) targetName = nameof(StringListValueBinder);
+        var prop = GetType().GetProperty(targetName) 
+                   ?? throw new InvalidOperationException($"Cannot find binding property for {typeof(TType).Name}, tried {targetName}");
+        return prop;
+    }
+    // ===============================================================
+
+    [Parameter, EditorRequired]
+    public object Setup { get; set; } = null!;
+
+    [Parameter, EditorRequired]
+    public string Key { get; set; } = null!;
+
+    [Parameter, EditorRequired]
+    public object ValueTarget { get; set; } = new();
+
+    [Parameter]
+    public bool RenderError { get; set; } = true;
+
+    [Parameter]
+    public Func<DynamicFormElement, RenderMode> RenderModeDecider { get; set; }
+        = DisplayNameExplicitRenderModeDecider;
+
+    /// Renders property as input if display name is set explicitly
+    /// Otherwise does not render
+    public static RenderMode DisplayNameExplicitRenderModeDecider(DynamicFormElement dfe)
+    {
+        if (dfe._setup.DisplayName is not null)
+        {
+            return RenderMode.Input;
+        }
+
+        return RenderMode.None;
+    }
+
+        
+
+    [Parameter]
+    public EventCallback<object?> OnValueSet { get; set; }
+    
+    [Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+    
+    private DynamicElementSetup _setup = null!;
+
+    // These are to be prepared for rendering after OnParametersSet
+    private Type? _componentType;
+    private Func<Dictionary<string, object?>> _componentParamsProvider = () => new Dictionary<string, object?>();
+    private RenderMode _renderMode = RenderMode.None;
+    
+    private string? _error = null;
+    
+    protected override void OnParametersSet()
+    {
+        try
+        {
+            // --------- Sanitize parameters and normalize inputs ----------------
+            ArgumentNullException.ThrowIfNull(Key, nameof(Key));
+            ArgumentNullException.ThrowIfNull(ValueTarget, nameof(ValueTarget));
+            ArgumentNullException.ThrowIfNull(Setup, nameof(Setup));
+            
+            var setup = DynamicElementSetup.FromObject(Setup);
+            _setup = setup;
+            
+            // -------- Now prepare component and parameters -----------
+            
+            
+            // Now that we know a type we can infer the component type
+            var compType = setup.Type.Name switch {
+                nameof(String) => typeof(CTextInput),
+                nameof(Boolean) => typeof(CCheckBox),
+                nameof(Byte) => typeof(CNumberInput<Byte>),
+                nameof(Int16) => typeof(CNumberInput<Int16>),
+                nameof(Int32) => typeof(CNumberInput<Int32>),
+                nameof(Int64) => typeof(CNumberInput<Int64>),
+                nameof(Single) => typeof(CNumberInput<Single>),
+                nameof(Double) => typeof(CNumberInput<Double>),
+                _ => null};
+
+            if (compType is null && setup.Type == typeof(List<string>))
+            {
+                // Check if it is a list 
+                compType = typeof(CLineMultiInput);
+            }
+            
+            // -------- Determine render mode -----------
+            _renderMode = RenderModeDecider(this);
+            // Logger.LogDebug("[DynamicComponent: {Key}] Decided on render mode {RenderMode}", Key, _renderMode);
+            if (_renderMode is RenderMode.None)
+            {
+                // Optimization - skip rest if not rendering
+                // However, if we are working with dictionary, set default value to the key if necessary 
+                if (ValueTarget is IDictionary valTargetDict)
+                {
+                    if (!valTargetDict.Contains(Key) || ObjectExtensions.ShouldSetDefault(setup.Default, valTargetDict[Key]))
+                    {
+                        valTargetDict[Key] = setup.Default;
+                    }
+                }
+                
+                return; 
+            }
+
+            if (compType is null)
+            {
+                throw new ArgumentOutOfRangeException(
+                    $"[DynamicComponent: {Key}] Unsupported type to component type mapping: {setup.Type.Name}");
+            }
+            
+            
+            // Now we build up component parameters
+            
+            // Start with creation of binding params
+            var compParams = (Dictionary<string, object?>)GetType()
+                .GetMethod(nameof(PrepareBindParameters), BindingFlags.NonPublic | BindingFlags.Instance)!
+                .MakeGenericMethod(setup.Type)
+                .Invoke(this, null)!;
+            
+            // Now general input params
+            compParams.Add(nameof(CInputBase<object>.Default), setup.Default);
+            compParams.Add(nameof(CInputBase<object>.IsReadonly), setup.IsReadonly);
+            compParams.Add(nameof(CInputBase<object>.IsRequired), setup.IsRequired);
+            compParams.Add(nameof(CInputBase<object>.Flex), setup.Flex);
+            compParams.Add(nameof(CInputBase<object>.Unit), setup.Unit);
+            compParams.Add(nameof(CInputBase<object>.DisplayName), setup.DisplayName);
+            // TODO - ranges
+            // compParams.Add("RangeMin", PickParameter<IConvertible>(PARAM_MIN)?.ToDouble(null));
+            // compParams.Add("RangeMax", PickParameter<IConvertible>(PARAM_MAX)?.ToDouble(null));
+
+        
+            // There are special cases, like filesystem browser, for now hardcode
+            if (setup.SpecifiedType is "folder" or "file")
+            {
+                compType = typeof(FilesystemBrowser);
+                var reqdel = FilesystemProvider; 
+                compParams.Add(nameof(FilesystemBrowser.FileSystemProvider), reqdel);
+                compParams.Add(nameof(FilesystemBrowser.PickFolder), setup.SpecifiedType == "folder");
+                compParams.Add(nameof(FilesystemBrowser.Scope), setup.Scope);
+            }
+            
+            // What about selections? 
+            var selection = setup.Selection;
+            if (selection is not null)
+            {
+                // There is selection, that changes a lot
+                // Basic string selection component (radios)
+                var sel = selection.Cast<object>().Select(x => x.ToString()!).ToList();
+                var itemsProvider = CRadioList<string>.SimpleStringProvider(sel);
+                var dnameMapper = CRadioList<string>.SimpleStringDisplayNameMapper(sel);
+                compType = typeof(CRadioList<string>);
+                compParams.Add(nameof(CRadioList<string>.ItemsProvider), itemsProvider);
+                compParams.Add(nameof(CRadioList<string>.DisplayNameMapper), dnameMapper);
+                if (setup.Type != typeof(string)) 
+                    throw new NotSupportedException($"Other that simple string radio selections not supported, type: {setup.Type.Name}, key: {Key}");
+            }
+            
+            // Pass further additional attributes
+            if (AdditionalAttributes is not null)
+            {
+                // TODO - this way or pass it as whole dictionary?
+                // foreach (var (key, value) in AdditionalAttributes)
+                // {
+                //     compParams.Add(key, value);
+                // }
+                
+                // OR 
+                compParams.Add(nameof(CInputBase<object>.AdditionalAttributes), AdditionalAttributes);
+            }
+            
+            // Finally!
+            _componentType = compType;
+            var safeValuePickMethod = GetType().GetMethod(nameof(SafePickValue), BindingFlags.NonPublic | BindingFlags.Instance)!;
+            
+            _componentParamsProvider = () =>
+            {
+                compParams["Value"] = safeValuePickMethod.MakeGenericMethod(setup.Type).Invoke(this, new[]{ValueTarget, Key});
+                return compParams;
+            };
+            
+            _error = null;
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, "Error during DynamicFormElement setup");
+            _error = e.Message;
+            // throw;
+        }
+    }
+
+
+    
+    
+    private T? SafePickValue<T>(object from, string key)
+    {
+        // TODO - refactor - call directly the extension method
+        return from.SafePickValue<T>(key);
+    }
+
+    private void SafePutValue<T>(object target, string key, T value)
+    {
+        if (target is IDictionary targetDict)
+        {
+            targetDict[key] = value;
+        }
+        else
+        {
+            var prop = target.GetType().GetProperty(key);
+            prop?.SetValue(target, value);
+            Logger.LogDebug("Setting value {} {} on object: {} {} at property {} {}", value, value?.GetType().Name, target, target.GetType().Name, key, prop);
+        }
+    }
+
+    
+
+    
+    
+    private Dictionary<string, object?> PrepareBindParameters<TValue>()
+    {
+        var pars =  new Dictionary<string, object?>
+        {
+            {"Value", SafePickValue<TValue>(ValueTarget, Key)},
+            {"ValueChanged", EventCallback.Factory.Create<TValue>(this, value => SafePutValue(ValueTarget, Key, value))},
+            {
+                "ValueExpression", Expression.Lambda<Func<TValue>>(
+                    Expression.MakeMemberAccess(Expression.Constant(this), GetBinderProperty<TValue>())
+                    )
+            },
+        };
+
+        if (OnValueSet.HasDelegate)
+        {
+            pars.Add(nameof(CInputBase<object>.OnValueSet), EventCallback.Factory.Create<TValue>(this, value => OnValueSet.InvokeAsync(value)));
+        }
+
+        Logger.LogDebug("PrepBindParams {}: {@ValueTarget}", Key, pars); 
+
+        return pars;
+    }
+   
+
+}

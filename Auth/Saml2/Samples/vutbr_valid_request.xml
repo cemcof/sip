@@ -1,0 +1,21 @@
+<samlp:AuthnRequest
+        AssertionConsumerServiceURL="https://stigmator.ceitec.muni.cz/Shibboleth.sso/SAML2/POST"
+        Destination="https://idp.vutbr.cz/saml2/idp/SSOService.php" ID="_94883fc1aa6357e814b128acf1b617f8"
+        IssueInstant="2022-01-22T11:38:38Z" ProtocolBinding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+        Version="2.0" xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol">
+    <saml:Issuer xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">https://stigmator.ceitec.muni.cz/authzone</saml:Issuer>
+    <samlp:NameIDPolicy AllowCreate="1"/>
+</samlp:AuthnRequest>
+
+
+This guy is invalid
+
+<samlp:AuthnRequest xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" 
+                    ID="_b9af341f-3d0b-4a7b-8aec-7b46bd3d5567" 
+                    Version="2.0" 
+                    IssueInstant="2022-04-12T16:40:39Z" 
+                    ProtocolBinding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" 
+                    AssertionConsumerServiceURL="https://aperture.ceitec.muni.cz/Shibboleth.sso/SAML2/POST">
+<saml:Issuer xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">https://aperture.ceitec.muni.cz/shibboleth</saml:Issuer>
+<samlp:NameIDPolicy Format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified" AllowCreate="true"></samlp:NameIDPolicy>
+</samlp:AuthnRequest>

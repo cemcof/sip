@@ -1,0 +1,33 @@
+@using Microsoft.Extensions.Options
+@using sip.Experiments.Samples
+@inject IOptions<SampleOptions> SampleOptions;
+
+
+<VerticalLayout>
+    <CTextInput @ref="_focusCompRef" @bind-Value="@Model.Name" DisplayName="Name"></CTextInput>
+    <CTextInput @bind-Value="@Model.Identifier" DisplayName="Identifier"></CTextInput>
+    
+    <InputAligner Flex="0 0 20%">
+        <CLineMultiInput @bind-Value="@Model.Keywords" DisplayName="Keywords"></CLineMultiInput>
+        <CSingleFileUploader DisplayName="Project proposal" @bind-Value="Model.File" 
+                             TargetDirectory="@SampleOptions.Value.ProposalsFolder"
+                             FilenamePrefix="sample_proposal"></CSingleFileUploader>
+    </InputAligner>
+    
+</VerticalLayout>
+
+@code {
+
+    [Parameter, EditorRequired]
+    public Sample Model { get; set; } = null!;
+    
+    private CTextInput? _focusCompRef;
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && _focusCompRef is not null)
+        {
+            await _focusCompRef.FocusAsync();
+        }
+    }
+}

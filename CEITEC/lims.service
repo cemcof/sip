@@ -1,0 +1,18 @@
+# Target file /etc/systemd/system/lims.service
+
+[Unit]
+Description=LIMS dotnet Kestrel service
+
+[Service]
+WorkingDirectory=<path to lims publish folder>
+ExecStart=<path to dotnet executable, usually /usr/bin/dotnet or /bin/dotnet> <WorkingDirectory>/lims.dll
+Restart=always
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=lims-kestrel
+User=<user under which process will run>
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+
+[Install]
+WantedBy=multi-user.target

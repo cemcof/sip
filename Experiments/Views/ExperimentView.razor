@@ -1,0 +1,199 @@
+@using sip.Experiments.Model
+
+@inject ExperimentEngine ExperimentEngine
+
+<div class="heading-panel d-flex align-items-center justify-content-between">
+    
+    <h1>@Exp.SecondaryId - @Exp.Sample.Name </h1>
+
+    @if (IsHeadlessPage)
+    {
+        // From headless page we can print 
+        <a class="btn btn-primary print-btn" href="javascript:window.print()"><i class="bi bi-printer"></i> Print / PDF</a>
+    }
+    else
+    {
+        <a href="/experiment/@Exp.Id" target="_blank"><i class="bi fs-3 bi-box-arrow-up-right"></i></a>
+    }
+</div>
+
+<hr/>
+
+<div class="d-flex mb-3 justify-content-between align-items-start">
+        
+    <table class="table table-sm table-striped">
+        <tbody>
+            <tr>
+                <th scope="row">Center:</th>
+                <td>@Exp.Organization.Abbreviation</td>
+            </tr>
+            <tr>
+                <th scope="row">Operator:</th>
+                <td>@Exp.Operator.Fullcontact</td>
+            </tr>
+            <tr>
+                <th scope="row">User:</th>
+                <td>@Exp.User.Fullcontact</td>
+            </tr>
+            <tr>
+                <th scope="row">Experiment started:</th>
+                <td>@Exp.DtCreated</td>
+            </tr>
+            <tr>
+                <th scope="row">Instrument:</th>
+                <td>@Exp.InstrumentName</td>
+            </tr>
+            <tr>
+                <th scope="row">Experiment technique:</th>
+                <td>@Exp.Technique</td>
+            </tr>
+            <tr>
+                <th scope="row">Sample:</th>
+                <td>@Exp.Sample.Name</td>
+            </tr>
+            <tr>
+                <th scope="row">Sample keywords:</th>
+                <td>@Exp.Sample.KeywordsStr</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <DataStateCard Exp="Exp" OnPublicationRequest="@((exp) => ExperimentEngine.RequestPublicationAsync(exp))"></DataStateCard>
+</div>
+
+@if (Exp.Storage.State is StorageState.Idle or StorageState.Archived)
+{
+    
+    <section>
+        @if (Exp.Storage.StorageEngine == "irods")
+        {
+            <p>Your dataset has been stored in iRODS cloud. To <strong>download your data</strong>, use our prepared script</p>
+            
+            <p><strong>On Linux <i class="fab fa-linux"></i>  / macOS <i class="fab fa-apple"></i>:</strong></p>
+            
+            <ol>
+                <li>Open terminal and navigate to the directory where you want to download your data</li> 
+                <li>Copy following command, which will download a script that will execute and download the dataset.
+                    <CopiableCode CodeContent="@_GetIrodsFetchUnixOneliner()"></CopiableCode>
+                </li>
+                <li>Paste it to the terminal and hit enter, follow instructions if any</li>
+            </ol>
+            
+            <p><strong>On Windows <i class="bi bi-windows text-primary">:</i></strong></p>
+            
+            <ol>
+                <li>Go to a folder where you want do download your data</li>
+                <li>Hold shift and right click</li>
+                <li>Select "Open Powershell here"</li>
+                <li>Copy following command: 
+                    <CopiableCode CodeContent="@_GetPowershellFetch()"></CopiableCode>
+                </li>
+                <li>Paste it to the powershell window and hit enter, follow instructions if any</li>
+            </ol>
+            
+            @* <div class="access-ways-container"> *@
+            @*     <div class="simple-card"> *@
+            @*         <div class="header">On Windows</div>  *@
+            @*         <div class="body"> *@
+            @*         </div> *@
+            @*     </div> *@
+            @*      *@
+            @*     <div class="simple-card"> *@
+            @*         <div class="header">On Linux/macOS</div> *@
+            @*         <div class="body"> *@
+            @*             <ol> *@
+            @*                 <li>Open terminal and navigate to the directory where you want to download your data</li> *@
+            @*                 <li>Copy following command:  *@
+            @*                     <CopiableCode CodeContent="@_GetIrodsFetchUnixOneliner()"></CopiableCode> *@
+            @*                 </li> *@
+            @*                 <li>Paste it to the terminal and hit enter, follow instructions if any</li> *@
+            @*             </ol> *@
+            @*         </div> *@
+            @*     </div> *@
+            @*      *@
+            @* </div> *@
+            
+        }
+        
+        @if (Exp.Storage.StorageEngine == "fs")
+        {
+            <p>The dataset has been stored at the following location and you can access it provided that you were
+                given credentials (username/password/ssh key) by the facility</p>
+            
+            <code>@Exp.Storage.Target</code>
+                                     
+            <p>
+                <strong>On Windows <i class="bi bi-windows text-primary"></i></strong>, you can use for example <a target="_blank" href="https://winscp.net/">WinSCP <i class="fas fa-arrow-up-right-from-square"></i></a> program to access and copy the data.
+            </p>
+                
+            <p>
+                <strong>On Linux <i class="fab fa-linux"></i>  / macOS <i class="fab fa-apple"></i></strong>, you can use for example the rsync utility:
+                <code>rsync -av --progress [username]@("@")@Exp.Storage.Target .</code>
+            </p>
+                                                                          
+        }
+        
+        
+    </section>
+}
+
+@if (!string.IsNullOrEmpty(Exp.Processing.ProcessingEngine))
+{
+    <section>
+        <h2>Processing results - @Exp.Processing.ProcessingEngine engine</h2>
+        
+        <DocumentPreview style="min-height: 50rem" Document="@Exp.Processing.ResultReport"></DocumentPreview>
+    </section>
+}
+
+
+@code {
+
+    [Parameter]
+    public Experiment Exp { get; set; } = null!;
+
+    [Parameter] public bool IsHeadlessPage { get; set; } = false;
+
+    protected override void OnParametersSet()
+    {
+        if (Exp == null) throw new ArgumentNullException(nameof(Exp));
+    }
+
+    // private string _GetIrodsFetchUnixOneliner()
+    //     => $"curl -sSfL \n " +
+    //        $"\"https://raw.githubusercontent.com/cemcof/cemcof.github.io/main/irods_fetch_unix.sh\" | \n" +
+    //        $"bash -s -- \n " +
+    //        $"--host \"{Exp.Storage.Target}\" \n " +
+    //        $"-t \"{Exp.Storage.Token}\" \n " +
+    //        $"-c \"{Exp.Storage.Path}\"";
+    //
+    private string _GetIrodsFetchUnixOneliner()
+        => $"curl -sSfL \"https://raw.githubusercontent.com/cemcof/cemcof.github.io/main/irods_fetch_unix.sh\" " +
+           $"| bash -s -- --host \"{Exp.Storage.Target}\" -t \"{Exp.Storage.Token}\" -c \"{Exp.Storage.Path}\"";
+
+    private string _GetPowershellFetch()
+        => "Invoke-Command -ScriptBlock ([Scriptblock]::Create((iwr \"https://raw.githubusercontent.com/cemcof/cemcof.github.io/main/irods_fetch_win.ps1\").Content)) " +
+           $"-ArgumentList ($args + @('--host', '{Exp.Storage.Target}', '-t', '{Exp.Storage.Token}', '-c', '{Exp.Storage.Path}'))";
+
+    // Raw string literals multiline not supported in blazor
+
+    // private MarkupString _GetIrodsFetchUnixOneliner()
+    //         => (MarkupString)$"""
+    //            curl -sSfL \
+    //              "https://raw.githubusercontent.com/cemcof/cemcof.github.io/main/irods_fetch_unix.sh" | \
+    //            bash -s -- \
+    //              --host "{Exp.Storage.Target}" \
+    //              -t "{Exp.Storage.Token}" \ 
+    //              -c "{Exp.Storage.Path}"
+    //            """;
+    //         
+    //     private string _GetPowershellFetch()
+    //         => $"""
+    //            curl -sSfL \
+    //              "https://raw.githubusercontent.com/cemcof/cemcof.github.io/main/irods_fetch_unix.sh" | \
+    //            bash -s -- \
+    //              --host "{Exp.Storage.Target}" \
+    //              -t "{Exp.Storage.Token}" \ 
+    //              -c "{Exp.Storage.Path}
+    //            """;
+}

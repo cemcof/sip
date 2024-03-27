@@ -1,0 +1,9 @@
+.interactive-button-container {
+    position: relative;
+    
+}
+
+::deep.tip-content {
+    text-align: center;
+    padding: 0 1rem;
+}

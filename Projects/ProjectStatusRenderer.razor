@@ -1,0 +1,63 @@
+@using sip.Utils
+@using sip.Projects.Statuses
+
+
+<div class="project-status-flow">
+    <div class="status-linecross"></div>
+    @foreach (var sf in StatusFlow)
+    {
+        <div class="status-flow-item @GetStatusState(sf)">
+            
+            <div class="status-name" title="@sf.Description">@sf.DisplayName</div>
+            
+            <div class="status-marker-container">
+                
+                <div class="status-marker-start"></div>
+                <div class="status-marker"></div>
+                <div class="status-marker-end"></div>
+                
+            </div>
+            
+            <div class="status-organizations">
+                @foreach (var stus in Statuses.Where(s => s.StatusInfo == sf).DistinctBy(s => s.Organization))
+                {
+                    <div class="status-org-info" title="Entered @stus.DtEntered.StandardFormat(), Left @stus.DtLeft.StandardFormat()">
+                        @stus.Organization.Abbreviation 
+                        
+                        @if (stus.DtEntered != default)
+                        {
+                            <span class="small">&nbsp;@stus.DtEntered.StandardFormat()</span>
+                        }
+                    </div>
+                }
+            </div>
+            
+        </div>
+    }
+    
+</div>
+
+@code {
+
+    [Parameter]
+    public List<Status> Statuses { get; set; } = new();
+
+    [Parameter]
+    public List<StatusInfo> StatusFlow { get; set; } = new();
+
+    private string GetStatusState(StatusInfo statusInfo)
+    {
+        if (Statuses.Any(s => s.StatusInfo == statusInfo && s.Active))
+        {
+            return "active";
+        }
+        
+        // Status that is no longer used but was used
+        if (Statuses.Where(s => s.StatusInfo == statusInfo)
+            .All(s => !s.Active && s.DtLeft != default))
+            return "used";
+
+        return "default";
+    }
+
+}

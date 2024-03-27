@@ -1,0 +1,19 @@
+# Target file /etc/systemd/system/lims-staging.service
+
+[Unit]
+Description=LIMS staging dotnet Kestrel service
+
+[Service]
+WorkingDirectory=/home/emcf/lims-staging/lims/lims/bin/Debug/net6.0/
+ExecStart=/usr/bin/dotnet lims.dll --environment Staging
+Restart=always
+# Restart service after 10 seconds if the dotnet service crashes:
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=lims-staging-kestrel
+User=emcf
+Environment=ASPNETCORE_ENVIRONMENT=Staging
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+
+[Install]
+WantedBy=multi-user.target

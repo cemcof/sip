@@ -1,0 +1,5724 @@
+DtDataGathered: '2021-10-23T20:44:56Z' 
+Instruments:
+- colour: '#6ab04c'
+  name: Titan Krios
+  reservations:
+  - _ge_realised_for_contactid_value: d9ffa3f7-eddf-eb11-80cb-005056914121
+    _ge_res_groupid_value: e174bdca-c3db-e611-9f54-005056991551
+    _psa_projectid_value: c2ffa3f7-eddf-eb11-80cb-005056914121
+    activityid: 6c087314-4234-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-10-23T20:44:56Z'
+    customer:
+    - "Ka\u0161\u010D\xE1kov\xE1"
+    - Barbora
+    modifiedon: '2021-10-23T20:44:56Z'
+    project: '#UID: c2ffa3f7-eddf-eb11-80cb-005056914121'
+    research_group: '#UID: e174bdca-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-10-27T07:00:00Z'
+    scheduledstart: '2021-10-26T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262523/EA-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8901daf2-b855-e211-970b-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 256cfbc9-76ae-eb11-80cb-005056914121
+    activityid: 093dd41a-4234-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-10-23T20:45:14Z'
+    customer:
+    - Kabzinski
+    - Tomasz
+    modifiedon: '2021-10-23T20:45:14Z'
+    project: '#UID: 256cfbc9-76ae-eb11-80cb-005056914121'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-10-28T07:00:00Z'
+    scheduledstart: '2021-10-27T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262524/RG-3-10
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: f6bfbb08-b4dc-e611-9f54-005056991551
+    activityid: b1919ab6-b133-eb11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2020-12-01T08:46:40Z'
+    customer:
+    - Babiak
+    - Michal
+    description: CryoCycle
+    modifiedon: '2021-10-25T08:46:35Z'
+    project: CEMCOF - service
+    research_group: CEMCOF
+    scheduledend: '2021-10-31T22:59:00Z'
+    scheduledstart: '2021-10-30T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-214703/CF-06
+    subtype: Maintenance / Udrzba
+  - _ge_realised_for_contactid_value: 93326661-c428-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: 613423b6-a23a-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-10-31T23:31:46Z'
+    customer:
+    - Bauda
+    - Elda
+    modifiedon: '2021-11-02T04:52:14Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-11-04T08:00:00Z'
+    scheduledstart: '2021-11-01T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263460/EA-Z
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 7ca07002-e109-ea11-80ca-005056914121
+    _ge_res_groupid_value: e174bdca-c3db-e611-9f54-005056991551
+    _psa_projectid_value: d7a01e7c-9aeb-ea11-80cb-005056914121
+    activityid: 8c30b3c6-0825-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-10-04T11:47:07Z'
+    customer:
+    - Zoll
+    - Sebastian
+    modifiedon: '2021-11-08T11:20:29Z'
+    project: '#UID: d7a01e7c-9aeb-ea11-80cb-005056914121'
+    research_group: '#UID: e174bdca-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-09T08:00:00Z'
+    scheduledstart: '2021-11-04T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-259170/EA-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 00ee8c9b-416f-e611-9f54-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: aae7773a-9dd3-e911-80ca-005056914121
+    activityid: 84223df4-8540-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-11-08T11:21:02Z'
+    customer:
+    - Wilson
+    - Daniel
+    modifiedon: '2021-11-08T11:21:02Z'
+    project: '#UID: aae7773a-9dd3-e911-80ca-005056914121'
+    research_group: CEMCOF
+    scheduledend: '2021-11-11T08:00:00Z'
+    scheduledstart: '2021-11-09T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264910/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 1d08daf2-b855-e211-970b-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: 69bf66ae-00e3-e611-9f54-005056991551
+    activityid: a430bee9-7840-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-11-08T09:47:42Z'
+    customer:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    modifiedon: '2021-11-08T09:47:42Z'
+    project: CEMCOF - service - downtime
+    research_group: CEMCOF
+    scheduledend: '2021-11-12T08:00:00Z'
+    scheduledstart: '2021-11-11T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264853/CF-06
+    subtype: Service / Servis
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 4b47c18d-6735-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-10-25T07:45:46Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-11-08T09:46:32Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-12T14:00:00Z'
+    scheduledstart: '2021-11-12T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262620/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 93326661-c428-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: 8d4c7e0e-8640-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-11-08T11:21:51Z'
+    customer:
+    - Bauda
+    - Elda
+    modifiedon: '2021-11-11T18:23:50Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-11-13T20:00:00Z'
+    scheduledstart: '2021-11-12T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264912/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: f6bfbb08-b4dc-e611-9f54-005056991551
+    activityid: c3919ab6-b133-eb11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2020-12-01T08:46:41Z'
+    customer:
+    - Babiak
+    - Michal
+    description: CryoCycle
+    modifiedon: '2021-11-08T11:21:21Z'
+    project: CEMCOF - service
+    research_group: CEMCOF
+    scheduledend: '2021-11-14T22:59:00Z'
+    scheduledstart: '2021-11-13T20:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-214704/CF-06
+    subtype: Maintenance / Udrzba
+  - _ge_realised_for_contactid_value: 57fa37f7-d55b-e211-970b-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 4f6820ae-0ce2-e511-9f54-005056991551
+    activityid: 8ad52ae1-622a-ec11-80cb-005056914121
+    createdby:
+    - Plevka
+    - Pavel
+    createdon: '2021-10-11T07:14:38Z'
+    customer:
+    - Plevka
+    - Pavel
+    modifiedon: '2021-11-08T11:22:55Z'
+    project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-11-19T08:00:00Z'
+    scheduledstart: '2021-11-15T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-260303/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 00ee8c9b-416f-e611-9f54-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: aae7773a-9dd3-e911-80ca-005056914121
+    activityid: 7e8bc349-8640-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-11-08T11:23:25Z'
+    customer:
+    - Wilson
+    - Daniel
+    modifiedon: '2021-11-08T11:23:25Z'
+    project: '#UID: aae7773a-9dd3-e911-80ca-005056914121'
+    research_group: CEMCOF
+    scheduledend: '2021-11-22T08:00:00Z'
+    scheduledstart: '2021-11-19T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264914/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 57fa37f7-d55b-e211-970b-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 4f6820ae-0ce2-e511-9f54-005056991551
+    activityid: 3b51eee1-2537-ec11-80cb-005056914121
+    createdby:
+    - Plevka
+    - Pavel
+    createdon: '2021-10-27T13:00:41Z'
+    customer:
+    - Plevka
+    - Pavel
+    modifiedon: '2021-10-27T13:00:41Z'
+    project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-11-25T08:00:00Z'
+    scheduledstart: '2021-11-22T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263148/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: c8cd1aa2-6735-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-10-25T07:46:20Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-10-25T07:46:20Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-26T08:00:00Z'
+    scheduledstart: '2021-11-25T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262621/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 58f0073d-2550-eb11-80cb-005056914121
+    _ge_res_groupid_value: e174bdca-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 41f0073d-2550-eb11-80cb-005056914121
+    activityid: 4ce747e8-c838-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-10-29T15:00:09Z'
+    customer:
+    - Rozbesky
+    - Daniel
+    modifiedon: '2021-10-29T15:00:09Z'
+    project: '#UID: 41f0073d-2550-eb11-80cb-005056914121'
+    research_group: '#UID: e174bdca-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-27T20:00:00Z'
+    scheduledstart: '2021-11-26T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263373/EA-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: f6bfbb08-b4dc-e611-9f54-005056991551
+    activityid: d5919ab6-b133-eb11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2020-12-01T08:46:42Z'
+    customer:
+    - Babiak
+    - Michal
+    description: CryoCycle
+    modifiedon: '2021-10-29T14:59:43Z'
+    project: CEMCOF - service
+    research_group: CEMCOF
+    scheduledend: '2021-11-28T22:59:00Z'
+    scheduledstart: '2021-11-27T20:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-214705/CF-06
+    subtype: Maintenance / Udrzba
+  - _ge_realised_for_contactid_value: 987f5ec9-9343-e911-80c4-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 4f6820ae-0ce2-e511-9f54-005056991551
+    activityid: f481b78d-183e-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-11-05T09:12:58Z'
+    customer:
+    - Kouba
+    - "Tom\xE1\u0161"
+    modifiedon: '2021-11-05T09:12:58Z'
+    project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    research_group: external academic - foreign
+    scheduledend: '2021-12-01T08:00:00Z'
+    scheduledstart: '2021-11-29T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264531/EA-Z
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: a4baa6d5-b684-ea11-80ca-005056914121
+    _ge_res_groupid_value: e174bdca-c3db-e611-9f54-005056991551
+    _psa_projectid_value: d7df1482-3de2-ea11-80cb-005056914121
+    activityid: 38fbba40-d946-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-11-16T12:32:25Z'
+    customer:
+    - "Nedv\u011Bdov\xE1"
+    - Jana
+    modifiedon: '2021-11-16T12:32:26Z'
+    project: '#UID: d7df1482-3de2-ea11-80cb-005056914121'
+    research_group: '#UID: e174bdca-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-12-06T08:00:00Z'
+    scheduledstart: '2021-12-01T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266468/EA-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 0704daf2-b855-e211-970b-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 69e14f71-cbfd-e211-b8a6-005056991551
+    activityid: 6aa37e91-bd43-ec11-80cb-005056914121
+    createdby:
+    - "Kub\xED\u010Dek"
+    - Karel
+    createdon: '2021-11-12T13:36:42Z'
+    customer:
+    - "Kub\xED\u010Dek"
+    - Karel
+    description: dicer
+    modifiedon: '2021-11-12T13:37:35Z'
+    project: '#UID: 69e14f71-cbfd-e211-b8a6-005056991551'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-12-10T15:00:00Z'
+    scheduledstart: '2021-12-06T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265959/RG-3-10
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: f6bfbb08-b4dc-e611-9f54-005056991551
+    activityid: c0da92bc-b133-eb11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2020-12-01T08:46:45Z'
+    customer:
+    - Babiak
+    - Michal
+    description: CryoCycle
+    modifiedon: '2020-12-01T08:46:45Z'
+    project: CEMCOF - service
+    research_group: CEMCOF
+    scheduledend: '2021-12-12T22:59:00Z'
+    scheduledstart: '2021-12-10T15:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-214706/CF-06
+    subtype: Maintenance / Udrzba
+  - _ge_realised_for_contactid_value: 57fa37f7-d55b-e211-970b-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 4f6820ae-0ce2-e511-9f54-005056991551
+    activityid: afe1b588-9d45-ec11-80cb-005056914121
+    createdby:
+    - Plevka
+    - Pavel
+    createdon: '2021-11-14T22:52:28Z'
+    customer:
+    - Plevka
+    - Pavel
+    modifiedon: '2021-11-14T22:52:29Z'
+    project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-12-18T08:00:00Z'
+    scheduledstart: '2021-12-13T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266111/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 0704daf2-b855-e211-970b-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 69e14f71-cbfd-e211-b8a6-005056991551
+    activityid: 88dec716-2746-ec11-80cb-005056914121
+    createdby:
+    - "Kub\xED\u010Dek"
+    - Karel
+    createdon: '2021-11-15T15:17:06Z'
+    customer:
+    - "Kub\xED\u010Dek"
+    - Karel
+    description: dicer
+    modifiedon: '2021-11-15T15:17:33Z'
+    project: '#UID: 69e14f71-cbfd-e211-b8a6-005056991551'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-12-20T08:00:00Z'
+    scheduledstart: '2021-12-17T13:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266309/RG-3-10
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 57fa37f7-d55b-e211-970b-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 4f6820ae-0ce2-e511-9f54-005056991551
+    activityid: f5248bad-1a46-ec11-80cb-005056914121
+    createdby:
+    - Plevka
+    - Pavel
+    createdon: '2021-11-15T13:48:16Z'
+    customer:
+    - Plevka
+    - Pavel
+    modifiedon: '2021-11-15T13:48:16Z'
+    project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-12-23T08:00:00Z'
+    scheduledstart: '2021-12-20T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266285/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 00ee8c9b-416f-e611-9f54-005056991551
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: aae7773a-9dd3-e911-80ca-005056914121
+    activityid: dc6e2969-d846-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-11-16T12:26:24Z'
+    customer:
+    - Wilson
+    - Daniel
+    modifiedon: '2021-11-16T12:26:24Z'
+    project: '#UID: aae7773a-9dd3-e911-80ca-005056914121'
+    research_group: external academic - foreign
+    scheduledend: '2021-12-27T08:00:00Z'
+    scheduledstart: '2021-12-23T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266466/EA-Z
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 0704daf2-b855-e211-970b-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 69e14f71-cbfd-e211-b8a6-005056991551
+    activityid: 76bd1858-2746-ec11-80cb-005056914121
+    createdby:
+    - "Kub\xED\u010Dek"
+    - Karel
+    createdon: '2021-11-15T15:18:54Z'
+    customer:
+    - "Kub\xED\u010Dek"
+    - Karel
+    description: Dicer
+    modifiedon: '2021-11-15T15:18:54Z'
+    project: '#UID: 69e14f71-cbfd-e211-b8a6-005056991551'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-12-30T08:00:00Z'
+    scheduledstart: '2021-12-27T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266310/RG-3-10
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 1d08daf2-b855-e211-970b-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: f6bfbb08-b4dc-e611-9f54-005056991551
+    activityid: 83538382-d846-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-11-16T12:27:10Z'
+    customer:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    modifiedon: '2021-11-16T12:27:10Z'
+    project: CEMCOF - service
+    research_group: CEMCOF
+    scheduledend: '2022-01-06T08:00:00Z'
+    scheduledstart: '2021-12-30T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266467/CF-06
+    subtype: Measurement
+- colour: '#00a8ff'
+  name: Talos Arctica
+  reservations:
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: 39f34192-7532-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-10-21T13:48:39Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-10-21T13:48:39Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-10-25T10:30:00Z'
+    scheduledstart: '2021-10-25T05:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262231/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 7ca07002-e109-ea11-80ca-005056914121
+    _ge_res_groupid_value: e174bdca-c3db-e611-9f54-005056991551
+    activityid: 02b78d4c-4b03-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-08-22T13:17:29Z'
+    customer:
+    - Zoll
+    - Sebastian
+    modifiedon: '2021-10-26T10:01:19Z'
+    project: '-'
+    research_group: '#UID: e174bdca-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-10-25T16:00:00Z'
+    scheduledstart: '2021-10-25T10:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-252566/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ae43a5cf-d993-e511-88d0-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: fd6debab-0f1f-e311-8a73-005056991551
+    activityid: 399f20b5-4336-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-26T10:01:42Z'
+    customer:
+    - Zapletal
+    - David
+    modifiedon: '2021-10-26T10:01:42Z'
+    project: '#UID: fd6debab-0f1f-e311-8a73-005056991551'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-10-25T20:30:00Z'
+    scheduledstart: '2021-10-25T16:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262905/RG-3-10
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 0ed819c2-4336-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-26T10:01:59Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-26T10:02:12Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-10-26T08:00:00Z'
+    scheduledstart: '2021-10-25T20:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262907/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: d7463ddb-f00a-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-01T06:50:18Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-01T06:50:19Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-10-26T12:00:00Z'
+    scheduledstart: '2021-10-26T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-253945/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d6cbbbdd-4c81-e711-aa46-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: a1d62e85-90c9-e911-80ca-005056914121
+    activityid: 3dfe0e97-8331-ec11-80cb-005056914121
+    createdby:
+    - Homola
+    - Miroslav
+    createdon: '2021-10-20T08:56:19Z'
+    customer:
+    - Homola
+    - Miroslav
+    description: ehux cell walls
+    modifiedon: '2021-10-20T08:56:19Z'
+    project: Structural characterization of Marine Virus
+    research_group: Structural Virology
+    scheduledend: '2021-10-26T17:00:00Z'
+    scheduledstart: '2021-10-26T12:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-261968/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: dc8ad7bb-a57a-e811-80c2-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    activityid: 22c9c44d-4036-ec11-80cb-005056914121
+    createdby:
+    - "Valentov\xE1"
+    - Lucie
+    createdon: '2021-10-26T09:37:20Z'
+    customer:
+    - "Valentov\xE1"
+    - Lucie
+    modifiedon: '2021-10-26T09:37:59Z'
+    project: '-'
+    research_group: Structural Virology
+    scheduledend: '2021-10-27T08:00:00Z'
+    scheduledstart: '2021-10-27T05:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262891/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 1d185425-a0be-e711-af01-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    activityid: 533487f2-322c-ec11-80cb-005056914121
+    createdby:
+    - "\u0160kubn\xEDk"
+    - Karel
+    createdon: '2021-10-13T14:36:28Z'
+    customer:
+    - "\u0160ebesta"
+    - Marek
+    modifiedon: '2021-10-27T16:24:49Z'
+    project: '-'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-10-29T07:00:00Z'
+    scheduledstart: '2021-10-27T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-260856/RG-3-10
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: bf112bbd-ee36-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-10-27T06:26:01Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-10-29T13:15:36Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-10-29T13:30:00Z'
+    scheduledstart: '2021-10-29T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263041/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d6cbbbdd-4c81-e711-aa46-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: a1d62e85-90c9-e911-80ca-005056914121
+    activityid: 3260d959-0737-ec11-80cb-005056914121
+    createdby:
+    - Homola
+    - Miroslav
+    createdon: '2021-10-27T09:22:08Z'
+    customer:
+    - Homola
+    - Miroslav
+    modifiedon: '2021-10-27T09:22:08Z'
+    project: Structural characterization of Marine Virus
+    research_group: Structural Virology
+    scheduledend: '2021-11-01T14:00:00Z'
+    scheduledstart: '2021-11-01T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263097/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 7ca07002-e109-ea11-80ca-005056914121
+    _ge_res_groupid_value: e174bdca-c3db-e611-9f54-005056991551
+    activityid: bb7c1f59-fa41-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-11-10T07:46:44Z'
+    customer:
+    - Zoll
+    - Sebastian
+    modifiedon: '2021-11-10T07:46:57Z'
+    project: '-'
+    research_group: '#UID: e174bdca-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-01T16:00:00Z'
+    scheduledstart: '2021-11-01T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265372/EA-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: ff412223-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:05:13Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-11-10T07:46:00Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-01T21:00:00Z'
+    scheduledstart: '2021-11-01T16:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262496/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: e9463ddb-f00a-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-01T06:50:19Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-11-01T14:34:19Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-02T12:00:00Z'
+    scheduledstart: '2021-11-02T07:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-253946/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: dc8ad7bb-a57a-e811-80c2-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    activityid: 9027a4dc-1237-ec11-80cb-005056914121
+    createdby:
+    - "Valentov\xE1"
+    - Lucie
+    createdon: '2021-10-27T10:44:31Z'
+    customer:
+    - "Valentov\xE1"
+    - Lucie
+    modifiedon: '2021-11-01T14:39:22Z'
+    project: '-'
+    research_group: Structural Virology
+    scheduledend: '2021-11-02T16:00:00Z'
+    scheduledstart: '2021-11-02T12:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263115/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: cde19524-1e42-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-11-10T12:03:02Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-11-10T12:03:02Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-02T19:30:00Z'
+    scheduledstart: '2021-11-02T16:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265475/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 7ffbd9f2-b855-e211-970b-005056991551
+    _ge_res_groupid_value: 53d6832d-b120-ea11-80ca-005056914121
+    activityid: 09dad79e-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:08:35Z'
+    customer:
+    - Demo
+    - Gabriel
+    modifiedon: '2021-11-10T12:02:44Z'
+    project: '-'
+    research_group: Structural Biology of Coupled Transcription-Translation
+    scheduledend: '2021-11-03T08:00:00Z'
+    scheduledstart: '2021-11-02T19:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262520/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 1d185425-a0be-e711-af01-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    activityid: 8900aa9c-2637-ec11-80cb-005056914121
+    createdby:
+    - "\u0160kubn\xEDk"
+    - Karel
+    createdon: '2021-10-27T13:05:59Z'
+    customer:
+    - "\u0160ebesta"
+    - Marek
+    modifiedon: '2021-10-27T13:05:59Z'
+    project: '-'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-11-04T07:00:00Z'
+    scheduledstart: '2021-11-03T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263149/RG-3-10
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d6cbbbdd-4c81-e711-aa46-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: a1d62e85-90c9-e911-80ca-005056914121
+    activityid: 551e8646-0737-ec11-80cb-005056914121
+    createdby:
+    - Homola
+    - Miroslav
+    createdon: '2021-10-27T09:21:37Z'
+    customer:
+    - Homola
+    - Miroslav
+    modifiedon: '2021-10-27T09:21:37Z'
+    project: Structural characterization of Marine Virus
+    research_group: Structural Virology
+    scheduledend: '2021-11-04T14:00:00Z'
+    scheduledstart: '2021-11-04T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263096/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 759b3e3f-741b-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-22T07:11:04Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-22T07:11:04Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-04T19:00:00Z'
+    scheduledstart: '2021-11-04T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-257276/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: dc8ad7bb-a57a-e811-80c2-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    activityid: b06bda4f-2c37-ec11-80cb-005056914121
+    createdby:
+    - "Valentov\xE1"
+    - Lucie
+    createdon: '2021-10-27T13:46:43Z'
+    customer:
+    - "Valentov\xE1"
+    - Lucie
+    modifiedon: '2021-10-27T13:46:43Z'
+    project: '-'
+    research_group: Structural Virology
+    scheduledend: '2021-11-05T07:00:00Z'
+    scheduledstart: '2021-11-05T04:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263168/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: a363be8f-dd33-eb11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2020-12-01T14:00:32Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2020-12-01T14:00:32Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-05T14:59:00Z'
+    scheduledstart: '2021-11-05T07:01:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-214909/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: f6bfbb08-b4dc-e611-9f54-005056991551
+    activityid: 352a9b97-b233-eb11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2020-12-01T08:52:52Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2020-12-01T08:52:52Z'
+    project: CEMCOF - service
+    research_group: CEMCOF
+    scheduledend: '2021-11-07T22:59:00Z'
+    scheduledstart: '2021-11-05T15:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-214754/CF-06
+    subtype: Maintenance / Udrzba
+  - _ge_realised_for_contactid_value: 4320ace9-3a36-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: d951c1e1-8438-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-10-29T06:53:18Z'
+    customer:
+    - Galera Prat
+    - Albert
+    modifiedon: '2021-10-29T06:53:18Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-11-08T14:00:00Z'
+    scheduledstart: '2021-11-08T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263269/EA-Z
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ae43a5cf-d993-e511-88d0-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: fd6debab-0f1f-e311-8a73-005056991551
+    activityid: 11422223-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:05:14Z'
+    customer:
+    - Zapletal
+    - David
+    modifiedon: '2021-11-10T07:09:34Z'
+    project: '#UID: fd6debab-0f1f-e311-8a73-005056991551'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-11-08T15:30:00Z'
+    scheduledstart: '2021-11-08T14:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262497/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 47b86ac8-36b2-e611-9f54-005056991551
+    _ge_res_groupid_value: e5befe01-2df2-e511-9f54-005056991551
+    activityid: ab266df1-f641-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-11-10T07:22:22Z'
+    customer:
+    - "Nedv\u011Bdov\xE1"
+    - Jana
+    modifiedon: '2021-11-10T07:22:22Z'
+    project: '-'
+    research_group: IMCF IBT Barinka
+    scheduledend: '2021-11-08T20:00:00Z'
+    scheduledstart: '2021-11-08T15:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265363/RG-403
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 7ffbd9f2-b855-e211-970b-005056991551
+    _ge_res_groupid_value: 53d6832d-b120-ea11-80ca-005056914121
+    activityid: f97c7822-f741-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-11-10T07:23:44Z'
+    customer:
+    - Demo
+    - Gabriel
+    modifiedon: '2021-11-10T07:23:44Z'
+    project: '-'
+    research_group: Structural Biology of Coupled Transcription-Translation
+    scheduledend: '2021-11-09T04:00:00Z'
+    scheduledstart: '2021-11-08T20:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265365/RG-3-21
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: dc8ad7bb-a57a-e811-80c2-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    activityid: f25b7556-d13b-ec11-80cb-005056914121
+    createdby:
+    - "Valentov\xE1"
+    - Lucie
+    createdon: '2021-11-02T11:38:06Z'
+    customer:
+    - "Valentov\xE1"
+    - Lucie
+    modifiedon: '2021-11-02T11:38:06Z'
+    project: '-'
+    research_group: Structural Virology
+    scheduledend: '2021-11-09T09:00:00Z'
+    scheduledstart: '2021-11-09T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263878/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: fb463ddb-f00a-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-01T06:50:19Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-01T06:50:19Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-09T13:00:00Z'
+    scheduledstart: '2021-11-09T09:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-253947/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 3641bf45-a46b-e911-80c5-005056914121
+    _ge_res_groupid_value: b0dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 4f6820ae-0ce2-e511-9f54-005056991551
+    activityid: c328cee9-a830-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-10-19T06:50:58Z'
+    customer:
+    - Shakoor
+    - Huma
+    modifiedon: '2021-11-10T12:23:23Z'
+    project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    research_group: RNA based regulation of Gene Expression
+    scheduledend: '2021-11-10T07:00:00Z'
+    scheduledstart: '2021-11-09T13:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-261674/RG-3-08
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ae43a5cf-d993-e511-88d0-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: fd6debab-0f1f-e311-8a73-005056991551
+    activityid: 22252e05-2142-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-11-10T12:23:40Z'
+    customer:
+    - Zapletal
+    - David
+    modifiedon: '2021-11-10T12:23:40Z'
+    project: '#UID: fd6debab-0f1f-e311-8a73-005056991551'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-11-10T13:00:00Z'
+    scheduledstart: '2021-11-10T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265484/RG-3-10
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 1d185425-a0be-e711-af01-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    activityid: 4f62fed6-2637-ec11-80cb-005056914121
+    createdby:
+    - "\u0160kubn\xEDk"
+    - Karel
+    createdon: '2021-10-27T13:07:30Z'
+    customer:
+    - "\u0160ebesta"
+    - Marek
+    modifiedon: '2021-10-27T13:07:30Z'
+    project: '-'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-11-11T08:00:00Z'
+    scheduledstart: '2021-11-10T13:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263153/RG-3-10
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 833458e2-2452-e911-80c4-005056914121
+    _ge_res_groupid_value: 000c876e-a0c6-e611-9f54-005056991551
+    _psa_projectid_value: 274566ec-8e31-e711-8654-005056991551
+    activityid: 501b9095-f63a-ec11-80cb-005056914121
+    createdby:
+    - "\u0160kubn\xEDk"
+    - Karel
+    createdon: '2021-11-01T09:32:09Z'
+    customer:
+    - Jekabsons
+    - Atis
+    modifiedon: '2021-11-01T09:32:09Z'
+    project: '#UID: 274566ec-8e31-e711-8654-005056991551'
+    research_group: '#UID: 000c876e-a0c6-e611-9f54-005056991551'
+    scheduledend: '2021-11-11T12:00:00Z'
+    scheduledstart: '2021-11-11T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263581/RG-212
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 879b3e3f-741b-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-22T07:11:04Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-11-10T09:31:27Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-11T16:00:00Z'
+    scheduledstart: '2021-11-11T12:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-257277/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: dc8ad7bb-a57a-e811-80c2-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    activityid: 1beeef52-5a41-ec11-80cb-005056914121
+    createdby:
+    - "Valentov\xE1"
+    - Lucie
+    createdon: '2021-11-09T12:41:20Z'
+    customer:
+    - "Valentov\xE1"
+    - Lucie
+    modifiedon: '2021-11-10T09:32:37Z'
+    project: '-'
+    research_group: Structural Virology
+    scheduledend: '2021-11-11T21:00:00Z'
+    scheduledstart: '2021-11-11T16:05:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265254/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: b563be8f-dd33-eb11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2020-12-01T14:00:34Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2020-12-01T14:00:34Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-12T14:59:00Z'
+    scheduledstart: '2021-11-12T07:01:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-214910/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 3997ccf4-0fad-e411-86ce-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 4f6820ae-0ce2-e511-9f54-005056991551
+    activityid: ae989f13-2e3b-ec11-80cb-005056914121
+    createdby:
+    - Mukhamedova
+    - Liya
+    createdon: '2021-11-01T16:09:23Z'
+    customer:
+    - Mukhamedova
+    - Liya
+    modifiedon: '2021-11-01T16:09:23Z'
+    project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-11-12T19:00:00Z'
+    scheduledstart: '2021-11-12T15:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263758/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 4320ace9-3a36-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: 17b35167-3241-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-11-09T07:55:28Z'
+    customer:
+    - Galera Prat
+    - Albert
+    modifiedon: '2021-11-09T07:56:02Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-11-15T14:00:00Z'
+    scheduledstart: '2021-11-12T19:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265129/EA-Z
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ae43a5cf-d993-e511-88d0-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: fd6debab-0f1f-e311-8a73-005056991551
+    activityid: 23422223-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:05:14Z'
+    customer:
+    - Zapletal
+    - David
+    modifiedon: '2021-11-15T20:23:12Z'
+    project: '#UID: fd6debab-0f1f-e311-8a73-005056991551'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-11-15T20:00:00Z'
+    scheduledstart: '2021-11-15T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262498/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 4c0d04d0-74ff-e711-8b1a-005056991551
+    _ge_res_groupid_value: 12c6e1fa-74ff-e711-8b1a-005056991551
+    _psa_projectid_value: 4f6820ae-0ce2-e511-9f54-005056991551
+    activityid: cd68d910-ee42-ec11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2021-11-11T12:51:29Z'
+    customer:
+    - Polovinkin
+    - Vitaly
+    modifiedon: '2021-11-11T12:51:29Z'
+    project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    research_group: Department of Experimental Programmes
+    scheduledend: '2021-11-16T09:00:00Z'
+    scheduledstart: '2021-11-16T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265754/RG-164
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 0d473ddb-f00a-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-01T06:50:19Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-01T06:50:19Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-16T13:00:00Z'
+    scheduledstart: '2021-11-16T09:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-253948/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 07c37c79-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:07:33Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-11-17T05:59:51Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-17T17:00:00Z'
+    scheduledstart: '2021-11-16T13:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262509/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 4320ace9-3a36-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: ad8e9ece-1c43-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-11-11T18:25:55Z'
+    customer:
+    - Galera Prat
+    - Albert
+    modifiedon: '2021-11-11T18:25:55Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-11-18T14:00:00Z'
+    scheduledstart: '2021-11-18T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265829/EA-Z
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 999b3e3f-741b-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-22T07:11:05Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-22T07:11:05Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-18T19:00:00Z'
+    scheduledstart: '2021-11-18T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-257278/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 4320ace9-3a36-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: dcb0b695-dd33-eb11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2020-12-01T14:00:36Z'
+    customer:
+    - Galera Prat
+    - Albert
+    modifiedon: '2021-11-11T08:49:56Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-11-20T20:00:00Z'
+    scheduledstart: '2021-11-19T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-214911/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: f6bfbb08-b4dc-e611-9f54-005056991551
+    activityid: 6a2a9b97-b233-eb11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2020-12-01T08:52:56Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2021-11-11T08:49:23Z'
+    project: CEMCOF - service
+    research_group: CEMCOF
+    scheduledend: '2021-11-21T22:59:00Z'
+    scheduledstart: '2021-11-20T20:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-214756/CF-06
+    subtype: Maintenance / Udrzba
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: 1807a387-df43-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-11-12T17:39:57Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-12T17:39:58Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-11-22T12:00:00Z'
+    scheduledstart: '2021-11-22T10:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265999/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 35422223-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:05:15Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:05:15Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-22T21:00:00Z'
+    scheduledstart: '2021-11-22T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262499/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 1f473ddb-f00a-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-01T06:50:19Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-01T06:50:20Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-23T13:00:00Z'
+    scheduledstart: '2021-11-23T09:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-253949/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 19c37c79-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:07:33Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:07:33Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-24T08:00:00Z'
+    scheduledstart: '2021-11-23T16:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262510/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 1d185425-a0be-e711-af01-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    activityid: 7e2c1f6f-6e3d-ec11-80cb-005056914121
+    createdby:
+    - "\u0160kubn\xEDk"
+    - Karel
+    createdon: '2021-11-04T12:55:14Z'
+    customer:
+    - "\u0160ebesta"
+    - Marek
+    modifiedon: '2021-11-04T12:55:14Z'
+    project: '-'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-11-25T08:00:00Z'
+    scheduledstart: '2021-11-24T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264390/RG-3-10
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: ab9b3e3f-741b-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-22T07:11:05Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-22T07:11:05Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-25T19:00:00Z'
+    scheduledstart: '2021-11-25T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-257279/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: f0f61f4a-c4c5-e811-80c3-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 4f6820ae-0ce2-e511-9f54-005056991551
+    activityid: f0b0b695-dd33-eb11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2020-12-01T14:00:37Z'
+    customer:
+    - Bello
+    - Gianluca
+    modifiedon: '2021-11-15T08:49:50Z'
+    project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    research_group: external academic - foreign
+    scheduledend: '2021-11-26T14:59:00Z'
+    scheduledstart: '2021-11-26T07:01:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-214912/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 47422223-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:05:15Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:05:15Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-29T21:00:00Z'
+    scheduledstart: '2021-11-29T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262500/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 31473ddb-f00a-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-01T06:50:20Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-01T06:50:20Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-30T13:00:00Z'
+    scheduledstart: '2021-11-30T09:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-253950/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 2bc37c79-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:07:33Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:07:33Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-12-01T08:00:00Z'
+    scheduledstart: '2021-11-30T16:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262511/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: dc8ad7bb-a57a-e811-80c2-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    activityid: e8581fbf-fa42-ec11-80cb-005056914121
+    createdby:
+    - "Valentov\xE1"
+    - Lucie
+    createdon: '2021-11-11T14:22:08Z'
+    customer:
+    - "Valentov\xE1"
+    - Lucie
+    modifiedon: '2021-11-11T14:22:08Z'
+    project: '-'
+    research_group: Structural Virology
+    scheduledend: '2021-12-01T10:30:00Z'
+    scheduledstart: '2021-12-01T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265777/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 1d185425-a0be-e711-af01-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    activityid: 10a12984-c943-ec11-80cb-005056914121
+    createdby:
+    - "\u0160kubn\xEDk"
+    - Karel
+    createdon: '2021-11-12T15:02:19Z'
+    customer:
+    - "\u0160ebesta"
+    - Marek
+    modifiedon: '2021-11-12T15:02:19Z'
+    project: '-'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-12-02T08:00:00Z'
+    scheduledstart: '2021-12-01T10:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265981/RG-3-10
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: a1e917f2-53ea-ea11-80cb-005056914121
+    _ge_res_groupid_value: 657d29ce-539d-e411-86ce-005056991551
+    _psa_projectid_value: 2d52e76a-4a28-e811-b2ea-005056991551
+    activityid: 87e3df78-6348-ec11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2021-11-18T11:34:21Z'
+    customer:
+    - "Ku\u010Dinskas"
+    - Gytis
+    modifiedon: '2021-11-18T11:36:21Z'
+    project: '#UID: 2d52e76a-4a28-e811-b2ea-005056991551'
+    research_group: Protein Structure and Dynamics
+    scheduledend: '2021-12-02T14:00:00Z'
+    scheduledstart: '2021-12-02T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266793/RG-3-18
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: bd9b3e3f-741b-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-22T07:11:05Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-22T07:11:05Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-12-02T19:00:00Z'
+    scheduledstart: '2021-12-02T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-257280/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 02b1b695-dd33-eb11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2020-12-01T14:00:38Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2020-12-01T14:00:38Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-12-03T14:59:00Z'
+    scheduledstart: '2021-12-03T07:01:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-214913/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: 53d6832d-b120-ea11-80ca-005056914121
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 7063f39f-b333-eb11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2020-12-01T09:00:15Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2020-12-01T09:00:15Z'
+    project: CEMCOF - R&D
+    research_group: Structural Biology of Coupled Transcription-Translation
+    scheduledend: '2021-12-05T22:59:00Z'
+    scheduledstart: '2021-12-03T15:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-214766/RG-3-21
+    subtype: Maintenance / Udrzba
+  - _ge_realised_for_contactid_value: a1e917f2-53ea-ea11-80cb-005056914121
+    _ge_res_groupid_value: 657d29ce-539d-e411-86ce-005056991551
+    _psa_projectid_value: 2d52e76a-4a28-e811-b2ea-005056991551
+    activityid: d7ec8bec-6348-ec11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2021-11-18T11:37:40Z'
+    customer:
+    - "Ku\u010Dinskas"
+    - Gytis
+    modifiedon: '2021-11-18T11:37:40Z'
+    project: '#UID: 2d52e76a-4a28-e811-b2ea-005056991551'
+    research_group: Protein Structure and Dynamics
+    scheduledend: '2021-12-06T14:00:00Z'
+    scheduledstart: '2021-12-06T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266794/RG-3-18
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 59422223-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:05:15Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:05:15Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-12-06T21:00:00Z'
+    scheduledstart: '2021-12-06T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262501/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 43473ddb-f00a-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-01T06:50:20Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-01T06:50:20Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-12-07T13:00:00Z'
+    scheduledstart: '2021-12-07T09:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-253951/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 3dc37c79-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:07:34Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:07:34Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-12-08T08:00:00Z'
+    scheduledstart: '2021-12-07T16:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262512/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 1d185425-a0be-e711-af01-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    activityid: bfd93b95-c943-ec11-80cb-005056914121
+    createdby:
+    - "\u0160kubn\xEDk"
+    - Karel
+    createdon: '2021-11-12T15:02:42Z'
+    customer:
+    - "\u0160ebesta"
+    - Marek
+    modifiedon: '2021-11-12T15:02:42Z'
+    project: '-'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-12-09T08:00:00Z'
+    scheduledstart: '2021-12-08T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265982/RG-3-10
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: cf9b3e3f-741b-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-22T07:11:05Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-22T07:11:05Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-12-09T19:00:00Z'
+    scheduledstart: '2021-12-09T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-257281/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 14b1b695-dd33-eb11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2020-12-01T14:00:39Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2020-12-01T14:00:40Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-12-10T14:59:00Z'
+    scheduledstart: '2021-12-10T07:01:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-214914/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 6b422223-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:05:16Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:05:16Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-12-13T21:00:00Z'
+    scheduledstart: '2021-12-13T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262502/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 55473ddb-f00a-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-01T06:50:20Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-01T06:50:20Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-12-14T13:00:00Z'
+    scheduledstart: '2021-12-14T09:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-253952/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 4fc37c79-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:07:34Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:07:34Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-12-15T08:00:00Z'
+    scheduledstart: '2021-12-14T16:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262513/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: e19b3e3f-741b-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-22T07:11:06Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-22T07:11:06Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-12-16T19:00:00Z'
+    scheduledstart: '2021-12-16T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-257282/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 32b1b695-dd33-eb11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2020-12-01T14:00:41Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2020-12-01T14:00:41Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-12-17T14:59:00Z'
+    scheduledstart: '2021-12-17T07:01:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-214915/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: 53d6832d-b120-ea11-80ca-005056914121
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: fb7c32a7-b333-eb11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2020-12-01T09:00:32Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2020-12-01T09:00:32Z'
+    project: CEMCOF - R&D
+    research_group: Structural Biology of Coupled Transcription-Translation
+    scheduledend: '2021-12-19T22:59:00Z'
+    scheduledstart: '2021-12-17T15:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-214767/RG-3-21
+    subtype: Maintenance / Udrzba
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 7d422223-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:05:16Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:05:16Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-12-20T21:00:00Z'
+    scheduledstart: '2021-12-20T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262503/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 67473ddb-f00a-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-01T06:50:21Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-01T06:50:21Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-12-21T13:00:00Z'
+    scheduledstart: '2021-12-21T09:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-253953/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 61c37c79-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:07:34Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:07:34Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-12-22T08:00:00Z'
+    scheduledstart: '2021-12-21T16:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262514/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: f39b3e3f-741b-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-22T07:11:06Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-22T07:11:06Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-12-23T19:00:00Z'
+    scheduledstart: '2021-12-23T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-257283/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 44b1b695-dd33-eb11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2020-12-01T14:00:42Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2020-12-01T14:00:43Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-12-24T14:59:00Z'
+    scheduledstart: '2021-12-24T07:01:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-214916/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 8f422223-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:05:16Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:05:16Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-12-27T21:00:00Z'
+    scheduledstart: '2021-12-27T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262504/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 79473ddb-f00a-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-01T06:50:21Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-01T06:50:21Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-12-28T13:00:00Z'
+    scheduledstart: '2021-12-28T09:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-253954/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 73c37c79-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:07:35Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:07:35Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-12-29T08:00:00Z'
+    scheduledstart: '2021-12-28T16:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262515/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 059c3e3f-741b-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-22T07:11:06Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-22T07:11:06Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-12-30T19:00:00Z'
+    scheduledstart: '2021-12-30T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-257284/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 56b1b695-dd33-eb11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2020-12-01T14:00:44Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2020-12-01T14:00:44Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-12-31T14:59:00Z'
+    scheduledstart: '2021-12-31T07:01:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-214917/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: 53d6832d-b120-ea11-80ca-005056914121
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: c49750b8-b333-eb11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2020-12-01T09:00:55Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2020-12-01T09:00:56Z'
+    project: CEMCOF - R&D
+    research_group: Structural Biology of Coupled Transcription-Translation
+    scheduledend: '2022-01-02T22:59:00Z'
+    scheduledstart: '2021-12-31T15:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-214768/RG-3-21
+    subtype: Maintenance / Udrzba
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: a1422223-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:05:16Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:05:16Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2022-01-03T21:00:00Z'
+    scheduledstart: '2022-01-03T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262505/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 8b473ddb-f00a-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-01T06:50:21Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-01T06:50:21Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2022-01-04T13:00:00Z'
+    scheduledstart: '2022-01-04T09:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-253955/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 85c37c79-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:07:35Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:07:35Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2022-01-05T08:00:00Z'
+    scheduledstart: '2022-01-04T16:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262516/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 179c3e3f-741b-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-22T07:11:06Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-22T07:11:06Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2022-01-06T19:00:00Z'
+    scheduledstart: '2022-01-06T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-257285/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: b3422223-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:05:17Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:05:17Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2022-01-10T21:00:00Z'
+    scheduledstart: '2022-01-10T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262506/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 9d473ddb-f00a-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-01T06:50:21Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-01T06:50:21Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2022-01-11T13:00:00Z'
+    scheduledstart: '2022-01-11T09:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-253956/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 97c37c79-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:07:35Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:07:35Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2022-01-12T08:00:00Z'
+    scheduledstart: '2022-01-11T16:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262517/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 299c3e3f-741b-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-22T07:11:06Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-22T07:11:06Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2022-01-13T19:00:00Z'
+    scheduledstart: '2022-01-13T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-257286/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: c5422223-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:05:17Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:05:17Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2022-01-17T21:00:00Z'
+    scheduledstart: '2022-01-17T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262507/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: a9c37c79-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:07:36Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:07:36Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2022-01-19T08:00:00Z'
+    scheduledstart: '2022-01-18T16:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262518/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 3b9c3e3f-741b-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-22T07:11:07Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-22T07:11:07Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2022-01-20T19:00:00Z'
+    scheduledstart: '2022-01-20T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-257287/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: d7422223-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:05:17Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:05:17Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2022-01-24T21:00:00Z'
+    scheduledstart: '2022-01-24T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262508/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: bbc37c79-3434-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:07:36Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:07:36Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2022-01-26T08:00:00Z'
+    scheduledstart: '2022-01-25T16:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262519/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 4d9c3e3f-741b-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-09-22T07:11:07Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-09-22T07:11:07Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2022-01-27T19:00:00Z'
+    scheduledstart: '2022-01-27T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-257288/K-T
+    subtype: Measurement
+- colour: '#a29bfe'
+  name: Talos F200C
+  reservations:
+  - _ge_realised_for_contactid_value: 7ca07002-e109-ea11-80ca-005056914121
+    _ge_res_groupid_value: e174bdca-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5f754e67-1024-eb11-80cb-005056914121
+    activityid: 1449646d-5232-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-10-21T09:36:58Z'
+    customer:
+    - Zoll
+    - Sebastian
+    modifiedon: '2021-10-21T09:36:58Z'
+    project: '#UID: 5f754e67-1024-eb11-80cb-005056914121'
+    research_group: '#UID: e174bdca-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-10-25T17:00:00Z'
+    scheduledstart: '2021-10-25T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262180/EA-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: a1e917f2-53ea-ea11-80cb-005056914121
+    _ge_res_groupid_value: 657d29ce-539d-e411-86ce-005056991551
+    _psa_projectid_value: 2d52e76a-4a28-e811-b2ea-005056991551
+    activityid: bf0bcd5b-8832-ec11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2021-10-21T16:02:58Z'
+    customer:
+    - "Ku\u010Dinskas"
+    - Gytis
+    modifiedon: '2021-10-21T16:02:59Z'
+    project: '#UID: 2d52e76a-4a28-e811-b2ea-005056991551'
+    research_group: Protein Structure and Dynamics
+    scheduledend: '2021-10-26T14:00:00Z'
+    scheduledstart: '2021-10-26T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262258/RG-3-18
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 4320ace9-3a36-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: 2d701610-3c36-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-10-26T09:06:56Z'
+    customer:
+    - Galera Prat
+    - Albert
+    modifiedon: '2021-10-26T09:06:56Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-10-27T17:00:00Z'
+    scheduledstart: '2021-10-27T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262876/EA-Z
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 833458e2-2452-e911-80c4-005056914121
+    _ge_res_groupid_value: 000c876e-a0c6-e611-9f54-005056991551
+    _psa_projectid_value: 274566ec-8e31-e711-8654-005056991551
+    activityid: 0a93c627-6335-ec11-80cb-005056914121
+    createdby:
+    - Jekabsons
+    - Atis
+    createdon: '2021-10-25T07:14:18Z'
+    customer:
+    - Jekabsons
+    - Atis
+    modifiedon: '2021-10-25T07:14:18Z'
+    project: '#UID: 274566ec-8e31-e711-8654-005056991551'
+    research_group: '#UID: 000c876e-a0c6-e611-9f54-005056991551'
+    scheduledend: '2021-10-29T15:00:00Z'
+    scheduledstart: '2021-10-29T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262605/RG-212
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: cffbd9f2-b855-e211-970b-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: f472e52d-3736-ec11-80cb-005056914121
+    createdby:
+    - "Dopitov\xE1"
+    - Radka
+    createdon: '2021-10-26T08:32:04Z'
+    customer:
+    - "Dopitov\xE1"
+    - Radka
+    modifiedon: '2021-10-26T08:32:04Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-01T10:30:00Z'
+    scheduledstart: '2021-11-01T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262866/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 4320ace9-3a36-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: 5707d19f-8438-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-10-29T06:51:24Z'
+    customer:
+    - Galera Prat
+    - Albert
+    modifiedon: '2021-10-29T06:51:25Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-11-01T22:00:00Z'
+    scheduledstart: '2021-11-01T10:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263265/EA-Z
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 833458e2-2452-e911-80c4-005056914121
+    _ge_res_groupid_value: 000c876e-a0c6-e611-9f54-005056991551
+    _psa_projectid_value: 274566ec-8e31-e711-8654-005056991551
+    activityid: d08b307d-4e36-ec11-80cb-005056914121
+    createdby:
+    - Jekabsons
+    - Atis
+    createdon: '2021-10-26T11:18:50Z'
+    customer:
+    - Jekabsons
+    - Atis
+    modifiedon: '2021-11-01T14:20:18Z'
+    project: '#UID: 274566ec-8e31-e711-8654-005056991551'
+    research_group: '#UID: 000c876e-a0c6-e611-9f54-005056991551'
+    scheduledend: '2021-11-02T19:00:00Z'
+    scheduledstart: '2021-11-02T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262939/RG-212
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 0704daf2-b855-e211-970b-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 69e14f71-cbfd-e211-b8a6-005056991551
+    activityid: 5cf6bbff-3b37-ec11-80cb-005056914121
+    createdby:
+    - "Kub\xED\u010Dek"
+    - Karel
+    createdon: '2021-10-27T15:39:06Z'
+    customer:
+    - "Kub\xED\u010Dek"
+    - Karel
+    description: "G4, Rad51, pros\xEDm o zm\u011B\u0159en\xED 4-6 vzork\u016F p\u0159\
+      ipraven\xFDch 2.11."
+    modifiedon: '2021-10-27T15:39:06Z'
+    project: '#UID: 69e14f71-cbfd-e211-b8a6-005056991551'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-11-03T13:00:00Z'
+    scheduledstart: '2021-11-03T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263195/RG-3-10
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 833458e2-2452-e911-80c4-005056914121
+    _ge_res_groupid_value: 000c876e-a0c6-e611-9f54-005056991551
+    _psa_projectid_value: 274566ec-8e31-e711-8654-005056991551
+    activityid: 35ed36cb-cd38-ec11-80cb-005056914121
+    createdby:
+    - Jekabsons
+    - Atis
+    createdon: '2021-10-29T15:35:11Z'
+    customer:
+    - Jekabsons
+    - Atis
+    modifiedon: '2021-11-03T10:28:45Z'
+    project: '#UID: 274566ec-8e31-e711-8654-005056991551'
+    research_group: '#UID: 000c876e-a0c6-e611-9f54-005056991551'
+    scheduledend: '2021-11-03T17:30:00Z'
+    scheduledstart: '2021-11-03T13:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263379/RG-212
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 4320ace9-3a36-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: 0b4d54b8-8438-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-10-29T06:52:05Z'
+    customer:
+    - Galera Prat
+    - Albert
+    modifiedon: '2021-10-29T06:52:05Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-11-04T19:00:00Z'
+    scheduledstart: '2021-11-04T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263266/EA-Z
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 4320ace9-3a36-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: 2bb71cd1-8438-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-10-29T06:52:51Z'
+    customer:
+    - Galera Prat
+    - Albert
+    modifiedon: '2021-10-29T06:52:51Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-11-05T19:00:00Z'
+    scheduledstart: '2021-11-05T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263268/EA-Z
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: a1e917f2-53ea-ea11-80cb-005056914121
+    _ge_res_groupid_value: 657d29ce-539d-e411-86ce-005056991551
+    _psa_projectid_value: 2d52e76a-4a28-e811-b2ea-005056991551
+    activityid: 1a6db75a-073b-ec11-80cb-005056914121
+    createdby:
+    - "Ku\u010Dinskas"
+    - Gytis
+    createdon: '2021-11-01T11:32:14Z'
+    customer:
+    - "Ku\u010Dinskas"
+    - Gytis
+    description: dGAE and Tau samples
+    modifiedon: '2021-11-01T11:32:14Z'
+    project: '#UID: 2d52e76a-4a28-e811-b2ea-005056991551'
+    research_group: Protein Structure and Dynamics
+    scheduledend: '2021-11-08T16:30:00Z'
+    scheduledstart: '2021-11-08T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263639/RG-3-18
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: a1e917f2-53ea-ea11-80cb-005056914121
+    _ge_res_groupid_value: 657d29ce-539d-e411-86ce-005056991551
+    _psa_projectid_value: 2d52e76a-4a28-e811-b2ea-005056991551
+    activityid: 7b81cfb2-3041-ec11-80cb-005056914121
+    createdby:
+    - "Ku\u010Dinskas"
+    - Gytis
+    createdon: '2021-11-09T07:43:23Z'
+    customer:
+    - "Ku\u010Dinskas"
+    - Gytis
+    description: dGAE samples negative staining
+    modifiedon: '2021-11-09T07:43:23Z'
+    project: '#UID: 2d52e76a-4a28-e811-b2ea-005056991551'
+    research_group: Protein Structure and Dynamics
+    scheduledend: '2021-11-09T15:30:00Z'
+    scheduledstart: '2021-11-09T12:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265121/RG-3-18
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 250adaf2-b855-e211-970b-005056991551
+    _ge_res_groupid_value: c0828986-7be4-e611-9f54-005056991551
+    _psa_projectid_value: c89a244b-551a-ea11-80ca-005056914121
+    activityid: 8d2a4b81-9f40-ec11-80cb-005056914121
+    createdby:
+    - Vykoukal
+    - "V\xEDt"
+    createdon: '2021-11-08T14:23:58Z'
+    customer:
+    - Pinkas
+    - "Ji\u0159\xED"
+    modifiedon: '2021-11-08T14:24:51Z'
+    project: '#UID: c89a244b-551a-ea11-80ca-005056914121'
+    research_group: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    scheduledend: '2021-11-10T10:00:00Z'
+    scheduledstart: '2021-11-10T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265029/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 833458e2-2452-e911-80c4-005056914121
+    _ge_res_groupid_value: 000c876e-a0c6-e611-9f54-005056991551
+    _psa_projectid_value: 274566ec-8e31-e711-8654-005056991551
+    activityid: 02fdaa07-1f3b-ec11-80cb-005056914121
+    createdby:
+    - Jekabsons
+    - Atis
+    createdon: '2021-11-01T14:21:43Z'
+    customer:
+    - Jekabsons
+    - Atis
+    modifiedon: '2021-11-04T11:23:29Z'
+    project: '#UID: 274566ec-8e31-e711-8654-005056991551'
+    research_group: '#UID: 000c876e-a0c6-e611-9f54-005056991551'
+    scheduledend: '2021-11-10T19:00:00Z'
+    scheduledstart: '2021-11-10T12:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263712/RG-212
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: cffbd9f2-b855-e211-970b-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 161a1380-a440-ec11-80cb-005056914121
+    createdby:
+    - "Dopitov\xE1"
+    - Radka
+    createdon: '2021-11-08T14:59:44Z'
+    customer:
+    - "Dopitov\xE1"
+    - Radka
+    modifiedon: '2021-11-08T14:59:44Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-11T13:00:00Z'
+    scheduledstart: '2021-11-11T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265040/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 250adaf2-b855-e211-970b-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: 34e0fc3a-1ba8-eb11-80cb-005056914121
+    activityid: 9930c1b4-423e-ec11-80cb-005056914121
+    createdby:
+    - Vykoukal
+    - "V\xEDt"
+    createdon: '2021-11-05T14:14:42Z'
+    customer:
+    - Pinkas
+    - "Ji\u0159\xED"
+    modifiedon: '2021-11-08T14:19:02Z'
+    project: '#UID: 34e0fc3a-1ba8-eb11-80cb-005056914121'
+    research_group: CEMCOF
+    scheduledend: '2021-11-11T17:00:00Z'
+    scheduledstart: '2021-11-11T13:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264644/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 833458e2-2452-e911-80c4-005056914121
+    _ge_res_groupid_value: 000c876e-a0c6-e611-9f54-005056991551
+    _psa_projectid_value: 274566ec-8e31-e711-8654-005056991551
+    activityid: 80a5c299-613d-ec11-80cb-005056914121
+    createdby:
+    - Jekabsons
+    - Atis
+    createdon: '2021-11-04T11:23:17Z'
+    customer:
+    - Jekabsons
+    - Atis
+    modifiedon: '2021-11-04T11:23:17Z'
+    project: '#UID: 274566ec-8e31-e711-8654-005056991551'
+    research_group: '#UID: 000c876e-a0c6-e611-9f54-005056991551'
+    scheduledend: '2021-11-12T17:00:00Z'
+    scheduledstart: '2021-11-12T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264357/RG-212
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 833458e2-2452-e911-80c4-005056914121
+    _ge_res_groupid_value: 000c876e-a0c6-e611-9f54-005056991551
+    _psa_projectid_value: 274566ec-8e31-e711-8654-005056991551
+    activityid: f969352e-ce42-ec11-80cb-005056914121
+    createdby:
+    - Jekabsons
+    - Atis
+    createdon: '2021-11-11T09:03:08Z'
+    customer:
+    - Jekabsons
+    - Atis
+    modifiedon: '2021-11-11T09:03:08Z'
+    project: '#UID: 274566ec-8e31-e711-8654-005056991551'
+    research_group: '#UID: 000c876e-a0c6-e611-9f54-005056991551'
+    scheduledend: '2021-11-15T12:00:00Z'
+    scheduledstart: '2021-11-15T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265679/RG-212
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 250adaf2-b855-e211-970b-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: 34e0fc3a-1ba8-eb11-80cb-005056914121
+    activityid: 638ec63c-9f40-ec11-80cb-005056914121
+    createdby:
+    - Vykoukal
+    - "V\xEDt"
+    createdon: '2021-11-08T14:22:02Z'
+    customer:
+    - Pinkas
+    - "Ji\u0159\xED"
+    modifiedon: '2021-11-08T14:22:15Z'
+    project: '#UID: 34e0fc3a-1ba8-eb11-80cb-005056914121'
+    research_group: CEMCOF
+    scheduledend: '2021-11-16T17:00:00Z'
+    scheduledstart: '2021-11-16T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265028/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 4320ace9-3a36-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: 28bd3474-cc42-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-11-11T08:50:44Z'
+    customer:
+    - Galera Prat
+    - Albert
+    modifiedon: '2021-11-11T18:25:30Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-11-17T17:00:00Z'
+    scheduledstart: '2021-11-17T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265675/EA-Z
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: adfc66ad-b8c1-ea11-80ca-005056914121
+    _ge_res_groupid_value: e174bdca-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 96fc66ad-b8c1-ea11-80ca-005056914121
+    activityid: ed82bc2a-9543-ec11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2021-11-12T08:47:36Z'
+    customer:
+    - "Mr\xE1zov\xE1"
+    - "Kate\u0159ina"
+    modifiedon: '2021-11-12T08:47:36Z'
+    project: '#UID: 96fc66ad-b8c1-ea11-80ca-005056914121'
+    research_group: '#UID: e174bdca-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-18T16:00:00Z'
+    scheduledstart: '2021-11-18T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265885/EA-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 34e18e1a-6d61-e911-80c5-005056914121
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    activityid: 62e50888-9935-ec11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2021-10-25T13:43:32Z'
+    customer:
+    - "L\xE1n\xED\u010Dek"
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-25T13:43:32Z'
+    project: '-'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-11-19T15:00:00Z'
+    scheduledstart: '2021-11-19T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262758/RG-3-10
+    subtype: Training / Skoleni
+  - _ge_realised_for_contactid_value: 0fc397e3-2e65-e811-b2ea-005056991551
+    _ge_res_groupid_value: 657d29ce-539d-e411-86ce-005056991551
+    _psa_projectid_value: 2d52e76a-4a28-e811-b2ea-005056991551
+    activityid: ce151f3d-c746-ec11-80cb-005056914121
+    createdby:
+    - Narasimhan
+    - Subhash
+    createdon: '2021-11-16T10:23:32Z'
+    customer:
+    - Narasimhan
+    - Subhash
+    modifiedon: '2021-11-18T10:50:19Z'
+    project: '#UID: 2d52e76a-4a28-e811-b2ea-005056991551'
+    research_group: Protein Structure and Dynamics
+    scheduledend: '2021-11-22T17:30:00Z'
+    scheduledstart: '2021-11-22T09:35:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266421/RG-3-18
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 1d08daf2-b855-e211-970b-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: 25d96efb-cee2-e611-9f54-005056991551
+    activityid: 70269d03-1f41-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-11-09T05:36:47Z'
+    customer:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    modifiedon: '2021-11-09T05:36:47Z'
+    project: CF teaching
+    research_group: CEMCOF
+    scheduledend: '2021-11-23T18:00:00Z'
+    scheduledstart: '2021-11-23T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265097/CF-06
+    subtype: Teaching / Vyuka
+  - _ge_realised_for_contactid_value: a1e917f2-53ea-ea11-80cb-005056914121
+    _ge_res_groupid_value: 657d29ce-539d-e411-86ce-005056991551
+    _psa_projectid_value: 2d52e76a-4a28-e811-b2ea-005056991551
+    activityid: ce83c46e-9f43-ec11-80cb-005056914121
+    createdby:
+    - "Ku\u010Dinskas"
+    - Gytis
+    createdon: '2021-11-12T10:01:01Z'
+    customer:
+    - "Ku\u010Dinskas"
+    - Gytis
+    description: dGAE fibrils, new batch
+    modifiedon: '2021-11-12T10:01:01Z'
+    project: '#UID: 2d52e76a-4a28-e811-b2ea-005056991551'
+    research_group: Protein Structure and Dynamics
+    scheduledend: '2021-11-24T11:30:00Z'
+    scheduledstart: '2021-11-24T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265912/RG-3-18
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: f6032d78-31bd-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: e81f8839-f846-ec11-80cb-005056914121
+    createdby:
+    - "Holbov\xE1"
+    - Radka
+    createdon: '2021-11-16T16:14:17Z'
+    customer:
+    - "Holbov\xE1"
+    - Radka
+    description: Kontrola rezu
+    modifiedon: '2021-11-18T08:56:58Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-25T13:30:00Z'
+    scheduledstart: '2021-11-25T08:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266544/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: cffbd9f2-b855-e211-970b-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 4c2eed21-4d48-ec11-80cb-005056914121
+    createdby:
+    - "Dopitov\xE1"
+    - Radka
+    createdon: '2021-11-18T08:54:33Z'
+    customer:
+    - "Dopitov\xE1"
+    - Radka
+    modifiedon: '2021-11-18T08:55:09Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-26T13:00:00Z'
+    scheduledstart: '2021-11-26T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266713/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 1d185425-a0be-e711-af01-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    activityid: e087887b-1349-ec11-80cb-005056914121
+    createdby:
+    - "\u0160kubn\xEDk"
+    - Karel
+    createdon: '2021-11-19T08:34:24Z'
+    customer:
+    - "\u0160ebesta"
+    - Marek
+    modifiedon: '2021-11-19T08:34:24Z'
+    project: '-'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-11-26T16:00:00Z'
+    scheduledstart: '2021-11-26T13:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266910/RG-3-10
+    subtype: Measurement
+- colour: '#fdcb6e'
+  name: Versa 3D
+  reservations:
+  - _ge_realised_for_contactid_value: f6032d78-31bd-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: d012b041-2c0b-ec11-80cb-005056914121
+    createdby:
+    - "Holbov\xE1"
+    - Radka
+    createdon: '2021-09-01T13:55:26Z'
+    customer:
+    - "Holbov\xE1"
+    - Radka
+    description: TFS
+    modifiedon: '2021-09-01T13:55:26Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-10-25T13:00:00Z'
+    scheduledstart: '2021-10-25T06:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-254122/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: c2a27d6d-c714-e511-8921-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 1c8f74e5-0f30-ec11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2021-10-18T12:35:39Z'
+    customer:
+    - "Moravcov\xE1"
+    - Jana
+    modifiedon: '2021-10-18T12:35:39Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-10-25T16:30:00Z'
+    scheduledstart: '2021-10-25T13:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-261594/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 5f4d22f6-dff1-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 9a869133-7a2e-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k 2"
+    - Martin
+    createdon: '2021-10-16T12:11:33Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-10-16T12:11:33Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-10-25T19:00:00Z'
+    scheduledstart: '2021-10-25T17:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-261347/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 102d7b2a-aad8-eb11-80cb-005056914121
+    createdby:
+    - Grybchuk
+    - Danyil
+    createdon: '2021-06-29T07:18:16Z'
+    customer:
+    - Babiak
+    - Michal
+    description: CryoStage. S. aureus + 3A FIB-milling
+    modifiedon: '2021-08-31T09:10:05Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-10-26T14:00:00Z'
+    scheduledstart: '2021-10-26T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-245262/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 5f4d22f6-dff1-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: c703e83d-7a2e-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k 2"
+    - Martin
+    createdon: '2021-10-16T12:11:55Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-10-16T12:11:55Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-10-26T18:00:00Z'
+    scheduledstart: '2021-10-26T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-261348/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: c2a27d6d-c714-e511-8921-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: a81e3ff3-4a32-ec11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2021-10-21T08:43:25Z'
+    customer:
+    - "Moravcov\xE1"
+    - Jana
+    modifiedon: '2021-10-21T08:43:25Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-10-27T13:00:00Z'
+    scheduledstart: '2021-10-27T05:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262169/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 63e910fa-7fc8-e511-9f54-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 4f6820ae-0ce2-e511-9f54-005056991551
+    activityid: b63fdf39-5ef4-eb11-80cb-005056914121
+    createdby:
+    - "Proch\xE1zkov\xE1"
+    - Michaela
+    createdon: '2021-08-03T13:25:17Z'
+    customer:
+    - "Proch\xE1zkov\xE1"
+    - Michaela
+    description: SA+phi812
+    modifiedon: '2021-09-10T09:09:29Z'
+    project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-10-27T20:30:00Z'
+    scheduledstart: '2021-10-27T13:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-250237/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 93326661-c428-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: cf6a78cd-8c34-eb11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2020-12-02T10:55:01Z'
+    customer:
+    - Bauda
+    - Elda
+    modifiedon: '2021-10-28T20:16:18Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-10-28T17:00:00Z'
+    scheduledstart: '2021-10-28T05:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-215175/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 7897bed2-d077-ea11-80ca-005056914121
+    _ge_res_groupid_value: c0828986-7be4-e611-9f54-005056991551
+    _psa_projectid_value: 335df9b5-e961-ea11-80ca-005056914121
+    activityid: eb0cbc09-982d-ec11-80cb-005056914121
+    createdby:
+    - Prysiazhnyi
+    - Vadym
+    createdon: '2021-10-15T09:12:43Z'
+    customer:
+    - Prysiazhnyi
+    - Vadym
+    modifiedon: '2021-10-15T09:12:43Z'
+    project: '#UID: 335df9b5-e961-ea11-80ca-005056914121'
+    research_group: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    scheduledend: '2021-10-29T16:00:00Z'
+    scheduledstart: '2021-10-29T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-261219/RG-349
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 93326661-c428-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: 96eca094-e82f-ec11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2021-10-18T07:54:13Z'
+    customer:
+    - Bauda
+    - Elda
+    modifiedon: '2021-10-18T07:54:13Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-10-30T15:00:00Z'
+    scheduledstart: '2021-10-30T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-261464/EA-Z
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 93326661-c428-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: ac9aaead-e82f-ec11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2021-10-18T07:54:54Z'
+    customer:
+    - Bauda
+    - Elda
+    modifiedon: '2021-10-18T07:54:54Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-10-31T16:00:00Z'
+    scheduledstart: '2021-10-31T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-261466/EA-Z
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 1c765b76-32e9-e611-9f54-005056991551
+    activityid: 878c1a83-7d10-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-09-08T08:19:44Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-09-08T08:19:44Z'
+    project: (bez specifikace projektu)
+    research_group: Structural Virology
+    scheduledend: '2021-11-01T14:00:00Z'
+    scheduledstart: '2021-11-01T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-254996/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: f6032d78-31bd-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 021e6305-e52f-ec11-80cb-005056914121
+    createdby:
+    - "Holbov\xE1"
+    - Radka
+    createdon: '2021-10-18T07:28:44Z'
+    customer:
+    - "Holbov\xE1"
+    - Radka
+    description: TFS cells
+    modifiedon: '2021-10-18T07:28:44Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-01T20:30:00Z'
+    scheduledstart: '2021-11-01T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-261448/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: dc8ad7bb-a57a-e811-80c2-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    activityid: b9758099-d22c-ec11-80cb-005056914121
+    createdby:
+    - "Valentov\xE1"
+    - Lucie
+    createdon: '2021-10-14T09:39:22Z'
+    customer:
+    - "Valentov\xE1"
+    - Lucie
+    modifiedon: '2021-11-02T10:16:03Z'
+    project: '-'
+    research_group: Structural Virology
+    scheduledend: '2021-11-02T12:00:00Z'
+    scheduledstart: '2021-11-02T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-261015/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: f6032d78-31bd-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 4af35465-ba3b-ec11-80cb-005056914121
+    createdby:
+    - "Holbov\xE1"
+    - Radka
+    createdon: '2021-11-02T08:53:50Z'
+    customer:
+    - "Holbov\xE1"
+    - Radka
+    description: TFS cells
+    modifiedon: '2021-11-02T08:53:50Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-02T15:00:00Z'
+    scheduledstart: '2021-11-02T13:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263824/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: 6c70bac1-4a36-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-10-26T10:52:08Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-10-26T10:52:08Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-11-03T14:00:00Z'
+    scheduledstart: '2021-11-03T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262927/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 4c0d04d0-74ff-e711-8b1a-005056991551
+    _ge_res_groupid_value: 12c6e1fa-74ff-e711-8b1a-005056991551
+    _psa_projectid_value: 4f6820ae-0ce2-e511-9f54-005056991551
+    activityid: e96a78cd-8c34-eb11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2020-12-02T10:55:02Z'
+    customer:
+    - Polovinkin
+    - Vitaly
+    modifiedon: '2021-10-06T09:14:11Z'
+    project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    research_group: Department of Experimental Programmes
+    scheduledend: '2021-11-04T18:00:00Z'
+    scheduledstart: '2021-11-04T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-215176/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: c2a27d6d-c714-e511-8921-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: bf0e65c5-b93c-ec11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2021-11-03T15:21:59Z'
+    customer:
+    - "Moravcov\xE1"
+    - Jana
+    modifiedon: '2021-11-03T15:21:59Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-05T08:00:00Z'
+    scheduledstart: '2021-11-05T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264218/CF-06
+    subtype: Maintenance / Udrzba
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 8437c9b5-ee24-ec11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2021-10-04T08:40:23Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2021-10-04T08:40:23Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-05T15:00:00Z'
+    scheduledstart: '2021-11-05T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-259088/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: f6032d78-31bd-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 59e3198e-e93b-ec11-80cb-005056914121
+    createdby:
+    - "Holbov\xE1"
+    - Radka
+    createdon: '2021-11-02T14:31:26Z'
+    customer:
+    - "Holbov\xE1"
+    - Radka
+    modifiedon: '2021-11-03T08:00:26Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-05T16:00:00Z'
+    scheduledstart: '2021-11-05T15:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263984/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: c6ce756f-02f7-e811-80c3-005056914121
+    _ge_res_groupid_value: c0828986-7be4-e611-9f54-005056991551
+    activityid: 27744279-2a3e-ec11-80cb-005056914121
+    createdby:
+    - "Kr\xE1l"
+    - "Zden\u011Bk"
+    createdon: '2021-11-05T11:21:09Z'
+    customer:
+    - "Kr\xE1l"
+    - "Zden\u011Bk"
+    description: "M\u011B\u0159en\xED"
+    modifiedon: '2021-11-05T11:21:09Z'
+    project: '-'
+    research_group: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    scheduledend: '2021-11-05T18:00:00Z'
+    scheduledstart: '2021-11-05T16:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264575/RG-349
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 93326661-c428-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: 0a2a98ee-9438-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-10-29T08:48:07Z'
+    customer:
+    - Bauda
+    - Elda
+    modifiedon: '2021-10-29T08:48:07Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-11-06T19:00:00Z'
+    scheduledstart: '2021-11-06T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263301/EA-Z
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 93326661-c428-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: 9fd04cf5-9438-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-10-29T08:48:24Z'
+    customer:
+    - Bauda
+    - Elda
+    modifiedon: '2021-10-29T08:48:24Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-11-07T19:00:00Z'
+    scheduledstart: '2021-11-07T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263302/EA-Z
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 87268b10-7fd9-eb11-80cb-005056914121
+    _ge_res_groupid_value: c0828986-7be4-e611-9f54-005056991551
+    _psa_projectid_value: 70268b10-7fd9-eb11-80cb-005056914121
+    activityid: 75b6368e-dc21-ec11-80cb-005056914121
+    createdby:
+    - Vykoukal
+    - "V\xEDt"
+    createdon: '2021-09-30T10:52:52Z'
+    customer:
+    - Heger
+    - Dominik
+    modifiedon: '2021-09-30T10:52:52Z'
+    project: '#UID: 70268b10-7fd9-eb11-80cb-005056914121'
+    research_group: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    scheduledend: '2021-11-08T18:00:00Z'
+    scheduledstart: '2021-11-08T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-258641/RG-349
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: c2a27d6d-c714-e511-8921-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: d68c8e52-5036-ec11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2021-10-26T11:32:01Z'
+    customer:
+    - "Moravcov\xE1"
+    - Jana
+    modifiedon: '2021-11-05T08:31:50Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-09T17:30:00Z'
+    scheduledstart: '2021-11-09T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262944/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: 16ef6afe-3841-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-11-09T08:42:41Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-09T08:42:41Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-11-10T08:00:00Z'
+    scheduledstart: '2021-11-10T04:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265147/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: e776bddd-ee24-ec11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2021-10-04T08:41:35Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2021-10-04T08:41:35Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-10T14:00:00Z'
+    scheduledstart: '2021-11-10T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-259090/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 63e910fa-7fc8-e511-9f54-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 4f6820ae-0ce2-e511-9f54-005056991551
+    activityid: 58c5bd03-660a-ec11-80cb-005056914121
+    createdby:
+    - "Proch\xE1zkov\xE1"
+    - Michaela
+    createdon: '2021-08-31T14:16:26Z'
+    customer:
+    - "Proch\xE1zkov\xE1"
+    - Michaela
+    description: S.aureus + phi 812
+    modifiedon: '2021-09-10T09:09:50Z'
+    project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-11-10T21:30:00Z'
+    scheduledstart: '2021-11-10T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-253878/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: c2a27d6d-c714-e511-8921-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: fd7c75d3-8c34-eb11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2020-12-02T10:55:03Z'
+    customer:
+    - "Moravcov\xE1"
+    - Jana
+    modifiedon: '2020-12-02T10:55:03Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-11T18:00:00Z'
+    scheduledstart: '2021-11-11T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-215177/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 7abe98ce-ee24-ec11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2021-10-04T08:41:13Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2021-10-04T08:41:13Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-12T15:00:00Z'
+    scheduledstart: '2021-11-12T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-259089/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 5f4d22f6-dff1-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 5c07187d-c943-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k 2"
+    - Martin
+    createdon: '2021-11-12T15:02:03Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-11-12T15:02:03Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-12T19:30:00Z'
+    scheduledstart: '2021-11-12T15:15:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265980/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 7897bed2-d077-ea11-80ca-005056914121
+    _ge_res_groupid_value: c0828986-7be4-e611-9f54-005056991551
+    _psa_projectid_value: 335df9b5-e961-ea11-80ca-005056914121
+    activityid: 4f12995c-9a2d-ec11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2021-10-15T09:29:15Z'
+    customer:
+    - Prysiazhnyi
+    - Vadym
+    modifiedon: '2021-10-15T09:29:15Z'
+    project: '#UID: 335df9b5-e961-ea11-80ca-005056914121'
+    research_group: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    scheduledend: '2021-11-13T17:00:00Z'
+    scheduledstart: '2021-11-13T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-261222/RG-349
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: d439b8fb-ee24-ec11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2021-10-04T08:42:19Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2021-10-04T08:42:19Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-15T15:00:00Z'
+    scheduledstart: '2021-11-15T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-259091/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 1c765b76-32e9-e611-9f54-005056991551
+    activityid: f0f2af9f-b521-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-09-30T06:14:14Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-09-30T06:14:14Z'
+    project: (bez specifikace projektu)
+    research_group: Structural Virology
+    scheduledend: '2021-11-16T15:00:00Z'
+    scheduledstart: '2021-11-16T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-258545/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 5f4d22f6-dff1-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: ca1a8828-0846-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k 2"
+    - Martin
+    createdon: '2021-11-15T11:35:47Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-11-15T11:35:48Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-16T17:00:00Z'
+    scheduledstart: '2021-11-16T15:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266225/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 87268b10-7fd9-eb11-80cb-005056914121
+    _ge_res_groupid_value: c0828986-7be4-e611-9f54-005056991551
+    _psa_projectid_value: 70268b10-7fd9-eb11-80cb-005056914121
+    activityid: 2ad59c19-9e40-ec11-80cb-005056914121
+    createdby:
+    - Vykoukal
+    - "V\xEDt"
+    createdon: '2021-11-08T14:13:53Z'
+    customer:
+    - Heger
+    - Dominik
+    modifiedon: '2021-11-08T14:13:53Z'
+    project: '#UID: 70268b10-7fd9-eb11-80cb-005056914121'
+    research_group: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    scheduledend: '2021-11-17T18:00:00Z'
+    scheduledstart: '2021-11-17T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265022/RG-349
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 7bf245af-a809-e311-b8a6-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: 219ac40f-0542-ec11-80cb-005056914121
+    createdby:
+    - "P\xE1lkov\xE1"
+    - Lenka
+    createdon: '2021-11-10T09:03:25Z'
+    customer:
+    - "P\xE1lkov\xE1"
+    - Lenka
+    modifiedon: '2021-11-10T09:03:25Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-11-18T14:00:00Z'
+    scheduledstart: '2021-11-18T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265412/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 7897bed2-d077-ea11-80ca-005056914121
+    _ge_res_groupid_value: c0828986-7be4-e611-9f54-005056991551
+    _psa_projectid_value: 335df9b5-e961-ea11-80ca-005056914121
+    activityid: afcff11d-982d-ec11-80cb-005056914121
+    createdby:
+    - Prysiazhnyi
+    - Vadym
+    createdon: '2021-10-15T09:13:13Z'
+    customer:
+    - Prysiazhnyi
+    - Vadym
+    modifiedon: '2021-10-15T09:13:13Z'
+    project: '#UID: 335df9b5-e961-ea11-80ca-005056914121'
+    research_group: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    scheduledend: '2021-11-19T17:00:00Z'
+    scheduledstart: '2021-11-19T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-261220/RG-349
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: dc292b2e-9baa-e711-97c0-005056991551
+    _ge_res_groupid_value: 8b179451-c0db-e611-9f54-005056991551
+    _psa_projectid_value: 5761f3bc-13ec-e811-80c3-005056914121
+    activityid: 098fd24a-4641-ec11-80cb-005056914121
+    createdby:
+    - "Vrchoveck\xE1"
+    - "Kate\u0159ina"
+    createdon: '2021-11-09T10:17:59Z'
+    customer:
+    - "Vrchoveck\xE1"
+    - "Kate\u0159ina"
+    modifiedon: '2021-11-09T10:17:59Z'
+    project: '#UID: 5761f3bc-13ec-e811-80c3-005056914121'
+    research_group: '#UID: 8b179451-c0db-e611-9f54-005056991551'
+    scheduledend: '2021-11-20T15:00:00Z'
+    scheduledstart: '2021-11-20T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265188/RG-331
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 59086c13-ef24-ec11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2021-10-04T08:42:59Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2021-10-04T08:42:59Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-22T15:00:00Z'
+    scheduledstart: '2021-11-22T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-259092/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: c2a27d6d-c714-e511-8921-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 6685a1a3-df45-ec11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2021-11-15T06:45:38Z'
+    customer:
+    - "Moravcov\xE1"
+    - Jana
+    modifiedon: '2021-11-15T06:45:38Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-22T17:00:00Z'
+    scheduledstart: '2021-11-22T15:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266126/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 1c765b76-32e9-e611-9f54-005056991551
+    activityid: c548c4ab-b521-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-09-30T06:14:32Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-09-30T06:14:32Z'
+    project: (bez specifikace projektu)
+    research_group: Structural Virology
+    scheduledend: '2021-11-23T15:00:00Z'
+    scheduledstart: '2021-11-23T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-258546/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: f6032d78-31bd-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: d2cfffee-7c32-ec11-80cb-005056914121
+    createdby:
+    - "Holbov\xE1"
+    - Radka
+    createdon: '2021-10-21T14:41:11Z'
+    customer:
+    - "Holbov\xE1"
+    - Radka
+    description: TFS
+    modifiedon: '2021-10-21T14:41:11Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-24T14:00:00Z'
+    scheduledstart: '2021-11-24T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262243/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 63e910fa-7fc8-e511-9f54-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 4f6820ae-0ce2-e511-9f54-005056991551
+    activityid: dfff1722-660a-ec11-80cb-005056914121
+    createdby:
+    - "Proch\xE1zkov\xE1"
+    - Michaela
+    createdon: '2021-08-31T14:17:22Z'
+    customer:
+    - "Proch\xE1zkov\xE1"
+    - Michaela
+    description: S.aureus + phi812
+    modifiedon: '2021-09-10T09:10:09Z'
+    project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-11-24T21:30:00Z'
+    scheduledstart: '2021-11-24T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-253880/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: c2a27d6d-c714-e511-8921-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 2d7d75d3-8c34-eb11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2020-12-02T10:55:07Z'
+    customer:
+    - "Moravcov\xE1"
+    - Jana
+    modifiedon: '2020-12-02T10:55:07Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-25T18:00:00Z'
+    scheduledstart: '2021-11-25T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-215179/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: dc292b2e-9baa-e711-97c0-005056991551
+    _ge_res_groupid_value: 8b179451-c0db-e611-9f54-005056991551
+    _psa_projectid_value: 5761f3bc-13ec-e811-80c3-005056914121
+    activityid: 1eb21e46-4e3d-ec11-80cb-005056914121
+    createdby:
+    - "Vrchoveck\xE1"
+    - "Kate\u0159ina"
+    createdon: '2021-11-04T09:04:54Z'
+    customer:
+    - "Vrchoveck\xE1"
+    - "Kate\u0159ina"
+    modifiedon: '2021-11-04T09:04:54Z'
+    project: '#UID: 5761f3bc-13ec-e811-80c3-005056914121'
+    research_group: '#UID: 8b179451-c0db-e611-9f54-005056991551'
+    scheduledend: '2021-11-26T08:00:00Z'
+    scheduledstart: '2021-11-26T06:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264290/RG-331
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 7897bed2-d077-ea11-80ca-005056914121
+    _ge_res_groupid_value: c0828986-7be4-e611-9f54-005056991551
+    _psa_projectid_value: 335df9b5-e961-ea11-80ca-005056914121
+    activityid: a2976b71-982d-ec11-80cb-005056914121
+    createdby:
+    - Prysiazhnyi
+    - Vadym
+    createdon: '2021-10-15T09:15:32Z'
+    customer:
+    - Prysiazhnyi
+    - Vadym
+    modifiedon: '2021-10-15T09:15:32Z'
+    project: '#UID: 335df9b5-e961-ea11-80ca-005056914121'
+    research_group: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    scheduledend: '2021-11-26T17:00:00Z'
+    scheduledstart: '2021-11-26T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-261221/RG-349
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 1f4f6419-ef24-ec11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2021-10-04T08:43:16Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2021-10-04T08:43:16Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-29T15:00:00Z'
+    scheduledstart: '2021-11-29T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-259093/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: c2a27d6d-c714-e511-8921-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 56f77b8b-b93c-ec11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2021-11-03T15:20:16Z'
+    customer:
+    - "Moravcov\xE1"
+    - Jana
+    modifiedon: '2021-11-03T15:20:16Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-30T16:00:00Z'
+    scheduledstart: '2021-11-30T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264217/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: f6032d78-31bd-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: c6d35dfe-7c32-ec11-80cb-005056914121
+    createdby:
+    - "Holbov\xE1"
+    - Radka
+    createdon: '2021-10-21T14:41:37Z'
+    customer:
+    - "Holbov\xE1"
+    - Radka
+    description: TFS
+    modifiedon: '2021-10-21T14:41:37Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-12-01T14:00:00Z'
+    scheduledstart: '2021-12-01T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262244/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 63e910fa-7fc8-e511-9f54-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 4f6820ae-0ce2-e511-9f54-005056991551
+    activityid: 8071c62f-660a-ec11-80cb-005056914121
+    createdby:
+    - "Proch\xE1zkov\xE1"
+    - Michaela
+    createdon: '2021-08-31T14:17:42Z'
+    customer:
+    - "Proch\xE1zkov\xE1"
+    - Michaela
+    description: S.aureus + phi812
+    modifiedon: '2021-09-10T09:10:19Z'
+    project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-12-01T21:30:00Z'
+    scheduledstart: '2021-12-01T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-253881/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 084a7ecb-45de-e611-9f54-005056991551
+    activityid: 437d75d3-8c34-eb11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2020-12-02T10:55:08Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-03T15:20:59Z'
+    project: '#UID: 084a7ecb-45de-e611-9f54-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-12-02T16:00:00Z'
+    scheduledstart: '2021-12-02T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-215180/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: dc8ad7bb-a57a-e811-80c2-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    activityid: da283a07-053e-ec11-80cb-005056914121
+    createdby:
+    - "Valentov\xE1"
+    - Lucie
+    createdon: '2021-11-05T06:53:09Z'
+    customer:
+    - "Valentov\xE1"
+    - Lucie
+    modifiedon: '2021-11-05T06:53:09Z'
+    project: '-'
+    research_group: Structural Virology
+    scheduledend: '2021-12-02T21:00:00Z'
+    scheduledstart: '2021-12-02T16:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264498/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 5f4d22f6-dff1-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 9f0b8d67-7c2e-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k 2"
+    - Martin
+    createdon: '2021-10-16T12:27:28Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-10-16T12:27:28Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-12-03T18:00:00Z'
+    scheduledstart: '2021-12-03T06:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-261355/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 7897bed2-d077-ea11-80ca-005056914121
+    _ge_res_groupid_value: c0828986-7be4-e611-9f54-005056991551
+    _psa_projectid_value: 335df9b5-e961-ea11-80ca-005056914121
+    activityid: cc4e3fb2-cf3b-ec11-80cb-005056914121
+    createdby:
+    - Prysiazhnyi
+    - Vadym
+    createdon: '2021-11-02T11:26:22Z'
+    customer:
+    - Prysiazhnyi
+    - Vadym
+    modifiedon: '2021-11-02T11:26:22Z'
+    project: '#UID: 335df9b5-e961-ea11-80ca-005056914121'
+    research_group: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    scheduledend: '2021-12-04T17:00:00Z'
+    scheduledstart: '2021-12-04T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263866/RG-349
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: a73d3b27-ef24-ec11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2021-10-04T08:43:38Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2021-10-04T08:43:38Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-12-06T15:00:00Z'
+    scheduledstart: '2021-12-06T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-259094/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 5f4d22f6-dff1-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 0037e55f-7c2e-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k 2"
+    - Martin
+    createdon: '2021-10-16T12:27:10Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-10-16T12:27:10Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-12-07T15:00:00Z'
+    scheduledstart: '2021-12-07T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-261354/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: f6032d78-31bd-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 58e3bd08-7d32-ec11-80cb-005056914121
+    createdby:
+    - "Holbov\xE1"
+    - Radka
+    createdon: '2021-10-21T14:41:55Z'
+    customer:
+    - "Holbov\xE1"
+    - Radka
+    description: TFS
+    modifiedon: '2021-10-21T14:41:55Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-12-08T14:00:00Z'
+    scheduledstart: '2021-12-08T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262245/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 63e910fa-7fc8-e511-9f54-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 4f6820ae-0ce2-e511-9f54-005056991551
+    activityid: 8440d73f-660a-ec11-80cb-005056914121
+    createdby:
+    - "Proch\xE1zkov\xE1"
+    - Michaela
+    createdon: '2021-08-31T14:18:02Z'
+    customer:
+    - "Proch\xE1zkov\xE1"
+    - Michaela
+    description: 'S.aureus + phi812
+
+      '
+    modifiedon: '2021-09-10T09:10:28Z'
+    project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-12-08T21:30:00Z'
+    scheduledstart: '2021-12-08T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-253883/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: c2a27d6d-c714-e511-8921-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 557d75d3-8c34-eb11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2020-12-02T10:55:09Z'
+    customer:
+    - "Moravcov\xE1"
+    - Jana
+    modifiedon: '2020-12-02T10:55:09Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-12-09T18:00:00Z'
+    scheduledstart: '2021-12-09T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-215181/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: dc292b2e-9baa-e711-97c0-005056991551
+    _ge_res_groupid_value: 8b179451-c0db-e611-9f54-005056991551
+    _psa_projectid_value: 5761f3bc-13ec-e811-80c3-005056914121
+    activityid: bd052d78-5236-ec11-80cb-005056914121
+    createdby:
+    - "Vrchoveck\xE1"
+    - "Kate\u0159ina"
+    createdon: '2021-10-26T11:47:24Z'
+    customer:
+    - "Vrchoveck\xE1"
+    - "Kate\u0159ina"
+    modifiedon: '2021-11-04T08:07:27Z'
+    project: '#UID: 5761f3bc-13ec-e811-80c3-005056914121'
+    research_group: '#UID: 8b179451-c0db-e611-9f54-005056991551'
+    scheduledend: '2021-12-10T17:00:00Z'
+    scheduledstart: '2021-12-10T06:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262950/RG-331
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 7897bed2-d077-ea11-80ca-005056914121
+    _ge_res_groupid_value: c0828986-7be4-e611-9f54-005056991551
+    _psa_projectid_value: 335df9b5-e961-ea11-80ca-005056914121
+    activityid: f8fe81dd-cf3b-ec11-80cb-005056914121
+    createdby:
+    - Prysiazhnyi
+    - Vadym
+    createdon: '2021-11-02T11:27:31Z'
+    customer:
+    - Prysiazhnyi
+    - Vadym
+    modifiedon: '2021-11-02T11:27:31Z'
+    project: '#UID: 335df9b5-e961-ea11-80ca-005056914121'
+    research_group: '#UID: c0828986-7be4-e611-9f54-005056991551'
+    scheduledend: '2021-12-11T17:00:00Z'
+    scheduledstart: '2021-12-11T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263867/RG-349
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 6194492f-ef24-ec11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2021-10-04T08:43:46Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2021-10-04T08:43:46Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-12-13T15:00:00Z'
+    scheduledstart: '2021-12-13T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-259095/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 5f4d22f6-dff1-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: dd9ab3ab-7a2e-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k 2"
+    - Martin
+    createdon: '2021-10-16T12:14:57Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-10-16T12:14:57Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-12-14T16:00:00Z'
+    scheduledstart: '2021-12-14T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-261351/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: f6032d78-31bd-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 2061c80f-7d32-ec11-80cb-005056914121
+    createdby:
+    - "Holbov\xE1"
+    - Radka
+    createdon: '2021-10-21T14:42:16Z'
+    customer:
+    - "Holbov\xE1"
+    - Radka
+    description: TFS
+    modifiedon: '2021-10-21T14:42:16Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-12-15T14:00:00Z'
+    scheduledstart: '2021-12-15T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262246/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 63e910fa-7fc8-e511-9f54-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 4f6820ae-0ce2-e511-9f54-005056991551
+    activityid: 14fe2548-660a-ec11-80cb-005056914121
+    createdby:
+    - "Proch\xE1zkov\xE1"
+    - Michaela
+    createdon: '2021-08-31T14:18:25Z'
+    customer:
+    - "Proch\xE1zkov\xE1"
+    - Michaela
+    description: S.aureus + phi812
+    modifiedon: '2021-09-10T09:10:38Z'
+    project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-12-15T21:30:00Z'
+    scheduledstart: '2021-12-15T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-253884/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: c2a27d6d-c714-e511-8921-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 677d75d3-8c34-eb11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2020-12-02T10:55:10Z'
+    customer:
+    - "Moravcov\xE1"
+    - Jana
+    modifiedon: '2020-12-02T10:55:11Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-12-16T18:00:00Z'
+    scheduledstart: '2021-12-16T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2020-215182/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: dc292b2e-9baa-e711-97c0-005056991551
+    _ge_res_groupid_value: 8b179451-c0db-e611-9f54-005056991551
+    _psa_projectid_value: 5761f3bc-13ec-e811-80c3-005056914121
+    activityid: 0d837696-5236-ec11-80cb-005056914121
+    createdby:
+    - "Vrchoveck\xE1"
+    - "Kate\u0159ina"
+    createdon: '2021-10-26T11:48:10Z'
+    customer:
+    - "Vrchoveck\xE1"
+    - "Kate\u0159ina"
+    modifiedon: '2021-10-26T11:48:10Z'
+    project: '#UID: 5761f3bc-13ec-e811-80c3-005056914121'
+    research_group: '#UID: 8b179451-c0db-e611-9f54-005056991551'
+    scheduledend: '2021-12-17T17:00:00Z'
+    scheduledstart: '2021-12-17T06:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262951/RG-331
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d1b3e467-74e8-e211-b8a6-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: a9083838-ef24-ec11-80cb-005056914121
+    createdby:
+    - Babiak
+    - Michal
+    createdon: '2021-10-04T08:44:01Z'
+    customer:
+    - Babiak
+    - Michal
+    modifiedon: '2021-10-04T08:44:01Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-12-20T15:00:00Z'
+    scheduledstart: '2021-12-20T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-259096/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: f6032d78-31bd-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: d839e33c-7d32-ec11-80cb-005056914121
+    createdby:
+    - "Holbov\xE1"
+    - Radka
+    createdon: '2021-10-21T14:43:27Z'
+    customer:
+    - "Holbov\xE1"
+    - Radka
+    description: TFS
+    modifiedon: '2021-10-21T14:43:28Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-12-21T14:00:00Z'
+    scheduledstart: '2021-12-21T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262248/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: f6032d78-31bd-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: e6f662be-f542-ec11-80cb-005056914121
+    createdby:
+    - "Holbov\xE1"
+    - Radka
+    createdon: '2021-11-11T13:46:18Z'
+    customer:
+    - "Holbov\xE1"
+    - Radka
+    description: TFS
+    modifiedon: '2021-11-11T13:46:18Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2022-01-04T14:00:00Z'
+    scheduledstart: '2022-01-04T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265770/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: db6f46b0-1243-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-11-11T17:13:31Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-11T17:13:31Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-01-05T15:00:00Z'
+    scheduledstart: '2022-01-05T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265808/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 7bf245af-a809-e311-b8a6-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: f95193d6-bd47-ec11-80cb-005056914121
+    createdby:
+    - "P\xE1lkov\xE1"
+    - Lenka
+    createdon: '2021-11-17T15:48:49Z'
+    customer:
+    - "P\xE1lkov\xE1"
+    - Lenka
+    modifiedon: '2021-11-17T15:48:50Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-01-06T14:00:00Z'
+    scheduledstart: '2022-01-06T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266649/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: f6032d78-31bd-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 68cafd16-7d32-ec11-80cb-005056914121
+    createdby:
+    - "Holbov\xE1"
+    - Radka
+    createdon: '2021-10-21T14:42:28Z'
+    customer:
+    - "Holbov\xE1"
+    - Radka
+    description: TFS
+    modifiedon: '2021-11-11T13:47:00Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2022-01-11T14:00:00Z'
+    scheduledstart: '2022-01-11T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262247/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: fdb60eb9-1243-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-11-11T17:13:52Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-11T17:13:52Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-01-12T15:00:00Z'
+    scheduledstart: '2022-01-12T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265809/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 7bf245af-a809-e311-b8a6-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: 56d537fa-bd47-ec11-80cb-005056914121
+    createdby:
+    - "P\xE1lkov\xE1"
+    - Lenka
+    createdon: '2021-11-17T15:49:42Z'
+    customer:
+    - "P\xE1lkov\xE1"
+    - Lenka
+    modifiedon: '2021-11-17T15:49:42Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-01-13T14:00:00Z'
+    scheduledstart: '2022-01-13T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266650/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: dcdac7ca-1243-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-11-11T17:14:16Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-11T17:14:16Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-01-18T15:00:00Z'
+    scheduledstart: '2022-01-18T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265810/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 7bf245af-a809-e311-b8a6-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: 051520a3-be47-ec11-80cb-005056914121
+    createdby:
+    - "P\xE1lkov\xE1"
+    - Lenka
+    createdon: '2021-11-17T15:54:34Z'
+    customer:
+    - "P\xE1lkov\xE1"
+    - Lenka
+    modifiedon: '2021-11-17T15:54:34Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-01-19T14:00:00Z'
+    scheduledstart: '2022-01-19T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266655/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: 6dee05d3-1243-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-11-11T17:14:36Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-11T17:14:36Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-01-25T15:00:00Z'
+    scheduledstart: '2022-01-25T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265811/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 7bf245af-a809-e311-b8a6-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: 335c96df-be47-ec11-80cb-005056914121
+    createdby:
+    - "P\xE1lkov\xE1"
+    - Lenka
+    createdon: '2021-11-17T15:56:12Z'
+    customer:
+    - "P\xE1lkov\xE1"
+    - Lenka
+    modifiedon: '2021-11-17T15:56:12Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-01-26T14:00:00Z'
+    scheduledstart: '2022-01-26T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266656/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: aa9b32ec-1243-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-11-11T17:15:12Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-11T17:15:12Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-02-01T15:00:00Z'
+    scheduledstart: '2022-02-01T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265812/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 7bf245af-a809-e311-b8a6-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: 055d2081-c047-ec11-80cb-005056914121
+    createdby:
+    - "P\xE1lkov\xE1"
+    - Lenka
+    createdon: '2021-11-17T16:07:57Z'
+    customer:
+    - "P\xE1lkov\xE1"
+    - Lenka
+    modifiedon: '2021-11-17T16:07:57Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-02-02T14:00:00Z'
+    scheduledstart: '2022-02-02T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266657/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: 062eb6f9-1243-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-11-11T17:15:34Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-11T17:15:34Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-02-08T15:00:00Z'
+    scheduledstart: '2022-02-08T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265813/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 7bf245af-a809-e311-b8a6-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: fff54ca2-c047-ec11-80cb-005056914121
+    createdby:
+    - "P\xE1lkov\xE1"
+    - Lenka
+    createdon: '2021-11-17T16:08:43Z'
+    customer:
+    - "P\xE1lkov\xE1"
+    - Lenka
+    modifiedon: '2021-11-17T16:08:43Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-02-09T14:00:00Z'
+    scheduledstart: '2022-02-09T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266658/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: dbc67902-1343-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-11-11T17:15:50Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-11T17:15:50Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-02-15T15:00:00Z'
+    scheduledstart: '2022-02-15T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265814/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: 1312350f-1343-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-11-11T17:16:10Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-11T17:16:10Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-02-22T15:00:00Z'
+    scheduledstart: '2022-02-22T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265815/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: b733e586-1343-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-11-11T17:19:36Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-11T17:19:36Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-03-01T15:00:00Z'
+    scheduledstart: '2022-03-01T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265816/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: 3adbc38e-1343-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-11-11T17:19:50Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-11T17:19:50Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-03-08T15:00:00Z'
+    scheduledstart: '2022-03-08T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265817/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: e40ca19d-1343-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-11-11T17:20:07Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-11T17:20:08Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-03-15T15:00:00Z'
+    scheduledstart: '2022-03-15T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265818/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: a3ac74a4-1343-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-11-11T17:20:21Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-11T17:20:21Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-03-22T15:00:00Z'
+    scheduledstart: '2022-03-22T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265819/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: ab3e7eac-1343-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-11-11T17:20:35Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-11T17:20:35Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2022-03-29T14:00:00Z'
+    scheduledstart: '2022-03-29T05:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265820/RG-3-12
+    subtype: Measurement
+- colour: '#c7ecee'
+  name: Vitrobot
+  reservations:
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 0dfd39b5-3334-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-23T19:02:04Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-23T19:02:05Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-10-25T09:00:00Z'
+    scheduledstart: '2021-10-25T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262495/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 1d185425-a0be-e711-af01-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    activityid: 391a0a50-be31-ec11-80cb-005056914121
+    createdby:
+    - "\u0160kubn\xEDk"
+    - Karel
+    createdon: '2021-10-20T15:56:40Z'
+    customer:
+    - "\u0160ebesta"
+    - Marek
+    modifiedon: '2021-10-25T11:01:04Z'
+    project: '-'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-10-25T11:00:00Z'
+    scheduledstart: '2021-10-25T09:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262082/RG-3-10
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: bec1a959-6135-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-10-25T07:01:20Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-10-25T07:01:20Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-10-25T13:00:00Z'
+    scheduledstart: '2021-10-25T12:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262599/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d6cbbbdd-4c81-e711-aa46-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: a1d62e85-90c9-e911-80ca-005056914121
+    activityid: 1094a303-5132-ec11-80cb-005056914121
+    createdby:
+    - Homola
+    - Miroslav
+    createdon: '2021-10-21T09:26:49Z'
+    customer:
+    - Homola
+    - Miroslav
+    description: ehux cells walls if Vitrobot operational
+    modifiedon: '2021-10-21T09:26:49Z'
+    project: Structural characterization of Marine Virus
+    research_group: Structural Virology
+    scheduledend: '2021-10-26T09:30:00Z'
+    scheduledstart: '2021-10-26T07:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262179/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: c2a27d6d-c714-e511-8921-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: f659bf90-5732-ec11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2021-10-21T10:13:43Z'
+    customer:
+    - "Moravcov\xE1"
+    - Jana
+    modifiedon: '2021-10-21T10:13:43Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-10-26T11:00:00Z'
+    scheduledstart: '2021-10-26T09:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262189/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 959f96bb-2736-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-26T06:41:30Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-26T06:41:30Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-10-26T13:00:00Z'
+    scheduledstart: '2021-10-26T12:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262826/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 93326661-c428-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: 52fbc9a1-2e33-ec11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2021-10-22T11:53:12Z'
+    customer:
+    - Bauda
+    - Elda
+    modifiedon: '2021-10-22T11:53:12Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-10-26T14:00:00Z'
+    scheduledstart: '2021-10-26T13:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-262393/EA-Z
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 56451694-eb36-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-10-27T06:03:20Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-10-27T09:47:39Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-10-27T13:00:00Z'
+    scheduledstart: '2021-10-27T12:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263034/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: d6cbbbdd-4c81-e711-aa46-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: a1d62e85-90c9-e911-80ca-005056914121
+    activityid: 6907efa9-fb36-ec11-80cb-005056914121
+    createdby:
+    - Homola
+    - Miroslav
+    createdon: '2021-10-27T07:58:26Z'
+    customer:
+    - Homola
+    - Miroslav
+    description: ehux cell walls
+    modifiedon: '2021-10-27T10:38:30Z'
+    project: Structural characterization of Marine Virus
+    research_group: Structural Virology
+    scheduledend: '2021-10-27T15:00:00Z'
+    scheduledstart: '2021-10-27T13:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263057/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 8c5b1c45-823a-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-31T19:39:37Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-31T19:39:37Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-01T13:30:00Z'
+    scheduledstart: '2021-11-01T12:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263454/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 51a82fa0-e63a-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-11-01T07:37:59Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-11-01T07:37:59Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-01T14:00:00Z'
+    scheduledstart: '2021-11-01T13:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263491/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: dc8ad7bb-a57a-e811-80c2-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    activityid: f4e2444b-2b37-ec11-80cb-005056914121
+    createdby:
+    - "Valentov\xE1"
+    - Lucie
+    createdon: '2021-10-27T13:39:26Z'
+    customer:
+    - "Valentov\xE1"
+    - Lucie
+    modifiedon: '2021-11-01T11:22:30Z'
+    project: '-'
+    research_group: Structural Virology
+    scheduledend: '2021-11-01T16:00:00Z'
+    scheduledstart: '2021-11-01T15:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263166/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 1d185425-a0be-e711-af01-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    activityid: 103633b1-2637-ec11-80cb-005056914121
+    createdby:
+    - "\u0160kubn\xEDk"
+    - Karel
+    createdon: '2021-10-27T13:06:27Z'
+    customer:
+    - "\u0160ebesta"
+    - Marek
+    modifiedon: '2021-10-27T13:06:27Z'
+    project: '-'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-11-02T12:30:00Z'
+    scheduledstart: '2021-11-02T10:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263151/RG-3-10
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: f6032d78-31bd-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 84514f39-153b-ec11-80cb-005056914121
+    createdby:
+    - "Holbov\xE1"
+    - Radka
+    createdon: '2021-11-01T13:11:30Z'
+    customer:
+    - "Holbov\xE1"
+    - Radka
+    modifiedon: '2021-11-01T13:11:30Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-02T13:00:00Z'
+    scheduledstart: '2021-11-02T12:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263679/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: d4a46652-823a-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-10-31T19:40:02Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-10-31T19:40:02Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-02T14:00:00Z'
+    scheduledstart: '2021-11-02T13:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263455/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: f6032d78-31bd-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 600efd44-153b-ec11-80cb-005056914121
+    createdby:
+    - "Holbov\xE1"
+    - Radka
+    createdon: '2021-11-01T13:11:52Z'
+    customer:
+    - "Holbov\xE1"
+    - Radka
+    modifiedon: '2021-11-01T13:11:52Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-02T15:00:00Z'
+    scheduledstart: '2021-11-02T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263680/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 85003984-b83b-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-11-02T08:40:24Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-11-02T08:40:24Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-02T16:00:00Z'
+    scheduledstart: '2021-11-02T15:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263816/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 72737248-7c3c-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-11-03T08:01:44Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-11-03T08:01:44Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-03T14:00:00Z'
+    scheduledstart: '2021-11-03T13:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264074/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: f6032d78-31bd-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 5f16193c-9c3c-ec11-80cb-005056914121
+    createdby:
+    - "Holbov\xE1"
+    - Radka
+    createdon: '2021-11-03T11:50:30Z'
+    customer:
+    - "Holbov\xE1"
+    - Radka
+    modifiedon: '2021-11-03T11:50:30Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-04T12:00:00Z'
+    scheduledstart: '2021-11-04T08:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264147/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: d382f1cc-dd3b-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-11-02T13:07:19Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-02T13:07:19Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-11-04T14:30:00Z'
+    scheduledstart: '2021-11-04T12:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263932/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: 890b8244-de3b-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-11-02T13:10:37Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-02T13:10:37Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-11-05T08:30:00Z'
+    scheduledstart: '2021-11-05T07:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-263937/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: c2a27d6d-c714-e511-8921-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 267d88cd-903c-ec11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2021-11-03T10:28:37Z'
+    customer:
+    - "Moravcov\xE1"
+    - Jana
+    modifiedon: '2021-11-03T10:28:37Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-05T11:30:00Z'
+    scheduledstart: '2021-11-05T10:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264127/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: f6032d78-31bd-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: fb52ec5c-4a3d-ec11-80cb-005056914121
+    createdby:
+    - "Holbov\xE1"
+    - Radka
+    createdon: '2021-11-04T08:36:54Z'
+    customer:
+    - "Holbov\xE1"
+    - Radka
+    description: TFS
+    modifiedon: '2021-11-04T08:36:54Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-05T13:00:00Z'
+    scheduledstart: '2021-11-05T11:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264277/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 93326661-c428-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: 94421a60-b93c-ec11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2021-11-03T15:19:05Z'
+    customer:
+    - Bauda
+    - Elda
+    modifiedon: '2021-11-03T15:19:05Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-11-05T15:00:00Z'
+    scheduledstart: '2021-11-05T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264216/EA-Z
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 1d08daf2-b855-e211-970b-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: 69bf66ae-00e3-e611-9f54-005056991551
+    activityid: 2c888fbc-6c40-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-11-08T08:20:34Z'
+    customer:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    modifiedon: '2021-11-08T08:20:34Z'
+    project: CEMCOF - service - downtime
+    research_group: CEMCOF
+    scheduledend: '2021-11-08T13:00:00Z'
+    scheduledstart: '2021-11-08T08:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264764/CF-06
+    subtype: Service / Servis
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: 0c66aae2-6940-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-11-08T08:00:07Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-11-08T08:07:55Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-08T14:00:00Z'
+    scheduledstart: '2021-11-08T13:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264752/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: dc8ad7bb-a57a-e811-80c2-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    activityid: 0c3c3c4a-7a40-ec11-80cb-005056914121
+    createdby:
+    - "Valentov\xE1"
+    - Lucie
+    createdon: '2021-11-08T09:57:32Z'
+    customer:
+    - "Valentov\xE1"
+    - Lucie
+    modifiedon: '2021-11-08T09:57:32Z'
+    project: '-'
+    research_group: Structural Virology
+    scheduledend: '2021-11-08T17:00:00Z'
+    scheduledstart: '2021-11-08T16:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264858/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 4320ace9-3a36-ec11-80cb-005056914121
+    _ge_res_groupid_value: 6d6abad0-c3db-e611-9f54-005056991551
+    _psa_projectid_value: fac53bb9-e690-e911-80ca-005056914121
+    activityid: a06a47e7-3141-ec11-80cb-005056914121
+    createdby:
+    - "Nov\xE1\u010Dek"
+    - "Ji\u0159\xED"
+    createdon: '2021-11-09T07:51:58Z'
+    customer:
+    - Galera Prat
+    - Albert
+    modifiedon: '2021-11-09T07:51:58Z'
+    project: Instruct-ERIC access according to Service Level Agreement
+    research_group: external academic - foreign
+    scheduledend: '2021-11-09T11:00:00Z'
+    scheduledstart: '2021-11-09T08:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265127/EA-Z
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 2da0a69a-bd40-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-11-08T17:59:26Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-11-08T17:59:26Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-09T12:30:00Z'
+    scheduledstart: '2021-11-09T11:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265068/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ae43a5cf-d993-e511-88d0-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: fd6debab-0f1f-e311-8a73-005056991551
+    activityid: bee06b59-023c-ec11-80cb-005056914121
+    createdby:
+    - Zapletal
+    - David
+    createdon: '2021-11-02T17:28:53Z'
+    customer:
+    - Zapletal
+    - David
+    description: DicerOO+miR15a+TRBP
+    modifiedon: '2021-11-02T17:28:54Z'
+    project: '#UID: fd6debab-0f1f-e311-8a73-005056991551'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-11-09T16:30:00Z'
+    scheduledstart: '2021-11-09T15:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264016/RG-3-10
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: dc8ad7bb-a57a-e811-80c2-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    activityid: 851b85d9-e641-ec11-80cb-005056914121
+    createdby:
+    - "Valentov\xE1"
+    - Lucie
+    createdon: '2021-11-10T05:27:11Z'
+    customer:
+    - "Valentov\xE1"
+    - Lucie
+    modifiedon: '2021-11-10T05:27:55Z'
+    project: '-'
+    research_group: Structural Virology
+    scheduledend: '2021-11-10T07:00:00Z'
+    scheduledstart: '2021-11-10T06:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265357/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 3997ccf4-0fad-e411-86ce-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 4f6820ae-0ce2-e511-9f54-005056991551
+    activityid: 9ce0eec6-4341-ec11-80cb-005056914121
+    createdby:
+    - Mukhamedova
+    - Liya
+    createdon: '2021-11-09T09:59:51Z'
+    customer:
+    - Mukhamedova
+    - Liya
+    modifiedon: '2021-11-09T09:59:51Z'
+    project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-11-10T15:00:00Z'
+    scheduledstart: '2021-11-10T12:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265181/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ae43a5cf-d993-e511-88d0-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: fd6debab-0f1f-e311-8a73-005056991551
+    activityid: a356dd7d-023c-ec11-80cb-005056914121
+    createdby:
+    - Zapletal
+    - David
+    createdon: '2021-11-02T17:29:55Z'
+    customer:
+    - Zapletal
+    - David
+    description: Dicer+Adar1+miR15a
+    modifiedon: '2021-11-02T17:29:55Z'
+    project: '#UID: fd6debab-0f1f-e311-8a73-005056991551'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-11-10T16:30:00Z'
+    scheduledstart: '2021-11-10T15:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-264017/RG-3-10
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 3997ccf4-0fad-e411-86ce-005056991551
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: 4f6820ae-0ce2-e511-9f54-005056991551
+    activityid: 5eac57d9-4442-ec11-80cb-005056914121
+    createdby:
+    - Mukhamedova
+    - Liya
+    createdon: '2021-11-10T16:40:03Z'
+    customer:
+    - Mukhamedova
+    - Liya
+    modifiedon: '2021-11-10T16:40:03Z'
+    project: '#UID: 4f6820ae-0ce2-e511-9f54-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-11-11T17:00:00Z'
+    scheduledstart: '2021-11-11T15:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265594/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: e2128e7e-f145-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-11-15T08:53:35Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-11-15T08:53:35Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-15T14:00:00Z'
+    scheduledstart: '2021-11-15T13:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266164/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: f6032d78-31bd-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 66740548-1746-ec11-80cb-005056914121
+    createdby:
+    - "Holbov\xE1"
+    - Radka
+    createdon: '2021-11-15T13:24:01Z'
+    customer:
+    - "Holbov\xE1"
+    - Radka
+    description: Yeast
+    modifiedon: '2021-11-15T13:24:01Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-16T10:00:00Z'
+    scheduledstart: '2021-11-16T08:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266271/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: c2a27d6d-c714-e511-8921-005056991551
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 1673a64e-bb43-ec11-80cb-005056914121
+    createdby:
+    - "Moravcov\xE1"
+    - Jana
+    createdon: '2021-11-12T13:20:32Z'
+    customer:
+    - "Moravcov\xE1"
+    - Jana
+    modifiedon: '2021-11-12T13:20:32Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-16T12:00:00Z'
+    scheduledstart: '2021-11-16T10:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265956/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: ea32a3e3-c17c-e811-80c2-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    activityid: 7c12f0e0-4446-ec11-80cb-005056914121
+    createdby:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    createdon: '2021-11-15T18:50:25Z'
+    customer:
+    - Pinkas
+    - "Maty\xE1\u0161"
+    modifiedon: '2021-11-16T07:57:25Z'
+    project: '-'
+    research_group: CEMCOF
+    scheduledend: '2021-11-16T14:00:00Z'
+    scheduledstart: '2021-11-16T12:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266336/CF-06
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 8b091408-4787-e511-88d0-005056991551
+    _ge_res_groupid_value: a1324eda-c3db-e611-9f54-005056991551
+    _psa_projectid_value: 5a17c584-ed7c-e711-8654-005056991551
+    activityid: a3979654-ec46-ec11-80cb-005056914121
+    createdby:
+    - "Pol\xE1k"
+    - Martin
+    createdon: '2021-11-16T14:49:00Z'
+    customer:
+    - "Pol\xE1k"
+    - Martin
+    modifiedon: '2021-11-16T14:49:00Z'
+    project: CEMCOF - commercial - EYEN
+    research_group: '#UID: a1324eda-c3db-e611-9f54-005056991551'
+    scheduledend: '2021-11-18T13:00:00Z'
+    scheduledstart: '2021-11-18T12:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266523/K-T
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 1d185425-a0be-e711-af01-005056991551
+    _ge_res_groupid_value: b4dd6e4a-3f48-e211-970b-005056991551
+    activityid: 5b35c02c-ca43-ec11-80cb-005056914121
+    createdby:
+    - "\u0160kubn\xEDk"
+    - Karel
+    createdon: '2021-11-12T15:07:05Z'
+    customer:
+    - "\u0160ebesta"
+    - Marek
+    modifiedon: '2021-11-12T15:08:32Z'
+    project: '-'
+    research_group: Structural Biology of Gene Regulation
+    scheduledend: '2021-11-18T17:00:00Z'
+    scheduledstart: '2021-11-18T14:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265983/RG-3-10
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: 64ee4fcd-50bf-e911-80ca-005056914121
+    _ge_res_groupid_value: b6dd6e4a-3f48-e211-970b-005056991551
+    _psa_projectid_value: b3182248-150c-e311-b8a6-005056991551
+    activityid: 540de58f-de43-ec11-80cb-005056914121
+    createdby:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    createdon: '2021-11-12T17:32:56Z'
+    customer:
+    - "Trebichalsk\xE1"
+    - Zuzana
+    modifiedon: '2021-11-19T07:43:42Z'
+    project: '#UID: b3182248-150c-e311-b8a6-005056991551'
+    research_group: Structural Virology
+    scheduledend: '2021-11-19T10:30:00Z'
+    scheduledstart: '2021-11-19T09:00:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-265998/RG-3-12
+    subtype: Measurement
+  - _ge_realised_for_contactid_value: f6032d78-31bd-e811-80c3-005056914121
+    _ge_res_groupid_value: eca39969-793c-e311-85a1-005056991551
+    _psa_projectid_value: e5f8d30b-5931-e711-8654-005056991551
+    activityid: 1d7aebdc-5b48-ec11-80cb-005056914121
+    createdby:
+    - "Holbov\xE1"
+    - Radka
+    createdon: '2021-11-18T10:39:53Z'
+    customer:
+    - "Holbov\xE1"
+    - Radka
+    description: TFS yeast
+    modifiedon: '2021-11-18T10:39:53Z'
+    project: CEMCOF - R&D
+    research_group: CEMCOF
+    scheduledend: '2021-11-19T12:30:00Z'
+    scheduledstart: '2021-11-19T10:30:00Z'
+    statecode: 3
+    statuscode: 4
+    subject: 2021-266776/CF-06
+    subtype: Measurement

@@ -1,0 +1,39 @@
+@page "/"
+
+@using sip.Core.IndexRedirecting
+
+@inject NavigationManager NavigationManager
+@inject IOptions<AppOptions> AppOptions
+@inject IIndexRedirector IndexRedirector
+@inject ILogger<Index> Logger
+
+@if (_noRedirect)
+{
+    <div class="text-center mt-2">
+        <h1 class="text-center">@AppOptions.Value.ShortName index page</h1>
+        <p class="text-danger">If u are not getting redirected, your role within the system may not be recognized</p>
+    </div>
+}
+
+@code
+{
+    [CascadingParameter]
+    public OrganizationComponentContext ComponentContext { get; set; } = null!;
+    
+    private bool _noRedirect;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var target = await IndexRedirector.DecideTargetAsync(ComponentContext.PrincipalUser, ComponentContext.Organization);
+        Logger.LogDebug("Index deciding target: {}, org is: {}", target, ComponentContext.Organization?.Id);            
+        if (target is not null) // && target.TargetUrl.TrimStart('/') != NavigationManager.ToBaseRelativePath(NavigationManager.Uri))
+        {
+            NavigationManager.NavigateTo(target.TargetUrl, forceLoad: target.Refresh);
+        }
+        else
+        {
+            _noRedirect = true;
+        }
+    }
+
+}

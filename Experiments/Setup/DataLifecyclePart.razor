@@ -1,0 +1,68 @@
+@using sip.Experiments.Model
+@inject IConfiguration Configuration
+<GroupVertical>
+    <Header>Data Lifecycle</Header>
+    <Body>
+
+    <div class="big-radiolist">
+        @* TODO get rid of this wrapper by supporting custom class on input element *@
+        <CRadioList TValue="DataLifecycleOptions" @bind-Value="DataLifecycle"
+                    ItemsProvider="@(CRadioList<DataLifecycleOptions>.StaticItems(ExpMeta.DataLifecycles.Values))"
+                    HasLabel="@false">
+            <ItemTemplate Context="radioctx">
+                <div class="fake-radio"></div>
+                <div>
+                    <div class="heading">@radioctx.DisplayName</div>
+                    <div class="description">@radioctx.Tip</div>
+                </div>
+
+            </ItemTemplate>
+        </CRadioList>
+    </div>
+
+    @* Render all desired properties from lifecycle *@
+    <CascadingValue TValue="string" Name="filebrowser_scope" Value="@Exp.Type">
+        @foreach (var prop in DynamicFormTools.PrepareDynamicInputs(DataLifecycle.Setup, Exp))
+        {
+            <DynamicFormElement Setup="@prop.Setup" ValueTarget="@prop.ValueTarget" Key="@prop.Key"></DynamicFormElement>
+        }
+    </CascadingValue>
+    </Body>
+</GroupVertical>
+
+@code {
+
+    [Parameter]
+    public Experiment Exp { get; set; } = null!;
+    private Experiment? _prevExp = null;
+    
+
+    [Parameter]
+    public ExperimentOptions ExpMeta { get; set; } = null!;
+    
+    
+    protected override void OnParametersSet()
+    {
+        // Experiment changed? 
+        if (!ReferenceEquals(_prevExp, Exp))
+        {
+            DataLifecycle = ExpMeta.DataLifecycles.Values.First();
+        }
+
+        _prevExp = Exp;
+    }
+
+
+    private DataLifecycleOptions _dataLifecycle = null!;
+
+    public DataLifecycleOptions DataLifecycle
+    {
+        get => _dataLifecycle;
+        set
+        {
+            _dataLifecycle = value;
+            DynamicFormTools.ApplyValues(value.Setup, Exp);
+        }
+    }
+
+}

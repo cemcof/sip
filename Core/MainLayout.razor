@@ -1,0 +1,22 @@
+@inherits LayoutComponentBase
+
+@inject IOptionsMonitor<MainGuiOptions> GuiOpts
+
+<main class="@Gui.PanelTheme">
+    <div class="main-menu-container" >
+        <MainNavPanel/>
+        
+    </div>
+
+    <div class="main-body-container">
+        @Body
+    </div>
+</main>
+
+
+
+@code {
+
+    private MainGuiOptions Gui => GuiOpts.CurrentValue;
+
+}

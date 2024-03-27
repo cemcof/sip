@@ -1,0 +1,37 @@
+<div @attributes="@AdditionalAttributes" 
+     class="tt-container tt-@TooltipDirection.ToString().ToLower() @AdditionalAttributes?.GetValueOrDefault("class")"
+     tt-visible="@_tipVisible">
+    <CascadingValue IsFixed="@true" Value="@_context">
+        @ChildContent
+    </CascadingValue>
+</div>
+
+@code {
+    
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)] 
+    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+    
+    [Parameter]
+    public TooltipDirection TooltipDirection { get; set; }
+
+    private TooltipContainerContext _context = null!;
+    private bool _tipVisible = false;
+    
+    protected override void OnInitialized()
+    {
+        _context = new TooltipContainerContext(
+                EventCallback.Factory.Create<bool>(this, _onTooltipShowChanged)    
+            );
+    }
+
+    private Task _onTooltipShowChanged(bool show)
+    {
+        _context.ChangeCounter += show ? 1 : -1;
+        _tipVisible = _context.ChangeCounter > 0;
+        return Task.CompletedTask;
+    }
+
+}

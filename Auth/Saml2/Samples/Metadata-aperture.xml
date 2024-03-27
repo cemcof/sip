@@ -1,0 +1,118 @@
+<!--
+This is example metadata only. Do *NOT* supply it as is without review,
+and do *NOT* provide it in real time to your partners.
+ -->
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" ID="_462ab5661da709825a493ee3473f4429c8cfa683" entityID="https://aperture.ceitec.muni.cz/shibboleth">
+ 
+  <md:Extensions xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport">
+    <alg:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/>
+    <alg:DigestMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#sha384"/>
+    <alg:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+    <alg:DigestMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#sha224"/>
+    <alg:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha224"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha384"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2009/xmldsig11#dsa-sha256"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+    <alg:SigningMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1"/>
+  </md:Extensions>
+ 
+  <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+ 
+    <md:Extensions>
+      <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
+        <mdui:DisplayName xml:lang="en">Laboratory information management system</mdui:DisplayName>
+        <mdui:DisplayName xml:lang="cs">Systém správy informací o laboratoři</mdui:DisplayName>
+        <mdui:Description xml:lang="en">Access to laboratory information management system</mdui:Description>
+	      <mdui:Description xml:lang="cs">Přístup k systému správy informací o laboratoři</mdui:Description>
+        <mdui:InformationURL xml:lang="en">https://www.ceitec.eu/cryo-electron-microscopy-and-tomography-core-facility/cf94</mdui:InformationURL>
+        <mdui:InformationURL xml:lang="cs">https://www.ceitec.cz/cryo-electron-microscopy-and-tomography-core-facility/cf94</mdui:InformationURL>
+      </mdui:UIInfo>
+      <init:RequestInitiator xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://aperture.ceitec.muni.cz/Shibboleth.sso/Login"/>
+      <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://aperture.ceitec.muni.cz/Shibboleth.sso/Login" index="1"/>
+    </md:Extensions>
+ 
+    <md:KeyDescriptor>
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:KeyName>aperture.ceitec.muni.czg</ds:KeyName>
+        <ds:KeyName>https://aperture.ceitec.muni.cz//shibboleth</ds:KeyName>
+        <ds:X509Data>
+          <ds:X509SubjectName>CN=aperture.ceitec.muni.czg</ds:X509SubjectName>
+          <ds:X509Certificate>MIIERzCCAq+gAwIBAgIUa4opqblBvpAO/IqkHLEg1gPhAxswDQYJKoZIhvcNAQEL
+BQAwIzEhMB8GA1UEAxMYYXBlcnR1cmUuY2VpdGVjLm11bmkuY3pnMB4XDTIxMDcw
+ODEwMTQ0M1oXDTMxMDcwNjEwMTQ0M1owIzEhMB8GA1UEAxMYYXBlcnR1cmUuY2Vp
+dGVjLm11bmkuY3pnMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEArMHi
+pLFRDSQ0Ri2v/UZGxdvvUR9SRCudv2zn1x1W4Em6qU8IbouZRI4o/13WzdS32n3m
+w8SuZ0rwNs8HlymcVhe3uPVl0EiJIVRC2P92auTrfM9EEQ2qnmUp7cTLn5GE+h4a
+r7WUgKdzDPZBdvO70YIdy1I430kjWhZMBRG52s+fasHjE+Tq0knPq/NqOCVJPWqO
+wWvruy1NUoA5LBEmuJPwolaLa1frZiBZlLhJq+VQhAf5dOv8WBE0eCvsyYxHWlXh
+rb9P3MGf5veReg9YOGNWSZpx0sYgrCKqha9ecB/QMQOWflmL/l1jCwRlVegMxFR4
+KevFKiSFdAnBtrN5VRGUkQkiL/nZ9c0PadhEX+UMFrMa2eqmAXOdR5lggi1Uj6SB
+xqxDKIfZToQlp+WmyTEs5roVTctqhU4eZfKptqrzNE7j46bRgKf134EeZlDNfBut
+uy0tRFobXMtUnga1hPGfxws6Ivajse5+MZqkGuC1pHwp9RZRypIBTq/WvnX/AgMB
+AAGjczBxMFAGA1UdEQRJMEeCGGFwZXJ0dXJlLmNlaXRlYy5tdW5pLmN6Z4YraHR0
+cHM6Ly9hcGVydHVyZS5jZWl0ZWMubXVuaS5jei8vc2hpYmJvbGV0aDAdBgNVHQ4E
+FgQUwCfz2kYzf1VCeezl1Q/gksmHQmowDQYJKoZIhvcNAQELBQADggGBAAbugei7
+rWJTLtbfA9KkrrPbwugbOxfI3v4HVLbizKUc+d6Ed6eRrQhw3siQjP+VZLj/fjIS
+tfqRZJ+lXp9Y/POnbaV0sQ7JmdQ5CG40fslAwT+8sgE9TIEJ36ohE0ogrXBV070x
+mxvaLln1bIoioOuz7ZbUWJqohfAaTMA6GQeaQuIi3LmX7CcmhIFlgNPGg16I3bfv
+TMMLf+ORKjREoeWiQzlblunctbyxRKeUxjk68gfZZ6D/Kbk9dFVWeSd2LhfM6uhl
+3gLZ9RuqgP69u2OlODpxWBAY8khfMPI1YJ5ZWJjYAUgHYfEoPRBAHhlXsBbn0mWv
+5frm52NXD/EDeFHuwGP7AF8HYKAf9BvEtvLCm9FVQ54SaNjhXG5V+aD78NDaumuT
+/2INkhkNX3tqvAYdojGThMDqN+XlTce21Ayr7XVdh1Mfj1hrwQYpEIcVbq3SHOT8
+6RWVo8mUDtDW2BmSZ2vx/ak6iMWmapQUM5orAU/5r1Tiw0CY0iou5P5DIg==
+</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#aes128-gcm"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#aes192-gcm"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#aes256-gcm"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes128-cbc"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes192-cbc"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes256-cbc"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2009/xmlenc11#rsa-oaep"/>
+      <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p"/>
+    </md:KeyDescriptor>
+ 
+    <md:ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://aperture.ceitec.muni.cz/Shibboleth.sso/Artifact/SOAP" index="1"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://aperture.ceitec.muni.cz/Shibboleth.sso/SLO/SOAP"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://aperture.ceitec.muni.cz/Shibboleth.sso/SLO/Redirect"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://aperture.ceitec.muni.cz/Shibboleth.sso/SLO/POST"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://aperture.ceitec.muni.cz/Shibboleth.sso/SLO/Artifact"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://aperture.ceitec.muni.cz/Shibboleth.sso/SAML2/POST" index="1"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://aperture.ceitec.muni.cz/Shibboleth.sso/SAML2/POST-SimpleSign" index="2"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://aperture.ceitec.muni.cz/Shibboleth.sso/SAML2/Artifact" index="3"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://aperture.ceitec.muni.cz/Shibboleth.sso/SAML2/ECP" index="4"/>
+    <md:AttributeConsumingService index="0">
+      <md:ServiceName xml:lang="en">Laboratory Information Management Systeme</md:ServiceName>
+      <md:ServiceName xml:lang="cs">Systém správy informací o laboratoři</md:ServiceName>
+      <md:ServiceDescription xml:lang="en">Access to laboratory information management system</md:ServiceDescription>
+      <md:ServiceDescription xml:lang="cs">Přístup k systému správy informací o laboratoři</md:ServiceDescription>
+      <md:RequestedAttribute FriendlyName="eppn" Name="urn:oid:1.3.6.1.4.1.5923.1.1.1.6" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" isRequired="true"/>
+      <md:RequestedAttribute FriendlyName="givenName" Name="urn:oid:2.5.4.42" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" isRequired="true"/>
+      <md:RequestedAttribute FriendlyName="mail" Name="urn:oid:0.9.2342.19200300.100.1.3" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" isRequired="true"/>
+      <md:RequestedAttribute FriendlyName="sn" Name="urn:oid:2.5.4.4" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" isRequired="true"/>
+    </md:AttributeConsumingService></md:SPSSODescriptor>
+ 
+  <md:Organization>
+    <md:OrganizationName xml:lang="en">CEMCOF</md:OrganizationName>
+    <md:OrganizationName xml:lang="cs">CEMCOF</md:OrganizationName>
+    <md:OrganizationDisplayName xml:lang="en">CEMCOF</md:OrganizationDisplayName>
+    <md:OrganizationDisplayName xml:lang="cs">CEMCOF</md:OrganizationDisplayName>
+    <md:OrganizationURL xml:lang="en">https://www.ceitec.eu/centralni-laborator-kryo-elektronova-mikroskopie-a-tomografie/cf94</md:OrganizationURL>
+    <md:OrganizationURL xml:lang="cs">https://www.ceitec.cz/centralni-laborator-kryo-elektronova-mikroskopie-a-tomografie/cf94</md:OrganizationURL>
+  </md:Organization>
+ 
+  <md:ContactPerson contactType="technical">
+    <md:GivenName>Jiří</md:GivenName>
+    <md:SurName>Nováček</md:SurName>
+    <md:EmailAddress>mailto:jiri.novacek@ceitec.muni.cz</md:EmailAddress>
+  </md:ContactPerson>
+</md:EntityDescriptor>

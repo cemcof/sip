@@ -1,0 +1,34 @@
+@typeparam TValue
+@inherits CInputBase<TValue>
+
+<div class="form-group cinput-container cdate-container rendering-strategy-@(RenderingStrategy) @(HasLabel ? "labeled" : "labelless") @(IsRequired ? "required" : "")">
+    @if (HasLabel)
+    {
+        <div class="clabel-container" style="@GetFlexStyleForIndex(0)">
+            <CLabelAndTip Id="@InputId" Tip="@Tip">@DisplayName</CLabelAndTip>
+        </div>
+    }
+    
+    <div class="cinput-input-container" style="@GetFlexStyleForIndex(1)">
+        <InputDate class="@("form-control" + FieldCssClass)" 
+                   disabled="@IsDisabled" required="@IsRequired" readonly="@IsReadonly"
+                   id="@InputId" Type="@InputDateType" @bind-Value="@CurrentValue"></InputDate>
+        
+        <div class="invalid-feedback">
+            <ValidationMessage For="ValueExpression"></ValidationMessage>
+        </div>
+    </div>
+</div>        
+
+
+@code {
+
+    [Parameter]
+    public InputDateType InputDateType { get; set; }
+
+    protected override bool TryParseValueFromString(string? value, out TValue result, out string validationErrorMessage)
+    {
+        throw new InvalidOperationException();
+    }
+
+}

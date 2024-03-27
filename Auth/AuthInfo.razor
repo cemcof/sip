@@ -1,0 +1,21 @@
+@page "/authinfo"
+
+@inject IHttpContextAccessor ContextAccessor
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<AuthorizeView Policy="@ImpersonationOptions.ImpersonatedPolicy">
+    <a class="btn btn-primary" href="@($"/impersonation/deimpersonate")">Deimpersonate</a>
+</AuthorizeView>
+
+<ClaimsPrincipalOverview Principal="@_cp"></ClaimsPrincipalOverview>
+
+@code {
+
+    private ClaimsPrincipal? _cp;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _cp = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User;
+    }
+
+}

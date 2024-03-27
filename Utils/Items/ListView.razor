@@ -1,0 +1,185 @@
+@* OBSOLETE, remove this and replace with SListView instead *@
+
+@typeparam TItem
+
+<div class="listview-container @ClassName" @onkeydown="_inputKeyDown">
+    <div class="listview-header">@Header</div>
+    
+    @if (!HideBodyAndFooter)
+    {
+        <div class="listview-body-footer-container" @onmousedown:preventDefault="true" @onmousedown="@(_ => {})">
+            <div class="listview-body listview-items" @onwheel="_onItemsWheel" @onwheel:preventDefault="true">
+                @foreach (var i in ItemsForRendering)
+                {
+                    <div @key="i" 
+                         class="listview-item @(i.Equals(_selectedItem) ? "selected" : "") @(ItemSelectable(i) ? "selectable" : "unselectable")" 
+                         @onclick="@(() => _itemClick(i))">@_itemTemplate(i)</div>
+                }
+            </div>
+            
+            <div class="listview-footer">
+                @if (Footer is null)
+                {
+                    <div>@(_displayedFirstItemIndex)-@(DisplayedLastItemIndex) of @(_items.Count), Selected @(SelectedIndex + 1). </div>
+                }
+                else
+                {
+                    @Footer
+                }
+                
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+
+    [Parameter]
+    public string ClassName { get; set; } = "default";
+
+
+    private RenderFragment<TItem> _itemTemplate = null!;
+    [Parameter]
+    [EditorRequired]
+    public RenderFragment<TItem>? ItemTemplate { get; set; }
+    
+    [Parameter]
+    public RenderFragment? Header { get; set; }
+    [Parameter]
+    public RenderFragment? Footer { get; set; }
+    
+    [Parameter]
+    public bool HideBodyAndFooter { get; set; }
+
+    [Parameter]
+    public int ItemsCount { get; set; } = 10;
+
+    private IEnumerable<TItem> ItemsForRendering => _items.Skip(_displayedFirstItemIndex)
+        .Take(ItemsCount);
+
+    private IList<TItem> _items = new List<TItem>();
+    [Parameter]
+    public IList<TItem> Items { get; set; } = new List<TItem>();
+
+    [Parameter]
+    public Func<TItem, bool> ItemSelectable { get; set; } = (_) => true;
+
+    private int _displayedFirstItemIndex;
+    private int DisplayedLastItemIndex => _displayedFirstItemIndex + (ItemsCount - 1);
+    private TItem? _selectedItem;
+    private int SelectedIndex => _selectedItem is null ? -1 : _items.IndexOf(_selectedItem); 
+    
+    [Parameter] public EventCallback<TItem> OnItemSelected { get; set; }
+    [Parameter] public EventCallback<TItem> OnItemConfirmed { get; set; }
+    [Parameter] public EventCallback OnCancelled { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        _itemTemplate = ItemTemplate ?? throw new ArgumentNullException(nameof(ItemTemplate), "ListView component requires item template");
+        if (!_items.SequenceEqual(Items)) 
+        {
+            _displayedFirstItemIndex = 0;
+        }
+
+        _items = Items;
+    }
+    
+
+    public TItem? SelectNextItem()
+    {
+        // Find first selectable next item
+        var searchFromIndex = SelectedIndex + 1;
+        var targetItem = _items.Skip(searchFromIndex)
+            .Concat(_items.Take(searchFromIndex))
+            .FirstOrDefault(x => ItemSelectable(x));
+        SelectItem(targetItem);
+        return _selectedItem;
+    }
+
+    public TItem? SelectPreviousItem()
+    {
+        
+        // Find first selectable previous item
+        var searchFromIndex = (_items.Count - 1 - SelectedIndex) + 1 ;
+        var targetItem = _items.Reverse()
+            .Skip(searchFromIndex)
+            .Concat(_items.Reverse().Take(searchFromIndex))
+            .FirstOrDefault(x => ItemSelectable(x));
+        SelectItem(targetItem);
+        return _selectedItem;
+    }
+
+    public void SelectItem(TItem? item)
+    {
+        if (item is null || !Items.Contains(item)) item = default;
+        if (item is not null && item.Equals(_selectedItem)) return;
+        if (item is not null && !ItemSelectable(item)) return;
+        _selectedItem = item;
+        
+        // When necessary, scroll list view
+        if (item is not null)
+        {
+            if (SelectedIndex < _displayedFirstItemIndex)
+                _displayedFirstItemIndex = SelectedIndex;
+            if (SelectedIndex > DisplayedLastItemIndex)
+                _displayedFirstItemIndex = SelectedIndex - (ItemsCount) + 1;
+        }
+        
+        OnItemSelected.InvokeAsync(item);
+    }
+    
+    public void ConfirmCurrentItem()
+    {
+        if (_selectedItem is null) return;
+        ConfirmItem(_selectedItem);
+    }
+
+    public TItem ConfirmItem(TItem item)
+    {
+        OnItemConfirmed.InvokeAsync(item);
+        return item;
+    }
+    
+    private void _inputKeyDown(KeyboardEventArgs e)
+    {
+        var result = Enum.TryParse<KeyNames>(e.Key, out var key);
+        if (!result) return;
+        
+        if (key is KeyNames.ArrowDown)
+        {
+            SelectNextItem();
+        }
+
+        if (key is KeyNames.ArrowUp)
+        {
+            SelectPreviousItem();
+        }
+
+        if (key is KeyNames.Enter)
+        {
+            ConfirmCurrentItem();
+        }
+
+        if (key is KeyNames.Escape)
+        {
+            Console.WriteLine("LIst view pressed escape key.");
+            OnCancelled.InvokeAsync();
+        }
+    }
+
+    private void _onItemsWheel(WheelEventArgs e)
+    {
+        _displayedFirstItemIndex = e.DeltaY switch
+        {
+            > 0 => Math.Min(_displayedFirstItemIndex + 1, _items.Count - ItemsCount),
+            < 0 => Math.Max(_displayedFirstItemIndex - 1, 0),
+            _ => _displayedFirstItemIndex
+        };
+    }
+
+    private void _itemClick(TItem item)
+    {
+        SelectItem(item);
+        ConfirmCurrentItem();
+    }
+}

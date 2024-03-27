@@ -1,0 +1,36 @@
+.uploading {
+    display: none;
+}
+
+.idle { display: block }
+
+.uploading + div { display: block }
+.idle + div { display: none }
+
+
+.cinput-btn-browse {
+    position: relative;
+}
+
+.cinput-btn-browse ::deep input[type=file], .cinput-btn-browse button {
+    width: 6rem;
+    max-width: 6rem;
+    min-width: 6rem;
+    cursor: pointer;
+}
+
+.cinput-btn-browse ::deep input[type=file] {
+    position: absolute;
+    right: 0;
+    opacity: 0;
+}
+
+
+.cinput-input-container {
+    position: relative;
+}
+
+.cinput-input-container i {
+    position: absolute;
+    right: 1rem;
+}

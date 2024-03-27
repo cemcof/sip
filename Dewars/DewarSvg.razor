@@ -1,0 +1,88 @@
+<svg class="@(StaticOnly ? "static-only" : "interactive") dewar-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <defs>
+        <filter id="blur">
+            <feGaussianBlur stdDeviation="1"/>
+        </filter>
+        <filter id="shad">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"/>
+            <feOffset in="blur" dx="0" dy="0" result="offsetBlur"/>
+            <feSpecularLighting in="blur" surfaceScale="5" specularConstant=".75"
+                                specularExponent="20" lighting-color="#bbbbbb"
+                                result="specOut">
+                <fePointLight x="-5000" y="-10000" z="20000"/>
+            </feSpecularLighting>
+            <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
+            <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic"
+                         k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
+
+            <feMerge>
+                <feMergeNode in="offsetBlur"/>
+                <feMergeNode in="litPaint"/>
+            </feMerge>
+        </filter>
+    </defs>
+    <style>
+        #circ1 { fill: gray; }
+        #circ2 { fill: #b6b6b6; }
+        #circ3 { fill: #bdbdbd; }
+        #circ4 { fill: #8ca88b; }
+        
+        .group-kekw { cursor: pointer }
+        .fake-click-rect { opacity: 0; cursor: pointer; }
+        
+         .holder-rect.selected {
+            fill: #073f91                    
+         }
+         
+         .group-kekw.empty .holder-rect {
+            fill: #f1f1f1;
+            color: #efefef;
+         }
+         
+         g.interactive .group-kekw:hover .holder-rect,
+          .group-kekw.selected .holder-rect {
+            fill: #093c85;
+         }
+         
+         g.interactive .group-kekw:hover text,
+          .group-kekw.selected text {
+            fill: #073f91;
+         }
+    </style>
+    
+    <g class="@(StaticOnly ? "static-only" : "interactive")" filter="url(#shad)">
+        <circle filter="url(#shad)" cx="50%" cy="50%" r="38" id="circ1"/>
+        <circle cx="50" cy="50" r="32" id="circ2"/>
+        <circle cx="50" cy="50" r="20" id="circ3"/>
+
+        @for (int i = 0; i < 6; i++)
+        {
+            var cap = ((i + 1) % 6) + 1;
+            <g @onclick="@(() => HolderClicked.InvokeAsync(cap.ToString()))" transform="@($"rotate({i * 60}, 50, 50)")" class="group-kekw @GetHolderClass(cap.ToString())">
+                <rect class="fake-click-rect" x="50" y="42" height="16" width="35"/>
+                <rect class="holder-rect" x="50" y="49" width="26" height="2"/>
+                <text font-weight="bold" font-size="6" x="80" y="50" dominant-baseline="middle" text-anchor="middle" transform="rotate(@(i * -60), 80, 50)">@cap</text>
+            </g>
+        }
+
+        <circle cx="50" cy="50" r="12" id="circ4" filter="url(#blur)"/>
+    </g>
+    
+    <text font-size="5" x="50" y="97" font-weight="bold" text-anchor="middle">dewar @DewarId</text>
+
+</svg>
+
+@code {
+
+    [Parameter]
+    public string DewarId { get; set; } = "";
+    
+    [Parameter]
+    public bool StaticOnly { get; set; } 
+    
+    [Parameter]
+    public Func<string, string> GetHolderClass { get; set; } = (_) => "";
+    
+    [Parameter]
+    public EventCallback<string> HolderClicked { get; set; }
+}

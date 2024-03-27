@@ -1,0 +1,61 @@
+@using sip.Experiments.Model
+@inject ProjectManipulationHelperService ProjectService
+
+<GroupVertical>
+    <Header>
+        Project
+        <CDropdown HasLabel="@false" TValue="Project" ItemsProvider="_ProjectProvider" @bind-Value="@Exp.Project">
+            
+            <ItemTemplate>
+                <div class="basic-item-template">
+                    @context.Title <br/>
+                </div>
+            </ItemTemplate>
+
+            <AlternativeBody Context="dropdown">
+                <CEditForm TModelType="Project" Context="form"
+                           ModelFactory="@(ProjectService.CreateEmpty<EProject>)"
+                           OnSubmit="@((p) => _createProjectSubmit(p, dropdown))"
+                           OnCancel="@(() => dropdown.SelectItem(null))">
+                    <CreateProject Model="@form.Model"></CreateProject>
+                </CEditForm>
+            </AlternativeBody>
+            
+            <Footer Context="dropdown">
+                
+                @if (dropdown.State is not CDropdown<Project>.DropdownState.AlternativeMode)
+                {
+                    <button @onmousedown:preventDefault="true" @onmousedown="@(_ => { })"
+                            type="button" @onclick="@(() => dropdown.EnterAltMode())">Create new project</button>
+                }
+            </Footer>
+
+        </CDropdown>
+        
+    </Header>
+</GroupVertical>
+
+@code
+{
+    [Parameter]
+    public Experiment Exp { get; set; } = null!;
+
+    private async ValueTask<ItemsProviderResult<Project>> _ProjectProvider(ItemsProviderRequest request, string? searchstring)
+    {
+        var result = await ProjectService.LoadProjectsAsyns(new ProjectFilter()
+        {
+            FilterQuery = searchstring, 
+            CancellationToken = request.CancellationToken, 
+            Count = request.Count,
+            Offset = request.StartIndex
+        });
+        
+        return new ItemsProviderResult<Project>(result.Items, result.TotalCount);
+    }
+
+    private async Task _createProjectSubmit(Project project, CDropdown<Project> dropdownControl)
+    {
+        await ProjectService.PersistProjectAsync(project);
+        await dropdownControl.SelectItem(project);
+    }
+}

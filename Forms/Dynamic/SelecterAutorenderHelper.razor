@@ -1,0 +1,81 @@
+@using System.Linq.Expressions
+@using System.Collections
+@typeparam TContainer
+
+@if (Value is not null)
+{
+    <CSelecter TValue="TContainer" @bind-Value="@Value">
+        @foreach (var selecterItesm in GetSelecterItems())
+        {
+            <DynamicComponent Type="@selecterItesm.selecterItemComponent" Parameters="selecterItesm.parameters"></DynamicComponent>
+        }
+    </CSelecter>
+}
+
+@code {
+    [Parameter]
+    public TContainer? Value { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+    }
+
+    public IEnumerable<(Type selecterItemComponent, Dictionary<string, object?> parameters)> GetSelecterItems()
+    {
+        foreach (var propertyInfo in Value!.GetType().GetProperties())
+        {
+            var selecterItemType = typeof(CSelecterItem<,>).MakeGenericType(propertyInfo.PropertyType, typeof(TContainer));
+            var paramProvMethod = GetType().GetMethod(nameof(PrepareParameters), BindingFlags.NonPublic | BindingFlags.Instance)!
+                .MakeGenericMethod(propertyInfo.PropertyType);
+            var parameters = (Dictionary<string,object?>)paramProvMethod.Invoke(this, new object[] {propertyInfo})!;
+            yield return (selecterItemType, parameters);
+        }
+    }
+    
+    private Dictionary<string, object?> PrepareParameters<TValue>(PropertyInfo propertyInfo)
+    {
+        var result = new Dictionary<string, object?>
+        {
+            {"Value", propertyInfo.GetValue(Value)},
+            {"ValueChanged", EventCallback.Factory.Create<TValue>(this, value => propertyInfo.SetValue(Value, value))},
+            {
+                "ValueExpression", Expression.Lambda(
+                    Expression.MakeMemberAccess(Expression.Constant(Value), propertyInfo)
+                    )
+            }
+        };
+
+        if (!propertyInfo.PropertyType.IsPrimitive && propertyInfo.PropertyType != typeof(string) && !propertyInfo.PropertyType.IsAssignableTo(typeof(IList)))
+        {
+            // Arbitrary object - it is something that needs to be rendered further
+            // If that thing is selectable again, render it as Selecter helper again, otherwise use autoform renderer
+            var selectable = propertyInfo.GetCustomAttribute<SelectionAttribute>() is not null;
+
+            RenderFragment Fragment(TValue value) => builder =>
+            {
+                builder.OpenRegion(1);
+                if (selectable)
+                {
+                    var ctype = typeof(SelecterAutorenderHelper<>).MakeGenericType(propertyInfo.PropertyType);
+                    builder.OpenComponent(2, ctype);
+                    builder.AddAttribute(3, "Value", propertyInfo.GetValue(Value));
+                    builder.CloseComponent();
+                }
+                else
+                {
+                    builder.OpenComponent<AutoformRenderer>(4);
+                    builder.AddAttribute(5, "Model", propertyInfo.GetValue(Value));
+                    builder.CloseComponent();
+                }
+                builder.CloseRegion();
+            };
+
+            result["ChildContent"] = (RenderFragment<TValue>) Fragment;
+        }
+
+        return result;
+    }
+    
+    
+}

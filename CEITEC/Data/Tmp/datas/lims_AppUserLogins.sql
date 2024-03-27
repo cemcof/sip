@@ -1,0 +1,12 @@
+INSERT INTO lims.AppUserLogins (LoginProvider, ProviderKey, ProviderDisplayName, UserId) VALUES ('Google', '100908314409876924038', 'Google', '08da1be5-d6d8-401e-882e-d4b9a4fd0647');
+INSERT INTO lims.AppUserLogins (LoginProvider, ProviderKey, ProviderDisplayName, UserId) VALUES ('Google', '111274730091925143938', 'Google', '08da1be5-d6d8-401e-882e-d4b9a4fd0647');
+INSERT INTO lims.AppUserLogins (LoginProvider, ProviderKey, ProviderDisplayName, UserId) VALUES ('https://idp2.ics.muni.cz/idp/shibboleth', '12868@muni.cz', 'MUNI', '08d9bfe8-8f0a-44b8-8993-2d035819e49f');
+INSERT INTO lims.AppUserLogins (LoginProvider, ProviderKey, ProviderDisplayName, UserId) VALUES ('https://idp2.ics.muni.cz/idp/shibboleth', '151132@muni.cz', 'MUNI', '08d9aa96-3527-450c-8a33-fedf5c637bf1');
+INSERT INTO lims.AppUserLogins (LoginProvider, ProviderKey, ProviderDisplayName, UserId) VALUES ('https://idp2.ics.muni.cz/idp/shibboleth', '175342@muni.cz', 'MUNI', '08d9be4b-1700-49e2-89a8-449680dfa0b7');
+INSERT INTO lims.AppUserLogins (LoginProvider, ProviderKey, ProviderDisplayName, UserId) VALUES ('https://idp2.ics.muni.cz/idp/shibboleth', '235846@muni.cz', 'MUNI', '08d9bfe8-2d17-498a-8e0d-437f025c36ca');
+INSERT INTO lims.AppUserLogins (LoginProvider, ProviderKey, ProviderDisplayName, UserId) VALUES ('https://idp2.ics.muni.cz/idp/shibboleth', '241995@muni.cz', 'MUNI', '08d9b9d6-4a41-4a01-82bc-97e12a89f653');
+INSERT INTO lims.AppUserLogins (LoginProvider, ProviderKey, ProviderDisplayName, UserId) VALUES ('https://idp2.ics.muni.cz/idp/shibboleth', '247351@muni.cz', 'MUNI', '08d9bfe8-6d56-4535-8375-6bcfaed5b996');
+INSERT INTO lims.AppUserLogins (LoginProvider, ProviderKey, ProviderDisplayName, UserId) VALUES ('https://idp2.ics.muni.cz/idp/shibboleth', '356738@muni.cz', 'MUNI', '08d9bfdb-0a7c-4bb4-8103-bc945b190690');
+INSERT INTO lims.AppUserLogins (LoginProvider, ProviderKey, ProviderDisplayName, UserId) VALUES ('https://idp2.ics.muni.cz/idp/shibboleth', '357095@muni.cz', 'MUNI', '08d9bfe8-803c-4bc1-80ee-45d48e356ecc');
+INSERT INTO lims.AppUserLogins (LoginProvider, ProviderKey, ProviderDisplayName, UserId) VALUES ('https://idp2.ics.muni.cz/idp/shibboleth', '451337@muni.cz', 'MUNI', '08d9bfe8-5e2f-41e7-89fa-00ea033aef02');
+INSERT INTO lims.AppUserLogins (LoginProvider, ProviderKey, ProviderDisplayName, UserId) VALUES ('https://idp2.ics.muni.cz/idp/shibboleth', '52570@muni.cz', 'MUNI', '08d9bfe8-41ca-4a6a-84de-5e2169cf9738');

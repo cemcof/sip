@@ -1,0 +1,123 @@
+@inject ILogger<SearchBar> Logger
+
+<div class="searchbar" 
+     onkeydown="preventDefaultIfEnter(event); preventDefaultIfUp(event); preventDefaultIfDown(event)"
+     onkeypress="preventDefaultIfEnter(event); preventDefaultIfUp(event); preventDefaultIfDown(event)">
+    
+    <input @onkeydown="OnKeyDown" @ref="@_inputRef" placeholder="@Placeholder" type="text" class="form-control" 
+           @bind="_searchText"  
+           @oninput="OnInput"
+           @onfocus="OnFocus"
+           @onblur="OnBlur"/>
+    
+    @if (!string.IsNullOrEmpty(_searchText))
+    {
+        <div @onclick="OnClear" class="clear-icon">❌</div>
+    }
+    
+</div>
+
+
+@code {
+     // TODO - style position the clear icon
+    [Parameter]
+    public string Placeholder { get; set; } = "Search...";
+    private string _searchText = "";
+    private CancellationTokenSource? _currentSearch;
+    private ElementReference _inputRef;
+    public ElementReference InputRef => _inputRef;
+
+    
+    [Parameter]
+    public EventCallback<(string, CancellationToken)> RequestSearch { get; set; }
+    
+    // When searching, user should have ability to scroll between results by arrow keys, confirm the result, etc.
+    // However, the callback should not be propagated and event should be default-prevented so that the input can keep focus.
+    // Via this event the component signals that some navigation key was pressed so that consuming component can react accordingly.
+    [Parameter]
+    public EventCallback<KeyNames> OnNavigationKeyDown { get; set; }
+    
+    // How much time must elapse after last input to perform the search, defaults to half a second
+    [Parameter]
+    public TimeSpan TypeToSearchDelay { get; set; } = TimeSpan.FromMilliseconds(700);
+
+    
+    
+    [Parameter]
+    public EventCallback OnSearchFocused { get; set; }
+    
+    [Parameter]
+    public EventCallback OnSearchBlurred { get; set; }
+    
+
+
+    private async Task OnFocus()
+    {
+        if (!string.IsNullOrEmpty(_searchText))
+        {
+            await OnClear();
+        }
+
+        await OnSearchFocused.InvokeAsync();
+    }
+
+    private async Task TrySearch(string searchString, TimeSpan delay)
+    {
+        _searchText = searchString;
+        Logger.LogDebug("Attempting to search: {}, waiting for {}", _searchText, delay);
+        _currentSearch?.Cancel();
+        _currentSearch = new CancellationTokenSource();
+
+        try
+        {
+            await Task.Delay(delay, _currentSearch.Token);
+        }
+        catch (TaskCanceledException)
+        {
+            Logger.LogDebug("Cancelled search due to TypeToSearchDelay");
+            return;
+        }
+
+        try
+        {
+            Logger.LogDebug("Requesting search bar search: {}", _searchText);
+            await RequestSearch.InvokeAsync((_searchText, _currentSearch.Token));
+        }
+        catch (TaskCanceledException)
+        {
+            Logger.LogDebug("Cancelled search while search was being performed");
+        }
+    }
+
+    private Task OnInput(ChangeEventArgs arg)
+    {
+        return TrySearch(arg.Value?.ToString() ?? "", TypeToSearchDelay);
+    }
+
+    private Task OnBlur()
+    {
+        Logger.LogDebug("Search bar blurred");
+        return OnSearchBlurred.InvokeAsync();
+    }
+
+    private async Task OnClear()
+    {
+        _searchText = string.Empty;
+        await TrySearch(_searchText, TimeSpan.Zero);
+        await _inputRef.FocusAsync();
+    }
+
+    private async Task OnKeyDown(KeyboardEventArgs arg)
+    {
+        var result = Enum.TryParse<KeyNames>(arg.Key, out var key);
+        if (!result) return;
+
+        await OnNavigationKeyDown.InvokeAsync(key);
+    }
+
+    public async Task FocusAsync()
+    {
+        await _inputRef.FocusAsync();
+    }
+
+}

@@ -1,0 +1,19 @@
+@typeparam TValue
+@inherits CInputBase<TValue> 
+
+
+@code {
+    [Parameter]
+    public TValue? Val { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        Value = Val;
+    }
+
+    protected override bool TryParseValueFromString(string? value, out TValue result, out string validationErrorMessage)
+    {
+        throw new NotSupportedException();
+    }
+
+}

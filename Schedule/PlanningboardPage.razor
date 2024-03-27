@@ -1,0 +1,18 @@
+@page "/{OrganizationId}/planningboard"
+@page "/{OrganizationId}/planningboard/{WeekOffset:int}"
+@inherits OrganizationComponentBase
+@inject NavigationManager NavigationManager
+
+<RefreshTimer Action="@(() => { })"></RefreshTimer>
+
+<Schedule Organization="@Organization"
+          WeekOffset="@WeekOffset"
+          OnWeekOffsetRequest="@((int wo) => NavigationManager.NavigateTo($"/{Organization.LinkId}/planningboard/{wo}"))"></Schedule>
+
+@code {
+    // [CascadingParameter]
+    // public IOrganization Organization { get; set; } = null!;
+    
+    [Parameter, EditorRequired]
+    public int WeekOffset { get; set; }
+}

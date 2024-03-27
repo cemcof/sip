@@ -1,0 +1,87 @@
+<svg class="@(StaticOnly ? "static-only" : "dynamic") holder-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 160">
+    
+    <text class="holder-id-text" font-weight="bold" font-size="7" x="40" y="10" dominant-baseline="middle" text-anchor="middle">@HolderId</text>
+    
+    <style>
+        .tube-path {
+            fill: #e3e3e3;
+            stroke: black;
+            stroke-width: 0.4;
+         }
+         
+         .holder-path {
+            fill: none;
+            stroke: black;
+            stroke-width: 5.05;
+         }
+         
+         g.dynamic .tube-path {
+            cursor: pointer;
+         }
+         
+        .tube-path.selected {
+            fill: #4585e5;
+        }
+        
+        g.dynamic .tube-group:hover path {
+            fill: #4585e5;
+        }
+        
+        text.position-num {
+            cursor:pointer;
+        }
+    </style>
+    
+    <path stroke-linecap="round" stroke-linejoin="round" class="holder-path" d="M 40 140 V 42 l -13 -9 "></path>
+    <g class="@(StaticOnly ? "static-only" : "dynamic")" transform="translate(34, 0)">
+        @foreach (var t in _tubesToRender)
+        {
+            <g class="tube-group" @onclick="@(() => TubeClicked.InvokeAsync((t.Deck, t.Clock.ToString())))" transform="@($"translate({t.offsetX}, {t.offsetY})")">
+                <path
+                    d="M 0,3.54 a 6,3.54 0,0,0 12 0 a 6,3.54 0,0,0 -12 0 l 0,21.615128111731828 a 6,3.54 0,0,0 12 0 l 0,-21.615128111731828"
+                    class="tube-path @GetTubeClass((t.Deck, t.Clock.ToString()))">
+                </path>
+                
+                <text transform="translate(6, 4)" font-size="6" class="position-num" dominant-baseline="middle" text-anchor="middle">@t.Clock</text>
+            </g>
+        }
+        
+            
+    </g>
+</svg>
+
+
+@code {
+    private const float TUBE_RADIUS = 9;
+    private const float TUBE_VERTICAL_DISPLACE = 6;
+    private const float DECK_TOP_Y_OFFSET = 50;
+    private const float DECK_BOT_Y_OFFSET = 110;
+
+    private readonly List<(string Deck, int Clock, float offsetX, float offsetY)> _tubesToRender = new()
+    {
+        // Top Deck
+        ("T", 3, TUBE_RADIUS, -TUBE_VERTICAL_DISPLACE + DECK_TOP_Y_OFFSET),
+        ("T", 6, TUBE_RADIUS, TUBE_VERTICAL_DISPLACE + DECK_TOP_Y_OFFSET),
+        ("T", 12, -TUBE_RADIUS, -TUBE_VERTICAL_DISPLACE + DECK_TOP_Y_OFFSET),
+        ("T", 9, -TUBE_RADIUS, TUBE_VERTICAL_DISPLACE + DECK_TOP_Y_OFFSET),
+        
+        // Bottom deck
+        ("B", 3, TUBE_RADIUS, -TUBE_VERTICAL_DISPLACE + DECK_BOT_Y_OFFSET),
+        ("B", 6, TUBE_RADIUS, TUBE_VERTICAL_DISPLACE + DECK_BOT_Y_OFFSET),
+        ("B", 12, -TUBE_RADIUS, -TUBE_VERTICAL_DISPLACE + DECK_BOT_Y_OFFSET),
+        ("B", 9, -TUBE_RADIUS, TUBE_VERTICAL_DISPLACE + DECK_BOT_Y_OFFSET),
+    };
+
+    [Parameter]
+    public string HolderId { get; set; } = "";
+    
+    [Parameter]
+    public EventCallback<(string Deck, string Position)> TubeClicked { get; set; }
+    
+    [Parameter]
+    public Func<(string Deck, string Clock), string> GetTubeClass { get; set; } = (_) => "";
+    
+    [Parameter]
+    public bool StaticOnly { get; set; }
+    
+}

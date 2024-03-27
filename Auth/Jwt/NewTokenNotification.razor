@@ -1,0 +1,13 @@
+@page "/new_token_notification/{TargetEmail}"
+@layout NoLayout
+
+<p class="text-danger text-center m-4">
+    The link has expired and is no longer valid. Please use a new link we have just sent you to @TargetEmail
+</p>
+
+@code {
+
+    [Parameter]
+    public string TargetEmail { get; set; } = "";
+
+}

@@ -1,0 +1,95 @@
+@using sip.Experiments.Model
+@using sip.Userman
+@inject AppUserManager UserManager
+@inject IAuthorizationService AuthorizationService
+@inject IOptionsMonitor<InstrumentsOptions> InstrumentOptions
+@inject ILogger<OperatorPickerPart> Logger
+ 
+<GroupVertical>
+    <Header>
+        <strong>Operator</strong> <small class="small small-tip">- contact information of the person setting up the experiment</small>
+        <ConditionalRender Condition="HasFullAccess">
+            <TrueContent>
+                <CDropdown HasLabel="@false" ItemsProvider="_OperatorsProvider" TValue="AppUser" @bind-Value="@Exp.Operator">
+                    
+                    <ItemTemplate Context="user">
+                        <div class="icon-item-template">
+                            <div><i class="bi bi-person"></i></div>
+                            <div>
+                                @user <br/>
+                                <small>@user.PrimaryContact.Affiliation</small>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+
+                    <AlternativeBody Context="dropdown">
+                         <CEditForm TModelType="AppUser" Context="form"
+                                   ModelFactory="@(UserManager.CreateItem)"
+                                   OnSubmit="@((p) => _createOperatorSubmit(p, dropdown))"
+                                   OnCancel="@(() => dropdown.SelectItem(null))">
+                            <CreateUser Model="@dropdown.Value"></CreateUser>
+                        </CEditForm>
+                    </AlternativeBody>
+
+                </CDropdown>
+            </TrueContent>
+
+            <FalseContent>
+                <NullAware Value="@Exp.Operator">
+                    <WhenReady Context="user">
+                        <div class="icon-item-template">
+                            <div><i class="bi bi-person"></i></div>
+                            <div>
+                                @user <br/>
+                                <small>@user.PrimaryContact.Affiliation</small>
+                            </div>
+                        </div>
+                    </WhenReady>
+                </NullAware>
+            </FalseContent>
+        </ConditionalRender>
+    </Header>
+</GroupVertical>
+
+@code {
+
+    [Parameter]
+    public Experiment Exp { get; set; } = null!;
+
+    private bool HasFullAccess { get; set; }
+
+    [CascadingParameter]
+    public OrganizationComponentContext ComponentContext { get; set; } = null!;
+
+    protected override async Task OnInitializedAsync()
+    {
+    // Authorize whether user has full access? 
+        var instrumentSubject = InstrumentOptions.Get(Exp.OrganizationId).Instruments.First(i => i.Name == Exp.InstrumentName);
+        var req = new[] {new IntrumentJobsUseRequirement(instrumentSubject, true)};
+        HasFullAccess = (await AuthorizationService.AuthorizeAsync(ComponentContext.PrincipalUser, null, req)).Succeeded;
+    // Set Operator to be current user by default
+    // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+        if (ComponentContext.ApplicationUser is not null && Exp.Operator is null)
+        {
+            Logger.LogDebug("Setting operator to current user");
+            Exp.Operator = ComponentContext.ApplicationUser;
+        }
+    }
+    
+    //
+    // protected override async Task OnParametersSetAsync()
+    // {
+    // }
+    
+    private async ValueTask<ItemsProviderResult<AppUser>> _OperatorsProvider(ItemsProviderRequest request, string? searchstring)
+    {
+        var users = await UserManager.GetUsersAsync(request.ToFilter());
+        return new ItemsProviderResult<AppUser>(users.Items, users.TotalCount);
+    }
+
+    private async Task _createOperatorSubmit(AppUser appUser, CDropdown<AppUser> dropdown)
+    {
+        await UserManager.PersistItem(appUser);
+        await dropdown.SelectItem(appUser);
+    }
+}

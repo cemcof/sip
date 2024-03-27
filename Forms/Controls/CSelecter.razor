@@ -1,0 +1,31 @@
+@typeparam TValue
+@inherits CInputBase<TValue>
+
+@if (Value is not null && ChildContent is not null)
+{
+    <CascadingValue Name="selecter" Value="@(this)" >
+        
+        <div class="cselecter-container cinput-container cinput-@ModelPropertyType.Name">
+            @if (HasLabel)
+            {
+                <div class="clabel-container" style="@GetFlexStyleForIndex(0)">
+                    <CLabelAndTip Id="@InputId" Tip="@Tip">@DisplayName</CLabelAndTip>
+                </div>
+            }
+
+            <div class="cinput-input-container" style="@GetFlexStyleForIndex(1)">
+                @ChildContent(Value)
+            </div>
+        </div>
+        
+    </CascadingValue>
+}
+
+@code {
+    [Parameter]
+    public RenderFragment<TValue>? ChildContent { get; set; }
+
+    
+    protected override bool TryParseValueFromString(string? value, out TValue result, [NotNullWhen(false)] out string? validationErrorMessage)
+        => throw new NotSupportedException($"This component does not parse string inputs. Bind to the '{nameof(CurrentValue)}' property, not '{nameof(CurrentValueAsString)}'.");
+}

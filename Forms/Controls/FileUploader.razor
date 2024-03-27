@@ -1,0 +1,117 @@
+@using MimeKit
+@using sip.Documents
+
+<div class="file-uploader">
+    <div class="header d-flex justify-content-between">
+        @if (ChildContent is not null)
+        {
+            <div class="caption">@ChildContent</div>
+        }
+        <UploadButton IsDisabled="@(_state is UploaderState.Uploading or UploaderState.Loading)" 
+                      Accept="@UploaderInfo.AcceptMimes" 
+                      IsMultiple="@(UploaderInfo.FilesMax > 1)" 
+                      OnFilesPick="@LoadFiles"
+                      BtnClass="btn btn-primary"></UploadButton>
+
+    </div>
+    
+    <div class="file-list">
+        @if (_state == UploaderState.Uploading)
+        {
+            <div class="text-warning">Uploading files... Please wait.</div>
+        }
+        
+        @foreach (var f in _currentFiles)
+        {
+            <div class="file-info d-flex justify-content-between">
+                <div>@f.FileName (@f.Length Bytes)</div>
+                
+                @if (RemoveHandler is not null)
+                {
+                    <div @onclick="@(() => DeleteFile(f))" class="clear-icon pointer">❌</div>
+                }
+            </div>
+        }
+        
+        
+    </div>
+    
+</div>
+
+@code {
+    private enum UploaderState
+    {
+        Loading,
+        Idle,
+        Uploading,
+        Errored
+    }
+    
+    private UploaderState _state = UploaderState.Idle;
+
+
+    [Parameter]
+    public Func<Task<IEnumerable<FileMetadata>>> FileListProvider { get; set; } = null!;
+
+    [Parameter]
+    public Func<FileMetadata, Stream, Task> UploadHandler { get; set; } = null!;
+    
+    [Parameter]
+    public Func<FileMetadata, Task>? RemoveHandler { get; set; }
+
+    [Parameter] 
+    public UploadFileAttribute UploaderInfo { get; set; } = new();
+    
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    private List<FileMetadata> _currentFiles = new();
+    
+    private async Task LoadFiles(IEnumerable<IBrowserFile> files)
+    {
+        _state = UploaderState.Uploading;
+        
+        // Prepare file metadata 
+        foreach (var browserFile in files)
+        {
+            var fm = new FileMetadata() {ContentType = ContentType.Parse(browserFile.ContentType), DtCreated = DateTime.UtcNow, FileName = browserFile.Name, Length = (int) browserFile.Size};
+            await using var stream = browserFile.OpenReadStream(UploaderInfo.BytesPerFileMax);
+            await UploadHandler(fm, stream);
+        }
+
+        _state = UploaderState.Loading;
+        await RefreshFileList();
+
+        _state = UploaderState.Idle;
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if (FileListProvider is null) throw new ArgumentNullException(nameof(FileListProvider));
+        if (UploadHandler is null) throw new ArgumentNullException(nameof(UploadHandler));
+        
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _state = UploaderState.Loading;
+        await RefreshFileList();
+        _state = UploaderState.Idle;
+    }
+
+    private async Task RefreshFileList()
+    {
+        _currentFiles = (await FileListProvider()).ToList();
+    }
+
+    private async Task DeleteFile(FileMetadata fileMetadata)
+    {
+        if (RemoveHandler is not null)
+        {
+            await RemoveHandler(fileMetadata);
+            await RefreshFileList();
+        }
+    }
+
+}

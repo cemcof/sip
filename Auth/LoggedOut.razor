@@ -1,0 +1,20 @@
+@page "/logged_out"
+@using sip.Core
+@inject IOptions<AppOptions> Options 
+
+<div class="container text-center d-flex align-items-center flex-column">
+    
+    <h2>You have been successfully signed out of the application</h2>
+
+    <p class="text-danger">Please note that you were signed out only from our application, login session of your external identity provider might still exist until the web browser is closed</p>
+    
+    <div class="btn-group">
+        <NavLink class="btn btn-primary" href="/">Home</NavLink>
+        <a class="btn btn-primary" href="/login">Re-login</a>
+    </div>
+
+</div>
+
+@code {
+    
+}

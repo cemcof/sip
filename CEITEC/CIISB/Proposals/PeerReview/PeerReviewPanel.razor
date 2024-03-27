@@ -1,0 +1,52 @@
+@using sip.Projects
+@using sip.Userman
+
+<div class="document-panel pstate-@PeerReview.ProposalState @PeerReview prstatus-@PeerReview.Result">
+    
+    <div class="heading">
+        Peer review
+    </div>
+    
+    <div class="body">
+        
+        @* @if (!PeerReview.IsEvaluated && Project.InStatusAll<WaitingForPeerReviewRequest>()) *@
+        @* { *@
+        @*     // Peer review is not evaluated and is waiting for request *@
+        @*      *@
+        @*     // Is this guy the guy that can send peer review request?   *@
+        @*     @if (CurrentUser.IsInRole<Peerreviewer>()) *@
+        @*      *@
+        @*      *@
+        @* } *@
+        @* else if (!PeerReview.IsEvaluated && Project.InStatusAll<WaitingForPeerReview>()) *@
+        @* { *@
+        @*     // Peer review is evaluated *@
+        @*      *@
+        @*      *@
+        @* } *@
+        @* *@
+        @* @if (PeerReview.ExpectedEvaluator is null) *@
+        @* { *@
+        @*     // Selecting peer reviewer *@
+        @* } *@
+        @* else *@
+        @* { *@
+        @*      *@
+        @* } *@
+        
+    </div>
+    
+</div>
+
+
+@code {
+    
+    [Parameter]
+    public PeerReview PeerReview { get; set; }
+    
+    [Parameter]
+    public Project Project { get; set; }
+    
+    [Parameter]
+    public AppUser CurrentUser { get; set; }
+}

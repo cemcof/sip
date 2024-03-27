@@ -1,0 +1,183 @@
+@using MimeTypes
+@inherits CInputBase<string>
+@inject ILogger<CFilesUploader> Logger
+@inject IJSRuntime Js 
+
+<div class="form-group cinput-container csingleuploadinput-container rendering-strategy-@(RenderingStrategy) @(HasLabel ? "labeled" : "labelless") @(IsRequired ? "required" : "")">
+    @if (HasLabel)
+    {
+        <div class="clabel-container" style="@GetFlexStyleForIndex(0)">
+            <CLabelAndTip Id="@InputId" Tip="@Tip">@DisplayName</CLabelAndTip>
+        </div>
+    }
+    
+    <div class="cinput-input-container" style="@GetFlexStyleForIndex(1)">
+        @if (_state == UploaderState.Prepicking)
+        {
+            <FilesystemBrowser OnValidPick="OnValidPick" @bind-Value="@CurrentValue" PickFolder="@false" Scope="@Scope" FileSystemProvider="@PrepickProvider" HasLabel="@false"></FilesystemBrowser>
+        }
+        
+        @if (_state is UploaderState.Prepicked or UploaderState.Uploaded or UploaderState.Picking)
+        {
+            <input @onclick="EditClick" type="text" class="form-control" readonly value="@CurrentValue"/>
+        }
+        
+        @if (_state == UploaderState.Uploaded)
+        {
+            <i @onclick="_deleteFile" class="fas fa-times text-danger"></i>
+        }
+        <div class="invalid-feedback">
+            <ValidationMessage For="ValueExpression"></ValidationMessage>
+        </div>
+    </div>
+    
+    <div class="cinput-btn-browse" style="@GetFlexStyleForIndex(2)">
+        <button @onclick="BrowseClickInvoke" type="button" class="btn btn-secondary btn-sm" disabled="@IsDisabled">Browse</button>
+        <InputFile @ref="_inputFileComponent" id="@InputId" OnChange="LoadFiles" multiple="@IsMultiple" accept="@Accept"></InputFile>
+    </div>
+</div>        
+
+@code {
+
+    private const int MAX_FILES_COUNT_DEFAULT = 1;
+    private int? _maxFilesCount;
+    [Parameter]
+    public int MaxFilesCount
+    {
+        get => _maxFilesCount ?? ModelPropertyType.GetCustomAttribute<MaxLengthAttribute>()?.Length ?? MAX_FILES_COUNT_DEFAULT;
+        set => _maxFilesCount = value;
+    }
+    public bool IsMultiple => MaxFilesCount > 1;
+
+    private const string ACCEPT_DEFAULT = "*";
+    private string? _accept;
+    [Parameter]
+    public string Accept
+    {
+        get => _accept ?? ACCEPT_DEFAULT;
+        set => _accept = value;
+    }
+
+
+    private enum UploaderState
+    {
+        Picking,
+        Uploading,
+        Uploaded,
+        Prepicking,
+        Prepicked,
+        Errored
+    }
+    
+    [Parameter]
+    [EditorRequired]
+    public string TargetDirectory { get; set; } = null!;
+
+    [Parameter]
+    [EditorRequired]
+    public string FilenamePrefix { get; set; } = null!;
+
+    [Parameter]
+    public string? Scope { get; set; }
+    
+    [Parameter]
+    public IFilesystemProvider? PrepickProvider { get; set; }
+
+    private bool Prepickable => PrepickProvider != null;
+
+    private UploaderState _state = UploaderState.Picking;
+    private string? _filePath = null;
+    private InputFile? _inputFileComponent;
+
+    protected override void OnInitialized()
+    {
+        _state = Prepickable ? UploaderState.Prepicking : UploaderState.Picking;
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if (TargetDirectory is null) throw new ArgumentNullException(nameof(TargetDirectory));
+        if (FilenamePrefix is null) throw new ArgumentNullException(nameof(FilenamePrefix));
+        
+    }
+
+    private string GetInputFileClass()
+    {
+        var cl = $"form-control ms-1 {FieldCssClass} ";
+        cl += _state.ToString().ToLower();
+        return cl;
+    }
+    
+    private async Task LoadFiles(InputFileChangeEventArgs e)
+    {
+        var fl = e.File;
+        _state = UploaderState.Uploading;
+        
+        try
+        {
+            var safeFilename = Guid.NewGuid().ToString().Replace("-", "")[..10];
+            var extension = MimeTypeMap.GetExtension(fl.ContentType);
+            var fileRef = FilenamePrefix + "_" + safeFilename + extension;
+            _filePath = Path.Combine(TargetDirectory, fileRef);
+            await using FileStream fs = new(_filePath, FileMode.Create);
+            await fl.OpenReadStream().CopyToAsync(fs);
+            Logger.LogInformation("Successfully uploaded file: {Bytes} bytes, target name {Name}, target path {Path}", fs.Length, fileRef, _filePath);
+            CurrentValue = fileRef;
+            _state = UploaderState.Uploaded;
+        }
+        catch (Exception ex)
+        {
+            _state = UploaderState.Errored;
+            Logger.LogError("File: {Filename} Error: {Error}",
+                fl.Name, ex.Message);
+        }
+    }
+    
+    protected override bool TryParseValueFromString(string? value, out string result, out string validationErrorMessage)
+    {
+        throw new NotSupportedException($"This component does not parse string inputs. Bind to the '{nameof(CurrentValue)}' property, not '{nameof(CurrentValueAsString)}'.");
+    }
+
+    private void _deleteFile()
+    {
+        CurrentValue = null;
+        try
+        {
+            if (_filePath is not null)
+                File.Delete(_filePath); // !
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, "Failed to delete a file with path {Path}", _filePath);
+        }
+        finally
+        {
+            _state = Prepickable ? UploaderState.Prepicking : UploaderState.Picking;
+        }
+    }
+
+    private Task BrowseClickInvoke(MouseEventArgs e)
+    {
+        return Task.CompletedTask;
+    // if (_inputFileComponent is null) return Task.CompletedTask;
+    // return _js.InvokeVoidAsync("clickElement", _inputFileComponent.Element).AsTask();
+    }
+
+    private void EditClick()
+    {
+        if (_state is UploaderState.Prepicked)
+        {
+            CurrentValue = null;
+            _state = Prepickable ? UploaderState.Prepicking : UploaderState.Picking;
+        }
+    }
+
+    private Task OnValidPick(string path)
+    {
+        _state = UploaderState.Prepicked;
+        CurrentValue = path;
+        return Task.CompletedTask;
+    }
+
+}

@@ -1,0 +1,44 @@
+
+
+.wf-body {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+    /*flex-wrap: wrap;*/
+}
+
+
+.wf-header {
+    margin: 0.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #a8a8a8;
+}
+
+.wf-list-item {
+    display: flex;
+    align-items: center;
+}
+
+.exp-form-flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.exp-form-processing-part {
+   width: 50rem;
+}
+
+.exp-form-data-part {
+    width: 50rem;
+    /*display: flex; Buggy - overflow*/
+    flex-direction: column;
+}
+
+::deep .exp-form-data-part > div:last-child {
+    flex-grow: 1;
+}
+
+::deep .exp-form-processing-part > div:last-child {
+    height: 100%;
+}

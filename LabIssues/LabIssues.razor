@@ -1,0 +1,101 @@
+@page "/labissues/{SelectedIid?}"
+@using sip.Userman
+
+@inject IssuesService IssuesService
+@inject AppUserManager UserManager
+@inject NavigationManager NavigationManager
+
+<PageTitle>Issues</PageTitle>
+
+<div class="issues-header">
+    <NavLink href="/labissues/new" class="btn btn-primary btn-sm"><i class="bi bi-plus-circle"></i>&nbsp; File a new issue</NavLink>
+    <strong class="ms-3">Search issues:&nbsp;</strong>
+    <input type="text" placeholder="Search issues (by user, description, date, status...)" 
+           value="@_searchString"
+           class="form-control form-control-sm me-3"
+           @oninput="@((args) => _search(args.Value?.ToString() ?? string.Empty))"
+           @onfocus="@(() => _search(string.Empty))" />
+    @if (_searchString.ToLower() != "inprogress")
+    {
+        <a class="link-primary pointer" @onclick="@(() => _search("InProgress"))">Show in progress only</a>
+    }
+    <div class="flex-grow-1"></div>
+    <strong>Hint: click on an issue to view details or edit</strong>
+</div>
+
+<div class="issues-upper-container">
+    <div class="issues-container">
+        <Virtualize TItem="Issue" Context="issue" Items="_issues" ItemSize="50">
+            <NavLink class="text-decoration-none" href="@("/labissues/" + issue.Id)">
+                <IssueComponent Issue="issue" IsSelected="@(issue.Id == SelectedIid)"></IssueComponent>
+            </NavLink>
+        </Virtualize>
+    </div>
+    
+    @if (_renderSide)
+    {
+        <div class="issues-side-container">
+            <IssuesSidePanel IssueCreated="OnSideCancel" 
+                             IssueUpdated="OnSideCancel" 
+                             Cancelled="OnSideCancel" 
+                             Issue="_selectedIssue"></IssuesSidePanel>    
+        </div>
+    }
+    
+</div>
+
+
+
+@code {
+    private ICollection<Issue> _issues = new List<Issue>();
+
+    private Issue? _selectedIssue;
+    private string _searchString = string.Empty;
+
+    private bool _renderSide;
+    
+    [Parameter]
+    public string? SelectedIid { get; set; }
+
+
+    private async Task _search(string searchString)
+    {
+        _searchString = searchString;
+        await LoadIssues(searchString);
+    }
+
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _renderSide = false;
+        _selectedIssue = null;
+        
+        if (SelectedIid is not null)
+        {
+            if (SelectedIid != "new")
+            {
+                _selectedIssue = _issues.FirstOrDefault(i => i.Id == SelectedIid);
+            }
+
+            _renderSide = true;
+            await LoadIssues(_searchString);
+        }
+        else
+        {
+            await LoadIssues();
+        }
+    }
+
+
+    private async Task LoadIssues(string search = "")
+    {
+        _issues = (await IssuesService.GetItems(search)).ToList();
+    }
+
+    private void OnSideCancel()
+    {
+        NavigationManager.NavigateTo("/labissues");   
+    }
+
+
+}

@@ -1,0 +1,9 @@
+@page "/userman"
+@page "/userman/{SelectedUserId:guid}"
+
+<UserManagement LinkProvider="@(s => s)" SelectedUserId="@SelectedUserId"></UserManagement>
+
+@code {
+    [Parameter]
+    public Guid SelectedUserId { get; set; }
+}

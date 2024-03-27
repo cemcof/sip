@@ -1,0 +1,105 @@
+@page "/environment"
+
+@inject EnvironmentService EnvironmentService
+@attribute [Authorize(Policy = "LabOverview")]
+@implements IDisposable
+
+<PageTitle>Environment</PageTitle>
+<RefreshTimer Action="@(() => { })"></RefreshTimer>
+
+<NullAware TValue="EnvironmentModel" Value="EnvironmentService.Data">
+    
+    <WhenReady Context="data">
+        <div class="d-flex justify-content-end">
+            <div class="mx-3 my-1">Last data update: <strong>@data.DtDataGathered.HappenAgo()</strong></div>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                @if (_selectedVariable is null)
+                {
+                    <p class="text-center">Click on any cell to view the value evolution in time</p>
+                }
+                <table class="table-env">
+                    <thead>
+                    <tr>
+                        <th class="th-loc">Location</th>
+                        @foreach (var variable in Vars)
+                        {
+                            <th class="th-var">@variable</th>
+                        }
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    @foreach (var sensor in data.Sensors)
+                    {
+                        <tr>
+                            <td>@sensor.Name</td>
+
+                            @foreach (var variable in Vars)
+                            {
+                                var vr = sensor.Variables.Values.FirstOrDefault(v => v.VarName == variable);
+                                @if (vr is not null)
+                                {
+                                    <td @onclick="@(() => _selectedVariable = vr)" class="value-cell" selected="@(_selectedVariable?.VarId == vr.VarId)">
+                                        <span class="fw-bold">@vr.Current</span> <br/>
+                                        <span class="var-min text-danger">@vr.Min /</span>
+                                        <span class="var-max text-primary"> @vr.Max</span>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="value-null"></td>
+                                }
+                            }
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+            
+            <NullAware TValue="VariableData" Value="_selectedVariable">
+                <WhenReady>
+                    <div class="row">
+                        <img src="/environment/@context.VarId/graph" alt="Plot" />
+                    </div>            
+                </WhenReady>
+            </NullAware>
+        </div>
+        
+    </WhenReady>
+    
+    <WhenNull>
+        <div class="alert alert-danger text-center">
+            No environment data currently available
+        </div>    
+    </WhenNull>
+    
+</NullAware>
+
+@code {
+    
+    private VariableData? _selectedVariable;
+    private IEnumerable<string> Vars =>
+        EnvironmentService.Data!.Sensors
+            .SelectMany(x => x.Variables.Values)
+            .Select(x => x.VarName)
+            .Distinct();
+
+    protected override void OnInitialized()
+    {
+        EnvironmentService.Refresh += OnRefreshed;
+    }
+
+    private void OnRefreshed()
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        EnvironmentService.Refresh -= OnRefreshed;
+    }
+
+}

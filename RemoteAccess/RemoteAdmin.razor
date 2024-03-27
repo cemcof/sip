@@ -1,0 +1,96 @@
+@inherits OrganizationComponentBase
+
+@using sip.Experiments
+@using sip.Userman
+
+@inject ILogger<RemoteAdmin> Logger
+@inject IRemoteAccess RemoteAccess
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
+
+<ComponentRenderHelper ActionProvider="@(() => RemoteAccess.GetRemoteAccessStatus(Organization))" RefreshInterval="@TimeSpan.FromSeconds(5)" >
+    <Available Context="remoteStatus">
+        <div class="remote-admin-container">
+            @foreach (var subj in remoteStatus.AvailableConnections)
+            {
+                <div class="instrument-container border">
+                    <div class="subj-header @subj.Key.DisplayTheme">
+                        @subj.Key.Name
+                    </div>
+                    
+                    <div class="instrument-body">
+                        <Each Items="@subj.Value" class="connection-items-container">
+                            <Item Context="conn">
+                                <div class="connection-item">
+                                    <div class="connection-item-header">
+                                        <div>@conn.Name</div>
+                                        <button @onclick="@(() => SessionConnect(subj.Key, conn))" class="btn btn-link">Connect</button>
+                                    </div>
+
+                                    <Each class="connection-item-sessions" Items="@remoteStatus.GetActiveSessions(subj.Key, conn).ToList()">
+                                        <Item Context="sess">
+                                            <div class="subj-item">
+                                                <div class="user-identif">@sess.ForUser.Firstname @sess.ForUser.Lastname (@sess.ForUser.Id)</div>
+                                                <div>@sess.From.StandardFormat() - @sess.Until.StandardFormat()</div>
+
+                                                <div class="link-group">
+                                                    <button @onclick="@(() => SessionJoin(sess))" class="btn btn-link">Join</button>
+                                                    <button @onclick="@(() => RemoteAccess.KillSession(sess))" class="btn btn-link">Kill</button>
+                                                </div>
+                                            </div>
+                                        </Item>
+                                    </Each>
+                                </div>
+                            </Item>
+                            
+                            <Empty>
+                                <small>No connections available</small>
+                            </Empty>
+                        </Each>
+                        
+                    </div>
+                </div>
+            }
+        </div>
+    </Available>
+    
+    <NotAvailable>
+        <div class="alert alert-danger text-center">Remote access is not available at the moment</div>
+    </NotAvailable>
+</ComponentRenderHelper>
+
+@code {
+    
+    private async Task SessionJoin(RemoteAccessSession session)
+    {
+        var cp = AuthUser;
+        var openSessionRequest = new RemoteAccessSessionRequest(
+            session.ForInstrument, 
+            session.ForConnection,
+            cp.ToUserClientInfo(),
+            false, 
+            session.Until
+            );
+        
+        var newSession = await RemoteAccess.JoinSession(session, openSessionRequest);
+
+        await JsRuntime.InvokeVoidAsync("open", newSession.TargetUrl, "_blank");
+    }
+    
+    private async Task SessionConnect(IInstrument instrument, RemoteConnectionInfo connection)
+    {
+        var cp = AuthUser;
+        
+        var openSessionRequest = new RemoteAccessSessionRequest(
+            instrument,
+            connection,
+            cp.ToUserClientInfo(),
+            false, 
+            DateTime.UtcNow.AddDays(1)
+            );
+
+        var session = await RemoteAccess.OpenSession(openSessionRequest);
+        
+        await JsRuntime.InvokeVoidAsync("open", session.TargetUrl, "_blank");
+    }
+}

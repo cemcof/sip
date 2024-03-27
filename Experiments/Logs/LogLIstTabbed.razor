@@ -1,0 +1,83 @@
+﻿@using sip.Utils
+
+<div class="tabcontrol-container">
+    <ul class="nav nav-tabs">
+        @foreach(var logCat in _logCategories)
+        {
+            <li class="nav-item pointer"
+                @onclick=@(() => SetCategory(logCat))>
+                <span class="nav-link @(logCat.Item1 == _selectedCategory?.Item1 ? "active" : "")">
+                    @CategoryDisplayNameMapper(logCat.Item1)
+                </span>
+            </li>
+        }
+    </ul>
+    
+    <div class="tabcontrol-content">
+        @if (_selectedCategory is not null)
+        {
+            <Loglist @ref="_logList" Overscan="@MaxLogs" Autorefresh="@true" LogsProvider="@_selectedCategory.Value.Item2"></Loglist>
+        }
+    </div>
+</div>
+
+
+@code
+{
+    [Parameter, EditorRequired]
+    public Func<ValueTask<List<(string categoryName, ItemsProviderDelegate<Log>)>>> LogCategoriesProvider { get; set; } = null!;
+
+    [Parameter]
+    public Func<string, string> CategoryDisplayNameMapper { get; set; } = (str) => str.Truncate(15);
+    
+    [Parameter]
+    public int MaxLogs { get; set; } = 300;
+
+    
+    private List<(string, ItemsProviderDelegate<Log>)> _logCategories = new();
+    private (string, ItemsProviderDelegate<Log>)? _selectedCategory;
+    private List<Log> _logs = new();
+
+    protected override Task OnInitializedAsync() 
+    {
+        return RefreshAsync();
+    }
+
+    protected override Task OnParametersSetAsync()
+    {
+        return RefreshAsync();
+    }
+
+    private async Task SetCategory((string, ItemsProviderDelegate<Log>) logCat) 
+    {
+        _selectedCategory = logCat;
+        await RefreshAsync();
+        if (_logList is not null)
+        {
+            await _logList.ReloadLogsAsync();
+        }
+    }
+
+    public async Task RefreshAsync()
+    {
+    
+        // Fetch categories 
+        _logCategories = await LogCategoriesProvider();
+        
+        // If invalid category is selected, reset it
+        if (_selectedCategory is not null && 
+            !_logCategories.Any(c => c.Item1 == _selectedCategory.Value.Item1))
+        {
+            _selectedCategory = null;
+        }
+
+        if (_selectedCategory is null)
+        {
+            // Select first available category
+            _selectedCategory = _logCategories.FirstOrDefault();
+        }
+           
+    }
+
+    private Loglist? _logList;
+}

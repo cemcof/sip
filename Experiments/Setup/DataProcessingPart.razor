@@ -1,0 +1,123 @@
+@using sip.Experiments.Model
+@using sip.Experiments.Workflows
+@using Microsoft.Extensions.Configuration.Json
+
+@inject ILogger<DataProcessingPart> Logger
+@inject IWorkflowProvider WorkflowProvider
+
+
+@if (ShowWorkflowSetup) 
+        {
+            <GroupVertical>
+                <Header>
+                    Data processing
+                </Header>
+                <Body>
+                <div class="wf-header">
+                    <CEditForm TModelType="ExperimentIdle" FormFooter="@(CEditForm<ExperimentIdle>.EmptyFooter)" Context="ctxxx">
+                        <InputAligner Flex="0 0 10rem, 1">
+                            <CDropdown TValue="Workflow"
+                                       Context="wfctx"
+                                       OnValueSet="@SelectWorkflow"
+                                       DisplayName="Workflow template"
+                                       @bind-Value="@SelectedWorkflow"
+                                       AutoDefault="@true"
+                                       ItemsProvider="_WorkflowTemplateItemsProvider">
+                                <ItemTemplate>
+                                    <div>
+                                        @if (wfctx.Provider is not null)
+                                        {
+                                            <span class="badge bg-primary">@wfctx.Provider</span>
+                                        }
+                                        
+                                        @wfctx.Title
+                                    </div>
+                                </ItemTemplate>
+                                
+                                <SelectedItemTemplate>
+                                    <div>@wfctx.Title</div>
+                                </SelectedItemTemplate>
+
+                            </CDropdown>
+                        </InputAligner>
+                    </CEditForm>
+                </div>
+                
+                <div class="wf-body">
+                    @if (SelectedWorkflow is not null) 
+                    {
+                        <WorkflowGeneralRenderer Workflow="@SelectedWorkflow"
+                                                TargetProtocols="@Exp.Processing.Workflow">
+                        </WorkflowGeneralRenderer>
+                    } 
+                </div>
+                
+                </Body>
+            </GroupVertical>
+        }
+
+
+@code {
+    private bool ShowWorkflowSetup => !string.IsNullOrEmpty(Exp.Processing.ProcessingEngine);
+    
+    [Parameter] public Experiment Exp { get; set; } = null!;
+    private Experiment? _prevExp = null;
+    
+    [Parameter]
+    public ExperimentOptions ExpMeta { get; set; } = null!;
+    
+    protected override void OnParametersSet()
+    {
+        if (!ReferenceEquals(_prevExp, Exp))
+        {
+            SelectedWorkflow = null;
+        }
+        
+        _prevExp = Exp;
+    }
+
+    
+    // Processing / workflow setup state
+    private Workflow? _selectedWorkflow;
+    
+    public Workflow? SelectedWorkflow
+    {
+        get => _selectedWorkflow;
+        set
+        {
+            Logger.LogDebug("Selecting wf: {@Wf}", _selectedWorkflow);
+            _selectedWorkflow = value;
+            if (value is not null) 
+            {
+                DynamicFormTools.ApplyValues(value.Protocols, Exp.Processing.Workflow);
+                Logger.LogDebug("Values applied: source={@Source} target={@Target}", value.Protocols, Exp.Processing.Workflow);
+            }
+            else 
+            {
+                Exp.Processing.Workflow.Clear();
+                Logger.LogDebug("Values cleared");
+            }
+            
+        }
+    }
+    
+    private void SelectWorkflow(Workflow pipeline)
+    {
+        SelectedWorkflow = pipeline;
+    }
+    
+    private async ValueTask<ItemsProviderResult<Workflow>> _WorkflowTemplateItemsProvider(ItemsProviderRequest request, string? searchstring)
+    {
+        var wfs = await WorkflowProvider.GetWorkflowsAsync(ExpMeta)
+            .ToListAsync();
+        
+        var result = wfs.Where(kv =>
+            StringUtils.IsFilterMatchAtLeastOneOf(searchstring, kv.Title, kv.Description))
+            .ToList();
+        
+        return new ItemsProviderResult<Workflow>(result, result.Count);
+    }
+
+
+
+}

@@ -1,0 +1,106 @@
+@typeparam TValue
+@typeparam TContainer
+@inherits CInputBase<TValue>
+
+
+<div class="cselecter-item">
+    
+    <div class="clabel-container" @onclick="@(() => _Toggle(!Selected))" style="@GetFlexStyleForIndex(0)">
+        <label class="clabel">
+            @if (Render is RenderType.Checkbox)
+            {
+                <div class="check-container">
+                    <input type="checkbox" readonly="@IsReadonly" disabled="@IsDisabled" class="form-check-input" @onchange="OnCheckChange" checked="@Selected" id="@InputId"/>
+                    <label for="@InputId" class="form-check-label">@DisplayName</label>
+                </div>
+            }
+            
+            @if (Render is RenderType.Switcher)
+            {
+                <div class="form-control form-switch check-container">
+                    <input type="checkbox" readonly="@IsReadonly" disabled="@IsDisabled" class="form-check-input" @onchange="OnCheckChange" checked="@Selected" id="@InputId"/>
+                    <label for="@InputId" class="form-check-label">@DisplayName</label>
+                </div>
+                
+            }
+            
+            @if (Render is RenderType.Radio)
+            {
+                <div class="form-check check-container">
+                    <input name="@Selecter?.InputId" type="radio" readonly="@IsReadonly" disabled="@IsDisabled" class="form-check-input" @onchange="OnCheckChange" checked="@Selected" id="@InputId"/>
+                    <label for="@InputId">@DisplayName</label>
+                </div>
+            }
+            
+            
+            @if (Collapsible)
+            {
+                <div class="spacer"></div>
+                
+                <div class="collapse-button" collapsed="@Collapsed" @onclick="@(() => Collapsed = !Collapsed)">
+                    <i class="bi bi-arrow-@(Collapsed ? "right" : "bottom")"></i>
+                </div>
+            }
+            
+        </label>
+    </div>
+    
+    @if (Selected && ChildContent is not null)
+    {
+        <div class="cinput-input-container" style="@GetFlexStyleForIndex(1)">
+            @ChildContent(CurrentValue!)
+        </div>
+    }
+    
+</div>
+
+
+@code {
+    public enum RenderType
+    {
+        Checkbox, Switcher, Radio 
+    }
+    
+    [Parameter]
+    public RenderFragment<TValue>? ChildContent { get; set; }
+
+    public bool Selected => CurrentValue is bool bval ? bval : Value is not null;
+    
+    // Todo - this actually might not work
+    [CascadingParameter(Name = "selecter")]
+    public CSelecter<TContainer>? Selecter { get; set; }
+    
+    [Parameter]
+    public RenderType Render { get; set; }
+
+    [Parameter]
+    public bool Collapsible { get; set; }
+
+    private bool Collapsed { get; set; }
+
+
+    private Task OnCheckChange(ChangeEventArgs arg)
+    {
+        var chec = (bool) arg.Value!;
+        return _Toggle(chec);
+    }
+
+    private Task _Toggle(bool on)
+    {
+        if (CurrentValue is bool)
+        {
+            GetType().GetProperty(nameof(CurrentValue))?.SetValue(this, on);
+        }
+        else
+        {
+            CurrentValue = on ? Activator.CreateInstance<TValue>() : default;
+        }
+
+        if (on) Collapsed = false;
+        return Task.CompletedTask;
+    } 
+    
+    protected override bool TryParseValueFromString(string? value, out TValue result, [NotNullWhen(false)] out string? validationErrorMessage)
+        => throw new NotSupportedException($"This component does not parse string inputs. Bind to the '{nameof(CurrentValue)}' property, not '{nameof(CurrentValueAsString)}'.");
+
+}

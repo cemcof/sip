@@ -1,0 +1,33 @@
+@page "/proposal/{DocumentId:guid}/submit"
+
+@layout NoLayout 
+@inject IServiceProvider ServiceProvider 
+@inject IDocumentProvider DocumentProvider
+
+@if (_component is not null && _params is not null)
+{
+    <DynamicComponent Type="_component" Parameters="_params"></DynamicComponent>    
+}
+
+@code {
+    
+    [Parameter]
+    public Guid DocumentId { get; set; }
+
+
+    private Type? _component;
+    private Dictionary<string, object?>? _params; 
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var doc = await DocumentProvider.GetDocumentAsync(DocumentId) ?? throw new InvalidOperationException("Document not found");
+        object propRenderProv = ServiceProvider.GetRequiredService(typeof(IDocumentRenderInfoProvider<>).MakeGenericType(doc.GetType()));
+        DocumentRenderInfo info = propRenderProv.DynamicInvoke(nameof(IDocumentRenderInfoProvider<Document>.GetRenderInfo),  typeof(DocumentRenderInfo), doc)!;
+
+        if (info.SubmitRender.HasValue)
+        {
+            _component = info.SubmitRender.Value.Component;
+            _params = info.SubmitRender.Value.Parameters;
+        }
+    }
+}

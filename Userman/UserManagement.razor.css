@@ -1,0 +1,23 @@
+.userman-layout {
+    display: flex;
+}
+
+.userman-layout > ::deep* {
+    margin: 0.6rem;
+}
+
+.userman-layout > ::deep *:first-child {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 30rem;
+}
+
+.userman-layout > ::deep *:first-child .item-viewer-body {
+    height: calc(100vh - 7rem);
+    overflow: auto;
+}
+
+.userman-layout > ::deep *:nth-child(2) {
+    flex-grow: 1;
+}
+

@@ -1,0 +1,91 @@
+@typeparam TCrudItem
+
+<div class="item-cruder card @CssTheme @CssClass">
+    
+    <div class="card-header">
+        
+        <div class="simple-cruder-caption">
+            @Caption
+        </div>
+        
+        <div class="spacer"></div>
+        
+        <div class="simple-cruder-adder">
+            @ItemAdderTemplate(this)
+        </div>
+        
+        
+    </div>
+    
+    <div class="card-body">
+        
+        <ItemsRenderer @ref="_rendererRef" TItem="TCrudItem" ItemsProvider="@ItemsProvider">
+            <div class="simple-cruder-item">
+                <div class="simple-cruder-item-body">
+                    @ChildContent(context)
+                </div>
+
+                <div class="spacer"></div>
+                @if (ItemDeletor is not null)
+                {
+                    <button class="simple-cruder-deletor bt-transparent" onclick="@(() => OnItemDelete(context))">
+                        <i class="bi bi-dash-circle"></i>
+                    </button>
+                }
+
+            </div>
+        </ItemsRenderer>
+        
+    </div>
+    
+</div>
+
+@code {
+
+    [Parameter]
+    public string CssTheme { get; set; } = string.Empty;
+
+    [Parameter]
+    public string CssClass { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Caption { get; set; } = string.Empty;
+    
+    [Parameter, EditorRequired]
+    public ItemsProviderDelegate<TCrudItem> ItemsProvider { get; set; } = null!;
+
+    [Parameter]
+    public Func<TCrudItem, Task>? ItemDeletor { get; set; }
+
+    [Parameter]
+    public RenderFragment<TCrudItem> ChildContent { get; set; } = null!;
+
+    [Parameter, EditorRequired]
+    public RenderFragment<SimpleCruder<TCrudItem>> ItemAdderTemplate { get; set; } = null!;
+
+    private ItemsRenderer<TCrudItem>? _rendererRef;
+
+    protected override void OnParametersSet()
+    {
+        if (ChildContent is null) throw new ArgumentException("Component parameter is required", nameof(ChildContent));
+        if (ItemAdderTemplate is null) throw new ArgumentException("Component parameter is required", nameof(ItemAdderTemplate));
+        base.OnParametersSet();
+    }
+
+    private async Task OnItemDelete(TCrudItem context)
+    {
+        @if (ItemDeletor is not null)
+        {
+            await ItemDeletor.Invoke(context);
+        }
+        
+        @if (_rendererRef is not null)
+        {
+            await _rendererRef.RequestItems();
+            StateHasChanged();
+        }
+    }
+    
+    
+
+}

@@ -1,0 +1,12 @@
+@page "/login"
+@layout NoLayout 
+
+<div class="container mt-3">
+    <Login ReturnUrl="@ReturnUrl"></Login>
+</div>
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "returnUrl")]
+    public string? ReturnUrl { get; set; }    
+}

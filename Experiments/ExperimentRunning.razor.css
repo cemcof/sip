@@ -1,0 +1,101 @@
+::deep .loglist-container {
+    overflow-y: scroll;
+    /* margin-bottom: 2rem; */
+    /* border-top: 1px solid #c1c1c1;
+    border-bottom: 1px solid #c1c1c1; */
+}
+
+@media (max-width: 1600px) {
+    /* For smaller screens, make items fullwidth and in one column */
+    ::deep .loglist-container {
+        height: 330px;
+        margin-bottom: 1.5rem;
+    }
+
+    .results {
+        height: calc(100vh - 550px);
+    }
+
+}
+
+@media (min-width: 1600px) {
+    ::deep .loglist-container {
+        /* height: 620px;
+        max-height: 620px;
+        min-height: 620px; */
+        /* height: calc(100vh - 195px); */
+        height: 100%;
+    }
+
+    .exp-log-results-container {
+        display: flex;
+        align-items: stretch;
+        height: calc(100vh - 110px);
+    }
+
+    .results {
+        flex: 0 0 45rem;
+    }
+
+    /*::deep .tabcontrol-container {*/
+    /*    display: flex;*/
+    /*    flex-direction: column;*/
+    /*    flex: 50% 0 1;*/
+    /*}*/
+    
+    /*::deep .tabcontrol-content {*/
+    /*    height: 1px;*/
+    /*    flex-grow: 1;*/
+    /*}*/
+}
+
+
+.exp-status-bar {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    padding: 0.8rem 1rem;
+    background-color: rgb(229, 229, 229);
+}
+
+
+
+.dots-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.stop-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tbl-dl div {
+    display: flex;
+
+}
+
+.tbl-dl div dt {
+    flex: 6rem 0 0;
+}
+
+.tbl-dl dd {
+    margin: 0;
+}
+
+.tbl-dl {
+    margin: 0;
+    flex-grow: 1;
+}
+
+.status-StartRequested, .status-StopRequested {
+    background-color: #f2eba5;
+}
+
+.status-Active {
+    background-color: #c1edc1;
+}

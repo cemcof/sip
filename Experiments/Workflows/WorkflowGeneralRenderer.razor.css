@@ -1,0 +1,41 @@
+.wf-protocol-boxes {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: stretch;
+    /*flex-grow: 1;*/
+}
+
+.wf-diagram {
+    
+}
+
+.wf-prot-properties {
+    flex: 0 0 30rem;
+}
+
+.protocol-box:hover {
+    background-color: #c2c2c2;
+}
+
+.protocol-box[selected] {
+    border: 2px solid gray;
+    box-shadow: 0 3px 13px 2px rgba(0,0,0,0.46)
+}
+
+.protocol-box {
+    border: 1px solid gray;
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background-color: #eeeeee;
+}
+
+
+.wf-protocol-headline {
+    padding: 0.6rem;
+    text-align: center;
+    margin-top: 0.7rem;
+    border-bottom: 1px solid #c5c5c5;
+}

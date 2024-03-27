@@ -1,0 +1,225 @@
+@using System.Linq.Expressions
+@using System.Collections
+@typeparam TValue
+
+@if (!_renderAttr.Ignore)
+{
+    @if (_type == typeof(string) && ValueChanged is EventCallback<string> evc1 && ValueExpression is Expression<Func<string>> exp1 && !_isSelection)
+    {
+        // Simple string - simple text input
+        <CTextInput ValueExpression="@exp1" ValueChanged="@evc1" Value="@((string?)(object?)Value)"></CTextInput>
+    }
+    else if (_type == typeof(string) && ValueChanged is EventCallback<string> evcb3 && ValueExpression is Expression<Func<string>> exp2 && _isSelection)
+    {
+        // Selection list of strings - select box
+        <CSelectDropdown TItem="String" ValueExpression="@exp2" ValueChanged="@evcb3" Value=@((string?)(object?)Value)></CSelectDropdown>
+    }
+    else if (_type == typeof(List<string>) && ValueChanged is EventCallback<List<string>> evcb4 && ValueExpression is Expression<Func<List<string>>> exp3  && !_isSelection)
+    {
+        // Not selection but list of strings =  Multi line input
+        <CLineMultiInput ValueExpression="@exp3" ValueChanged="@evcb4" Value="@((List<string>?)(object?)Value)"></CLineMultiInput>
+    }
+    else if (_type == typeof(List<string>) && ValueChanged is EventCallback<List<string>> evcb5 && ValueExpression is Expression<Func<List<string>>> exp4 && _isSelection)
+    {
+        // Selection and list of strings - checboxes
+        <CCheckboxList TValue="String" ValueExpression="@exp4" ValueChanged="@evcb5" Value="@((List<string>?)(object?)Value)"></CCheckboxList>  
+    }
+    else if (Value is bool val2 && ValueChanged is EventCallback<bool> evcb2 && ValueExpression is Expression<Func<bool>> exp5 && !_isSelection)
+    {
+        // Simple bool - checbox
+        <CCheckBox ValueExpression="@exp5" ValueChanged="@evcb2" Value="@val2"></CCheckBox>
+    }
+    else if (!_type.IsPrimitive && _type != typeof(string))
+    {
+        // Now the fun - rendering using recursion on non primitive 
+        @if (!_isList && !_isSelection && Value is not null)
+        {
+            <FormPart TMod="TValue" Name="@_formPartName" Class="@_formPartClass" DisplayName="@_formPartDisplayName" Model="Value">
+                @foreach (var property in EnumerateTypeProperties(_type))
+                {
+                    <DynamicComponent Type="@(typeof(CAutoformRenderer<>).MakeGenericType(property.PropertyType))"
+                                      Parameters="@PrepareTargetParametersInvoke(Value, property)">
+                    </DynamicComponent>
+                }
+            </FormPart>
+        }
+        else if (!_isList && _isSelection && Value is not null)
+        {
+            // Well, this is an object but specified to be the selection, such
+            // object should be rendered as checkbox selector
+            <CSelecter Context="ctxc" TValue="TValue" HasLabel="@_hasLabel" ValueExpression="@ValueExpression" ValueChanged="ValueChanged" Value="@Value">
+                @foreach (var property in EnumerateTypeProperties(_type))
+                {
+                    @if (IsSelectableProperty(property))
+                    {
+                        <DynamicComponent Type="@(typeof(CSelecterItem<,>).MakeGenericType(property.PropertyType, typeof(TValue)))"
+                                          Parameters="@PrepareTargetParametersWithRecurseChildContentWithValueExpressionInvoke(ctxc!, property)"></DynamicComponent>
+                        
+                    }
+                    else
+                    {
+                        <DynamicComponent Type="@(typeof(CAutoformRenderer<>).MakeGenericType(property.PropertyType))"
+                                          Parameters="@PrepareTargetParametersInvoke(ctxc, property)">
+                        </DynamicComponent>
+                    }
+
+                }
+            </CSelecter>
+            
+        }
+        else if (_isList && !_isSelection && Value is not null)
+        {
+            <DynamicComponent Type="@(typeof(CMultiObject<>).MakeGenericType(_listInnerType!))"
+                              Parameters="@PrepareTargetParametersWithRecurseChildContentInvoke(_model, _property, _listInnerType)"></DynamicComponent>
+        }
+        else if (_isList && _isSelection)
+        {
+            throw new NotSupportedException();
+        }
+        
+    }
+}
+
+
+@code {
+    [Parameter] public TValue? Value { get; set; }
+    [Parameter] public EventCallback<TValue> ValueChanged { get; set; }
+    [Parameter] public Expression<Func<TValue>>? ValueExpression { get; set; }
+
+    private string? _formPartName;
+    private string? _formPartClass;
+    private string? _formPartDisplayName;
+    private PropertyInfo _property = null!;
+    private object _model = null!;
+    private Type _type = null!;
+    private bool _isSelection;
+    private RenderAttribute _renderAttr = null!;
+    private bool _isList;
+    private Type? _listInnerType;
+    private bool _hasLabel;
+
+    protected override void OnParametersSet()
+    {
+        if (ValueExpression is null) 
+        {
+            _type = typeof(TValue);
+            _isList = false;
+            _isSelection = false;
+            _renderAttr = new RenderAttribute();
+        }
+        else
+        {
+            var fi = FieldIdentifier.Create(ValueExpression!);
+            _model = fi.Model;
+            _type = typeof(TValue);
+            _property = fi.Model.GetType().GetProperty(fi.FieldName)!;
+            _isSelection = _property.GetCustomAttribute<SelectionAttribute>() is not null;
+            _renderAttr = _property.GetCustomAttribute<RenderAttribute>() ?? new RenderAttribute();
+            _formPartDisplayName = _renderAttr.Title ?? fi.FieldName.Humanize();
+            _formPartName = fi.FieldName;
+            _hasLabel = !_renderAttr.NoTitle;
+            _formPartClass = _renderAttr.GroupClass;
+            _isList = _type.IsGenericType && _type.IsAssignableTo(typeof(IList));
+            _listInnerType = _isList ? _type.GetGenericArguments().First() : null;
+        }
+
+    }
+
+    private RenderFragment<TType> RecurseChildContent<TType>()
+    {
+        return value => builder =>
+        {
+            builder.OpenComponent<CAutoformRenderer<TType>>(69);
+            builder.AddAttribute(70, nameof(Value), value);
+            builder.CloseComponent();
+        };
+    }
+    
+    private RenderFragment<TType> RecurseChildContentWithValueExpression<TType>(Expression<Func<TType>> expression) 
+    {
+        return value => builder =>
+        {
+            builder.OpenComponent<CAutoformRenderer<TType>>(69);
+            builder.AddAttribute(70, nameof(Value), value);
+            builder.AddAttribute(71, nameof(ValueExpression), expression);
+            builder.CloseComponent();
+        };
+    }
+
+    private Dictionary<string, object?> PrepareTargetParametersInvoke(object target, PropertyInfo propertyInfo)
+    {
+        return (Dictionary<string, object?>)GetType().GetMethod(nameof(PrepareTargetParameters), BindingFlags.Instance | BindingFlags.NonPublic)!
+            .MakeGenericMethod(propertyInfo.PropertyType)
+            .Invoke(this, new []{ target, propertyInfo })!;
+    }
+
+    private Dictionary<string, object?> PrepareTargetParametersWithRecurseChildContentInvoke(object target, PropertyInfo propertyInfo, Type? childContentType = null)
+    {
+        childContentType ??= propertyInfo.PropertyType;
+        var parameters = PrepareTargetParametersInvoke(target, propertyInfo);
+        parameters["ChildContent"] = GetType().GetMethod(nameof(RecurseChildContent), BindingFlags.Instance | BindingFlags.NonPublic)!
+            .MakeGenericMethod(childContentType)
+            .Invoke(this, null);
+
+        return parameters;
+    }
+
+    private Dictionary<string, object?> PrepareTargetParametersWithRecurseChildContentWithValueExpressionInvoke(object target, PropertyInfo propertyInfo)
+    {
+        var parameters = PrepareTargetParametersInvoke(target, propertyInfo);
+        parameters["ChildContent"] = GetType().GetMethod(nameof(RecurseChildContentWithValueExpression), BindingFlags.Instance | BindingFlags.NonPublic)!
+            .MakeGenericMethod(propertyInfo.PropertyType)
+            .Invoke(this, new[] { parameters["ValueExpression"] });
+
+        return parameters;
+    }
+
+    
+    private Dictionary<string, object?> PrepareTargetParameters<TVal>(object target, PropertyInfo propertyInfo)
+    {
+        return new Dictionary<string, object?>
+        {
+            {"Value", propertyInfo.GetValue(target)},
+            {"ValueChanged", EventCallback.Factory.Create<TVal>(this, value => propertyInfo.SetValue(target, value))},
+            {
+                "ValueExpression", Expression.Lambda<Func<TVal>>(
+                    Expression.MakeMemberAccess(Expression.Constant(target), propertyInfo)
+                    )
+            }
+        };
+    }
+
+    
+
+    private IEnumerable<PropertyInfo> EnumerateTypeProperties(Type type)
+    {
+        return type.GetProperties();
+    }
+
+    /// Two enumerables = selectable and properties opted out of selection
+    // private (IEnumerable<PropertyInfo> selectable, IEnumerable<PropertyInfo> optedout) EnumerateTypeSelectionProperties(Type type)
+    // {
+    //     var selectables = type.GetProperties().Where(p =>
+    //     {
+    //         var rattr = p.GetCustomAttribute<RenderAttribute>() ?? new RenderAttribute();
+    //         return rattr.AsNotOption == false;
+    //     });
+    //     
+    //     var unselectables = type.GetProperties().Where(p =>
+    //     {
+    //         var rattr = p.GetCustomAttribute<RenderAttribute>() ?? new RenderAttribute();
+    //         return rattr.AsNotOption;
+    //     });
+    //
+    //     return (selectables, unselectables);
+    // }
+
+    private bool IsSelectableProperty(PropertyInfo property)
+    {
+        var rattr = property.GetCustomAttribute<RenderAttribute>() ?? new RenderAttribute();
+        return rattr.AsNotOption == false;
+    }
+
+}
+
+

@@ -1,0 +1,27 @@
+
+.table-env th {
+    text-align: center;
+}
+
+.table-env td {
+    border: 1px solid gray;
+    padding: 0.3rem 1rem;
+    text-align: center;
+    table-layout: fixed;
+}
+
+.table-env td[selected], .table-env td:hover {
+    background-color: #eaeaea;
+    cursor: pointer;
+}
+
+.table-env td:first-child {
+    text-align: left;
+    font-weight: bold;
+    border-right: 1px solid black;
+    background-color: #d7d7d7;
+}
+
+.table-env th:first-child {
+    width: 20rem;
+}

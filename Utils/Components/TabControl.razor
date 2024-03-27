@@ -1,0 +1,56 @@
+<div class="tabcontrol-container">
+    <div class="tabcontrol-tabs">
+        @foreach (var tabPage in _pages)
+        {
+            <div class="tab @GetTabClass(tabPage)"
+                    @onclick=@( () => ActivatePage(tabPage) )>
+                @tabPage.Text
+            </div>
+        }
+    </div>
+    
+    <div class="tabcontrol-content">
+        <CascadingValue Value="this">
+            @ChildContent
+        </CascadingValue>
+    </div>
+</div>
+
+
+@code {
+    // Next line is needed so we are able to add <TabPage> components inside
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    public TabPage? ActivePage { get; set; }
+    
+    List<TabPage> _pages = new();
+    
+    internal void AddPage(TabPage tabPage)
+    {
+        _pages.Add(tabPage);
+        if (_pages.Count == 1)
+            ActivePage = tabPage;
+        StateHasChanged();
+    }
+    
+    string GetTabClass(TabPage page)
+    {
+        return page == ActivePage ? "active" : "";
+    }
+    
+    void ActivatePage(TabPage page)
+    {
+        ActivePage = page;
+    }
+
+    public void RemovePage(TabPage tabPage)
+    {
+        // Remove page
+        _pages.Remove(tabPage);
+        // If the removed page was the active page, activate the first page
+        if (tabPage == ActivePage)
+            ActivePage = _pages.FirstOrDefault();
+        StateHasChanged();
+    }
+
+}

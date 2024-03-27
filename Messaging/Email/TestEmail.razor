@@ -1,0 +1,44 @@
+@page "/testmail"
+@using MimeKit
+
+@inject SmtpSender EmailService
+
+<div class="container">
+    <div class="form-group">
+        <label class="form-label">To</label>
+        <input type="text" class="form-control" @bind="_to" />
+    </div>
+    
+    <div class="form-group">
+        <label class="form-label">Subject</label>
+        <input type="text" class="form-control" @bind="_subject" />
+    </div>
+    
+    <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-control" @bind="_message"></textarea>
+    </div>
+    
+    <button type="button" @onclick="_send">Send</button>
+    
+</div>
+
+@code {
+    private string _to = string.Empty;
+    private string _subject = "Any subject";
+    private string _message = "Any message.";
+
+    private async Task _send()
+    {
+        var mess = new MimeMessage()
+        {
+            Subject = _subject,
+            Body = new TextPart("plain")
+            {
+                Text = _message
+            }
+        };
+        mess.To.Add(MailboxAddress.Parse(_to));
+        await EmailService.SendOne(mess);
+    }
+}

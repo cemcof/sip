@@ -1,0 +1,19 @@
+.autoloader-container {
+    padding: 1.5rem;
+    flex: 0 0 45rem;
+    overflow-x: auto;
+}
+
+pre {
+    overflow-x: auto;
+}
+
+.autoloader-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sample-loadings {
+    margin-bottom: 5rem;
+}

@@ -1,0 +1,25 @@
+.item-viewer-header {
+    display: flex;
+    align-items: center;
+}
+
+.item-viewer-header ::deep .searchbar {
+    flex-grow: 1;
+}
+
+.item-viewer-body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.item-viewer-body ::deep > a {
+    color: initial;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-bottom: 1px solid lightgray;
+}
+
+.item-viewer-body ::deep > a:hover, .item-viewer-body ::deep > a.active { 
+    background-color: var(--bs-gray-200);
+}

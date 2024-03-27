@@ -1,0 +1,53 @@
+@* Obsolete, replace with InteractiveButton *@
+
+<button @attributes="@AllOtherAttributes" @onclick="OnClicked" disabled="@_used" data-used="@_used">
+    @(_used ? UsedCaption : UnusedCaption)
+</button>
+
+@code {
+
+    private bool _used;
+    
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object>? AllOtherAttributes { get; set; }
+    
+    [Parameter]
+    [EditorRequired]
+    public string UnusedCaption { get; set; } = String.Empty;
+
+    [Parameter]
+    [EditorRequired]
+    public string UsedCaption { get; set; } = string.Empty;
+
+    [Parameter]
+    public EventCallback OnUse { get; set; }
+
+    [Parameter]
+    public bool AutoLock { get; set; } = true;
+
+    protected override void OnInitialized()
+    {
+        Unlock();
+    }
+
+    private void OnClicked()
+    {
+        var wasUsed = _used;
+        if (AutoLock)
+            Lock();
+        
+        if (!wasUsed)
+            OnUse.InvokeAsync();
+    }
+
+    public void Lock() =>
+        _used = true;
+
+    public void Unlock()
+    {
+        _used = false;
+        StateHasChanged();
+    }
+
+
+}
