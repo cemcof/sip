@@ -6,4 +6,9 @@ public class FromConfigWorkflowProvider : IWorkflowProvider
     {
         return forExp.Workflows.Values.ToAsyncEnumerable();
     }
+
+    public Task<Workflow?> GetWorkflowByIdAsync(string id)
+    {
+        throw new NotImplementedException();
+    }
 }

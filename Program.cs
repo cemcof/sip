@@ -14,9 +14,9 @@ using sip.LabIssues;
 using sip.RemoteAccess;
 using sip.Schedule;
 
-var emanSetup = new EmanSetup(args);
+var sipSetup = new SipSetup(args);
 
-emanSetup.AutoDefault(builder =>
+sipSetup.AutoDefault(builder =>
 {
     var services = builder.WebApplicationBuilder.Services;
     var config = builder.WebApplicationBuilder.Configuration;

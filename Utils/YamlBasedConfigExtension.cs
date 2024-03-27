@@ -11,15 +11,19 @@ public static class YamlBasedConfigExtension
     /// </summary>
     public static void ConfigDefaultSourcesPlusYaml(this WebApplicationBuilder builder, string[] args)
     {
-        // NOTE: ConfigureAppConfiguration runs the action immediatelly
-        builder.Host.ConfigureAppConfiguration((hostingContext, config) =>
-        {
-            config.Sources.Clear();
-            // One configuration yaml file selected according to current environment
-            config.AddYamlFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.yml", false, true);
-            config.AddEnvironmentVariables("ASPNETCORE_");
-            config.AddCommandLine(args);
-        });
-
+        var conf = builder.Configuration;
+        
+        // Obtain appsettings file name, can be possibly given as env variable or command line argument
+        // If not given, use default: appsettings.{Environment}.yml
+        conf.AddCommandLine(args); // Env provider is already added by default
+        var appsettingsFile = conf.GetValue<string>(
+            "appsettings",
+            $"appsettings.{builder.Environment.EnvironmentName}.yml"
+            );
+        
+        conf.Sources.Clear();
+        conf.AddYamlFile(appsettingsFile, false, true);
+        conf.AddEnvironmentVariables("ASPNETCORE_");
+        conf.AddCommandLine(args);
     }
 }

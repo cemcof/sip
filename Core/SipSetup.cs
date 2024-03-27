@@ -19,14 +19,14 @@ using sip.Utils;
 
 namespace sip.Core;
 
-public class EmanSetup(string[] args)
+public class SipSetup(string[] args)
 {
-    public void AutoDefault(Action<EmanBuilder> configure)
+    public void AutoDefault(Action<SipBuilder> configure)
     {
         var assebmly = Assembly.GetExecutingAssembly();
         var wb = WebApplication.CreateBuilder(args);
         
-        var projmanBuilder = new EmanBuilder(wb);
+        var projmanBuilder = new SipBuilder(wb);
         Action<AppOptions>? configureApp = null;
         // ============================================================================
         // Configure base, configuration and logging 
@@ -248,7 +248,7 @@ public class EmanSetup(string[] args)
     }
 }
 
-public class EmanBuilder(WebApplicationBuilder webApplicationBuilder)
+public class SipBuilder(WebApplicationBuilder webApplicationBuilder)
 {
     public WebApplicationBuilder WebApplicationBuilder { get; } = webApplicationBuilder;
 }
