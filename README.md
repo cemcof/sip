@@ -128,16 +128,40 @@ specific required project types, their statuses and workflows are predefined by 
 
 ### Facility overview features
 
-TODO - dewars, planningboard etc. 
+TODO - dewars, planningboard etc, remote access. 
 
 ### Data management features
 
 In a facility network, there are several instruments that produce data. 
 A dataset produced by an instrument can undergo any of the **data lifecycles**, implemented by SIP.
 The data can be transfered and processed on-the-fly during the user's session on the instrument.
-One session and the resulting dataset is called **experiment** and it's processing session is called **job**.
+One session and it's resulting dataset is called **experiment** and it's processing session is called **job**.
+
+Experiment always happens on a specific **instrument** and has a specific **technique**. 
+Available instruments and techniques are preconfigured by the facility. 
+Each instrument/technique pair have it's own data lifecycle configuration and it's own processing workflows. 
+
+Before launching an experiment, user must use the SIP web interface to set up the experiment, 
+which includes selecting the instrument, technique, operator, data folder and other parameters.
+
+Common data model shared by all experiment techniques and instruments include: 
+- **Operator** - a person who does and is responsible for the experiment
+- **User** - for whom the experiment is done, the data owner. Can be same as the operator.
+- **Sample** - subject of the experiment
+- **Project** - optional project, for experiment grouping purposes
+
+The rest can be fully configured by the facility (by providing default values, determining what can be set by the user from interface etc):
+- **Data lifecycle properties** - whether to archive/publish data, which storage/processing engine to use...
+- **Processing workflows** - how and where to process the raw data transfered from the instrument. Processing workflows are either
+configured manually or can be provided from an external source - **workflowhub.eu** 
+
 
 TODO 
+
+Internally the data management is split into three major parts:
+- **Storage engine**
+- **Processing engine**
+- **Publication engine**
 
 ### Technical overview
 
@@ -210,23 +234,55 @@ The architecture described above is shown in the following diagram:
 
 ## Part 2 - Installation and setup
 
-SIP webserver runs on the latest `.NET` environment from Microsoft. Since it is a web application, `ASP.NET Core framework`, which is part
-of `.NET` ecosystem, is used.
+Before configuration, one must get familiar with [YAML](https://yaml.org) serialization format.
 
-- Install opensource `.NET 8 SDK`
-- Install opensource `PostgreSQL` database.
-- Set up a database user in `PostgreSQL` with enough permissions -do this by authenticating as `postgres` user, creating a new user and granting it permissions to create databases.
-```sudo -u postgres psql -c "CREATE USER sip WITH PASSWORD '********';"```
-```sudo -u postgres psql -c "ALTER USER sip WITH CREATEDB;"```
-- Optional: If postgres database should accept connection from external network, edit `postgresql.conf` and set `listen_addresses = '*'`. Then edit `pg_hba.conf` and add `host all all
-- Configure the database connection in [appsettings.Production.yml](lims/appsettings.Production.yml) under `Db->ConnectionString`, connection string 
+SIP webserver runs on [`.NET 8` from Microsoft.](https://dotnet.microsoft.com/download/dotnet/8.0). 
+SIP does not support docker deployment yet and the following guide assumes deployment on a Linux server.
+
+
+- Install opensource [`.NET 8 SDK`](https://dotnet.microsoft.com/download/dotnet/8.0)
+- Install opensource [`PostgreSQL` database](https://www.postgresql.org).
+- Set up a database user in `PostgreSQL` with enough permissions, do this by authenticating as `postgres` user, 
+creating a new user and granting it permissions to create databases.
+
+  ```sudo -u postgres psql -c "CREATE USER sip WITH PASSWORD '********';"``` 
+
+  ```sudo -u postgres psql -c "ALTER USER sip WITH CREATEDB;"```
+
+- Optional: If postgres database should accept connection from external network, edit `postgresql.conf` and set `listen_addresses = '*'`. Then edit `pg_hba.conf` and add `host all all`
+- Do minimal required SIP web application configuration as described in section below. Then continue here.
+- Set up database tables using following commands:
+
+  `dotnet tool install --global dotnet-ef` if not already installed 
+
+  `dotnet ef database update -- --environment <your_env>`
+
+- If using systemd, adjust and install `systemd` service file from template [sip.service](sip.service). Here specify path to dotnet binary, path to published application (working directory) and a user that will run the process.
+- Before launching the server, ensure it has enough priviledges to bind to the configured ports. Standard HTTP(S) ports are priviledged. See <https://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-on-linux>
+
+### Webserver setup & configuration
+
+SIP is designed so that platform, network and facility specific properties are all stored in a single configuration file.
+Most of the system parts take it's specific configuration from that file, however, adjusting the system for more specific needs
+will at some point require deeper extension in the codebase.
+
+the database connection in [appsettings.Production.yml](lims/appsettings.Production.yml) under `Db->ConnectionString`, connection string
 should look like this: `Host=localhost; Database=sip; Username=sip; Password=********`
-- Run `dotnet ef database update` in order to create the database and set up the tables. You will need to [install ef tools](https://docs.microsoft.com/en-us/ef/core/cli/dotnet) before this.
+
 - Configure server endpoints in [appsettings.Production.yml](lims/appsettings.Production.yml) under `Kestrel->Endpoints`. Here provide URLs and ports the server should listen on. Also specify path to SSL certificate. To allow `dotnet` to map to privileged ports (e.g. 80,443), use `sudo setcap CAP_NET_BIND_SERVICE=+eip <path to dotnet binary NOT A SYMLINK>`
-- Check rest of [appsettings.Production.yml](lims/appsettings.Production.yml) and configure properties related to the environment, for example email SMTP server.
-- Adjust and install `systemd` service file from template [lims.service](lims.service). Here specify path to dotnet binary, path to published application (working directory) and a user that will run the process.
 
+### Facility setup & nodes configuration
 
+The SIP webserver supports multiple facilities at the same time.
+Facilities (centers) the webserver knows about are defined under `Centers` section in the webserver configuration file.
+```
+Centers:
+  - Id: <facility_id> # Short unique facility identifier that never changes
+    Key: <secret_key> # Secret key of the center for authentication purposes during API calls
+    ConfigFile: <path> # OPTIONAL path to the configuration file of the center
+    
+# NOTE: ConfigFile path can be ommited if such configuration is proveded by one of the sip-nodes
+```
 
 ## Part 3 - Adaptation, extension and development
 
