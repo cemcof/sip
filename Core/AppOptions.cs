@@ -4,7 +4,7 @@ public class AppOptions
 {
     [Required] public string Name { get; set; } = null!;
     [Required] public string ShortName { get; set; } = null!;
-    public string? AttachmentsDirectory { get; set; }
+    
     [Required] public Uri UrlBase { get; set; } = null!;
     [Required] public Uri UrlBaseLocal { get; set; } = null!;
 

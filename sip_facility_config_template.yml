@@ -1,0 +1,85 @@
+# SIP center infrastructure (facility) configuration file 
+# Feel free to use YAML features like anchors and merging...
+# There is no problem defining your own top level keys and inserting them to relevant places in yaml config
+
+
+# Configure center basic information
+Center:
+    Identifier: <facility_id> # Same as in the SIP config under "Centers" section
+    UrlIdentifier: <url_compatible_string> # How will the center be identified in the URL, recommended is something short, lowercase and without special characters except _ and -
+    Name: <facility_name> # Full name of the facility, e.g. Cryo electron microscopy core facility
+    Abbreviation: <abbreviation> # Short descriptive name of the facility, e.g. CEMCOF,EM-Instruct-CZ,Brno
+
+# Connect to the SIP webserver
+SipApi:
+    BaseUrl: <url> # E.g. "https://sip.example.com/api/" # CAUTION - trailing slash has to be there becaou oterwiese urljoiner is kinda dumb
+    SecretKey: <secret> # Same secret string as is in the SIP server config
+
+
+# Configure nodes and their modules and actions
+LimsNodes: # TODO - rename key
+    <node_name>: # Can be for example hostname of the machine where node is deployed
+        Modules:
+            - target: <module.classname> # E.g. experiment.ExpFileBrowser
+              enabled: <enabled> # True/False
+              initial_invoke: <initial_invoke> # True/False
+              interval: <interval> # How often is the action invoked, format is D.H:M:S, e.g. 0:0.500 is every 500ms
+          # - target: ....
+  # <node_name>: .... 
+
+
+# Configure what pages/modules is seen in SIP GUI menu and how are they authorized
+Gui:
+    Modules:
+        <module_name>:
+            DisplayText: <display_text> # E.g. Planningboard
+            LinkHref: <link_href> # E.g. planningboard
+            CssIcon: <css_icon> # E.g. bi bi-calendar
+            RoleNetworkAuthorization: # TODO - better
+                Roles: [ <role> ] # E.g. LabOperatorRole
+                RemoteAddresses: [ <ip_address> ] # E.g. "
+#        Planningboard:
+#            DisplayText: Planningboard
+#            LinkHref: planningboard
+#            CssIcon: bi bi-calendar
+#            RoleNetworkAuthorization:
+#                Roles: [ LabOperatorRole ]
+#                RemoteAddresses: [ "147.251.0.0/16" ]
+#        Dewars:
+#            DisplayText: Dewars
+#            LinkHref: dewars
+#            CssIcon: fas fa-vials
+#            RoleNetworkAuthorization:
+#                Roles: [ LabUserRole ]
+#                RemoteAddresses: [ "147.251.0.0/16" ]
+#        Microscopes:
+#            DisplayText: Microscopes
+#            LinkHref: microscopes
+#            CssIcon: fas fa-microscope
+#            RoleNetworkAuthorization:
+#                Roles: [ LabOperatorRole, LabUserRole ]
+#                RemoteAddresses: [ "147.251.155.85", "147.251.155.115" ]
+#            RequiresActiveOrganization: true
+#        Experiments:
+#            DisplayText: Experiments
+#            LinkHref: experiments
+#            CssIcon: fas fa-flask
+#            RoleNetworkAuthorization:
+#                Roles: [ LabOperatorRole ]
+#            RequiresActiveOrganization: false
+#        Autoloaders:
+#            DisplayText: Autoloaders
+#            LinkHref: autoloaders
+#            CssIcon: fas fa-layer-group
+#            RoleNetworkAuthorization:
+#                Roles: [ LabOperatorRole, LabUserRole ]
+#                RemoteAddresses: [ "147.251.155.85", "147.251.155.115" ]
+#        RemoteAccess:
+#            DisplayText: Remote Access
+#            LinkHref: remote
+#            CssIcon: bi bi-cast
+#            RoleNetworkAuthorization:
+#                Roles: [ LabOperatorRole, LabUserRole ]
+
+
+# TODO - much more...

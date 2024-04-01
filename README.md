@@ -258,7 +258,8 @@ creating a new user and granting it permissions to create databases.
   `dotnet ef database update -- --environment <your_env>`
 
 - If using systemd, adjust and install `systemd` service file from template [sip.service](sip.service). Here specify path to dotnet binary, path to published application (working directory) and a user that will run the process.
-- Before launching the server, ensure it has enough priviledges to bind to the configured ports. Standard HTTP(S) ports are priviledged. See <https://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-on-linux>
+- Before launching the server, ensure it has enough priviledges to bind to the configured ports. 
+- Standard HTTP(S) ports are priviledged. See <https://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-on-linux>
 
 ### Webserver setup & configuration
 
@@ -266,23 +267,59 @@ SIP is designed so that platform, network and facility specific properties are a
 Most of the system parts take it's specific configuration from that file, however, adjusting the system for more specific needs
 will at some point require deeper extension in the codebase.
 
-the database connection in [appsettings.Production.yml](lims/appsettings.Production.yml) under `Db->ConnectionString`, connection string
-should look like this: `Host=localhost; Database=sip; Username=sip; Password=********`
+Use given configuration template [sip_server_config_template.yml](sip_server_config_template.yml), make a copy it 
+and name it `appsettings.<environment>.yml`, where `<environment>` is name of environment under which the webserver
+is running, one of: `Production`, `Staging`, `Development`. Default is 
+`Development` and can be set explicitly by `--environment` argument or `ASPNETCORE_ENVIRONMENT` environment variable. 
+Such file name and location will be automatically loaded, however, entirely custom
+file path can be given as a command line argument `--appsettings <filepath>` to the webserver.
 
-- Configure server endpoints in [appsettings.Production.yml](lims/appsettings.Production.yml) under `Kestrel->Endpoints`. Here provide URLs and ports the server should listen on. Also specify path to SSL certificate. To allow `dotnet` to map to privileged ports (e.g. 80,443), use `sudo setcap CAP_NET_BIND_SERVICE=+eip <path to dotnet binary NOT A SYMLINK>`
+Configuration necessary for minimal function (such that webserver does not crash on start) is following:
+
+- **Connect to the database** - set up under `Db` key in config file.
+- **Set up the server endpoints** - under `Kestrel` key in config file - where the server will listen, where are https certificates.
+- **Set up application basic information** - under `App` key in config file - name, abbreviation, etc.
+
+Follow comments in the configuration file and set up other stuff as needed. 
+
 
 ### Facility setup & nodes configuration
 
-The SIP webserver supports multiple facilities at the same time.
-Facilities (centers) the webserver knows about are defined under `Centers` section in the webserver configuration file.
-```
+First it is needed to be decided where to put the configuration file for the facility. It can be anywhere where one of
+deployed sip-nodes can read it, or it can be left on the original location and read by the webserver itself.
+Copy template to desired location [sip_center_config_template.yml](sip_center_config_template.yml) and name give it new name, for example `sip_<your-facilityname>_config.yml`.
+
+This file is separated from the webserver configuration file and contains only the configuration specific to the facility. 
+The SIP webserver supports multiple facilities at the same time and therefore multiple such files can exist.
+
+Facilities (centers) the webserver knows about and accepts are defined under `Centers` section in the **webserver configuration** file.
+```yaml
 Centers:
   - Id: <facility_id> # Short unique facility identifier that never changes
-    Key: <secret_key> # Secret key of the center for authentication purposes during API calls
+    Key: <secret_key> # Secret key of the center for authentication purposes during API calls (put here any random string) 
     ConfigFile: <path> # OPTIONAL path to the configuration file of the center
     
 # NOTE: ConfigFile path can be ommited if such configuration is proveded by one of the sip-nodes
 ```
+
+Minimal configuration of the facility configuration file is following:
+
+- **SIP webserver connection** - how to connect to the webserver (API url and key), under `SipApi` key in config file.
+- **Facility basic information** - name, abbreviation, id... under `Center` key in config file.
+
+#### Nodes and modules
+
+More sip-nodes can be utilized by the facility.
+What should they do, where they are and how they are configured is defined in the facility configuration file.
+After fetching this file, each `sip-node` loads the configured modules and runs the specified actions for it in specified intervals.
+Without this configuration, the `sip-node` instance will do nothing but pinging the webserver. Focus on the `Nodes` section in 
+the file to set it up.
+
+
+
+Follow comments in the configuration file and set up other stuff as needed. Since the file can get quite big and messy,
+it is recommended to get familiar with YAML's less known features such as *anchors* and *references* to keep the configuration
+more maintainable.
 
 ## Part 3 - Adaptation, extension and development
 
@@ -304,6 +341,8 @@ This manual does not cover this, but includes links to relevant documentation an
 
 ### Define the organization tree
 
+TODO 
+
 ### Define index redirecting 
 
 When user opens the webpage, redirection to a URL relevant to the user should happen. 
@@ -313,11 +352,15 @@ be interested in data transfer from microscopes. Unauthenticated user should be 
 
 This can be configured by implementing `IIndexRedirector` interface and registering it in the DI container.
 
+TODO
+
 ### Define the user roles
+
+TODO 
 
 ### Define the project types and statuses
 
-
+TODO 
 
 ### Useful curl requests
 

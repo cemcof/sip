@@ -1,0 +1,41 @@
+
+# Connect to the webserver database 
+Db:
+    ConnectionString: "Host=<hostname>; Database=<db_name>; Username=<username>; Password=<password>"
+    Init:
+        Strategy: AddOnly
+        
+# Configure server - endpoints, certificates etc...
+Kestrel:
+    Endpoints:
+        Http:
+            Url: <url> # E.g. http://0.0.0.0:80
+        HttpsInlineCertAndKeyFile:
+            Url: <url> # E.g. https://0.0.0.0:443
+            Certificate:
+                Path: <path> # E.g. /var/webcerts/cert.pem
+                KeyPath: <path> # E.g  /var/webcerts/key.pem
+
+# Application basic settings
+App:
+    Name: Scientific Integration Platform
+    ShortName: SIP
+    UrlBase: <url> # Where your app is hosted E.g. https://sip.example.com
+    UrlBaseLocal: <url> # Path to the app from the hosting server, e.g. "https://localhost"
+    AdminSupportMail: <email> # Where to send possible bugs and reports
+    DataDirectory: <path> # Storage where the system has read/write access, e.g. /var/sip_data
+
+# For production - open to internet                
+AllowedHosts: "*"
+
+# Configure logging provider - which types and severities of logs to show.
+Logging:
+    LogLevel:
+        # "Namespace: Severity" mapping for filtering logs, see https://learn.microsoft.com/en-us/dotnet/core/extensions/logging
+        Default: Information
+        Microsoft: Warning
+        Microsoft.Hosting.Lifetime: Debug
+    Console:
+        TimestampFormat: "[yyyy-MM-dd HH:mm:ss] "
+
+# TODO - much more...
