@@ -215,22 +215,12 @@ The node is expected to be run permanently (as a systemd service, for example) a
 Main thread runs in infinite loop and responsible for syncing configuration, pinging webserver and running independent configured tasks/modules
 on other threads.
 
-Node can be run in two modes: 
-
-```shell
-# As config-providing node
-python3 main.py --config-file <path_to_config_file.yml>
-
-# As standard node
-python3 main.py -o <organization_name> --sip-api-url <sip_api_url> --sip-api-key <sip_api_center_secret> 
-```
-
 The architecture described above is shown in the following diagram:
 
 ![Screenshot](Doc/node.png)
 
-
-
+The node can be run in two modes, either as facility configuration provider (max one instance, or SIP webserver itself) or 
+as a standard node, that connects to the webserver and fetches the configuration from it.
 
 ## Part 2 - Installation and setup
 
@@ -315,11 +305,24 @@ After fetching this file, each `sip-node` loads the configured modules and runs 
 Without this configuration, the `sip-node` instance will do nothing but pinging the webserver. Focus on the `Nodes` section in 
 the file to set it up.
 
-
-
 Follow comments in the configuration file and set up other stuff as needed. Since the file can get quite big and messy,
 it is recommended to get familiar with YAML's less known features such as *anchors* and *references* to keep the configuration
 more maintainable.
+
+To deploy the node, clone [sip-node](https://github.com/cemcof/sip-node) repository, install requirements and 
+configure underlying machine's environment.
+
+Node can be run in two modes, depending whether it is the node that provides facility configuration file or not.
+If node is not config provider, arguments that enable it to connect to the webserver must be given: *organization name*,
+*sip api url* and *sip api key*.
+
+```shell
+# As config-providing node
+python3 main.py --config-file <path_to_config_file.yml>
+
+# As standard node
+python3 main.py -o <organization_name> --sip-api-url <sip_api_url> --sip-api-key <sip_api_center_secret> 
+```
 
 ## Part 3 - Adaptation, extension and development
 
