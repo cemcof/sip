@@ -58,7 +58,33 @@
 {
     <section class="card border-success text-center my-0 w-25">
         <div class="card-body">
-            <p class="card-title">@if (Exp.Publication.Doi is not null) {<span>DOI: <a href="@Doi.GetDoiUrl(Exp.Publication.Doi)">@Exp.Publication.Doi}</a></span>}</p>
+            <p>
+                <span class="fw-bold">
+                    Published at
+                </span> 
+                <br/> 
+                <a href="@Exp.Publication.TargetUrl" target="_blank">
+                    @Exp.Publication.TargetUrl
+                </a>
+            </p>
+            
+            <hr/>
+            
+            <p>
+                <span class="fw-bold">
+                    DOI
+                </span>
+                <br/>
+                
+                @if (Exp.Publication.Doi is not null)
+                {
+                    <a href="@Doi.GetDoiUrl(Exp.Publication.Doi).url">@Exp.Publication.Doi</a>
+                }
+                else
+                {
+                    <span>-</span>
+                }
+            </p>
         </div>
     </section>
 }
