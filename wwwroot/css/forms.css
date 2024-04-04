@@ -205,7 +205,8 @@
     display: flex!important;
     align-items: center;
     border: 1px solid #ced4da;
-    padding: 1rem;
+    padding: 0.8rem;
+    margin-bottom: 0.3rem;
 }
 
 .big-radiolist label .fake-radio {
@@ -218,7 +219,6 @@
 
 .big-radiolist .heading {
     font-weight: bold;
-    margin-bottom: 0.5rem;
 } 
 
 .big-radiolist .description {
