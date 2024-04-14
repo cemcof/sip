@@ -12,9 +12,10 @@ public class ExperimentProcessing
 
     [MaxLength(64)] public string ProcessingEngine { get; set; } = string.Empty;
     [MaxLength(64)] public string Node { get; set; } = string.Empty;
-    [MaxLength(16)] public string? Pid { get; set; } 
-    
-    [NotMapped] public List<Dictionary<string, object?>> Workflow { get; set; } = new();
+    [MaxLength(16)] public string? Pid { get; set; }
+
+    public string WorkflowRef { get; set; }
+    [NotMapped] public object? Workflow { get; set; } 
     [YamlIgnore, JsonIgnore] public string WorkflowSerialized { get; set; } = "[]";
 
     [YamlIgnore, JsonIgnore] public List<ExperimentProcessingDocument> ExperimentProcessingDocuments { get; set; } = new();
@@ -33,7 +34,7 @@ public class ExperimentProcessing
             .IgnoreUnmatchedProperties()
             .WithAttemptingUnquotedStringTypeDeserialization()
             .Build();
-        Workflow = ds.Deserialize<List<Dictionary<string, object?>>>(WorkflowSerialized);
+        Workflow = ds.Deserialize(WorkflowSerialized);
     }
 
     public void SerializeWorkflow()

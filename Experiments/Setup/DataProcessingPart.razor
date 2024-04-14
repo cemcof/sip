@@ -108,7 +108,11 @@
     
     private async ValueTask<ItemsProviderResult<Workflow>> _WorkflowTemplateItemsProvider(ItemsProviderRequest request, string? searchstring)
     {
-        var wfs = await WorkflowProvider.GetWorkflowsAsync(ExpMeta)
+        var wfs = await WorkflowProvider.GetWorkflowsAsync(new WorkflowFilter(
+                Engine: Exp.Processing.ProcessingEngine, 
+                Instrument: Exp.InstrumentName,
+                Technique: Exp.Technique)
+            )
             .ToListAsync();
         
         var result = wfs.Where(kv =>
