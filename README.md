@@ -172,11 +172,20 @@ What metadata there are and from which source they come is configurable for each
 
 
 Internally the data management is split into three major parts:
-- **Storage engine**
-- **Processing engine**
-- **Publication engine**
+- **Storage engine** - required part, each experiment has it. Handles storing data in a location and providing ways to access it. 
+- **Processing engine** - optional part, uses storage engine to access data and runs processing on them, yielding processing results back to storage engine.
+- **Publication engine** - optional part, creates a reference to the data in a public catalogue.
 
-TOD
+The three parts are shown in the picture below. Each engine needs some configuration to function - values specific to each experiment
+come from SIP webserver, node specific configuration come from SIP configuration file and local environment of the machine the node 
+runs on.
+
+All engines can be deployed at one node as single instance, or split as needed. For example,
+facility's local machine can handle transfering data from microscopes to the desired storage, while a remote machine
+can be used for processing the data. 
+
+![Data management infrastructure](Doc/data_management.png)
+
 
 ### Technical overview
 
