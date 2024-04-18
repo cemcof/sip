@@ -35,6 +35,14 @@ public class ExperimentsBuilder
 
         services.AddSingleton<IWorkflowProvider, FromConfigWorkflowProvider>();
         services.AddSingleton<IWorkflowProvider, WorkflowhubWorkflowProvider>();
+        services.AddOptions<WorkflowhubOptions>()
+            .GetOrganizationOptionsBuilder()
+            .BindOrganizationConfiguration(configurationRoot, "Workflowhub");
+        
+        services.AddOptions<List<Workflow>>()
+            .GetOrganizationOptionsBuilder()
+            .BindOrganizationConfiguration(configurationRoot, "Workflows");
+        
         services.AddSingleton<IWorkflowProvider, CompositeWorkflowProvider>();
         
         services.AddScheduledService<CenterManager>(c =>

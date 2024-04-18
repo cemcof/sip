@@ -1,6 +1,7 @@
 using System.Collections;
 using System.ComponentModel;
 using System.Security.Cryptography.Xml;
+using Microsoft.AspNetCore.JsonPatch.Helpers;
 
 namespace sip.Forms.Dynamic;
 
@@ -98,9 +99,198 @@ public record DynamicElementSetup(
     
 }
 
+public interface IBindPoint
+{
+    
+}
+
+public class KBindPoint(ref string key)
+{
+    
+}
+
+
+
+public record BindPoint
+{
+    public object Target { get; init; }
+    public string? Key { get; init; }
+    
+    public BindPoint(object Target, string? Key = null)
+    {
+        this.Target = Target;
+        this.Key = Key;    
+    }
+
+    public object? GetValue()
+    {
+        if (Target is IDictionary dict)
+        {
+            return dict[Key];
+        }
+        else if (Target is IList list)
+        {
+            return list[int.Parse(Key!)];
+        }
+        else
+        {
+            // Target is arbitrary object - get it's property
+        }
+        
+    }
+
+
+    public Type? GetActualValueType()
+     => GetValue()?.GetType();
+
+    /// <summary>
+    /// Terminal values are:
+    /// - A primitive value
+    /// - List of primitives
+    /// - DynamicElementSetup
+    /// - Dictionary that resembles dynamic element setup
+    /// </summary>
+    /// <returns></returns>
+    public bool HasTerminalValue()
+    {
+        var valType = GetActualValueType();
+        throw new NotImplementedException();
+    }
+
+    public Type GetValueType()
+    {
+        if (string.IsNullOrEmpty(Key)) return Target.GetType();
+        
+
+    }
+
+    public static IEnumerable<BindPoint> EnumerateObject(object target)
+    {
+        if (target is IList tlist)
+        {
+            for (var i = 0; i < tlist.Count; i++)
+            {
+                yield return new BindPoint(tlist[i], i.ToString());
+            }
+        }
+        else if (target is IDictionary tdict)
+        {
+            foreach (DictionaryEntry entry in tdict)
+            {
+                yield return new BindPoint(entry.Value, entry.Key.ToString());
+            }
+        }
+        else
+        {
+            yield return new BindPoint(target, "");
+            
+        } 
+    }
+
+    /// <summary>
+    /// Sets target object according to this BindPoint 
+    /// </summary>
+    /// <param name="target"></param>
+    /// <exception cref="InvalidOperationException"></exception>
+    public void EnsureTarget(ref object? target)
+    {
+        if (target is null)
+        {
+            if (Key is null)
+            {
+                throw new InvalidOperationException("Cannot ensure target without key");
+            }
+            
+            if (Target is IList)
+            {
+                target = new List<object?>();
+            }
+            else if (Target is IDictionary)
+            {
+                target = new Dictionary<string, object?>();
+            }
+            else
+            {
+                throw new InvalidOperationException("Cannot ensure target without key");
+            }
+        }
+    }
+}
+
+
+public class DynamicBindContext
+{
+    public DynamicBindContext(object source, object? target = null, string? listIdKey = null)
+    {
+        
+    }
+
+    public IEnumerable<BindPoint> ApplyValues(
+        object source, 
+        ref object? target,
+        
+        string? listIdKey = DynamicFormTools.ID_KEY,
+        string? groupKey = DynamicFormTools.GROUP_NAME_KEY,
+        string? groupDescriptionKey = DynamicFormTools.DESCRIPTION_KEY)
+    {
+        
+        // Lets start by ensuring the target 
+        var srcb = new BindPoint(source, null);
+        srcb.EnsureTarget(ref target);
+        // Now iterate the source object
+        
+        if (source is IDictionary dsource)
+        {
+            var k = dsource["fwef"];
+            ApplyValues(source, ref dsource["fewf"]);
+        } 
+    }
+    
+    /// <summary>
+    /// Iterate structure of source object, which can consist of lists, dictionaries or ordinary objects.
+    /// Yield binding points of terminal primitive values or DynamicElementSetups.
+    /// Recursively create and apply same structure into the target object, if possible.
+    /// If dealing with lists, use listIdKey to identify the list items. 
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerable<BindPoint> ApplyValues(BindPoint source, BindPoint target)
+    {
+        // If we should enumerate, recurse
+        // Otherwise apply
+        // How do we know? 
+        // Well, by checking if source has terminal value or not
+        // Terminal can be primitive value, null or DynamicElementSetup
+    }
+
+    public IEnumerable<BindPoint> ApplyList(IList source, object? target) 
+    {
+        
+        
+    }
+    
+    
+    
+    
+}
 
 public static class DynamicFormTools
 {
+    public const string ID_KEY = "ID";
+    public const string TYPE_KEY = "TYPE";
+    public const string DESCRIPTION_KEY = "DESCRIPTION";
+    public const string NAME_KEY = "NAME";
+    public const string GROUP_NAME_KEY = "GROUP_NAME";
+    
+    /// <summary>
+    /// Recursively pa
+    /// </summary>
+    /// <param name="target"></param>
+    public static void ParseDynamicSetups(object target)
+    {
+        var ctx = new DynamicBindContext(target);
+
+    }
+    
     public static bool TryParseSetupFromString(string? strval, out DynamicElementSetup? result)
     {
         if (string.IsNullOrWhiteSpace(strval))
@@ -159,6 +349,51 @@ public static class DynamicFormTools
         }
 
         return list;
+    }
+
+    /// <summary>
+    /// Recursively convert this configuration section to object hierarchy
+    /// - Mappings are done by dictionaries
+    /// - Collections are done by lists
+    /// </summary>
+    /// <param name="section"></param>
+    /// <param name="inferTypes">Whether to attempt to convert primitive values to according types or leave all as strings</param>
+    /// <returns></returns>
+    public static object? ToObject(this IConfigurationSection section, bool inferTypes = true)
+    {
+        if (section.Value is not null)
+        {
+            if (inferTypes)
+            {
+                var info = InferTypeFromStringValue(section.Value);
+                return ConvertToGivenType(info.Item1, section.Value);
+            }
+            return section.Value;
+        }
+
+        var children = section.GetChildren().ToList();
+        if (children.Count == 0) return new Dictionary<string, object?>();
+
+        // If the first child is a list, then we are dealing with a list
+        if (children.First().Key == "0")
+        {
+            var list = new List<object?>();
+            foreach (var child in children)
+            {
+                list.Add(child.ToObject(inferTypes));
+            }
+
+            return list;
+        }
+
+        // Otherwise we are dealing with a dictionary
+        var dict = new Dictionary<string, object?>();
+        foreach (var child in children)
+        {
+            dict[child.Key] = child.ToObject(inferTypes);
+        }
+
+        return dict;
     }
     
     public static Type StringToValType(string? typeAsString)
@@ -240,24 +475,7 @@ public static class DynamicFormTools
         }
     }
 
-    public static void ApplyValues(
-        IConfigurationSection metadata,
-        List<Dictionary<string, object?>> target)
-    {
-        target.Clear();
-        
-        foreach (var meta in metadata.GetChildren())
-        {
-            var wf = new Dictionary<string, object?>();
-            target.Add(wf);
-            foreach (var setup in meta.GetChildren())
-            {
-                var setupDyn = DynamicElementSetup.FromObject(setup);
-                wf[setup.Key] = setupDyn.Default;
-            }
-        }    
-    }
-
+    
     public record DynInputInfo(
         string Key,
         DynamicElementSetup Setup,

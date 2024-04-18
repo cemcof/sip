@@ -1,4 +1,6 @@
-﻿namespace sip.Experiments.Workflows;
+﻿using sip.Forms.Dynamic;
+
+namespace sip.Experiments.Workflows;
 
 public class Workflow : IEquatable<Workflow>
 {
@@ -34,10 +36,7 @@ public class Workflow : IEquatable<Workflow>
         }
     #endregion
 
-    public const string PROTOCOL_ID_KEY = "ID";
-    public const string PROTOCOL_TYPE_KEY = "TYPE";
-    public const string PROTOCOL_DESCRIPTION_KEY = "DESCRIPTION";
-    public const string PROTOCOL_NAME_KEY = "NAME";
+    
 
     public string Id { get; set; } = null!;
     public string Title { get; set; } = "<untitled workflow>";
@@ -46,10 +45,21 @@ public class Workflow : IEquatable<Workflow>
     public string? Diagram { get; set; }
     public string? Provider { get; set; }
 
-    public List<string> Engines { get; set; } = new();
+    public List<string> Tags { get; set; } = new();
 
-
-    public IConfigurationSection Protocols { get; set; } = null!;
+    public object? Data { get; set; } = new Dictionary<string, object>();
+    
+    // Only for automatic configuration binding
+    public IConfigurationSection DataConf
+    {
+        // TODO - maybe we must have getter otherwise binder will ignore this
+        // get
+        // {
+        //     if (Data is null) return new ConfigurationRoot(ArraySegment<IConfigurationProvider>.Empty);
+        //     throw new NotSupportedException();
+        // };
+        set => Data = value.ToObject();
+    }
 
 }
 

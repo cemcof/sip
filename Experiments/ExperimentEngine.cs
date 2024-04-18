@@ -32,14 +32,15 @@ public class ExperimentEngine(
 
     public event Action? ExperimentChanged;
 
-    public Experiment CreateExperiment(string organization, string instrument, string technique)
+    public Experiment CreateExperiment(Organization organization, string instrument, string technique)
     {
         // Create metadata for the experiment 
         var ex = new Experiment
         {
             InstrumentName = instrument,
             Technique      = technique,
-            OrganizationId = organization,
+            OrganizationId = organization.Id,
+            Organization   = organization,
             Storage        = new ExperimentStorage(),
             Publication    = new ExperimentPublication(),
             Processing = new ExperimentProcessing()

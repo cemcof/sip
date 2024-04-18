@@ -89,7 +89,7 @@
             _selectedWorkflow = value;
             if (value is not null) 
             {
-                DynamicFormTools.ApplyValues(value.Protocols, Exp.Processing.Workflow);
+                DynamicFormTools.ApplyValues(value.Data, Exp.Processing.Workflow);
                 Logger.LogDebug("Values applied: source={@Source} target={@Target}", value.Protocols, Exp.Processing.Workflow);
             }
             else 
@@ -109,6 +109,7 @@
     private async ValueTask<ItemsProviderResult<Workflow>> _WorkflowTemplateItemsProvider(ItemsProviderRequest request, string? searchstring)
     {
         var wfs = await WorkflowProvider.GetWorkflowsAsync(new WorkflowFilter(
+                Organization: Exp.Organization,
                 Engine: Exp.Processing.ProcessingEngine, 
                 Instrument: Exp.InstrumentName,
                 Technique: Exp.Technique)
