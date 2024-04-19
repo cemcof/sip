@@ -58,6 +58,7 @@ public class Workflow : IEquatable<Workflow>
         //     if (Data is null) return new ConfigurationRoot(ArraySegment<IConfigurationProvider>.Empty);
         //     throw new NotSupportedException();
         // };
+        get => null!;
         set => Data = value.ToObject();
     }
 

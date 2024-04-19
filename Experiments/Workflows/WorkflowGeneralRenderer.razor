@@ -31,11 +31,14 @@
 
 @code {
 
+
     [Parameter, EditorRequired]
     public Workflow Workflow { get; set; } = null!;
 
     [Parameter, EditorRequired]
-    public List<Dictionary<string, object>> TargetProtocols { get; set; } = null!;
+    public object WorkflowData { get; set; } = null!;
+    
+    [Parameter] public bool AsForm { get; set; } = true;
     
     private Dictionary<string, dynamic> GetProtocol(string protocolid) 
     {

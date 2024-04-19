@@ -42,6 +42,10 @@ public class ExperimentsBuilder
         services.AddOptions<List<Workflow>>()
             .GetOrganizationOptionsBuilder()
             .BindOrganizationConfiguration(configurationRoot, "Workflows");
+
+        services.AddOptions<EnginesOptions>()
+            .GetOrganizationOptionsBuilder()
+            .BindOrganizationConfiguration(configurationRoot, "Engines");
         
         services.AddSingleton<IWorkflowProvider, CompositeWorkflowProvider>();
         

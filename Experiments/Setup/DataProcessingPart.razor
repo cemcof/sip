@@ -4,7 +4,7 @@
 
 @inject ILogger<DataProcessingPart> Logger
 @inject IWorkflowProvider WorkflowProvider
-
+@inject IOptionsMonitor<EnginesOptions> EngineOptions
 
 @if (ShowWorkflowSetup) 
         {
@@ -47,7 +47,7 @@
                     @if (SelectedWorkflow is not null) 
                     {
                         <WorkflowGeneralRenderer Workflow="@SelectedWorkflow"
-                                                TargetProtocols="@Exp.Processing.Workflow">
+                                                 WorkflowData="@Exp.Processing.Workflow">
                         </WorkflowGeneralRenderer>
                     } 
                 </div>
@@ -90,12 +90,18 @@
             if (value is not null) 
             {
                 DynamicFormTools.ApplyValues(value.Data, Exp.Processing.Workflow);
-                Logger.LogDebug("Values applied: source={@Source} target={@Target}", value.Protocols, Exp.Processing.Workflow);
+                // Select processing engine - look for it in the tags, use configured engines to determine which tag is the engine
+                Exp.Processing.ProcessingEngine = EngineOptions
+                    .Get(Exp.Organization)
+                    .Processing
+                    .First(e => value.Tags.Contains(e.Id))
+                    .Id;
+                Logger.LogDebug("Values applied: source={@Source} target={@Target}", value.Data, Exp.Processing.Workflow);
             }
-            else 
+            else
             {
-                Exp.Processing.Workflow.Clear();
-                Logger.LogDebug("Values cleared");
+                Exp.Processing.Workflow = null;
+                Logger.LogDebug("Workflow cleared");
             }
             
         }

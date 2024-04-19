@@ -17,80 +17,76 @@ public record DynamicElementSetup(
     string? Unit = null,
     string? Scope = null,
     string? Flex = null,
+    int Order = -1,
     int Min = int.MinValue,
     int Max = int.MaxValue	
 )
 {
-    public static DynamicElementSetup FromObject(object setup)
+    public static DynamicElementSetup FromObject(object? setup)
     {
-        DynamicElementSetup ParseConfigurationSectionSetup(IConfigurationSection section)
+        (Type, bool isSupported) GetTypeInfo(object? value)
         {
-            // First need to get the type and default value
-            var specifiedType = section.GetSection(nameof(Type)).Value ?? "str";
-            var type = DynamicFormTools.StringToValType(specifiedType);
-            
-            var defaultSection = section.GetSection(nameof(Default));
-            object? defaultValue = (defaultSection.IsSectionList()) ?
-                defaultSection.ToList() :
-                DynamicFormTools.ConvertToGivenType(type, defaultSection.Value);
-            
-            // We also need to parse selection if any
-            var selectionSection = section.GetSection(nameof(Selection));
-            IList? selectionList = null; 
-            if (selectionSection.IsSectionList())
+            if (value is null || value is string) return (typeof(string), true);
+            // Handle lists
+            if (value is IList list)
             {
-                selectionList = selectionSection.ToList();
+                if (list.Count == 0) return (typeof(List<string>), true);
+                var first = list[0];
+                var (type, supported) = GetTypeInfo(first);
+                if (!supported) return (typeof(string), false);
+                return (typeof(List<>).MakeGenericType(type), true);
             }
+
+            return (value.GetType(), false);
+        }
+
+        if (setup is string st && DynamicFormTools.TryParseSetupFromString(st, out var dynSetup))
+            return dynSetup!;
+        
+        var tinfo = GetTypeInfo(setup);
+
+        if (tinfo.isSupported)
+        {
+            return new DynamicElementSetup(Type: tinfo.Item1, Default: setup);
+        }
+
+        if (setup is DynamicElementSetup dyn)
+            return dyn;
+        
+        if (setup is IDictionary dict && 
+            (dict.Contains(nameof(Type)) || dict.Contains(nameof(Default)))) // TODO - more robust
+        {
+            // Type? type = null;
+            // if (dict.Contains(nameof(Type)))
+            //     type = DynamicFormTools.StringToValType(dict[nameof(Type)]!.ToString());
+            //
+            //
+            // if (dict.Contains(nameof(Default)))
+            // {
+            //     var defType = 
+            // }
+            //     
+            // var type = (dict.Contains(nameof(Type))) ?
+            //     DynamicFormTools.StringToValType(dict[nameof(Type)]!.ToString()) :
+            //     
+            // var defaultVal = DynamicFormTools.ConvertToGivenType(type, dict[nameof(Default)].ToString());
+            var bp = BindPoint.From(setup);
             
-            // Now parse the rest of the setup
             return new DynamicElementSetup(
                 Type: type,
-                Default: defaultValue,
-                SpecifiedType: specifiedType,
-                DisplayName: section.GetSection(nameof(DisplayName)).Value,
-                Selection: selectionList,
-                Tip: section.GetSection(nameof(Tip)).Value,
-                IsReadonly: section.GetSection(nameof(IsReadonly)).Get<bool>(),
-                IsRequired: section.GetSection(nameof(IsRequired)).Get<bool>(),
-                Unit: section.GetSection(nameof(Unit)).Value,
-                Scope: section.GetSection(nameof(Scope)).Value,
-                Flex: section.GetSection(nameof(Flex)).Value,
-                Min: section.GetSection(nameof(Min)).Get<int>(),
-                Max: section.GetSection(nameof(Max)).Get<int>()
+                Default: defaultVal,
+                SpecifiedType: bp.GetValueByKey<string>(nameof(DisplayName)),
+                DisplayName: bp.GetValueByKey<string>(nameof(DisplayName)),
+                Selection: bp.GetValueByKey<IList>(nameof(Selection)),
+                Tip: bp.GetValueByKey<string>(nameof(Tip)),
+                IsReadonly: bp.GetValueByKey<bool>(nameof(IsReadonly)),
+                IsRequired: bp.GetValueByKey<bool>(nameof(IsRequired)),
+                Unit: bp.GetValueByKey<string>(nameof(Unit)),
+                Scope: bp.GetValueByKey<string>(nameof(Scope)),
+                Flex: bp.GetValueByKey<string>(nameof(Flex)),
+                Min: bp.GetValueByKey<int>(nameof(Min)),
+                Max: bp.GetValueByKey<int>(nameof(Max))
             );
-
-        }
-        
-        if (setup is DynamicElementSetup dyn) return dyn;
-
-        if (setup is IConfigurationSection sect)
-        {
-            if (sect.Value is null && sect.GetChildren().Any())
-            {
-                if (sect.IsSectionList())
-                {
-                    // The sect is list, which is not configuration, but a default value
-                    var list = sect.ToList();
-                    return new DynamicElementSetup(Type: list.GetType(), Default: list);
-                }
-                else
-                {
-                    // The sect is a nested configuration, not a value
-                    return ParseConfigurationSectionSetup(sect);
-                }
-            }
-            else
-            {
-                // The sect is actually a value (nonlist)
-                
-                // Try to first parse it as a setup
-                if (DynamicFormTools.TryParseSetupFromString(sect.Value, out var dynSetup))
-                    return dynSetup!;
-                
-                // Now we know its really just a value
-                var info = DynamicFormTools.InferTypeFromStringValue(sect.Value);
-                return new DynamicElementSetup(Type: info.Item1, Default: info.Item2);
-            }
         }
         
         throw new NotSupportedException	($"Type {setup.GetType().Name} is not supported as dynamic form setup");
@@ -101,7 +97,11 @@ public record DynamicElementSetup(
 
 public interface IBindPoint
 {
-    
+    public object? GetValue();
+    public void SetValue(object? value);
+
+    public T? GetValueByKey<T>(string key, T? defaultValue = default);
+    public T GetValue<T>(T defaultValue = default);
 }
 
 public class KBindPoint(ref string key)
@@ -109,84 +109,8 @@ public class KBindPoint(ref string key)
     
 }
 
-
-
-public record BindPoint
+public class BindPoint : IBindPoint
 {
-    public object Target { get; init; }
-    public string? Key { get; init; }
-    
-    public BindPoint(object Target, string? Key = null)
-    {
-        this.Target = Target;
-        this.Key = Key;    
-    }
-
-    public object? GetValue()
-    {
-        if (Target is IDictionary dict)
-        {
-            return dict[Key];
-        }
-        else if (Target is IList list)
-        {
-            return list[int.Parse(Key!)];
-        }
-        else
-        {
-            // Target is arbitrary object - get it's property
-        }
-        
-    }
-
-
-    public Type? GetActualValueType()
-     => GetValue()?.GetType();
-
-    /// <summary>
-    /// Terminal values are:
-    /// - A primitive value
-    /// - List of primitives
-    /// - DynamicElementSetup
-    /// - Dictionary that resembles dynamic element setup
-    /// </summary>
-    /// <returns></returns>
-    public bool HasTerminalValue()
-    {
-        var valType = GetActualValueType();
-        throw new NotImplementedException();
-    }
-
-    public Type GetValueType()
-    {
-        if (string.IsNullOrEmpty(Key)) return Target.GetType();
-        
-
-    }
-
-    public static IEnumerable<BindPoint> EnumerateObject(object target)
-    {
-        if (target is IList tlist)
-        {
-            for (var i = 0; i < tlist.Count; i++)
-            {
-                yield return new BindPoint(tlist[i], i.ToString());
-            }
-        }
-        else if (target is IDictionary tdict)
-        {
-            foreach (DictionaryEntry entry in tdict)
-            {
-                yield return new BindPoint(entry.Value, entry.Key.ToString());
-            }
-        }
-        else
-        {
-            yield return new BindPoint(target, "");
-            
-        } 
-    }
-
     /// <summary>
     /// Sets target object according to this BindPoint 
     /// </summary>
@@ -194,38 +118,153 @@ public record BindPoint
     /// <exception cref="InvalidOperationException"></exception>
     public void EnsureTarget(ref object? target)
     {
-        if (target is null)
+        
+    }
+
+    public void SetTo(BindPoint target)
+    {
+        
+    }
+
+    public virtual object? GetValue()
+    {
+        throw new NotSupportedException();
+    }
+
+    public virtual void SetValue(object? value)
+    {
+        throw new NotSupportedException();
+    }
+
+    public virtual T GetValue<T>(T defaultValue = default)
+    {
+        throw new NotSupportedException();
+    }
+
+    public static IBindPoint From(object o, object key)
+    {
+        return o switch
         {
-            if (Key is null)
-            {
-                throw new InvalidOperationException("Cannot ensure target without key");
-            }
-            
-            if (Target is IList)
-            {
-                target = new List<object?>();
-            }
-            else if (Target is IDictionary)
-            {
-                target = new Dictionary<string, object?>();
-            }
-            else
-            {
-                throw new InvalidOperationException("Cannot ensure target without key");
-            }
-        }
+            IDictionary dict => new DictBindPoint(dict, key.ToString()!),
+            IList list => new ListBindPoint(list, (int) key),
+            _ => new ObjectBindPoint(o, key.ToString()!)
+        };
+    }
+
+    public static T? Get<T>(object target, string key, T? defaulValue = default)
+    {
+        return From(target, key).GetValue(defaulValue);
     }
 }
 
+
+public class DictBindPoint(IDictionary dict, string key) : BindPoint
+{
+    public override object? GetValue()
+    {
+        return dict[key];
+    }
+
+    public override void SetValue(object? value)
+    {
+        dict[key] = value;
+    }
+
+    public override T GetValue<T>(T defaultValue = default)
+    {
+        if (dict[key] is T val) return val;
+        return defaultValue;
+    }
+}
+
+public class ListBindPoint(IList list, int index) : BindPoint
+{
+    public override object? GetValue()
+    {
+        return list[index];
+    }
+
+    public override void SetValue(object? value)
+    {
+        list[index] = value;
+    }
+
+    public override T GetValue<T>(T defaultValue = default)
+    {
+        if (list[index] is T val) return val;
+        return defaultValue;
+    }
+}
+
+public class ObjectBindPoint(object obj, string key) : BindPoint
+{
+    public override object? GetValue()
+    {
+        var prop = obj.GetType().GetProperty(key);
+        if (prop is null) return null;
+        return prop.GetValue(obj);
+    }
+
+    public override void SetValue(object? value)
+    {
+        var prop = obj.GetType().GetProperty(key);
+        if (prop is null) return;
+        prop.SetValue(obj, value);
+    }
+
+    public override T GetValue<T>(T defaultValue = default)
+    {
+        var prop = obj.GetType().GetProperty(key);
+        if (prop is null) return defaultValue;
+        if (prop.GetValue(obj) is T val) return val;
+        return defaultValue;
+    }
+}
 
 public class DynamicBindContext
 {
     public DynamicBindContext(object source, object? target = null, string? listIdKey = null)
     {
-        
+
+    }
+    
+    
+
+    public static bool ValueAplicator(BindPoint source, BindPoint target)
+    {
+        var sourceVal = source.GetValue();
+
+        try
+        {
+            var dynObj = DynamicElementSetup.FromObject(sourceVal);
+            target.SetValue(dynObj.Default);
+            return false;
+        }
+        catch (NotSupportedException e)
+        {
+            source.SetTo(target);
+            return true;
+        }
     }
 
-    public IEnumerable<BindPoint> ApplyValues(
+    public static bool ConvertToDynamicSetupAplicator(BindPoint source, BindPoint target)
+    {
+        var val = source.GetValue();
+        try
+        {
+            var dynaSetup = DynamicElementSetup.FromObject(val);
+            target.SetValue(dynaSetup);
+            return false;
+        }
+        catch (NotSupportedException e)
+        {
+            source.SetTo(target);
+            return true; // Continue recurse
+        }
+    }
+
+
+public IEnumerable<BindPoint> ApplyValues(
         object source, 
         ref object? target,
         
@@ -245,28 +284,7 @@ public class DynamicBindContext
             ApplyValues(source, ref dsource["fewf"]);
         } 
     }
-    
-    /// <summary>
-    /// Iterate structure of source object, which can consist of lists, dictionaries or ordinary objects.
-    /// Yield binding points of terminal primitive values or DynamicElementSetups.
-    /// Recursively create and apply same structure into the target object, if possible.
-    /// If dealing with lists, use listIdKey to identify the list items. 
-    /// </summary>
-    /// <returns></returns>
-    public IEnumerable<BindPoint> ApplyValues(BindPoint source, BindPoint target)
-    {
-        // If we should enumerate, recurse
-        // Otherwise apply
-        // How do we know? 
-        // Well, by checking if source has terminal value or not
-        // Terminal can be primitive value, null or DynamicElementSetup
-    }
 
-    public IEnumerable<BindPoint> ApplyList(IList source, object? target) 
-    {
-        
-        
-    }
     
     
     
@@ -280,16 +298,7 @@ public static class DynamicFormTools
     public const string DESCRIPTION_KEY = "DESCRIPTION";
     public const string NAME_KEY = "NAME";
     public const string GROUP_NAME_KEY = "GROUP_NAME";
-    
-    /// <summary>
-    /// Recursively pa
-    /// </summary>
-    /// <param name="target"></param>
-    public static void ParseDynamicSetups(object target)
-    {
-        var ctx = new DynamicBindContext(target);
-
-    }
+    public const string 
     
     public static bool TryParseSetupFromString(string? strval, out DynamicElementSetup? result)
     {
@@ -328,29 +337,6 @@ public static class DynamicFormTools
         return false;
     }
     
-    public static bool IsSectionList(this IConfigurationSection section)
-    {
-        if (section.Value is not null) return false;
-        var firstChild = section.GetChildren().FirstOrDefault();
-        if (firstChild is null) return false;
-        return int.TryParse(firstChild.Key, out _);
-    }
-    
-    public static IList ToList(this IConfigurationSection section)
-    {
-        var subs = section.GetChildren().ToList();
-        var listItemType = InferTypeFromStringValue(subs.First().Value);
-        // Now create the list
-        var list = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(listItemType.Item1))!;
-        // Add items to the list
-        foreach (var configurationSection in subs)
-        {
-            list.Add(InferTypeFromStringValue(configurationSection.Value).Item2);
-        }
-
-        return list;
-    }
-
     /// <summary>
     /// Recursively convert this configuration section to object hierarchy
     /// - Mappings are done by dictionaries
@@ -412,7 +398,7 @@ public static class DynamicFormTools
     public static (Type, object?) InferTypeFromStringValue(string? value)
     {
         if (value is null) return (typeof(string), null);
-        
+        // TODO - handle datetime / timespan
         if (int.TryParse(value, out var intv)) return (typeof(int), intv);
         if (float.TryParse(value, out var floatv)) return (typeof(float), floatv);
         if (bool.TryParse(value, out var boolv)) return (typeof(bool), boolv);
@@ -441,8 +427,9 @@ public static class DynamicFormTools
     /// </summary>
     /// <param name="metadata"></param>
     /// <param name="target"></param>
-    public static void ApplyValues(IConfigurationSection metadata, object target)
+    public static void ApplyValues(object? metadata, ref object? target)
     {
+        
         void ApplyPropertyOrKeyValue(string key, object targetObj, DynamicElementSetup elementSetup)
         {
             var propertyInfo = targetObj.GetType().GetProperty(key);

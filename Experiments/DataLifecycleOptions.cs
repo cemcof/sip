@@ -1,5 +1,7 @@
 // ReSharper disable InconsistentNaming
 
+using sip.Forms.Dynamic;
+
 namespace sip.Experiments;
 
 public class DataLifecycleOptions : IEquatable<DataLifecycleOptions>
@@ -41,5 +43,14 @@ public class DataLifecycleOptions : IEquatable<DataLifecycleOptions>
     [Required] public string Id { get; set; } = null!;
     [Required] public string DisplayName { get; set; } = null!;
     public string Tip { get; set; } = string.Empty;
-    public IConfigurationSection Setup { get; set; } = null!;
+
+    public object? SetupDyn { get; set; }
+
+    
+    // For configuration binding purposes
+    public IConfigurationSection Setup
+    {
+        get => null!;
+        set => SetupDyn = value.ToObject();
+    }
 }

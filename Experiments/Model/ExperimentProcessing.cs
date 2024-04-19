@@ -45,6 +45,9 @@ public class ExperimentProcessing
         WorkflowSerialized = ser.Serialize(Workflow);
     }
     public ProcessingState State { get; set; }
+
+    // For workflows filtering purposes
+    [NotMapped, JsonIgnore, YamlIgnore] public List<string> WorkflowTags { get; set; } = new();
 }
 
 public enum ProcessingState
