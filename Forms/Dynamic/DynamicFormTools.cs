@@ -184,6 +184,7 @@ public class ObjectBindPoint(object obj, string key) : BindPoint
 
         if (ObjectExtensions.ShouldSetDefault(val, GetValue()))
         {
+            Console.WriteLine($"Setting default... {val}");
             val = DynamicFormTools.ConvertIfNecessary(val, prop.PropertyType);
             SetValue(val);
         }
