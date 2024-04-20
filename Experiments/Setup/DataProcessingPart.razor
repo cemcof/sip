@@ -1,3 +1,4 @@
+@using DocumentFormat.OpenXml.Presentation
 @using sip.Experiments.Model
 @using sip.Experiments.Workflows
 @using Microsoft.Extensions.Configuration.Json
@@ -25,12 +26,15 @@
                                        ItemsProvider="_WorkflowTemplateItemsProvider">
                                 <ItemTemplate>
                                     <div>
-                                        @if (wfctx.Provider is not null)
-                                        {
-                                            <span class="badge bg-primary me-1">@wfctx.Provider</span>
-                                        }
+                                        <span class="fw-bold">@wfctx.Title</span> <br/>
+                                        <span class="small">@wfctx.Description</span> <br/>
+                                        <span>
+                                            @foreach(var tag in wfctx.Tags)
+                                            {
+                                                <span class="badge bg-secondary me-1">@tag</span>
+                                            }
+                                        </span>
                                         
-                                        @wfctx.Title
                                     </div>
                                 </ItemTemplate>
                                 
@@ -90,6 +94,7 @@
             if (value is not null) 
             {
                 DynamicFormTools.ApplyValues(value.Data, Exp.Processing.Workflow);
+                Exp.Processing.WorkflowRef = value.Id;
                 // Select processing engine - look for it in the tags, use configured engines to determine which tag is the engine
                 Exp.Processing.ProcessingEngine = EngineOptions
                     .Get(Exp.Organization)
@@ -101,6 +106,7 @@
             else
             {
                 Exp.Processing.Workflow = null;
+                Exp.Processing.WorkflowRef = null;
                 Logger.LogDebug("Workflow cleared");
             }
             
@@ -116,9 +122,7 @@
     {
         var wfs = await WorkflowProvider.GetWorkflowsAsync(new WorkflowFilter(
                 Organization: Exp.Organization,
-                Engine: Exp.Processing.ProcessingEngine, 
-                Instrument: Exp.InstrumentName,
-                Technique: Exp.Technique)
+                Tags: Exp.Processing.WorkflowTags)
             )
             .ToListAsync();
         

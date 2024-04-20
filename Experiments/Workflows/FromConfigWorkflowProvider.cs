@@ -4,24 +4,8 @@ public class FromConfigWorkflowProvider(IOptionsMonitor<List<Workflow>> wfOption
 {
     public IAsyncEnumerable<Workflow> GetWorkflowsAsync(WorkflowFilter workflowFilter)
     {
-        var wfs = wfOptions.Get(workflowFilter.Organization).AsEnumerable();
-        
-        workflowFilter.ta
-        
-        if (workflowFilter.Technique is not null)
-        {
-            wfs = wfs.Where(w => w.Tags.Contains(workflowFilter.Technique));
-        }
-        
-        if (workflowFilter.Instrument is not null)
-        {
-            wfs = wfs.Where(w => w.Tags.Contains(workflowFilter.Instrument));
-        }
-        
-        if (workflowFilter.Engine is not null)
-        {
-            wfs = wfs.Where(w => w.Tags.Contains(workflowFilter.Engine));
-        }
+        var wfs = wfOptions.Get(workflowFilter.Organization).AsEnumerable()
+            .Where(wf => workflowFilter.Tags.Match(wf.Tags));
         
         return wfs.ToAsyncEnumerable();
     }

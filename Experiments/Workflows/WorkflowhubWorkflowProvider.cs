@@ -100,6 +100,8 @@ public class WorkflowhubWorkflowProvider(
 
                 workflow = await GetWorkflowByIdAsync(id, filter.Organization, client);
                 if (workflow is null) throw new InvalidOperationException($"Workflow {id} not found in workflowhub");
+                if (!filter.Tags.Match(workflow.Tags))
+                    continue;
             }
             catch (Exception e)
             {

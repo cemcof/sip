@@ -28,6 +28,10 @@ public static class StringUtils
             .Select(x => Convert.ToByte(str.Substring(x, 2), 16))
             .ToArray();
     }
+
+    public static string[] SplitWithTrim(this string str, params string[] separators)
+        => str.Split(separators, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+    
     // public static byte[] HexToByteArray(this ReadOnlySpan<char> str)
     // {
     //     var chars = str;

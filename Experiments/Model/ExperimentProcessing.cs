@@ -14,7 +14,7 @@ public class ExperimentProcessing
     [MaxLength(64)] public string Node { get; set; } = string.Empty;
     [MaxLength(16)] public string? Pid { get; set; }
 
-    public string WorkflowRef { get; set; }
+    public string? WorkflowRef { get; set; }
     [NotMapped] public object? Workflow { get; set; } 
     [YamlIgnore, JsonIgnore] public string WorkflowSerialized { get; set; } = "[]";
 
@@ -47,7 +47,7 @@ public class ExperimentProcessing
     public ProcessingState State { get; set; }
 
     // For workflows filtering purposes
-    [NotMapped, JsonIgnore, YamlIgnore] public List<string> WorkflowTags { get; set; } = new();
+    [NotMapped, JsonIgnore, YamlIgnore] public List<string> WorkflowTags { get; set; } = [];
 }
 
 public enum ProcessingState
