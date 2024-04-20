@@ -8,61 +8,61 @@
 @inject IOptionsMonitor<EnginesOptions> EngineOptions
 
 @if (ShowWorkflowSetup) 
-        {
-            <GroupVertical>
-                <Header>
-                    Data processing
-                </Header>
-                <Body>
-                <div class="wf-header">
-                    <CEditForm TModelType="ExperimentIdle" FormFooter="@(CEditForm<ExperimentIdle>.EmptyFooter)" Context="ctxxx">
-                        <InputAligner Flex="0 0 10rem, 1">
-                            <CDropdown TValue="Workflow"
-                                       Context="wfctx"
-                                       OnValueSet="@SelectWorkflow"
-                                       DisplayName="Workflow template"
-                                       @bind-Value="@SelectedWorkflow"
-                                       AutoDefault="@true"
-                                       ItemsProvider="_WorkflowTemplateItemsProvider">
-                                <ItemTemplate>
-                                    <div>
-                                        <span class="fw-bold">@wfctx.Title</span> <br/>
-                                        <span class="small">@wfctx.Description</span> <br/>
-                                        <span>
-                                            @foreach(var tag in wfctx.Tags)
-                                            {
-                                                <span class="badge bg-secondary me-1">@tag</span>
-                                            }
-                                        </span>
-                                        
-                                    </div>
-                                </ItemTemplate>
+{
+    <GroupVertical>
+        <Header>
+            Data processing
+        </Header>
+        <Body>
+        <div class="wf-header">
+            <CEditForm TModelType="ExperimentIdle" FormFooter="@(CEditForm<ExperimentIdle>.EmptyFooter)" Context="ctxxx">
+                <InputAligner Flex="0 0 10rem, 1">
+                    <CDropdown TValue="Workflow"
+                               Context="wfctx"
+                               OnValueSet="@SelectWorkflow"
+                               DisplayName="Workflow template"
+                               @bind-Value="@SelectedWorkflow"
+                               AutoDefault="@true"
+                               ItemsProvider="_WorkflowTemplateItemsProvider">
+                        <ItemTemplate>
+                            <div>
+                                <span class="fw-bold">@wfctx.Title</span> <br/>
+                                <span class="small">@wfctx.Description</span> <br/>
+                                <span>
+                                    @foreach(var tag in wfctx.Tags)
+                                    {
+                                        <span class="badge bg-secondary me-1">@tag</span>
+                                    }
+                                </span>
                                 
-                                <SelectedItemTemplate>
-                                    <div>@wfctx.Title</div>
-                                </SelectedItemTemplate>
+                            </div>
+                        </ItemTemplate>
+                        
+                        <SelectedItemTemplate>
+                            <div>@wfctx.Title</div>
+                        </SelectedItemTemplate>
 
-                            </CDropdown>
-                        </InputAligner>
-                    </CEditForm>
-                </div>
-                
-                <div class="wf-body">
-                    @if (SelectedWorkflow is not null) 
-                    {
-                        <WorkflowGeneralRenderer Workflow="@SelectedWorkflow"
-                                                 InspectResult="@_inspectResult">
-                        </WorkflowGeneralRenderer>
-                    } 
-                </div>
-                
-                </Body>
-            </GroupVertical>
-        }
+                    </CDropdown>
+                </InputAligner>
+            </CEditForm>
+        </div>
+        
+        <div class="wf-body">
+            @if (SelectedWorkflow is not null) 
+            {
+                <WorkflowGeneralRenderer Workflow="@SelectedWorkflow"
+                                         InspectResult="@_inspectResult">
+                </WorkflowGeneralRenderer>
+            } 
+        </div>
+        
+        </Body>
+    </GroupVertical>
+}
 
 
 @code {
-    private bool ShowWorkflowSetup => !string.IsNullOrEmpty(Exp.Processing.ProcessingEngine);
+    private bool ShowWorkflowSetup => Exp.Processing.State is not ProcessingState.Disabled;
     
     [Parameter] public Experiment Exp { get; set; } = null!;
     private Experiment? _prevExp = null;

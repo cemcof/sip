@@ -55,4 +55,5 @@ public enum ProcessingState
     Ready,
     Running,
     Completed,
+    Disabled
 }
