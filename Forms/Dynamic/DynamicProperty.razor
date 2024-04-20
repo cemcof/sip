@@ -1,0 +1,22 @@
+﻿
+<div class="dyn-property">
+    <div class="dyn-label">
+        @Setup.DisplayName
+    </div>
+    
+    <div class="dyn-value">
+        @BindPoint.GetValue()
+    </div>
+    
+    <div class="dyn-unit">
+        @Setup.Unit
+    </div>
+        
+</div>
+
+@code {
+
+    [Parameter, EditorRequired] public DynamicElementSetup Setup { get; set; } = null!;
+    [Parameter, EditorRequired] public IBindPoint BindPoint { get; set; } = null!;
+
+}

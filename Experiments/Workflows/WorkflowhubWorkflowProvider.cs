@@ -6,31 +6,6 @@ using sip.Utils;
 
 namespace sip.Experiments.Workflows;
 
-public class WfhConfigurationProvider : ConfigurationProvider
-{
-    public void ParseWorkflow(JsonDocument workflow)
-    {
-        Data = JsonConfigParser.Parse("Workflow", workflow.RootElement);
-
-        // Fill necessary properties (strings only)
-        var propMap = new Dictionary<string, string>()
-        {
-            {Workflow.PROTOCOL_TYPE_KEY, "object.className"},
-            {Workflow.PROTOCOL_ID_KEY, "object.id"},
-            {Workflow.PROTOCOL_NAME_KEY, "object.label"},
-            {Workflow.PROTOCOL_DESCRIPTION_KEY, "object.comment"},
-        };
-        
-        foreach (var keyValuePair in propMap)
-        {
-            foreach (var key in Data.Keys.Where	(k => k.EndsWith(keyValuePair.Value)).ToList	())
-            {
-                Data[key.Replace(keyValuePair.Value, keyValuePair.Key)] = Data[key];
-            }
-        }
-    }
-};
-
 public class WorkflowhubWorkflowProvider(
         IHttpClientFactory httpClientFactory,
         IMemoryCache memoryCache,
@@ -198,11 +173,6 @@ public class WorkflowhubWorkflowProvider(
         // Data to JSON and then to object (dic/list)
         wf.Data = JsonSerializer.Deserialize<JsonDocument>(workflowText)?.RootElement.ToObject();
         
-        // TODODODO 
-        // PARSING - parse all to DynamicFormElement, do that in DynFormTools, something is already implemented
-        new DynamicBindContext(wf.Data);
-        // Do same for from config provider
-
         // Put it to the cache
         memoryCache.Set($"workflow/{wfhOpts.CollectionId}/{id}", wf, wfhOpts.CacheTime);
         return wf;

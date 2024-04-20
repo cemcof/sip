@@ -1,3 +1,5 @@
+@* TODO - base params on IBindPoint *@
+
 @using System.Collections
 @using System.Linq.Expressions
 @using sip.Utils
@@ -70,11 +72,14 @@
     [Parameter, EditorRequired]
     public object Setup { get; set; } = null!;
 
-    [Parameter, EditorRequired]
+    [Parameter]
     public string Key { get; set; } = null!;
 
-    [Parameter, EditorRequired]
+    [Parameter]
     public object ValueTarget { get; set; } = new();
+    
+    [Parameter]
+    public IBindPoint? BindPoint { get; set; }
 
     [Parameter]
     public bool RenderError { get; set; } = true;
@@ -116,9 +121,20 @@
         try
         {
             // --------- Sanitize parameters and normalize inputs ----------------
-            ArgumentNullException.ThrowIfNull(Key, nameof(Key));
-            ArgumentNullException.ThrowIfNull(ValueTarget, nameof(ValueTarget));
             ArgumentNullException.ThrowIfNull(Setup, nameof(Setup));
+            
+            if (BindPoint is not null)
+            {
+                ValueTarget = BindPoint.Target;
+                Key = BindPoint.Key;
+            }
+            else
+            {
+                ArgumentNullException.ThrowIfNull(Key, nameof(Key));
+                ArgumentNullException.ThrowIfNull(ValueTarget, nameof(ValueTarget));
+                
+            }
+            
             
             var setup = DynamicElementSetup.FromObject(Setup);
             _setup = setup;
@@ -151,13 +167,13 @@
             {
                 // Optimization - skip rest if not rendering
                 // However, if we are working with dictionary, set default value to the key if necessary 
-                if (ValueTarget is IDictionary valTargetDict)
-                {
-                    if (!valTargetDict.Contains(Key) || ObjectExtensions.ShouldSetDefault(setup.Default, valTargetDict[Key]))
-                    {
-                        valTargetDict[Key] = setup.Default;
-                    }
-                }
+                // if (ValueTarget is IDictionary valTargetDict)
+                // {
+                //     if (!valTargetDict.Contains(Key) || ObjectExtensions.ShouldSetDefault(setup.Default, valTargetDict[Key]))
+                //     {
+                //         valTargetDict[Key] = setup.Default;
+                //     }
+                // }
                 
                 return; 
             }

@@ -135,7 +135,15 @@ public static class ObjectExtensions
 
 
         return meth.Invoke(obj, arguments);
-    } 
+    }
+
+    public static T? PickValue<T>(this IDictionary from, string key, T? def = default)
+    {
+        if (from.Contains(key))
+            return (T?)from[key];
+
+        return def;
+    }
     
     public static T? SafePickValue<T>(this object from, string key)
     {

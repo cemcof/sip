@@ -1,7 +1,5 @@
 using System.Collections;
 using System.ComponentModel;
-using System.Security.Cryptography.Xml;
-using Microsoft.AspNetCore.JsonPatch.Helpers;
 
 namespace sip.Forms.Dynamic;
 
@@ -17,6 +15,8 @@ public record DynamicElementSetup(
     string? Unit = null,
     string? Scope = null,
     string? Flex = null,
+    string Group = "",
+    string GroupDesc = "",
     int Order = -1,
     int Min = int.MinValue,
     int Max = int.MaxValue	
@@ -56,40 +56,39 @@ public record DynamicElementSetup(
         if (setup is IDictionary dict && 
             (dict.Contains(nameof(Type)) || dict.Contains(nameof(Default)))) // TODO - more robust
         {
-            // Type? type = null;
-            // if (dict.Contains(nameof(Type)))
-            //     type = DynamicFormTools.StringToValType(dict[nameof(Type)]!.ToString());
-            //
-            //
-            // if (dict.Contains(nameof(Default)))
-            // {
-            //     var defType = 
-            // }
-            //     
-            // var type = (dict.Contains(nameof(Type))) ?
-            //     DynamicFormTools.StringToValType(dict[nameof(Type)]!.ToString()) :
-            //     
-            // var defaultVal = DynamicFormTools.ConvertToGivenType(type, dict[nameof(Default)].ToString());
-            var bp = BindPoint.From(setup);
+            Type type;
+            object? defaultVal = dict.PickValue<object>(nameof(Default));
+            if (dict.Contains(nameof(Type)))
+            {
+                type = DynamicFormTools.StringToValType(dict.PickValue<string>(nameof(Type)));
+            }
+            else
+            {
+                var (t, supported) = GetTypeInfo(defaultVal);
+                if (!supported) throw new NotSupportedException($"Type {t.Name} is not supported as dynamic form setup");
+                type = t;
+            }
             
             return new DynamicElementSetup(
                 Type: type,
                 Default: defaultVal,
-                SpecifiedType: bp.GetValueByKey<string>(nameof(DisplayName)),
-                DisplayName: bp.GetValueByKey<string>(nameof(DisplayName)),
-                Selection: bp.GetValueByKey<IList>(nameof(Selection)),
-                Tip: bp.GetValueByKey<string>(nameof(Tip)),
-                IsReadonly: bp.GetValueByKey<bool>(nameof(IsReadonly)),
-                IsRequired: bp.GetValueByKey<bool>(nameof(IsRequired)),
-                Unit: bp.GetValueByKey<string>(nameof(Unit)),
-                Scope: bp.GetValueByKey<string>(nameof(Scope)),
-                Flex: bp.GetValueByKey<string>(nameof(Flex)),
-                Min: bp.GetValueByKey<int>(nameof(Min)),
-                Max: bp.GetValueByKey<int>(nameof(Max))
+                SpecifiedType: dict.PickValue<string>(nameof(DisplayName)),
+                DisplayName: dict.PickValue<string>(nameof(DisplayName)),
+                Selection: dict.PickValue<IList>(nameof(Selection)),
+                Tip: dict.PickValue<string>(nameof(Tip)),
+                IsReadonly: dict.PickValue<bool>(nameof(IsReadonly)),
+                IsRequired: dict.PickValue<bool>(nameof(IsRequired)),
+                Unit: dict.PickValue<string>(nameof(Unit)),
+                Scope: dict.PickValue<string>(nameof(Scope)),
+                Flex: dict.PickValue<string>(nameof(Flex)),
+                Min: dict.PickValue<int>(nameof(Min)),
+                Max: dict.PickValue<int>(nameof(Max)),
+                Group: dict.PickValue<string>(nameof(Group), string.Empty)!,
+                GroupDesc: dict.PickValue<string>(nameof(GroupDesc), string.Empty)!
             );
         }
         
-        throw new NotSupportedException	($"Type {setup.GetType().Name} is not supported as dynamic form setup");
+        throw new NotSupportedException	($"Type {setup?.GetType().Name} is not supported as dynamic form setup");
     }
     
     
@@ -102,6 +101,9 @@ public interface IBindPoint
 
     public T? GetValueByKey<T>(string key, T? defaultValue = default);
     public T GetValue<T>(T defaultValue = default);
+    void SetDefault(object? val);
+    object Target { get; }
+    string Key { get; }
 }
 
 public class KBindPoint(ref string key)
@@ -136,9 +138,19 @@ public class BindPoint : IBindPoint
         throw new NotSupportedException();
     }
 
+    public T? GetValueByKey<T>(string key, T? defaultValue = default)
+    {
+        throw new NotImplementedException();
+    }
+
     public virtual T GetValue<T>(T defaultValue = default)
     {
         throw new NotSupportedException();
+    }
+
+    public virtual void SetDefault(object? val)
+    {
+        throw new NotImplementedException();
     }
 
     public static IBindPoint From(object o, object key)
@@ -174,6 +186,12 @@ public class DictBindPoint(IDictionary dict, string key) : BindPoint
     {
         if (dict[key] is T val) return val;
         return defaultValue;
+    }
+    
+    public override void SetDefault(object? val)
+    {
+        // TODO - default val?
+        if (!dict.Contains(key)) dict[key] = val;
     }
 }
 
@@ -219,86 +237,37 @@ public class ObjectBindPoint(object obj, string key) : BindPoint
         if (prop.GetValue(obj) is T val) return val;
         return defaultValue;
     }
+    
+    public override void SetDefault(object? val)
+    {
+        var prop = obj.GetType().GetProperty(key);
+        if (prop is null || prop.GetValue(obj) is not null) return;
+
+        if (val is not null && prop.PropertyType != val.GetType())
+        {
+            var converter = TypeDescriptor.GetConverter(prop.PropertyType);
+            if (converter.CanConvertFrom(val.GetType()))
+            {
+                prop.SetValue(obj, converter.ConvertFrom(val));
+            }
+             // Even if we are not able to do the conversion, we might still do one from string representation
+             // For example target is DateTime and source is int (number of days)
+             // However TimeSpan converter converts only string, therefore .ToString() on the value must be used
+            else if (converter.CanConvertFrom(typeof(string)))
+            {
+                prop.SetValue(obj, converter.ConvertFrom(val.ToString()!));
+            } 
+        }
+        else
+            // TODO - handle primitive types
+            prop.SetValue(obj, val);
+    }
 }
 
-public class DynamicBindContext
-{
-    public DynamicBindContext(object source, object? target = null, string? listIdKey = null)
-    {
-
-    }
-    
-    
-
-    public static bool ValueAplicator(BindPoint source, BindPoint target)
-    {
-        var sourceVal = source.GetValue();
-
-        try
-        {
-            var dynObj = DynamicElementSetup.FromObject(sourceVal);
-            target.SetValue(dynObj.Default);
-            return false;
-        }
-        catch (NotSupportedException e)
-        {
-            source.SetTo(target);
-            return true;
-        }
-    }
-
-    public static bool ConvertToDynamicSetupAplicator(BindPoint source, BindPoint target)
-    {
-        var val = source.GetValue();
-        try
-        {
-            var dynaSetup = DynamicElementSetup.FromObject(val);
-            target.SetValue(dynaSetup);
-            return false;
-        }
-        catch (NotSupportedException e)
-        {
-            source.SetTo(target);
-            return true; // Continue recurse
-        }
-    }
-
-
-public IEnumerable<BindPoint> ApplyValues(
-        object source, 
-        ref object? target,
-        
-        string? listIdKey = DynamicFormTools.ID_KEY,
-        string? groupKey = DynamicFormTools.GROUP_NAME_KEY,
-        string? groupDescriptionKey = DynamicFormTools.DESCRIPTION_KEY)
-    {
-        
-        // Lets start by ensuring the target 
-        var srcb = new BindPoint(source, null);
-        srcb.EnsureTarget(ref target);
-        // Now iterate the source object
-        
-        if (source is IDictionary dsource)
-        {
-            var k = dsource["fwef"];
-            ApplyValues(source, ref dsource["fewf"]);
-        } 
-    }
-
-    
-    
-    
-    
-}
 
 public static class DynamicFormTools
 {
-    public const string ID_KEY = "ID";
-    public const string TYPE_KEY = "TYPE";
-    public const string DESCRIPTION_KEY = "DESCRIPTION";
-    public const string NAME_KEY = "NAME";
-    public const string GROUP_NAME_KEY = "GROUP_NAME";
-    public const string 
+    public const string ID_KEY = "object.id";
     
     public static bool TryParseSetupFromString(string? strval, out DynamicElementSetup? result)
     {
@@ -420,97 +389,107 @@ public static class DynamicFormTools
         throw new InvalidOperationException($"Cannot convert {value} to {type.Name}");
     }
 
-    /// <summary>
-    /// Apply values from dynamic form metadata to target object
-    /// 
-    /// Nesting is achieve by use . char in metadata keys.
-    /// </summary>
-    /// <param name="metadata"></param>
-    /// <param name="target"></param>
-    public static void ApplyValues(object? metadata, ref object? target)
+    public record ElementGroup(
+        List<(DynamicElementSetup, IBindPoint)> Elements,
+        string? Name = null,
+        string? Description = null);
+
+    public record InspectResult(
+        object? Target,
+        List<(DynamicElementSetup, IBindPoint)> Elements
+    )
     {
-        
-        void ApplyPropertyOrKeyValue(string key, object targetObj, DynamicElementSetup elementSetup)
+        public IEnumerable<ElementGroup> ToGroups()
         {
-            var propertyInfo = targetObj.GetType().GetProperty(key);
-            if (propertyInfo is null) return;
-            
-            // If source value type and target do not match, try to use type converter
-            // Maybe del
-            if (elementSetup.Default is not null && elementSetup.Type != propertyInfo.PropertyType)
+            var groups = Elements.GroupBy(e => e.Item1.Group);
+            foreach (var group in groups)
             {
-                var converter = TypeDescriptor.GetConverter(propertyInfo.PropertyType);
-                if (converter.CanConvertFrom(elementSetup.Default.GetType()))
+                var groupGuys = group.ToList();
+                var desc = groupGuys
+                    .FirstOrDefault(g => !string.IsNullOrWhiteSpace(g.Item1.GroupDesc))
+                    .Item1
+                    .GroupDesc;
+                
+                yield return new ElementGroup(groupGuys, group.Key, desc);
+            }
+        }
+    };
+    
+    public static InspectResult DynamicInspect(
+        object? metadata,
+        object? target
+    )
+    {
+        var fakeTarget = new Dictionary<string, object?>() { { "key", target } };
+        var bp = BindPoint.From(fakeTarget, "key");
+        var result = new List<(DynamicElementSetup, IBindPoint)>();
+        DynamicInspect(metadata, bp, result);
+        return new InspectResult(fakeTarget["key"]!, result);
+    }
+    
+    public static void DynamicInspect(
+        object? metadata, 
+        IBindPoint target,
+        
+        List<(DynamicElementSetup, IBindPoint)> re sultElements,
+        string? listIdKey = ID_KEY
+        )
+    {
+        try
+        {
+            var dynElement = DynamicElementSetup.FromObject(metadata);
+            // We are dealing with terminal value
+            target.SetDefault(dynElement.Default);
+            resultElements.Add((dynElement, target));
+
+        }
+        catch (NotSupportedException e)
+        {
+            // We are dealing with a collection or mapping and need to recurse furhter
+            if (metadata is IDictionary mdict)
+            {
+                // Ensure we have target object
+                target.SetDefault<Dictionary<string, object>>(new Dictionary<string, object?>(), out var value);
+                
+                // Iterate the dictionary keys and recurse
+                foreach (DictionaryEntry entry in mdict)
                 {
-                    propertyInfo.SetValue(targetObj, converter.ConvertFrom(elementSetup.Default));
-                }
-                // Even if we are not able to do the conversion, we might still do one from string representation
-                // For example target is DateTime and source is int (number of days)
-                // However TimeSpan converter converts only string, therefore .ToString() on the value must be used
-                else if (converter.CanConvertFrom(typeof(string)))
-                {
-                    propertyInfo.SetValue(targetObj, converter.ConvertFrom(elementSetup.Default.ToString()!));
+                    var key = entry.Key.ToString();
+                    var newMeta = entry.Value;
+                    var newTarget = BindPoint.From(value, key);
+                    DynamicInspect(newMeta, newTarget, resultElements, listIdKey);
+                    return;
                 }
             }
-            else
-                propertyInfo.SetValue(targetObj, elementSetup.Default);
-        }
-        
-        foreach (var kek in IterateDynamicInputs(metadata, target))
-        {
-            ApplyPropertyOrKeyValue(kek.key, kek.target, kek.meta);
-        }
-    }
-
-    
-    public record DynInputInfo(
-        string Key,
-        DynamicElementSetup Setup,
-        object ValueTarget
-    );
-    
-    public static IEnumerable<(string key, object target, DynamicElementSetup meta)> IterateDynamicInputs(IConfigurationSection metadata, object target)
-    {
-        object Nest(object on, string key)
-        {
-            var prop = on.GetType().GetProperty(key);
-            if (prop is null) throw new InvalidOperationException($"Cannot nest {key} on {on.GetType().Name} since that property does not exist");
-            var val = prop.GetValue(on);
-            if (val is null) throw new InvalidOperationException($"Cannot nest {key} on {on.GetType().Name} since that property is empty");
-            return val;
-        }
-        
-        foreach (var meta in metadata.GetChildren())
-        {
-            // Should we nest or are we at property level?
-            var keys = meta.Key.Split('.', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-            var currentTarget = target;
-
-            if (keys.Length > 1)
+            
+            if (metadata is IList mlist)
             {
-                foreach (var nestKey in keys[..^1])
-                {
-                    currentTarget = Nest(currentTarget, nestKey);
-                }
+                // Ensure we have target object
+                // target.SetDefault<List<object>>(new List<object?>(), out var value);
+                // List<object> targetValue = new List<object>();
+                // Iterate the list and recurse
+                // for (var i = 0; i < mlist.Count; i++)
+                // {
+                    // Check if in the target there is element that match through listIdKey
+                    // TODO 
+                    // if (listIdKey is not null)
+                    // {
+                    //     var item = targetValue.FirstOrDefault(i =>
+                    //     {
+                    //         var bp = BindPoint.From(i, listIdKey);
+                    //         var bpval = bp.GetValue();
+                    //         bp.Exists() && bpval is not null && bpval.Equals(mlist[i]); 
+                    //     })
+                    // }
+                    // var newMeta = mlist[i];
+                    // var newTarget = BindPoint.From(value, i);
+                    // DynamicInspect(newMeta, newTarget, resultElements, listIdKey);
+                // }
             }
-            
-            yield return (keys[^1], currentTarget, DynamicElementSetup.FromObject(meta));
         }
+        
+        
     }
 
-    public static IEnumerable<DynInputInfo> PrepareDynamicInputs(IConfigurationSection metadata, object target)
-    {
-        foreach (var kek in IterateDynamicInputs(metadata, target))
-        {
-            // Only these that are editable 
-            // For now this is no DisplayName provided
-            
-            if (string.IsNullOrEmpty(kek.meta.DisplayName)) continue;
-            
-            yield return new DynInputInfo(kek.key, kek.meta, kek.target);
-        }
-        
-        
-    }
     
 }

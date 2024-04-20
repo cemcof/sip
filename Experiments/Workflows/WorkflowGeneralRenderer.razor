@@ -7,44 +7,60 @@
 }
 
 <div class="wf-prot-properties">
-                                
-    <CEditForm TModelType="WorkflowGeneralRenderer" Model="@(this)" FormFooter="@(CEditForm<WorkflowGeneralRenderer>.EmptyFooter)" Context="ctxx">
-        <InputAligner Flex="0 0 40%, 1, 0 0 20%">
-            @foreach (var protocol in Workflow.Protocols.GetChildren())
+    @if (AsForm)
+    {
+        <CEditForm TModelType="WorkflowGeneralRenderer" Model="@(this)" FormFooter="@(CEditForm<WorkflowGeneralRenderer>.EmptyFooter)" Context="ctxx">
+            <InputAligner Flex="0 0 40%, 1, 0 0 20%">
+                @foreach (var group in InspectResult.ToGroups())
+                {
+                    @if (!string.IsNullOrWhiteSpace(group.Name))
+                    {
+                        <div class="wf-protocol-headline">
+                            <div class="fw-bold">@group.Name</div>
+                            <small>@group.Description</small>
+                        </div>
+                    }
+
+                    @foreach (var prop in group.Elements)
+                    {
+                        <DynamicFormElement Setup="@prop.Item1" BindPoint="@prop.Item2"/>
+                    }
+
+                }
+
+            </InputAligner>
+        </CEditForm>
+    }
+    else
+    {
+        @foreach (var group in InspectResult.ToGroups())
+        {
+            @if (!string.IsNullOrWhiteSpace(group.Name))
             {
                 <div class="wf-protocol-headline">
-                    <div class="fw-bold">@protocol[Workflow.PROTOCOL_NAME_KEY]</div>
-                    <small>@protocol[Workflow.PROTOCOL_DESCRIPTION_KEY]</small>
+                    <div class="fw-bold">@group.Name</div>
+                    <small>@group.Description</small>
                 </div>
-                
-                var protValue = GetProtocol(protocol[Workflow.PROTOCOL_ID_KEY]!);
-                @foreach (var prop in protocol.GetChildren())
-                {
-                    <DynamicFormElement Key="@prop.Key" Setup="@DynamicElementSetup.FromObject(prop)" ValueTarget="@protValue" />
-                }
-                
             }
-            
-        </InputAligner>
-    </CEditForm>
+
+            @foreach (var prop in group.Elements)
+            {
+                <DynamicProperty Setup="@prop.Item1" BindPoint="@prop.Item2"/>
+            }
+
+        }
+    }
+
 </div>
 
 @code {
 
-
+    
     [Parameter, EditorRequired]
     public Workflow Workflow { get; set; } = null!;
 
-    [Parameter, EditorRequired]
-    public object WorkflowData { get; set; } = null!;
-    
+    [Parameter, EditorRequired] public DynamicFormTools.InspectResult InspectResult { get; set; } = null;
+
     [Parameter] public bool AsForm { get; set; } = true;
-    
-    private Dictionary<string, dynamic> GetProtocol(string protocolid) 
-    {
-        var result = TargetProtocols.FirstOrDefault(wf => wf[Workflow.PROTOCOL_ID_KEY]!.ToString() == protocolid);
-        if (result is null) throw new InvalidOperationException($"Cannot find protocol with id {protocolid} on TargetProtocols list with {TargetProtocols.Count} items");
-        return result;
-    }
 
 }

@@ -51,7 +51,7 @@
                     @if (SelectedWorkflow is not null) 
                     {
                         <WorkflowGeneralRenderer Workflow="@SelectedWorkflow"
-                                                 WorkflowData="@Exp.Processing.Workflow">
+                                                 InspectResult="@_inspectResult">
                         </WorkflowGeneralRenderer>
                     } 
                 </div>
@@ -83,6 +83,7 @@
     
     // Processing / workflow setup state
     private Workflow? _selectedWorkflow;
+    private DynamicFormTools.InspectResult? _inspectResult;
     
     public Workflow? SelectedWorkflow
     {
@@ -91,9 +92,10 @@
         {
             Logger.LogDebug("Selecting wf: {@Wf}", _selectedWorkflow);
             _selectedWorkflow = value;
-            if (value is not null) 
+            if (value is not null)
             {
-                DynamicFormTools.ApplyValues(value.Data, Exp.Processing.Workflow);
+                _inspectResult = DynamicFormTools.DynamicInspect(value.Data, Exp.Processing.Workflow);
+                Exp.Processing.Workflow = _inspectResult.Target;
                 Exp.Processing.WorkflowRef = value.Id;
                 // Select processing engine - look for it in the tags, use configured engines to determine which tag is the engine
                 Exp.Processing.ProcessingEngine = EngineOptions

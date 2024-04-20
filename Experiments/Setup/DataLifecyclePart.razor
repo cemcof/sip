@@ -22,9 +22,9 @@
 
     @* Render all desired properties from lifecycle *@
     <CascadingValue TValue="string" Name="filebrowser_scope" Value="@Exp.Type">
-        @foreach (var prop in DynamicFormTools.PrepareDynamicInputs(DataLifecycle.Setup, Exp))
+        @foreach (var prop in _dataLifecycleInspectResult.Elements)
         {
-            <DynamicFormElement Setup="@prop.Setup" ValueTarget="@prop.ValueTarget" Key="@prop.Key"></DynamicFormElement>
+            <DynamicFormElement Setup="@prop.Item1" BindPoint="@prop.Item2"></DynamicFormElement>
         }
     </CascadingValue>
     </Body>
@@ -54,6 +54,7 @@
 
 
     private DataLifecycleOptions _dataLifecycle = null!;
+    private DynamicFormTools.InspectResult _dataLifecycleInspectResult = null!;
 
     public DataLifecycleOptions DataLifecycle
     {
@@ -61,7 +62,7 @@
         set
         {
             _dataLifecycle = value;
-            DynamicFormTools.ApplyValues(value.Setup, Exp);
+            _dataLifecycleInspectResult = DynamicFormTools.DynamicInspect(value.Setup, Exp);
         }
     }
 

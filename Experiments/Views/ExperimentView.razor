@@ -1,6 +1,8 @@
 @using sip.Experiments.Model
+@using sip.Experiments.Workflows
 
 @inject ExperimentEngine ExperimentEngine
+@inject IWorkflowProvider WorkflowProvider
 
 <div class="heading-panel d-flex align-items-center justify-content-between">
     
@@ -140,7 +142,16 @@
 @if (!string.IsNullOrEmpty(Exp.Processing.ProcessingEngine))
 {
     <section>
-        <h2>Processing results - @Exp.Processing.ProcessingEngine engine</h2>
+        <h2>Processing - @Exp.Processing.ProcessingEngine engine</h2>
+        
+        <NullAware Value="_workflow">
+            <WhenReady>
+                <WorkflowGeneralRenderer AsForm="@false" InspectResult="_inspectResult" Workflow="@context"></WorkflowGeneralRenderer> 
+            </WhenReady>
+            <WhenNull>
+                <p class="small fst-italic">Processing setup details not available</p>
+            </WhenNull>
+        </NullAware>
         
         <DocumentPreview style="min-height: 50rem" Document="@Exp.Processing.ResultReport"></DocumentPreview>
     </section>
@@ -154,9 +165,22 @@
 
     [Parameter] public bool IsHeadlessPage { get; set; } = false;
 
+    // For processing details render
+    private Workflow? _workflow;
+    private DynamicFormTools.InspectResult? _inspectResult;
+
     protected override void OnParametersSet()
     {
         if (Exp == null) throw new ArgumentNullException(nameof(Exp));
+    }
+    
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Exp.Processing.WorkflowRef != null)
+        {
+            _workflow = await WorkflowProvider.GetWorkflowByIdAsync(Exp.Processing.WorkflowRef, Exp.Organization);
+            _inspectResult = DynamicFormTools.DynamicInspect(_workflow?.Data, Exp.Processing.Workflow);
+        }
     }
 
     // private string _GetIrodsFetchUnixOneliner()
