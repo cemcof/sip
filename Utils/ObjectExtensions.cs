@@ -200,6 +200,12 @@ public static class ObjectExtensions
             var defaultValue = Activator.CreateInstance(type);
             return obj.Equals(defaultValue);
         }
+        
+        // If it is list, we consider it default if it is empty
+        if (obj is IList list)
+        {
+            return list.Count == 0;
+        }
 
         return false; // Not null, not value type => not default
     }
