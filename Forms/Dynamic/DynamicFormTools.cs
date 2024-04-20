@@ -73,7 +73,7 @@ public record DynamicElementSetup(
             return new DynamicElementSetup(
                 Type: type,
                 Default: defaultVal,
-                SpecifiedType: dict.PickValue<string>(nameof(DisplayName)),
+                SpecifiedType: dict.PickValue<string>(nameof(Type)),
                 DisplayName: dict.PickValue<string>(nameof(DisplayName)),
                 Selection: dict.PickValue<IList>(nameof(Selection)),
                 Tip: dict.PickValue<string>(nameof(Tip)),
@@ -409,6 +409,7 @@ public static class DynamicFormTools
     {
         try
         {
+            Console.WriteLine($"Dyn: {target.Key}, meta {metadata}");
             var dynElement = DynamicElementSetup.FromObject(metadata);
             // We are dealing with terminal value
             target.SetDefault(dynElement.Default);
@@ -420,6 +421,7 @@ public static class DynamicFormTools
             // We are dealing with a collection or mapping and need to recurse further
             if (metadata is IDictionary mdict)
             {
+                Console.WriteLine($"Metadata dictionary en: {mdict.Count}");
                 // Ensure we have target object
                 target.SetDefault(new Dictionary<string, object?>());
                 var value = target.GetValue();
@@ -431,9 +433,10 @@ public static class DynamicFormTools
                     var key = entry.Key.ToString()!;
                     var newMeta = entry.Value;
                     var newTarget = BindPoint.From(value, key);
+                    Console.WriteLine($"Recursing to: {key}, newMeta {newMeta}, newTarget {newTarget}");
                     DynamicInspect(newMeta, newTarget, resultElements, listIdKey);
-                    return;
                 }
+                return;
             }
             
             if (metadata is IList mlist)

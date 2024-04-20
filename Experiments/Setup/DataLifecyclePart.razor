@@ -1,5 +1,7 @@
 @using sip.Experiments.Model
 @inject IConfiguration Configuration
+@inject ILogger<DataLifecyclePart> Logger
+
 <GroupVertical>
     <Header>Data Lifecycle</Header>
     <Body>
@@ -62,7 +64,8 @@
         set
         {
             _dataLifecycle = value;
-            _dataLifecycleInspectResult = DynamicFormTools.DynamicInspect(value.Setup, Exp);
+            _dataLifecycleInspectResult = DynamicFormTools.DynamicInspect(value.SetupDyn, Exp);
+            Logger.LogInformation("SetupDyn: {@SetupDyn}, len {Len}", _dataLifecycleInspectResult.Elements, _dataLifecycleInspectResult.Elements.Count);
         }
     }
 
