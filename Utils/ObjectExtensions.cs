@@ -191,6 +191,20 @@ public static class ObjectExtensions
         return false;
     }
 
+    public static bool IsDefault(object? obj)
+    {
+        if (obj is null) return true;
+        var type = obj.GetType();
+        if (type.IsValueType)
+        {
+            var defaultValue = Activator.CreateInstance(type);
+            return obj.Equals(defaultValue);
+        }
+
+        return false; // Not null, not value type => not default
+    }
+    
+
 
     public static Dictionary<string, object?> ToDictionary(this JsonElement node)
     {
