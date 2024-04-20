@@ -182,10 +182,10 @@ public class ObjectBindPoint(object obj, string key) : BindPoint
         var prop = obj.GetType().GetProperty(key);
         if (prop is null) return;
 
-        val = DynamicFormTools.ConvertIfNecessary(val, prop.PropertyType);
 
         if (ObjectExtensions.ShouldSetDefault(val, GetValue()))
         {
+            val = DynamicFormTools.ConvertIfNecessary(val, prop.PropertyType);
             SetValue(val);
         }
     }
