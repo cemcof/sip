@@ -72,7 +72,7 @@ public record DynamicElementSetup(
             
             return new DynamicElementSetup(
                 Type: type,
-                Default: defaultVal,
+                Default: DynamicFormTools.ConvertIfNecessary(defaultVal, type),
                 SpecifiedType: dict.PickValue<string>(nameof(Type)),
                 DisplayName: dict.PickValue<string>(nameof(DisplayName)),
                 Selection: dict.PickValue<IList>(nameof(Selection)),
@@ -182,21 +182,7 @@ public class ObjectBindPoint(object obj, string key) : BindPoint
         var prop = obj.GetType().GetProperty(key);
         if (prop is null) return;
 
-        if (val is not null && prop.PropertyType != val.GetType())
-        {
-            var converter = TypeDescriptor.GetConverter(prop.PropertyType);
-            if (converter.CanConvertFrom(val.GetType()))
-            {
-                val = converter.ConvertFrom(val);
-            }
-             // Even if we are not able to do the conversion, we might still do one from string representation
-             // For example target is DateTime and source is int (number of days)
-             // However TimeSpan converter converts only string, therefore .ToString() on the value must be used
-            else if (converter.CanConvertFrom(typeof(string)))
-            {
-                val = converter.ConvertFrom(val.ToString()!);
-            } 
-        }
+        val = DynamicFormTools.ConvertIfNecessary(val, prop.PropertyType);
 
         if (ObjectExtensions.ShouldSetDefault(val, GetValue()))
         {
@@ -355,6 +341,40 @@ public static class DynamicFormTools
         if (converter.CanConvertFrom(typeof(string)))
         {
             return converter.ConvertFrom(value);
+        }
+
+        throw new InvalidOperationException($"Cannot convert {value} to {type.Name}");
+    }
+    
+    public static object? ConvertIfNecessary(object? value, Type type)
+    {
+        if (value is null) return null;
+        if (value.GetType() == type) return value;
+        
+        // If value is list<object>, cast it to the list of primitives in type
+        if (value is IList list && type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
+        {
+            var innerType = type.GetGenericArguments()[0];
+            var convertedList = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(innerType))!;
+            foreach (var item in list)
+            {
+                convertedList.Add(ConvertIfNecessary(item, innerType));
+            }
+
+            return convertedList;
+        }
+        
+        var converter = TypeDescriptor.GetConverter(type);
+        if (converter.CanConvertFrom(value.GetType()))
+        {
+            return converter.ConvertFrom(value);
+        }
+        // Even if we are not able to do the conversion, we might still do one from string representation
+        // For example target is DateTime and source is int (number of days)
+        // However TimeSpan converter converts only string, therefore .ToString() on the value must be used
+        else if (converter.CanConvertFrom(typeof(string)))
+        {
+            return converter.ConvertFrom(value.ToString()!);
         }
 
         throw new InvalidOperationException($"Cannot convert {value} to {type.Name}");

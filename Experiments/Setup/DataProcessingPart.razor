@@ -48,7 +48,7 @@
         </div>
         
         <div class="wf-body">
-            @if (SelectedWorkflow is not null) 
+            @if (SelectedWorkflow is not null && _inspectResult is not null) 
             {
                 <WorkflowGeneralRenderer Workflow="@SelectedWorkflow"
                                          InspectResult="@_inspectResult">
