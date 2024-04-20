@@ -24,7 +24,8 @@
       "launchUrl": "ciisb/proposal",
       "applicationUrl": "https://localhost:7096;http://localhost:7095",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_appsettings": "/Users/radem/repos/sip-private/appsettings.Development.yml"
       }
     },
     "IIS Express": {

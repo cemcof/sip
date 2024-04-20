@@ -1,5 +1,6 @@
 using System.Collections;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace sip.Forms.Dynamic;
 
@@ -99,73 +100,28 @@ public interface IBindPoint
     public object? GetValue();
     public void SetValue(object? value);
 
-    public T? GetValueByKey<T>(string key, T? defaultValue = default);
     public T GetValue<T>(T defaultValue = default);
     void SetDefault(object? val);
     object Target { get; }
     string Key { get; }
 }
 
-public class KBindPoint(ref string key)
+public abstract class BindPoint : IBindPoint
 {
-    
-}
-
-public class BindPoint : IBindPoint
-{
-    /// <summary>
-    /// Sets target object according to this BindPoint 
-    /// </summary>
-    /// <param name="target"></param>
-    /// <exception cref="InvalidOperationException"></exception>
-    public void EnsureTarget(ref object? target)
-    {
-        
-    }
-
-    public void SetTo(BindPoint target)
-    {
-        
-    }
-
-    public virtual object? GetValue()
-    {
-        throw new NotSupportedException();
-    }
-
-    public virtual void SetValue(object? value)
-    {
-        throw new NotSupportedException();
-    }
-
-    public T? GetValueByKey<T>(string key, T? defaultValue = default)
-    {
-        throw new NotImplementedException();
-    }
-
-    public virtual T GetValue<T>(T defaultValue = default)
-    {
-        throw new NotSupportedException();
-    }
-
-    public virtual void SetDefault(object? val)
-    {
-        throw new NotImplementedException();
-    }
-
+    public abstract object? GetValue();
+    public abstract T GetValue<T>(T defaultValue = default);
+    public abstract void SetValue(object? value);
+    public abstract void SetDefault(object? val); 
+    public abstract object Target { get; }
+    public abstract string Key { get; }
     public static IBindPoint From(object o, object key)
     {
         return o switch
         {
             IDictionary dict => new DictBindPoint(dict, key.ToString()!),
-            IList list => new ListBindPoint(list, (int) key),
+            IList list => new ListBindPoint(list, (int)key),
             _ => new ObjectBindPoint(o, key.ToString()!)
         };
-    }
-
-    public static T? Get<T>(object target, string key, T? defaulValue = default)
-    {
-        return From(target, key).GetValue(defaulValue);
     }
 }
 
@@ -193,26 +149,11 @@ public class DictBindPoint(IDictionary dict, string key) : BindPoint
         // TODO - default val?
         if (!dict.Contains(key)) dict[key] = val;
     }
+
+    public override object Target => dict;
+    public override string Key => key;
 }
 
-public class ListBindPoint(IList list, int index) : BindPoint
-{
-    public override object? GetValue()
-    {
-        return list[index];
-    }
-
-    public override void SetValue(object? value)
-    {
-        list[index] = value;
-    }
-
-    public override T GetValue<T>(T defaultValue = default)
-    {
-        if (list[index] is T val) return val;
-        return defaultValue;
-    }
-}
 
 public class ObjectBindPoint(object obj, string key) : BindPoint
 {
@@ -232,36 +173,66 @@ public class ObjectBindPoint(object obj, string key) : BindPoint
 
     public override T GetValue<T>(T defaultValue = default)
     {
-        var prop = obj.GetType().GetProperty(key);
-        if (prop is null) return defaultValue;
-        if (prop.GetValue(obj) is T val) return val;
+        if (GetValue() is T val) return val;
         return defaultValue;
     }
     
     public override void SetDefault(object? val)
     {
         var prop = obj.GetType().GetProperty(key);
-        if (prop is null || prop.GetValue(obj) is not null) return;
+        if (prop is null) return;
 
         if (val is not null && prop.PropertyType != val.GetType())
         {
             var converter = TypeDescriptor.GetConverter(prop.PropertyType);
             if (converter.CanConvertFrom(val.GetType()))
             {
-                prop.SetValue(obj, converter.ConvertFrom(val));
+                val = converter.ConvertFrom(val);
             }
              // Even if we are not able to do the conversion, we might still do one from string representation
              // For example target is DateTime and source is int (number of days)
              // However TimeSpan converter converts only string, therefore .ToString() on the value must be used
             else if (converter.CanConvertFrom(typeof(string)))
             {
-                prop.SetValue(obj, converter.ConvertFrom(val.ToString()!));
+                val = converter.ConvertFrom(val.ToString()!);
             } 
         }
-        else
-            // TODO - handle primitive types
-            prop.SetValue(obj, val);
+
+        if (ObjectExtensions.ShouldSetDefault(val, GetValue()))
+        {
+            SetValue(val);
+        }
     }
+
+    public override object Target => obj;
+    public override string Key => key;
+}
+
+public class ListBindPoint(IList list, int index) : BindPoint
+{
+    public override object? GetValue()
+    {
+        return list[index];
+    }
+
+    public override void SetValue(object? value)
+    {
+        list[index] = value;
+    }
+
+    public override T GetValue<T>(T defaultValue = default)
+    {
+        if (list[index] is T val) return val;
+        return defaultValue;
+    }
+    
+    public override void SetDefault(object? val)
+    {
+        if (list[index] is null) list[index] = val;
+    }
+
+    public override object Target => list;
+    public override string Key => index.ToString();
 }
 
 
@@ -427,11 +398,12 @@ public static class DynamicFormTools
         return new InspectResult(fakeTarget["key"]!, result);
     }
     
+    // TODO - rework this madness
     public static void DynamicInspect(
         object? metadata, 
         IBindPoint target,
         
-        List<(DynamicElementSetup, IBindPoint)> re sultElements,
+        List<(DynamicElementSetup, IBindPoint)> resultElements,
         string? listIdKey = ID_KEY
         )
     {
@@ -445,16 +417,18 @@ public static class DynamicFormTools
         }
         catch (NotSupportedException e)
         {
-            // We are dealing with a collection or mapping and need to recurse furhter
+            // We are dealing with a collection or mapping and need to recurse further
             if (metadata is IDictionary mdict)
             {
                 // Ensure we have target object
-                target.SetDefault<Dictionary<string, object>>(new Dictionary<string, object?>(), out var value);
+                target.SetDefault(new Dictionary<string, object?>());
+                var value = target.GetValue();
+                Debug.Assert(value is not null);
                 
                 // Iterate the dictionary keys and recurse
                 foreach (DictionaryEntry entry in mdict)
                 {
-                    var key = entry.Key.ToString();
+                    var key = entry.Key.ToString()!;
                     var newMeta = entry.Value;
                     var newTarget = BindPoint.From(value, key);
                     DynamicInspect(newMeta, newTarget, resultElements, listIdKey);
@@ -464,27 +438,49 @@ public static class DynamicFormTools
             
             if (metadata is IList mlist)
             {
+                // Currently supported and implemented only lists of dictionaries
+                
                 // Ensure we have target object
-                // target.SetDefault<List<object>>(new List<object?>(), out var value);
-                // List<object> targetValue = new List<object>();
+                target.SetDefault(new List<object?>());
+                var targetValue = (IList)(target.GetValue() ?? throw new InvalidOperationException());
+                
                 // Iterate the list and recurse
-                // for (var i = 0; i < mlist.Count; i++)
-                // {
+                for (var i = 0; i < mlist.Count; i++)
+                {
+                    var sourceItem = mlist[i] as IDictionary;
+                    if (sourceItem is null) continue; // Only dict supported
                     // Check if in the target there is element that match through listIdKey
-                    // TODO 
-                    // if (listIdKey is not null)
-                    // {
-                    //     var item = targetValue.FirstOrDefault(i =>
-                    //     {
-                    //         var bp = BindPoint.From(i, listIdKey);
-                    //         var bpval = bp.GetValue();
-                    //         bp.Exists() && bpval is not null && bpval.Equals(mlist[i]); 
-                    //     })
-                    // }
-                    // var newMeta = mlist[i];
-                    // var newTarget = BindPoint.From(value, i);
-                    // DynamicInspect(newMeta, newTarget, resultElements, listIdKey);
-                // }
+                    var tindex = -1;
+                    IDictionary? tdict = null;
+                    // Try to find target dictionary by listIdKey
+                    if (listIdKey is not null && sourceItem.Contains(listIdKey))
+                    {
+                        // Iterate target value list
+                        for (int j = 0; j < targetValue.Count; j++)
+                        {
+                            var item = targetValue[j]!;
+                            var bp = BindPoint.From(item, listIdKey);
+                            var bpval = bp.GetValue();
+                            if (bpval is not null && bpval.Equals(sourceItem[listIdKey]))
+                            {
+                                tindex = j;
+                                tdict = (IDictionary)item;
+                                break; 
+                            }
+                        }
+                    }
+                    
+                    // We didn't find it 
+                    if (tdict is null)
+                    {
+                        targetValue.Add(new Dictionary<string, object>());
+                        tindex = targetValue.Count - 1;
+                    }
+                    
+                    var newMeta = mlist[i];
+                    var newTarget = BindPoint.From(targetValue, tindex);
+                    DynamicInspect(newMeta, newTarget, resultElements, listIdKey);
+                }
             }
         }
         
