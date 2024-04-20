@@ -65,7 +65,7 @@
         {
             _dataLifecycle = value;
             _dataLifecycleInspectResult = DynamicFormTools.DynamicInspect(value.SetupDyn, Exp);
-            Logger.LogInformation("SetupDyn: {@SetupDyn}, len {Len}", _dataLifecycleInspectResult.Elements, _dataLifecycleInspectResult.Elements.Count);
+            Logger.LogInformation("SetupDyn: {@SetupDyn}, len {Len}, exp {@Exp}", _dataLifecycleInspectResult.Elements, _dataLifecycleInspectResult.Elements.Count, Exp);
         }
     }
 

@@ -25,9 +25,9 @@
                                AutoDefault="@true"
                                ItemsProvider="_WorkflowTemplateItemsProvider">
                         <ItemTemplate>
-                            <div>
+                            <div class="py-1">
                                 <span class="fw-bold">@wfctx.Title</span> <br/>
-                                <span class="small">@wfctx.Description</span> <br/>
+                                <span class="small">@wfctx.Description.Truncate(200)</span> <br/>
                                 <span>
                                     @foreach(var tag in wfctx.Tags)
                                     {

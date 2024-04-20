@@ -432,8 +432,8 @@ public static class DynamicFormTools
             var dynElement = DynamicElementSetup.FromObject(metadata);
             // We are dealing with terminal value
             target.SetDefault(dynElement.Default);
+            Console.WriteLine($"Set def terminal: {target.Key} to {dynElement.Default} after is: {target.GetValue()}");
             resultElements.Add((dynElement, target));
-
         }
         catch (NotSupportedException e)
         {
