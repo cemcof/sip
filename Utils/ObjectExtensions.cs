@@ -175,11 +175,11 @@ public static class ObjectExtensions
             defaultt = Activator.CreateInstance(type);
         }
 
-        if (def is string defstr)
+        if (def is string defstr && current is string currentstr)
         {
             // For strings, we assume that "" is also empty value, same as null
             // default equality comparison is therefore not enough
-            return !string.IsNullOrEmpty(defstr) && string.IsNullOrEmpty((string?)current);
+            return !string.IsNullOrEmpty(defstr) && string.IsNullOrEmpty(currentstr);
         }
         
         // Not string

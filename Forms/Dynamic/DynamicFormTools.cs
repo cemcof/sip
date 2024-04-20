@@ -182,7 +182,6 @@ public class ObjectBindPoint(object obj, string key) : BindPoint
         var prop = obj.GetType().GetProperty(key);
         if (prop is null) return;
 
-
         if (ObjectExtensions.ShouldSetDefault(val, GetValue()))
         {
             val = DynamicFormTools.ConvertIfNecessary(val, prop.PropertyType);
@@ -441,7 +440,6 @@ public static class DynamicFormTools
             // We are dealing with a collection or mapping and need to recurse further
             if (metadata is IDictionary mdict)
             {
-                Console.WriteLine($"Metadata dictionary en: {mdict.Count}");
                 // Ensure we have target object
                 target.SetDefault(new Dictionary<string, object?>());
                 var value = target.GetValue();
@@ -453,7 +451,6 @@ public static class DynamicFormTools
                     var key = entry.Key.ToString()!;
                     var newMeta = entry.Value;
                     var newTarget = BindPoint.From(value, key);
-                    Console.WriteLine($"Recursing to: {key}, newMeta {newMeta}, newTarget {newTarget}");
                     DynamicInspect(newMeta, newTarget, resultElements, listIdKey);
                 }
                 return;
