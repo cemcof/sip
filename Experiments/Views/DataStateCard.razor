@@ -15,7 +15,7 @@
 
 @if (!Exp.Storage.Archive && Exp is {Storage.State: StorageState.Idle})
 {
-    <section class="card border-warning text-center my-0 w-25">
+    <section class="card border-warning text-center m-0">
         <div class="card-body">
             <p class="card-title fw-bold">Data expiration: @Exp.Storage.DtExpiration.StandardFormat() (@Exp.Storage.DtExpiration.HappenAgo())</p>
             <p class="card-text">Since this dataset has not been marked to be archived, it will be deleted from our storage services by the date above. 
