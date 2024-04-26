@@ -32,6 +32,7 @@
     // ============ Key configuration constant names ==============
     const string PARAM_MAX = "Max";    
     const string PARAM_MIN = "Min";
+    const string PARAM_STEP = "Step";
     public const string PARAM_DEFAULT = "Default";
     const string PARAM_READONLY = "IsReadonly";
     const string PARAM_REQUIRED = "IsRequired";
@@ -200,10 +201,9 @@
             compParams.Add(nameof(CInputBase<object>.Flex), setup.Flex);
             compParams.Add(nameof(CInputBase<object>.Unit), setup.Unit);
             compParams.Add(nameof(CInputBase<object>.DisplayName), setup.DisplayName);
-            // TODO - ranges
-            // compParams.Add("RangeMin", PickParameter<IConvertible>(PARAM_MIN)?.ToDouble(null));
-            // compParams.Add("RangeMax", PickParameter<IConvertible>(PARAM_MAX)?.ToDouble(null));
-
+            compParams.Add(nameof(CInputBase<object>.RangeMin), setup.Min);
+            compParams.Add(nameof(CInputBase<object>.RangeMax), setup.Max);
+            compParams.Add(nameof(CInputBase<object>.Step), setup.Step);
         
             // There are special cases, like filesystem browser, for now hardcode
             if (setup.SpecifiedType is "folder" or "file")

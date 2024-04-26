@@ -11,7 +11,7 @@
     }
     
     <div class="cinput-input-container" style="@GetFlexStyleForIndex(1)">
-        <input type="number" min="@RangeMin" max="@RangeMax" class="form-control @FieldCssClass" @bind="CurrentValueAsString" id="@InputId" readonly="@IsReadonly" disabled="@IsDisabled" />
+        <input type="number" min="@InputMin" max="@InputMax" step="@InputStep" class="form-control @FieldCssClass" @bind="CurrentValueAsString" id="@InputId" readonly="@IsReadonly" disabled="@IsDisabled" />
         <div class="invalid-feedback">
             <ValidationMessage For="ValueExpression"></ValidationMessage>
         </div>
@@ -26,6 +26,11 @@
 </div>        
 
 @code {
+
+    // TODO - some input number restrictions, handle better
+    private double InputMin => Math.Max(RangeMin.GetValueOrDefault(-1e16), -1e16);
+    private double InputMax => Math.Min(RangeMax.GetValueOrDefault(1e16), 1e16);
+    private double InputStep => Step.GetValueOrDefault(1);
 
     protected override bool TryParseValueFromString(string? value, out TNumberType result, [NotNullWhen(returnValue: false)] out string? validationErrorMessage)
     {

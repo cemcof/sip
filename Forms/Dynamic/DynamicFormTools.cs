@@ -19,8 +19,9 @@ public record DynamicElementSetup(
     string Group = "",
     string GroupDesc = "",
     int Order = -1,
-    int Min = int.MinValue,
-    int Max = int.MaxValue	
+    double Min = double.MinValue,
+    double Max = double.MaxValue,
+    double Step = 1.0
 )
 {
     public static DynamicElementSetup FromObject(object? setup)

@@ -103,6 +103,13 @@ public abstract class CInputBase<TInput> : InputBase<TInput>, ICInputBase
         set => _rangeMax = value;
     }
 
+    private double? _step;
+    public double? Step
+    {
+        get => _step;
+        set => _step = value;
+    }
+
     private string? _unit;
         
     [Parameter]

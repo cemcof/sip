@@ -1,10 +1,21 @@
 @using sip.Forms
+
+@* Diagram if any  *@
 @if (!string.IsNullOrEmpty(Workflow.Diagram))
 {
     <div class="wf-diagram">
         <img src="@Workflow.Diagram" alt="@Workflow.Title"/>
     </div>
 }
+
+@* Description if any *@
+@if (!string.IsNullOrEmpty(Workflow.Description))
+{
+    <div class="text-center small">
+        @Workflow.Description
+    </div>
+}
+
 
 <div class="wf-prot-properties">
     @if (AsForm)
