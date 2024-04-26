@@ -27,7 +27,6 @@ public class Experiment
     [YamlIgnore, JsonIgnore] public Guid UserId { get; set; }
     [Required] public AppUser User { get; set; } = null!;
     [MaxLength(128), Required] public string UserType { get; set; } = null!;
-    [MaxLength(128), Required] public string AccessRoute { get; set; } = null!;
     
         
     // Project
