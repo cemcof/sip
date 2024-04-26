@@ -146,8 +146,10 @@ public class DictBindPoint(IDictionary dict, string key) : BindPoint
     
     public override void SetDefault(object? val)
     {
-        // TODO - default val?
-        if (!dict.Contains(key)) dict[key] = val;
+        if (!dict.Contains(key) || dict[key] is null) 
+        {
+            dict[key] = val;
+        }
     }
 
     public override object Target => dict;
@@ -398,7 +400,7 @@ public static class DynamicFormTools
                 var groupGuys = group.ToList();
                 var desc = groupGuys
                     .FirstOrDefault(g => !string.IsNullOrWhiteSpace(g.Item1.GroupDesc))
-                    .Item1
+                    .Item1?
                     .GroupDesc;
                 
                 yield return new ElementGroup(groupGuys, group.Key, desc);
