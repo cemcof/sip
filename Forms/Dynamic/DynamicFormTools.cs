@@ -504,8 +504,11 @@ public static class DynamicFormTools
                     var newMeta = mlist[i];
                     var newTarget = BindPoint.From(targetValue, tindex);
                     DynamicInspect(newMeta, newTarget, resultElements, listIdKey);
+                    return;
                 }
             }
+
+            throw new InvalidOperationException($"Could not inspect/bind {metadata} to {target.Key}");
         }
         
         
