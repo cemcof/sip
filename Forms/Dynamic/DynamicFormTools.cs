@@ -24,56 +24,25 @@ public record DynamicElementSetup(
     double Step = 1.0
 )
 {
-    public static DynamicElementSetup FromObject(object? setup)
+    public static DynamicElementSetup FromObject(object? setup, Type? targetType = null)
     {
-        (Type, bool isSupported) GetTypeInfo(object? value)
-        {
-            if (value is null || value is string) return (typeof(string), true);
-            // Handle lists
-            if (value is IList list)
-            {
-                if (list.Count == 0) return (typeof(List<string>), true);
-                var first = list[0];
-                var (type, supported) = GetTypeInfo(first);
-                if (!supported) return (typeof(string), false);
-                return (typeof(List<>).MakeGenericType(type), true);
-            }
-
-            return (value.GetType(), DynamicFormTools.IsSimpleTypeSupported(value.GetType()));
-        }
-
-        if (setup is string st && DynamicFormTools.TryParseSetupFromString(st, out var dynSetup))
-            return dynSetup!;
-        
-        var tinfo = GetTypeInfo(setup);
-
-        if (tinfo.isSupported)
-        {
-            return new DynamicElementSetup(Type: tinfo.Item1, Default: setup);
-        }
+        DynamicElementSetup result;
 
         if (setup is DynamicElementSetup dyn)
-            return dyn;
-        
-        if (setup is IDictionary dict && 
+            result = dyn;
+        else if (setup is string st && DynamicFormTools.TryParseSetupFromString(st, out var dynSetup))
+            result = dynSetup!;
+        else if (setup is IDictionary dict && 
             (dict.Contains(nameof(Type)) || dict.Contains(nameof(Default)))) // TODO - more robust
         {
-            Type type;
             object? defaultVal = dict.PickValue<object>(nameof(Default));
-            if (dict.Contains(nameof(Type)))
-            {
-                type = DynamicFormTools.StringToValType(dict.PickValue<string>(nameof(Type)));
-            }
-            else
-            {
-                var (t, supported) = GetTypeInfo(defaultVal);
-                if (!supported) throw new NotSupportedException($"Type {t.Name} is not supported as dynamic form setup");
-                type = t;
-            }
+            Type type = (dict.Contains(nameof(Type)))
+                ? DynamicFormTools.StringToValType(dict.PickValue<string>(nameof(Type)))
+                : defaultVal?.GetType() ?? typeof(string);
             
-            return new DynamicElementSetup(
+            result = new DynamicElementSetup(
                 Type: type,
-                Default: DynamicFormTools.ConvertIfNecessary(defaultVal, type),
+                Default:defaultVal,
                 SpecifiedType: dict.PickValue<string>(nameof(Type)),
                 DisplayName: dict.PickValue<string>(nameof(DisplayName)),
                 Selection: dict.PickValue<IList>(nameof(Selection)),
@@ -89,11 +58,18 @@ public record DynamicElementSetup(
                 GroupDesc: dict.PickValue<string>(nameof(GroupDesc), string.Empty)!
             );
         }
-        
-        throw new NotSupportedException	($"Type {setup?.GetType().Name} is not supported as dynamic form setup");
+        else
+        {
+            result = new DynamicElementSetup(
+                Type: targetType ?? setup?.GetType() ?? typeof(string), 
+                Default: setup);
+        }
+
+        targetType ??= result.Type;
+        var defaultV = DynamicFormTools.ConvertToSupportedIfNecessary(result.Default, targetType);
+        targetType = defaultV?.GetType() ?? targetType;
+        return result with { Default = defaultV, Type = targetType };
     }
-    
-    
 }
 
 public interface IBindPoint
@@ -162,16 +138,12 @@ public class ObjectBindPoint(object obj, string key) : BindPoint
 {
     public override object? GetValue()
     {
-        var prop = obj.GetType().GetProperty(key);
-        if (prop is null) return null;
-        return prop.GetValue(obj);
+        return PropertyInfo?.GetValue(obj);
     }
 
     public override void SetValue(object? value)
     {
-        var prop = obj.GetType().GetProperty(key);
-        if (prop is null) return;
-        prop.SetValue(obj, value);
+        PropertyInfo?.SetValue(obj, value);
     }
 
     public override T GetValue<T>(T defaultValue = default)
@@ -182,16 +154,13 @@ public class ObjectBindPoint(object obj, string key) : BindPoint
     
     public override void SetDefault(object? val)
     {
-        var prop = obj.GetType().GetProperty(key);
-        if (prop is null) return;
+        if (PropertyInfo is null) return;
 
         if (ObjectExtensions.IsDefault(GetValue()))
-        {
-            Console.WriteLine($"Setting default... {val}");
-            val = DynamicFormTools.ConvertIfNecessary(val, prop.PropertyType);
             SetValue(val);
-        }
     }
+    
+    public PropertyInfo? PropertyInfo => obj.GetType().GetProperty(key);
 
     public override object Target => obj;
     public override string Key => key;
@@ -358,7 +327,7 @@ public static class DynamicFormTools
         throw new InvalidOperationException($"Cannot convert {value} to {type.Name}");
     }
     
-    public static object? ConvertIfNecessary(object? value, Type type)
+    public static object? ConvertToSupportedIfNecessary(object? value, Type type)
     {
         if (value is null) return null;
         if (value.GetType() == type) return value;
@@ -370,11 +339,15 @@ public static class DynamicFormTools
             var convertedList = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(innerType))!;
             foreach (var item in list)
             {
-                convertedList.Add(ConvertIfNecessary(item, innerType));
+                convertedList.Add(ConvertToSupportedIfNecessary(item, innerType));
             }
 
             return convertedList;
         }
+
+        if (!IsSimpleTypeSupported(type))
+            throw new NotSupportedException(
+                $"Only simple types are supported for conversion, not {type.Name}, value: {value}");
         
         var converter = TypeDescriptor.GetConverter(type);
         if (converter.CanConvertFrom(value.GetType()))
@@ -389,7 +362,7 @@ public static class DynamicFormTools
             return converter.ConvertFrom(value.ToString()!);
         }
 
-        throw new InvalidOperationException($"Cannot convert {value} to {type.Name}");
+        throw new NotSupportedException($"Cannot convert {value} to {type.Name}");
     }
 
     public record ElementGroup(
@@ -443,8 +416,9 @@ public static class DynamicFormTools
     {
         try
         {
-            Console.WriteLine($"Dyn: {target.Key}, meta {metadata}");
-            var dynElement = DynamicElementSetup.FromObject(metadata);
+            var targetType = (target is ObjectBindPoint obp) ? obp.PropertyInfo?.PropertyType : null;
+            Console.WriteLine($"Dyn: {target.Key}, meta {metadata}, targetType: {targetType?.Name}");
+            var dynElement = DynamicElementSetup.FromObject(metadata, targetType);
             // We are dealing with terminal value
             if (forceSet) target.SetValue(dynElement.Default);
             else target.SetDefault(dynElement.Default);
