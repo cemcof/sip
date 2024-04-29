@@ -38,7 +38,7 @@ public record DynamicElementSetup(
             object? defaultVal = dict.PickValue<object>(nameof(Default));
             Type type = (dict.Contains(nameof(Type)))
                 ? DynamicFormTools.StringToValType(dict.PickValue<string>(nameof(Type)))
-                : defaultVal?.GetType() ?? typeof(string);
+                : DynamicFormTools.GetDynValueType(defaultVal);
             
             result = new DynamicElementSetup(
                 Type: type,
@@ -61,7 +61,7 @@ public record DynamicElementSetup(
         else
         {
             result = new DynamicElementSetup(
-                Type: targetType ?? setup?.GetType() ?? typeof(string), 
+                Type: targetType ?? DynamicFormTools.GetDynValueType(setup), 
                 Default: setup);
         }
 
@@ -234,6 +234,19 @@ public static class DynamicFormTools
         result = null;
         return false;
     }
+
+    public static Type GetDynValueType(object? value)
+    {
+        if (value is null) return typeof(string);
+        // If it is a list of objects, then we need to check the type of the first element and set specific list accordingly
+        if (value is List<object> list)
+        {
+            var subtype = GetDynValueType(list.FirstOrDefault());
+            return typeof(List<>).MakeGenericType(subtype);
+        }
+
+        return value.GetType();
+    }
     
     /// <summary>
     /// Recursively convert this configuration section to object hierarchy
@@ -329,25 +342,39 @@ public static class DynamicFormTools
     
     public static object? ConvertToSupportedIfNecessary(object? value, Type type)
     {
-        if (value is null) return null;
-        if (value.GetType() == type) return value;
-        
-        // If value is list<object>, cast it to the list of primitives in type
-        if (value is IList list && type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
+        // Handle list of values
+        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
         {
             var innerType = type.GetGenericArguments()[0];
+            if (!IsSimpleTypeSupported(innerType))
+                throw new NotSupportedException(
+                    $"Only simple types are supported for conversion, not {innerType.Name}, value: {value}");
+            
             var convertedList = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(innerType))!;
-            foreach (var item in list)
+            if (value is IList vallist)
             {
-                convertedList.Add(ConvertToSupportedIfNecessary(item, innerType));
+                foreach (var item in vallist)
+                {
+                    convertedList.Add(ConvertToSupportedIfNecessary(item, innerType));
+                }
             }
 
             return convertedList;
         }
-
+        
         if (!IsSimpleTypeSupported(type))
             throw new NotSupportedException(
                 $"Only simple types are supported for conversion, not {type.Name}, value: {value}");
+
+        if (value is null)
+        {
+            return (type.IsValueType) ? 
+                Activator.CreateInstance(type) : 
+                null;
+        }
+        
+        
+        if (value.GetType() == type) return value;
         
         var converter = TypeDescriptor.GetConverter(type);
         if (converter.CanConvertFrom(value.GetType()))
