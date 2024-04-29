@@ -261,6 +261,7 @@
 
     public override IEnumerable<string> SelfValidate(ValidationContext validationContext)
     {
+        Logger.LogTrace("Validating: {Value}, {@Items}, PickFolder={}", CurrentValue, _items, PickFolder);
         var messages = base.SelfValidate(validationContext);
         foreach (var message in messages)
         {

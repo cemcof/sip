@@ -17,4 +17,8 @@ public class FileSystemItemInfo : IFilesystemItemInfo
 
     public bool IsAccessible => true;
 
+    public override string ToString()
+    {
+        return $"FSII{{Path: {Path}, Name: {Name}, IsDirectory: {IsDirectory}, IsAccessible: {IsAccessible}}}";
+    }
 }
