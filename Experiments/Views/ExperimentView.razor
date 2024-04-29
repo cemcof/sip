@@ -179,7 +179,7 @@
         if (Exp.Processing.WorkflowRef != null)
         {
             _workflow = await WorkflowProvider.GetWorkflowByIdAsync(Exp.Processing.WorkflowRef, Exp.Organization);
-            _inspectResult = DynamicFormTools.DynamicInspect(_workflow?.Data, Exp.Processing.Workflow);
+            _inspectResult = DynamicFormTools.DynamicInspect(_workflow?.Data, Exp.Processing.Workflow, forceSet:false);
         }
     }
 

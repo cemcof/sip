@@ -420,13 +420,14 @@ public static class DynamicFormTools
     
     public static InspectResult DynamicInspect(
         object? metadata,
-        object? target
+        object? target,
+        bool forceSet = true
     )
     {
         var fakeTarget = new Dictionary<string, object?>() { { "key", target } };
         var bp = BindPoint.From(fakeTarget, "key");
         var result = new List<(DynamicElementSetup, IBindPoint)>();
-        DynamicInspect(metadata, bp, result);
+        DynamicInspect(metadata, bp, result, forceSet);
         return new InspectResult(fakeTarget["key"]!, result);
     }
     
@@ -436,6 +437,7 @@ public static class DynamicFormTools
         IBindPoint target,
         
         List<(DynamicElementSetup, IBindPoint)> resultElements,
+        bool forceSet = false,
         string? listIdKey = ID_KEY
         )
     {
@@ -444,7 +446,8 @@ public static class DynamicFormTools
             Console.WriteLine($"Dyn: {target.Key}, meta {metadata}");
             var dynElement = DynamicElementSetup.FromObject(metadata);
             // We are dealing with terminal value
-            target.SetDefault(dynElement.Default);
+            if (forceSet) target.SetValue(dynElement.Default);
+            else target.SetDefault(dynElement.Default);
             Console.WriteLine($"Set def terminal: {target.Key} to {dynElement.Default} after is: {target.GetValue()}");
             resultElements.Add((dynElement, target));
         }
@@ -464,7 +467,7 @@ public static class DynamicFormTools
                     var key = entry.Key.ToString()!;
                     var newMeta = entry.Value;
                     var newTarget = BindPoint.From(value, key);
-                    DynamicInspect(newMeta, newTarget, resultElements, listIdKey);
+                    DynamicInspect(newMeta, newTarget, resultElements, forceSet, listIdKey);
                 }
                 return;
             }
@@ -512,7 +515,7 @@ public static class DynamicFormTools
                     
                     var newMeta = mlist[i];
                     var newTarget = BindPoint.From(targetValue, tindex);
-                    DynamicInspect(newMeta, newTarget, resultElements, listIdKey);
+                    DynamicInspect(newMeta, newTarget, resultElements, forceSet, listIdKey);
                     return;
                 }
             }
