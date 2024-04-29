@@ -39,7 +39,7 @@ public record DynamicElementSetup(
                 return (typeof(List<>).MakeGenericType(type), true);
             }
 
-            return (value.GetType(), false);
+            return (value.GetType(), DynamicFormTools.IsSimpleTypeSupported(value.GetType()));
         }
 
         if (setup is string st && DynamicFormTools.TryParseSetupFromString(st, out var dynSetup))
@@ -322,6 +322,15 @@ public static class DynamicFormTools
             "folder" => typeof(string),
             "strlist" => typeof(List<string>),
             _ => throw new ArgumentOutOfRangeException(nameof(typeAsString), typeAsString, null)};
+    }
+
+    public static bool IsSimpleTypeSupported(Type t)
+    {
+        return t.IsPrimitive ||
+               t == typeof(string) ||
+               t.IsEnum ||
+               t == typeof(DateTime) ||
+               t == typeof(TimeSpan);
     }
 
     public static (Type, object?) InferTypeFromStringValue(string? value)
