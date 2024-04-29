@@ -103,10 +103,16 @@
     
     [Parameter]
     public EventCallback<string> OnValidPick { get; set; }
-    
-    
+
+    protected override void OnInitialized()
+    {
+        Logger.LogTrace("Initializing FilesystemBrowser {Id}", GetHashCode());
+        base.OnInitialized();
+    }
+
     protected override void Dispose(bool disposing)
     {
+        Logger.LogTrace("Disposing of FilesystemBrowser {Id}", GetHashCode());
         _providerCts.Cancel();
         base.Dispose(disposing);
     }
