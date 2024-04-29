@@ -3,7 +3,7 @@
 @* For expired data  *@
 @if (Exp is {Storage.State: StorageState.Expired or StorageState.ExpirationRequested or StorageState.Expiring})
 {
-    <section class="card border-info text-center my-0 w-25">
+    <section class="card border-info text-center m-0">
         <div class="card-body">
             <span class="card-text">Data expired @Exp.Storage.DtExpiration.StandardFormat() (@Exp.Storage.DtExpiration.HappenAgo())</span>
         </div>
@@ -29,7 +29,7 @@
 
 @if (Exp.Storage.Archive && Exp.Publication.State is PublicationState.DraftCreated or PublicationState.PublicationRequested)
 {
-    <section class="card border-success text-center my-0 w-25">
+    <section class="card border-success text-center m-0">
         <div class="card-body">
             <p class="card-title fw-bold">Data embargo ends: @Exp.Publication.DtEmbargo.StandardFormat() (@Exp.Publication.DtEmbargo.HappenAgo())</p>
             <p class="card-text">Since this dataset has been marked to be archived, it is expected to be assigned public identifier (DOI) and made publicly available either automatically after embargo period or earlier on your decision.</p>
@@ -56,7 +56,7 @@
 
 @if (Exp.Publication.State is PublicationState.Published)
 {
-    <section class="card border-success text-center my-0 w-25">
+    <section class="card border-success text-center m-0">
         <div class="card-body">
             <p>
                 <span class="fw-bold">
