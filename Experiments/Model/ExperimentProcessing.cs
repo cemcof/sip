@@ -52,6 +52,7 @@ public class ExperimentProcessing
 
 public enum ProcessingState
 {
+    Uninitialized,
     Ready,
     Running,
     Completed,
