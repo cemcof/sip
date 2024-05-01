@@ -36,6 +36,7 @@ public class ExperimentStorage
     public TimeSpan ExpirationPeriod { get; set; }
 
     public StorageState State { get; set; }
+    [MaxLength(64)] public string? Node { get; set; }
 }
 
 public enum StorageState

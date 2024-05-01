@@ -24,6 +24,8 @@ public class ExperimentPublication
     public DateTime DtEmbargo { get; set; }
 
     public PublicationState State { get; set; }
+    [MaxLength(64)] public string? Node { get; set; }
+
 }
 
 public enum PublicationState

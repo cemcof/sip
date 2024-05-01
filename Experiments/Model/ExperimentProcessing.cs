@@ -11,9 +11,7 @@ public class ExperimentProcessing
     [JsonIgnore, YamlIgnore] public Experiment Experiment { get; set; } = null!;
 
     [MaxLength(64)] public string ProcessingEngine { get; set; } = string.Empty;
-    [MaxLength(64)] public string Node { get; set; } = string.Empty;
-    [MaxLength(16)] public string? Pid { get; set; }
-
+    
     public string? WorkflowRef { get; set; }
     [NotMapped] public object? Workflow { get; set; } 
     [YamlIgnore, JsonIgnore] public string WorkflowSerialized { get; set; } = "[]";
@@ -45,6 +43,9 @@ public class ExperimentProcessing
         WorkflowSerialized = ser.Serialize(Workflow);
     }
     public ProcessingState State { get; set; }
+    [MaxLength(64)] public string? Node { get; set; }
+    [MaxLength(16)] public string? Pid { get; set; }
+
 
     // For workflows filtering purposes
     [NotMapped, JsonIgnore, YamlIgnore] public List<string> WorkflowTags { get; set; } = [];
