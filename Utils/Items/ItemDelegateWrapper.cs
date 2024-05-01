@@ -80,3 +80,31 @@ public static class IDW<TItem>
     
 
 }
+
+public static class ItemTools
+{
+    public static ItemsProviderDelegate<string> SimpleStringProvider(IEnumerable<string> strings)
+    {
+        var strs = strings
+            .Select(s => s.Split("=>", StringSplitOptions.TrimEntries).First())
+            .ToList();
+        
+        return _ => ValueTask.FromResult(new ItemsProviderResult<string>(strs, strs.Count));
+    }
+
+    public static Func<string, string> SimpleStringDisplayNameMapper(IEnumerable<string> strings)
+    {
+        var map = strings.ToDictionary(
+            str => str.Split("=>", StringSplitOptions.TrimEntries).First(),
+            str => str.Split("=>", StringSplitOptions.TrimEntries).Last()
+        );
+
+        return val => map[val!.ToString()!];
+    }
+
+    public static ItemsProviderDelegate<TValue> StaticItems<TValue>(IEnumerable<TValue> fromlist)
+    {
+        var enumerated = fromlist.ToList();
+        return _ => ValueTask.FromResult(new ItemsProviderResult<TValue>(enumerated, enumerated.Count()));
+    } 
+}

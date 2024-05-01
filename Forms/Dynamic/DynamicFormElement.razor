@@ -220,13 +220,15 @@
             if (selection is not null)
             {
                 // There is selection, that changes a lot
-                // Basic string selection component (radios)
+                // TODO - Select or radios?
+                compType = typeof(CSelectDropdown<>)
+                    .MakeGenericType(setup.Type);
+                
                 var sel = selection.Cast<object>().Select(x => x.ToString()!).ToList();
                 var itemsProvider = CRadioList<string>.SimpleStringProvider(sel);
                 var dnameMapper = CRadioList<string>.SimpleStringDisplayNameMapper(sel);
-                compType = typeof(CRadioList<string>);
-                compParams.Add(nameof(CRadioList<string>.ItemsProvider), itemsProvider);
-                compParams.Add(nameof(CRadioList<string>.DisplayNameMapper), dnameMapper);
+                compParams.Add(nameof(CRadioList<object>.ItemsProvider), itemsProvider);
+                compParams.Add(nameof(CRadioList<object>.DisplayNameMapper), dnameMapper);
                 if (setup.Type != typeof(string)) 
                     throw new NotSupportedException($"Other that simple string radio selections not supported, type: {setup.Type.Name}, key: {Key}");
             }
