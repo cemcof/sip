@@ -25,10 +25,12 @@
     </div>
     
     <div class="mx-5 text-nowrap">
-        <span class="fs-3"><i class="fa fa-spinner fa-spin fs-4"></i> &nbsp; @Exp.State.Humanize() ...</span> <br/>
-        <span class="small">St: @Exp.Storage.State.Humanize() @(string.IsNullOrWhiteSpace(Exp.Storage.Node) ? ", -" : $", {Exp.Storage.Node}")</span> <br/>
-        <span class="small">Pr: @Exp.Processing.State.Humanize() @(string.IsNullOrWhiteSpace(Exp.Processing.Node) ? ", -" : $", {Exp.Processing.Node}")</span> <br/>
-        <span class="small">Pu: @Exp.Publication.State.Humanize() @(string.IsNullOrWhiteSpace(Exp.Publication.Node) ? ", -" : $", {Exp.Publication.Node}")</span>
+        <span class="fs-5"><i class="fa fa-spinner fa-spin fs-5"></i> &nbsp; @Exp.State.Humanize() ...</span> 
+        <div class="lh-1">
+            <span class="small">St: @Exp.Storage.State.Humanize() @(string.IsNullOrWhiteSpace(Exp.Storage.Node) ? ", -" : $", {Exp.Storage.Node}")</span> <br/>
+            <span class="small">Pr: @Exp.Processing.State.Humanize() @(string.IsNullOrWhiteSpace(Exp.Processing.Node) ? ", -" : $", {Exp.Processing.Node}")</span> <br/>
+            <span class="small">Pu: @Exp.Publication.State.Humanize() @(string.IsNullOrWhiteSpace(Exp.Publication.Node) ? ", -" : $", {Exp.Publication.Node}")</span>
+        </div>
     </div>
     
     <div>
