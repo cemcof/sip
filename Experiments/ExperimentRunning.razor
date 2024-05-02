@@ -7,7 +7,7 @@
 @inject DocumentService DocumentService
 @inject ExperimentsService ExperimentsService
 
-<div class="exp-status-bar status-@Exp.State d-flex align-items-center">
+<div class="exp-status-bar status-@Exp.State d-flex align-items-center p-2">
     
     <div class="exp-overview flex-grow-1">
         <div class="fw-bold">@Exp.SecondaryId / @Exp.Sample.Name</div>
@@ -25,7 +25,10 @@
     </div>
     
     <div class="mx-5 text-nowrap">
-        <span class="fs-3"><i class="fa fa-spinner fa-spin fs-4"></i> &nbsp; @Exp.State.Humanize() ...</span>
+        <span class="fs-3"><i class="fa fa-spinner fa-spin fs-4"></i> &nbsp; @Exp.State.Humanize() ...</span> <br/>
+        <span class="small">St: @Exp.Storage.State.Humanize() @(string.IsNullOrWhiteSpace(Exp.Storage.Node) ? ", -" : $", {Exp.Storage.Node}")</span> <br/>
+        <span class="small">Pr: @Exp.Processing.State.Humanize() @(string.IsNullOrWhiteSpace(Exp.Processing.Node) ? ", -" : $", {Exp.Processing.Node}")</span> <br/>
+        <span class="small">Pu: @Exp.Publication.State.Humanize() @(string.IsNullOrWhiteSpace(Exp.Publication.Node) ? ", -" : $", {Exp.Publication.Node}")</span>
     </div>
     
     <div>

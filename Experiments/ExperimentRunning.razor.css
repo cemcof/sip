@@ -49,17 +49,6 @@
     /*}*/
 }
 
-
-.exp-status-bar {
-    display: flex;
-    align-items: center;
-    border-radius: 5px;
-    padding: 0.8rem 1rem;
-    background-color: rgb(229, 229, 229);
-}
-
-
-
 .dots-loader {
     display: flex;
     align-items: center;
