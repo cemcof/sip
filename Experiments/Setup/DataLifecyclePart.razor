@@ -9,7 +9,7 @@
     <div class="big-radiolist">
         @* TODO get rid of this wrapper by supporting custom class on input element *@
         <CRadioList TValue="DataLifecycleOptions" @bind-Value="DataLifecycle"
-                    ItemsProvider="@ItemTools.StaticItems(ExpMeta.DataLifecycles.Values))"
+                    ItemsProvider="@ItemTools.StaticItems(ExpMeta.DataLifecycles.Values)"
                     HasLabel="@false">
             <ItemTemplate Context="radioctx">
                 <div class="fake-radio"></div>
