@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 namespace sip.Utils.Items;
@@ -90,6 +91,23 @@ public static class ItemTools
             .ToList();
         
         return _ => ValueTask.FromResult(new ItemsProviderResult<string>(strs, strs.Count));
+    }
+
+    public static ItemsProviderDelegate<TItem> SimpleFromStringProvider<TItem>(IEnumerable<string> strings)
+    {
+        TItem BindConvertOrFail(object? item)
+        {
+            if (BindConverter.TryConvertTo<TItem>(item, null, out var res))
+                return res;
+            throw new NotSupportedException($"Cannot convert {item} to target type {typeof(TItem).Name}");
+        }
+        
+        var result = strings
+            .Select(s => s.Split("=>", StringSplitOptions.TrimEntries).First())
+            .Select(BindConvertOrFail)
+            .ToArray();
+        
+        return _ => ValueTask.FromResult(new ItemsProviderResult<TItem>(result, result.Length));
     }
 
     public static Func<string, string> SimpleStringDisplayNameMapper(IEnumerable<string> strings)

@@ -39,7 +39,6 @@ public record DynamicElementSetup(
             Type type = (dict.Contains(nameof(Type)))
                 ? DynamicFormTools.StringToValType(dict.PickValue<string>(nameof(Type)))
                 : DynamicFormTools.GetDynValueType(defaultVal);
-            
             result = new DynamicElementSetup(
                 Type: type,
                 Default:defaultVal,
