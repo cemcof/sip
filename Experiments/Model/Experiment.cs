@@ -31,7 +31,7 @@ public class Experiment
         
     // Project
     public string? ProjectId { get; set; }
-    [YamlIgnore, JsonIgnore] public Project? Project { get; set; }
+    public Project? Project { get; set; }
         
     // Sample 
     [YamlIgnore, JsonIgnore] public Guid SampleId { get; set; }

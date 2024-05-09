@@ -67,7 +67,7 @@
 {
     
     <section>
-        @if (Exp.Storage.StorageEngine == "irods")
+        @if (Exp.Storage.StorageEngine.StartsWith("irods"))
         {
             <p>Your dataset has been stored in iRODS cloud. To <strong>download your data</strong>, use our prepared script</p>
             
@@ -117,7 +117,7 @@
             
         }
         
-        @if (Exp.Storage.StorageEngine == "fs")
+        @if (Exp.Storage.StorageEngine.StartsWith("fs"))
         {
             <p>The dataset has been stored at the following location and you can access it provided that you were
                 given credentials (username/password/ssh key) by the facility</p>
