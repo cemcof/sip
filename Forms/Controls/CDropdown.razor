@@ -18,6 +18,7 @@
         {
             <TooltipContainer class="tt-fullsize" TooltipDirection="TooltipDirection.Bottom">
                 <SearchBar @ref="_searchBarRef" RequestSearch="RequestSearch"
+                           AdditionalClass="@FieldCssClass"
                            OnNavigationKeyDown="_searchInputNavigationKeyDown"
                            OnSearchFocused="_searchInputFocused"
                            OnSearchBlurred="_searchInputBlurred">

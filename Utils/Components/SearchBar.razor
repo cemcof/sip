@@ -1,10 +1,10 @@
 @inject ILogger<SearchBar> Logger
 
-<div class="searchbar" 
+<div class="searchbar @AdditionalClass" 
      onkeydown="preventDefaultIfEnter(event); preventDefaultIfUp(event); preventDefaultIfDown(event)"
      onkeypress="preventDefaultIfEnter(event); preventDefaultIfUp(event); preventDefaultIfDown(event)">
     
-    <input @onkeydown="OnKeyDown" @ref="@_inputRef" placeholder="@Placeholder" type="text" class="form-control" 
+    <input @onkeydown="OnKeyDown" @ref="@_inputRef" placeholder="@Placeholder" type="text" class="form-control @AdditionalClass" 
            @bind="_searchText"  
            @oninput="OnInput"
            @onfocus="OnFocus"
@@ -22,6 +22,9 @@
      // TODO - style position the clear icon
     [Parameter]
     public string Placeholder { get; set; } = "Search...";
+
+    [Parameter] public string AdditionalClass { get; set; } = string.Empty;
+    
     private string _searchText = "";
     private CancellationTokenSource? _currentSearch;
     private ElementReference _inputRef;
