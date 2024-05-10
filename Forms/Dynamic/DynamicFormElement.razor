@@ -220,19 +220,22 @@
             if (selection is not null)
             {
                 // There is selection, that changes a lot
-                throw new NotSupportedException($"Selections not supported yet, type: {setup.Type.Name}, key: {Key}");
-                // throw new NotSupportedException($"Other that simple string radio selections not supported, type: {setup.Type.Name}, key: {Key}");
                 // TODO - Select or radios?
                 // compType = typeof(CSelectDropdown<>)
                 //     .MakeGenericType(setup.Type);
                 //
                 // // For now, stringify the selection
-                // var sel = selection.Cast<object>().Select(x => x.ToString()!).ToList();
-                // var itemsProvider = ItemTools.SimpleFromStringProvider(sel, setup.Type);
-                // var dnameMapper = ItemTools.SimpleStringDisplayNameMapper(sel);
-                // compParams.Add(nameof(CRadioList<object>.ItemsProvider), itemsProvider);
-                // compParams.Add(nameof(CRadioList<object>.DisplayNameMapper), dnameMapper);
-                // if (setup.Type != typeof(string)) 
+                var sel = selection.Cast<object>().Select(x => x.ToString()!).ToArray();
+                compType = typeof(CRadioList<>)
+                    .MakeGenericType(setup.Type);
+                dynamic result = typeof(ItemTools).GetMethod(nameof(ItemTools.SimpleFromStringProviderAndMapper), BindingFlags.Static | BindingFlags.Public)!
+                    .MakeGenericMethod(setup.Type)
+                    .Invoke(null, new object[]{sel})!;
+                
+                compParams.Add(nameof(CRadioList<object>.ItemsProvider), result.Item1);
+                compParams.Add(nameof(CRadioList<object>.DisplayNameMapper), result.Item2);
+                
+                // throw new NotSupportedException($"Other that simple string radio selections not supported, type: {setup.Type.Name}, key: {Key}");
             }
             
             // Pass further additional attributes

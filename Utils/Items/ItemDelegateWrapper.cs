@@ -93,7 +93,7 @@ public static class ItemTools
         return _ => ValueTask.FromResult(new ItemsProviderResult<string>(strs, strs.Count));
     }
 
-    public static ItemsProviderDelegate<TItem> SimpleFromStringProvider<TItem>(IEnumerable<string> strings)
+    public static (ItemsProviderDelegate<TItem>, Func<TItem, string>) SimpleFromStringProviderAndMapper<TItem>(IEnumerable<string> strings) where TItem : notnull
     {
         TItem BindConvertOrFail(object? item)
         {
@@ -101,13 +101,15 @@ public static class ItemTools
                 return res;
             throw new NotSupportedException($"Cannot convert {item} to target type {typeof(TItem).Name}");
         }
+
+        var map = new Dictionary<string, string>(
+            new SelectionAttribute(strings.ToArray())
+            .GetKeyValues()
+        );
         
-        var result = strings
-            .Select(s => s.Split("=>", StringSplitOptions.TrimEntries).First())
-            .Select(BindConvertOrFail)
-            .ToArray();
-        
-        return _ => ValueTask.FromResult(new ItemsProviderResult<TItem>(result, result.Length));
+        var resultMap = map.ToDictionary(m => BindConvertOrFail(m.Key), m => m.Value);
+        return (_ => ValueTask.FromResult(new ItemsProviderResult<TItem>(resultMap.Keys, resultMap.Count)), 
+            item => resultMap[item]);     
     }
 
     public static Func<string, string> SimpleStringDisplayNameMapper(IEnumerable<string> strings)
