@@ -1,4 +1,6 @@
 using MimeTypes;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace sip.Utils;
 
@@ -57,4 +59,18 @@ public static class MimeHelper
 
     public static string ToMimeTypeString(this ContentType contentType)
         => $"{contentType.MediaType}/{contentType.MediaSubtype}";
+}
+
+public class ContentTypeJsonConverter : JsonConverter<ContentType>
+{
+    public override ContentType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        var str = reader.GetString();
+        return ContentType.Parse(str);
+    }
+
+    public override void Write(Utf8JsonWriter writer, ContentType value, JsonSerializerOptions options)
+    {
+        writer.WriteStringValue(value.ToMimeTypeString());
+    }
 }

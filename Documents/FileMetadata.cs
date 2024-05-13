@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace sip.Documents;
@@ -26,6 +27,7 @@ public class FileMetadata
     public DateTime DtCreated { get; set; }
     public DateTime DtModified { get; set; }
     
+    [JsonConverter(typeof(ContentTypeJsonConverter))]
     public ContentType ContentType { get; set; } = null!;
     
     
