@@ -31,7 +31,8 @@ public class Experiment
         
     // Project
     public string? ProjectId { get; set; }
-    public Project? Project { get; set; }
+    [NotMapped] public string? ProjectAcronym => Project?.Acronym; // Temporary solution for serialization - preamble random error
+    [YamlIgnore, JsonIgnore] public Project? Project { get; set; }
         
     // Sample 
     [YamlIgnore, JsonIgnore] public Guid SampleId { get; set; }
