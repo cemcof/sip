@@ -57,6 +57,7 @@ public enum ProcessingState
     Uninitialized,
     Ready,
     Running,
+    StopRequested,
     Completed,
     Disabled
 }
