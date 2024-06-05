@@ -9,6 +9,8 @@ public class ExperimentOptions
 
     public Dictionary<string, DataLifecycleOptions> DataLifecycles { get; set; } = new();
     public Dictionary<string, Workflow> Workflows { get; set; } = new();
+
+    public TimeSpan IdleTimeout { get; set; } = TimeSpan.FromHours(3);
 }
 
 public class EngineOptions

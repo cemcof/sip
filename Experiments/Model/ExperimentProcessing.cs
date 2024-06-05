@@ -46,6 +46,7 @@ public class ExperimentProcessing
     [MaxLength(64)] public string? Node { get; set; }
     [MaxLength(16)] public string? Pid { get; set; }
 
+    public DateTime DtLastUpdate { get; set; }
 
     // For workflows filtering purposes
     [NotMapped, JsonIgnore, YamlIgnore] public List<string> WorkflowTags { get; set; } = [];
