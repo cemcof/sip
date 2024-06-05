@@ -571,6 +571,10 @@ dl.key-val > div > dd {
     /*margin-left: 2rem;*/
 }
 
+.flex-static-25 {
+    flex: 0 0 25rem;
+}
+
 /*.ccreate-proposal .cmultiobject-container > .cinput-input-container {*/
 /*    margin-left: 3rem;*/
 /*}*/
