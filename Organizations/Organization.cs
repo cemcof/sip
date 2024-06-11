@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using sip.Utils;
 
 namespace sip.Organizations;
@@ -55,12 +56,12 @@ public class Organization(string id) :
     
     // Tree structure - if all organizations are loaded at once, there is no need to perform join for each layer - ef core will automatically fill up the tree from loaded flat collection.
     public Organization? Parent { get; set; }
-    IOrganization? ITreeItem<IOrganization>.Parent => Parent;
+    [JsonIgnore] IOrganization? ITreeItem<IOrganization>.Parent => Parent;
 
 
     public string? ParentId { get; set; }
-    public ICollection<Organization> Children { get; set; } = new List<Organization>();
-    ICollection<IOrganization> ITreeItem<IOrganization>.Children => Children.Cast<IOrganization>().ToList();
+    [JsonIgnore] public ICollection<Organization> Children { get; set; } = new List<Organization>();
+    [JsonIgnore] ICollection<IOrganization> ITreeItem<IOrganization>.Children => Children.Cast<IOrganization>().ToList();
 
     public bool Is<TOrganizationRef>()
         => typeof(TOrganizationRef).Name == Id;

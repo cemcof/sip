@@ -39,7 +39,7 @@ public class Experiment
     [Required] public Sample Sample { get; set; } = null!;
     
     // Organization 
-    [YamlIgnore, JsonIgnore] public Organization Organization { get; set; } = null!;
+    public Organization Organization { get; set; } = null!;
     public string OrganizationId { get; set; } = null!;
 
     // Logs
