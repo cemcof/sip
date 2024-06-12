@@ -1,12 +1,5 @@
 @using sip.Forms
 
-@* Diagram if any  *@
-@if (!string.IsNullOrEmpty(Workflow.Diagram))
-{
-    <div class="wf-diagram">
-        <img src="@Workflow.Diagram" alt="@Workflow.Title"/>
-    </div>
-}
 
 @* Description if any *@
 @if (!string.IsNullOrEmpty(Workflow.Description))
@@ -16,7 +9,7 @@
     </div>
 }
 
-
+@* Diagram if any  *@
 <div class="wf-prot-properties">
     @if (AsForm)
     {
@@ -63,6 +56,15 @@
     }
 
 </div>
+
+@if (!string.IsNullOrEmpty(Workflow.Diagram))
+{
+    <div class="wf-diagram">
+        <img src="@Workflow.Diagram" alt="@Workflow.Title"/>
+    </div>
+}
+
+
 
 @code {
 

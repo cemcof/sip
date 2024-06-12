@@ -7,7 +7,8 @@
 }
 
 .wf-diagram {
-    
+    display: flex;
+    justify-content: center;
 }
 
 .wf-prot-properties {
