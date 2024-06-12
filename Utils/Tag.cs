@@ -32,5 +32,10 @@ public class TagFilter
     }
 
     public bool Match(params string?[] givenTags) => Match(givenTags.AsEnumerable());
+    
+    public override string ToString() =>
+        "TagFilter {" +
+            string.Join("; ", _tags.Select(t => string.Join(", ", t))) +
+        "}";
 }
 
