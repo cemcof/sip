@@ -19,15 +19,14 @@ public class TagFilter
     public static implicit operator TagFilter(string[] tags) => new(tags);
     public static implicit operator TagFilter(List<string> tags) => new(tags);
 
-    public bool Match(IEnumerable<string?> givenTags)
+    public bool Match(IEnumerable<string?> givenTags, StringComparer? comparer = null)
     {
+        if (comparer is null) comparer = StringComparer.OrdinalIgnoreCase;
         // Ignore empty/null tags
         givenTags = givenTags.Where(t => !string.IsNullOrWhiteSpace(t)).ToArray();
-        
         var match = _tags.All(
-            ft => ft.Any(givenTags.Contains)
+            ft => ft.Any(t => givenTags.Contains(t, comparer))
         );
-
         return match;
     }
 
