@@ -228,6 +228,8 @@ public static class DynamicFormTools
                 Default: ConvertToGivenType(StringToValType(type), defaultValue),
                 DisplayName: label
             );
+
+            return true;
         }
 
         result = null;
