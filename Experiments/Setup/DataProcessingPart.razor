@@ -95,6 +95,7 @@
             _selectedWorkflow = value;
             if (value is not null)
             {
+                Logger.LogDebug("WF data {} {}", value.Data, value.Data?.GetType());
                 Console.WriteLine(JsonSerializer.Serialize(value.Data, new JsonSerializerOptions() { WriteIndented = true }));
                 _inspectResult = DynamicFormTools.DynamicInspect(value.Data, Exp.Processing.Workflow);
                 Console.WriteLine(JsonSerializer.Serialize(_inspectResult.Target, new JsonSerializerOptions() { WriteIndented = true }));
