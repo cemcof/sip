@@ -91,13 +91,13 @@
         get => _selectedWorkflow;
         set
         {
-            Logger.LogDebug("Selecting wf: {@Wf}", _selectedWorkflow);
             _selectedWorkflow = value;
+            Logger.LogDebug("Selecting wf: {@Wf}", _selectedWorkflow);
             if (value is not null)
             {
                 // Logger.LogDebug("WF data {} {}", value.Data, value.Data?.GetType());
                 Logger.LogDebug("WF JSON: {}", JsonSerializer.Serialize(value.Data, new JsonSerializerOptions() { WriteIndented = true }));
-                _inspectResult = DynamicFormTools.DynamicInspect(value.Data, Exp.Processing.Workflow);
+                _inspectResult = DynamicFormTools.DynamicInspect(value.Data);
                 Logger.LogDebug("APPLIED RESULT: {}", JsonSerializer.Serialize(_inspectResult.Target, new JsonSerializerOptions() { WriteIndented = true }));
                 Exp.Processing.Workflow = _inspectResult.Target;
                 Exp.Processing.WorkflowRef = value.Id;
