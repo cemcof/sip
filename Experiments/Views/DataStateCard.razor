@@ -3,9 +3,14 @@
 @* For expired data  *@
 @if (Exp is {Storage.State: StorageState.Expired or StorageState.ExpirationRequested or StorageState.Expiring})
 {
-    <section class="card border-info text-center m-0">
+    <section class="card border-info m-0">
+        <div class="card-header">
+            <span class="fw-bold">Data status</span>
+        </div>
+        
         <div class="card-body">
-            <span class="card-text">Data expired @Exp.Storage.DtExpiration.StandardFormat() (@Exp.Storage.DtExpiration.HappenAgo())</span>
+            <span class="card-text">Data expired @Exp.Storage.DtExpiration.StandardFormat() (@Exp.Storage.DtExpiration.HappenAgo()). The
+                dataset is no</span>
         </div>
     </section>
 }
@@ -15,10 +20,15 @@
 
 @if (!Exp.Storage.Archive && Exp is {Storage.State: StorageState.Idle})
 {
-    <section class="card border-warning text-center m-0">
+    <section class="card border-warning m-0">
+        
+        <div class="card-header">
+            <span class="fw-bold">Data status</span>
+        </div>
+
         <div class="card-body">
             <p class="card-title fw-bold">Data expiration: @Exp.Storage.DtExpiration.StandardFormat() (@Exp.Storage.DtExpiration.HappenAgo())</p>
-            <p class="card-text">Since this dataset has not been marked to be archived, it will be deleted from our storage services by the date above. 
+            <p class="card-text">Since this dataset has not been marked to be archived, it will be deleted from our storage services by the date above.
                 Please download the dataset before this moment to your storage as described below.</p>
         </div>
     </section>
@@ -29,12 +39,17 @@
 
 @if (Exp.Storage.Archive && Exp.Publication.State is PublicationState.DraftCreated or PublicationState.PublicationRequested)
 {
-    <section class="card border-success text-center m-0">
+    <section class="card border-success m-0">
+        
+        <div class="card-header">
+            <span class="fw-bold">Data status</span>
+        </div>
+
         <div class="card-body">
             <p class="card-title fw-bold">Data embargo ends: @Exp.Publication.DtEmbargo.StandardFormat() (@Exp.Publication.DtEmbargo.HappenAgo())</p>
             <p class="card-text">Since this dataset has been marked to be archived, it is expected to be assigned public identifier (DOI) and made publicly available either automatically after embargo period or earlier on your decision.</p>
         </div>
-        
+
         <div class="card-footer">
             @if (Exp.Publication.State is PublicationState.PublicationRequested)
             {
@@ -43,8 +58,7 @@
             else
             {
                 <InteractiveButton Caption="Request publication now"
-                                   BtnClass="btn btn-secondary btn-sm w-100"
-                                   ContainerClass="w-100"
+                                   BtnClass="btn btn-secondary btn-sm"
                                    OnClick="@(() => OnPublicationRequest.InvokeAsync(Exp))">
                 </InteractiveButton>
             }
@@ -56,26 +70,30 @@
 
 @if (Exp.Publication.State is PublicationState.Published)
 {
-    <section class="card border-success text-center m-0">
+    <section class="card border-success m-0">
+        <div class="card-header">
+            <span class="fw-bold">Data status</span>
+        </div>
+        
         <div class="card-body">
             <p>
                 <span class="fw-bold">
                     Published at
-                </span> 
-                <br/> 
+                </span>
+                <br/>
                 <a href="@Exp.Publication.TargetUrl" target="_blank">
                     @Exp.Publication.TargetUrl
                 </a>
             </p>
-            
+
             <hr/>
-            
+
             <p>
                 <span class="fw-bold">
                     DOI
                 </span>
                 <br/>
-                
+
                 @if (Exp.Publication.Doi is not null)
                 {
                     <a href="@Doi.GetDoiUrl(Exp.Publication.Doi).url">@Exp.Publication.Doi</a>

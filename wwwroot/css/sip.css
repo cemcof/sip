@@ -575,6 +575,32 @@ dl.key-val > div > dd {
     flex: 0 0 25rem;
 }
 
+.flex-static-40 {
+    flex: 0 0 40rem;
+}
+
+.dynamic-tabular-compact {
+    
+    & .dyn-property {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        
+        & .dyn-label {
+            flex-grow: 3;
+        }
+        
+        & .dyn-value {
+            flex-grow: 4;
+        }
+        
+        & .dyn-unit {
+            flex-grow: 1;
+        }
+    }
+    
+}
+
 /*.ccreate-proposal .cmultiobject-container > .cinput-input-container {*/
 /*    margin-left: 3rem;*/
 /*}*/
