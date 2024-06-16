@@ -3,14 +3,14 @@
 @* For expired data  *@
 @if (Exp is {Storage.State: StorageState.Expired or StorageState.ExpirationRequested or StorageState.Expiring})
 {
-    <section class="card border-info m-0">
+    <section class="card border-info mx-0 my-1">
         <div class="card-header">
             <span class="fw-bold">Data status</span>
         </div>
         
         <div class="card-body">
             <span class="card-text">Data expired @Exp.Storage.DtExpiration.StandardFormat() (@Exp.Storage.DtExpiration.HappenAgo()). The
-                dataset is no</span>
+                dataset is no longer available on our storages.</span>
         </div>
     </section>
 }
@@ -20,7 +20,7 @@
 
 @if (!Exp.Storage.Archive && Exp is {Storage.State: StorageState.Idle})
 {
-    <section class="card border-warning m-0">
+    <section class="card border-warning mx-0 my-1">
         
         <div class="card-header">
             <span class="fw-bold">Data status</span>
@@ -39,7 +39,7 @@
 
 @if (Exp.Storage.Archive && Exp.Publication.State is PublicationState.DraftCreated or PublicationState.PublicationRequested)
 {
-    <section class="card border-success m-0">
+    <section class="card border-success mx-0 my-1">
         
         <div class="card-header">
             <span class="fw-bold">Data status</span>
@@ -70,7 +70,7 @@
 
 @if (Exp.Publication.State is PublicationState.Published)
 {
-    <section class="card border-success m-0">
+    <section class="card border-success mx-0 my-1">
         <div class="card-header">
             <span class="fw-bold">Data status</span>
         </div>
