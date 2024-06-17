@@ -155,9 +155,10 @@ public class DocumentService(
     )
     {
         await using var db = await dbContextFactory.CreateDbContextAsync();
-        var docentry = db.Entry(document);
+        // var docentry = db.Entry(document);
+        var docentry = db.Attach(document);
         // TODO - is this correct approach?
-        docentry.State = EntityState.Unchanged;
+        // docentry.State = EntityState.Unchanged;
         await docentry.Collection(d => d.FilesInDocuments)
             .Query()
             .Include(c => c.FileMetadata)
