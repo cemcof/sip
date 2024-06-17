@@ -104,6 +104,8 @@ public class CEditForm<TModelType> : ComponentBase, IDisposable
     public async Task TrySubmit()
     {
         Debug.Assert(_editContext != null);
+        
+        Console.WriteLine("CEditForm, TrySubmit: " + System.Environment.StackTrace);
 
         // Otherwise, the system implicitly runs validation on form submission
         var isValid = _editContext.Validate(); // This will likely become ValidateAsync later

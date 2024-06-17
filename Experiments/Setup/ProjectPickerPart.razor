@@ -55,7 +55,6 @@
 
     private async Task _createProjectSubmit(Project project, CDropdown<Project> dropdownControl)
     {
-        Console.WriteLine("Persist project: " + Environment.StackTrace);
         await ProjectService.PersistProjectAsync(project);
         await dropdownControl.SelectItem(project);
     }
