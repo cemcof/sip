@@ -162,6 +162,11 @@ public class DocumentService(
             .Query()
             .Include(c => c.FileMetadata)
             .LoadAsync();
+        
+        foreach (var documentFilesInDocument in document.FilesInDocuments)
+        {
+            logger.LogDebug("FID state: {}", db.Entry(documentFilesInDocument));
+        }
 
         logger.LogDebug("Finding doc meta: {} in {}", fileMetadata.FileName, 
             string.Join(',', document.FilesInDocuments.Select(f => f.FileMetadata.FileName)));
@@ -220,7 +225,7 @@ public class DocumentService(
     
         logger.LogDebug("Saving file ({FileMetaId}) to database {FileName} {Length} bytes, DtModified={}, isNew={IsNew}", 
             tf.FileMetadata.Id, tf.FileMetadata.FileName, fbytes.Length, tf.FileMetadata.DtModified, isNewFile);
-        logger.LogDebug("TF track state: {} {} orig={}, curr={}", db.Entry(tf).State, db.Entry(tf.FileMetadata),
+        logger.LogDebug("TF track state: {} {} orig={}, curr={}", db.Entry(tf), db.Entry(tf.FileMetadata),
             db.Entry(tf).OriginalValues, db.Entry(tf).CurrentValues);
         await db.SaveChangesAsync();
         return tf.FileMetadata;
