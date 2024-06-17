@@ -184,8 +184,10 @@ public class DocumentService(
         {
             var existingFile = tf.FileMetadata;
             await LoadFileData(existingFile);
-            memoryStream.Write(existingFile.FileData!.Data);
-            logger.LogDebug("Appending to existing file {FileName} {Length} bytes", tf.FileMetadata.FileName, fileStream.Length);
+            var existingData = existingFile.FileData!.Data;
+            memoryStream.Write(existingData);
+            logger.LogDebug("Appending to existing file ({ExistingBytes} bytes) {FileName} {Length} bytes",
+                existingData.Length, tf.FileMetadata.FileName, fileStream.Length);
         }
         
         await fileStream.CopyToAsync(memoryStream);
@@ -214,8 +216,8 @@ public class DocumentService(
             document.FilesInDocuments.Add(tf);
         }
     
-        logger.LogDebug("Saving file to database {FileName} {Length} bytes, isNew={IsNew}", 
-            tf.FileMetadata.FileName, fbytes.Length, isNewFile);
+        logger.LogDebug("Saving file ({FileMetaId}) to database {FileName} {Length} bytes, DtModified={}, isNew={IsNew}", 
+            tf.FileMetadata.Id, tf.FileMetadata.FileName, fbytes.Length, tf.FileMetadata.DtModified, isNewFile);
         await db.SaveChangesAsync();
         return tf.FileMetadata;
     }
