@@ -40,14 +40,15 @@ public class CEditForm<TModelType> : ComponentBase, IDisposable
             builder.AddAttribute(1, "class", "cform-panel");
             
             builder.OpenElement(2, "button");
-            // builder.AddAttribute(3, "type", "submit");
-            builder.AddAttribute(3, "onclick", context.TrySubmit);
-            builder.AddContent(4, "OK");
+            builder.AddAttribute(3, "type", "button"); // To prevent double submitting
+            builder.AddAttribute(4, "onclick", context.TrySubmit);
+            builder.AddContent(5, "OK");
             builder.CloseElement();
             
-            builder.OpenElement(5, "button");
-            builder.AddAttribute(6, "onclick", context.Cancel);
-            builder.AddContent(7, "Cancel");
+            builder.OpenElement(6, "button");
+            builder.AddAttribute(7, "type", "button");
+            builder.AddAttribute(8, "onclick", context.Cancel);
+            builder.AddContent(9, "Cancel");
             builder.CloseElement();
 
             builder.CloseElement();
