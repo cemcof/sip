@@ -14,14 +14,14 @@
         
         <div>@Exp.Operator.Fullname -&gt; @Exp.User.Fullname</div>
         <em>Started @Exp.DtCreated.HappenAgo(), last log @((_lastLog?.Dt ?? Exp.DtCreated).HappenAgo(stripSeconds: false))</em>
-        @if (MightBeDone)
-        {
-            <em> - experiment is probably finished and ready to be terminated</em>
-        }
-        else
-        {
-            <em> - experiment is probably still in progress</em>
-        }
+        @* @if (MightBeDone) *@
+        @* { *@
+        @*     <em> - experiment is probably finished and ready to be terminated</em> *@
+        @* } *@
+        @* else *@
+        @* { *@
+        @*     <em> - experiment is probably still in progress</em> *@
+        @* } *@
     </div>
     
     <div class="mx-5 text-nowrap">

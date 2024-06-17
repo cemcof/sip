@@ -1,4 +1,3 @@
-
 @if (FileMetadata is not null)
 {
     <iframe @attributes="AdditionalAttributes" src="/files/@FileMetadata.Id"></iframe>
@@ -10,5 +9,10 @@
     
     [Parameter(CaptureUnmatchedValues = true)]
     public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine($"File metadata OnSet: {FileMetadata?.Id}");
+    }
 
 }
