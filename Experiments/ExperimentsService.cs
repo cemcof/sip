@@ -71,7 +71,7 @@ public class ExperimentsService(
             resultItems =
                 await query.ToListAsync(); // TODO - on many items this is so resource heavy and unacceptable...
             resultItems = resultItems.Where(x => StringUtils.IsFilterMatchAtLeastOneOf(searches,
-                    x.Technique, x.User.Fullcontact, x.Operator.Fullcontact, x.Sample.Name, x.Sample.KeywordsStr))
+                    x.Technique, x.User.Fullcontact, x.SecondaryId, x.Operator.Fullcontact, x.Sample.Name, x.Sample.KeywordsStr))
                 .ToList();
             totalCount = resultItems.Count;
             resultItems = resultItems
