@@ -19,7 +19,7 @@ public class HandlebarsUrlBuilderHelper(ILogger<HandlebarsUrlBuilderHelper> logg
             logger.LogDebug("Found URL argument: {} of type {} new href is {}", argument, argument.GetType().Name, hrefBuilder);
         }
 
-        var href = hrefBuilder.ToString();
+        var href = hrefBuilder.Uri.ToString();
         var urlstring = $"<a href=\"{href}\">{href}</a>";
 
         output.WriteSafeString(urlstring);
