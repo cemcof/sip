@@ -110,9 +110,8 @@
         if (_currentFilePreview is null)
         {
             // Select first item
-            // var items = (await _docItemsProvider(default)).Items;
-            // _currentFilePreview = items.FirstOrDefault();
-            _currentFilePreview = Exp.Processing.ResultReport.ActivePrimaryFiles.FirstOrDefault()?.FileMetadata;
+            var items = (await _docItemsProvider(default)).Items;
+            _currentFilePreview = items.FirstOrDefault();
             Logger.LogTrace("Set default file preview {Id}", _currentFilePreview?.Id);
         }
     }

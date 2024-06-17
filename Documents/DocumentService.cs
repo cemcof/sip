@@ -188,14 +188,16 @@ public class DocumentService(
         
         var isNewFile = tf.Id == default;
         await using var memoryStream = new MemoryStream();
-        if (appendMode && !isNewFile)
+        if (!isNewFile)
         {
-            var existingFile = tf.FileMetadata;
-            await LoadFileData(existingFile);
-            var existingData = existingFile.FileData!.Data;
-            memoryStream.Write(existingData);
-            logger.LogDebug("Appending to existing file ({ExistingBytes} bytes) {FileName} {Length} bytes",
-                existingData.Length, tf.FileMetadata.FileName, fileStream.Length);
+            await LoadFileData(tf.FileMetadata);
+            if (appendMode)
+            {
+                var existingData = tf.FileMetadata.FileData!.Data;
+                memoryStream.Write(existingData);
+                logger.LogDebug("Appending to existing file ({ExistingBytes} bytes) {FileName} {Length} bytes",
+                    existingData.Length, tf.FileMetadata.FileName, fileStream.Length);
+            }
         }
         
         await fileStream.CopyToAsync(memoryStream);
@@ -204,24 +206,24 @@ public class DocumentService(
         tf.FileMetadata.FileName = fileMetadata.FileName;
         tf.FileMetadata.ContentType = fileMetadata.ContentType;
 
-        if (isNewFile)
-        {
-            tf.FileMetadata.DtCreated = fileMetadata.DtCreated == default
-                ? systemClock.DtUtcNow()
-                : fileMetadata.DtCreated;
-        }
-        
         tf.FileMetadata.DtModified = fileMetadata.DtModified == default
             ? systemClock.DtUtcNow()
             : fileMetadata.DtModified;
         
         tf.FileMetadata.Length = fbytes.Length;
-        tf.FileMetadata.FileData = new FileData() {Data = fbytes};
         tf.DocumentFileType = fileType;
 
         if (isNewFile)
         {
+            tf.FileMetadata.DtCreated = fileMetadata.DtCreated == default
+                ? systemClock.DtUtcNow()
+                : fileMetadata.DtCreated;
+            tf.FileMetadata.FileData = new FileData() {Data = fbytes};
             document.FilesInDocuments.Add(tf);
+        }
+        else
+        {
+            tf.FileMetadata.FileData!.Data = fbytes;
         }
     
         logger.LogDebug("Saving file ({FileMetaId}) to database {FileName} {Length} bytes, DtModified={}, isNew={IsNew}", 
