@@ -1,21 +1,25 @@
 ﻿
-<div class="dyn-property">
-    <div class="dyn-label">
-        @Setup.DisplayName
-    </div>
-    
-    <div class="dyn-value">
-        @BindPoint.GetValue()
-    </div>
-    
-    <div class="dyn-unit">
-        @if (!string.IsNullOrEmpty(Setup.Unit))
-        {
-            @((MarkupString)Setup.Unit)
-        }
-    </div>
+@* Render only relevant property (currently determined by displayname) of a dynamic element. *@
+@if (!string.IsNullOrEmpty(Setup.DisplayName)) 
+{
+    <div class="dyn-property">
+        <div class="dyn-label">
+            @Setup.DisplayName
+        </div>
         
-</div>
+        <div class="dyn-value">
+            @BindPoint.GetValue()
+        </div>
+        
+        <div class="dyn-unit">
+            @if (!string.IsNullOrEmpty(Setup.Unit))
+            {
+                @((MarkupString)Setup.Unit)
+            }
+        </div>
+            
+    </div>
+}
 
 @code {
 

@@ -151,7 +151,6 @@ public class ProjectManipulationHelperService(IDbContextFactory<AppDbContext> db
     
     public async Task PersistProjectAsync(Project project, CancellationToken ct = default)
     {
-        Console.WriteLine("Persisting project {0}", project.Id);
         await using var db = await dbContextFactory.CreateDbContextAsync(ct);
         db.Entry(project).State = EntityState.Added;
         db.Entry(project.AffiliationDetails).State = EntityState.Added;

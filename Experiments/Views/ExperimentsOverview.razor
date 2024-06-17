@@ -21,7 +21,7 @@
         
         <ItemTemplate>
             <NavLink class="exp-item" href="@UrlProvider("/experiments/" + context.Id)">
-                <div class="badge @_FindTheme(context)">
+                <div class="badge @ExperimentsOptions.Get(Organization).FindTheme(context)">
                     <div>@context.Technique</div>
                     <div>@context.InstrumentName</div>
                 </div>
@@ -71,17 +71,7 @@
         }
     }
 
-    private string _FindTheme(Experiment experiment)
-    {
-        var instjobs = ExperimentsOptions.Get(Organization).InstrumentJobs;
-        // Find instrument
-        var instjob = instjobs.First(kv => kv.Key.Name == experiment.InstrumentName);
-        return instjob.Key.DisplayTheme;
-        
-        // TODO - also consider technique theme ?
-        // Find technique
-        // instjob.Value.TryGetValue(experiment.Technique, out var technique);
-    } 
+    
     
     // private ItemsRenderer<Experiment>? _itemsRendererRef;
 

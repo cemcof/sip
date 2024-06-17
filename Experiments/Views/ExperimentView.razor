@@ -3,10 +3,11 @@
 
 @inject ExperimentEngine ExperimentEngine
 @inject IWorkflowProvider WorkflowProvider
+@inject IOptionsMonitor<ExperimentsOptions> ExperimentsOptions
 
 <div class="card m-0">
 
-    <div class="card-header text-white bg-primary d-flex align-items-center justify-content-between">
+    <div class="card-header @ExperimentsOptions.Get(Exp.Organization).FindTheme(Exp) d-flex align-items-center justify-content-between">
         
         <h1>@Exp.SecondaryId - @Exp.Sample.Name </h1>
 
@@ -148,7 +149,7 @@
 
 @if (!string.IsNullOrEmpty(Exp.Processing.ProcessingEngine))
 {
-    <section class="card m-0">
+    <section class="card mx-0 my-1">
         <div class="card-header">
             <span class="fw-bold">Processing - @Exp.Processing.ProcessingEngine engine</span>
         </div>
