@@ -6,6 +6,7 @@
 @inject IExperimentLogProvider LogProvider
 @inject DocumentService DocumentService
 @inject ExperimentsService ExperimentsService
+@inject ILogger<ExperimentRunning> Logger
 
 <div class="exp-status-bar status-@Exp.State d-flex align-items-center p-2">
     
@@ -111,7 +112,7 @@
             // Select first item
             var items = (await _docItemsProvider(default)).Items;
             _currentFilePreview = items.FirstOrDefault();
-            Console.WriteLine($"Set default file preview {_currentFilePreview?.Id}");
+            Logger.LogTrace("Set default file preview {Id}", _currentFilePreview?.Id);
         }
     }
 
@@ -132,7 +133,7 @@
 
     private async Task _StopJobRequest()
     {
-        Console.WriteLine("Stop job request handler");
+        Logger.LogTrace("Stop job request handler");
         await ExpHandler.RequestStop(Exp);
     }
 
