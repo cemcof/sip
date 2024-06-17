@@ -597,6 +597,7 @@ dl.key-val > div > dd {
         }
         
         & .dyn-value {
+            padding-right: 0.5rem;
         }
         
         & .dyn-unit {
