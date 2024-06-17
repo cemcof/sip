@@ -421,7 +421,7 @@ public static class DynamicFormTools
     
     public static InspectResult DynamicInspect(
         object? metadata,
-        object? target,
+        object? target = null,
         bool forceSet = true
     )
     {
@@ -518,8 +518,9 @@ public static class DynamicFormTools
                     var newMeta = mlist[i];
                     var newTarget = BindPoint.From(targetValue, tindex);
                     DynamicInspect(newMeta, newTarget, resultElements, forceSet, listIdKey);
-                    return;
                 }
+                
+                return;
             }
 
             throw new InvalidOperationException($"Could not inspect/bind {metadata} to {target.Key}");

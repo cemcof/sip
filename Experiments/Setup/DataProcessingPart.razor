@@ -1,3 +1,4 @@
+@using System.Text.Json
 @using DocumentFormat.OpenXml.Presentation
 @using sip.Experiments.Model
 @using sip.Experiments.Workflows
@@ -90,11 +91,14 @@
         get => _selectedWorkflow;
         set
         {
-            Logger.LogDebug("Selecting wf: {@Wf}", _selectedWorkflow);
             _selectedWorkflow = value;
+            Logger.LogDebug("Selecting wf: {@Wf}", _selectedWorkflow);
             if (value is not null)
             {
-                _inspectResult = DynamicFormTools.DynamicInspect(value.Data, Exp.Processing.Workflow);
+                // Logger.LogDebug("WF data {} {}", value.Data, value.Data?.GetType());
+                Logger.LogDebug("WF JSON: {}", JsonSerializer.Serialize(value.Data, new JsonSerializerOptions() { WriteIndented = true }));
+                _inspectResult = DynamicFormTools.DynamicInspect(value.Data);
+                Logger.LogDebug("APPLIED RESULT: {}", JsonSerializer.Serialize(_inspectResult.Target, new JsonSerializerOptions() { WriteIndented = true }));
                 Exp.Processing.Workflow = _inspectResult.Target;
                 Exp.Processing.WorkflowRef = value.Id;
                 // Select processing engine - look for it in the tags, use configured engines to determine which tag is the engine

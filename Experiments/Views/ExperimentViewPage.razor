@@ -1,12 +1,13 @@
 @page "/experiment/{ExperimentId:guid}"
 @using sip.Experiments.Model
 
+@layout NoLayout
 @inject ExperimentsService ExperimentsService
 
 <div class="container w-a4">
     @if (_error is not null)
     {
-        <p>@_error</p>
+        <p class="text-danger">@_error</p>
     }
     else
     {

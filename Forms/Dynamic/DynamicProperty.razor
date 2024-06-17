@@ -9,7 +9,10 @@
     </div>
     
     <div class="dyn-unit">
-        @Setup.Unit
+        @if (!string.IsNullOrEmpty(Setup.Unit))
+        {
+            @((MarkupString)Setup.Unit)
+        }
     </div>
         
 </div>
