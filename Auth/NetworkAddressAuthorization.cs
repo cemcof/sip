@@ -109,18 +109,14 @@ public static class IpHelper
             // This means the sourceIp is specifiead as network address with prefix
             var ip = targetIp.Split('/')[0];
             var prefix = int.Parse(targetIp.Split('/')[1]);
+            
             var sourceIpBits = new BitArray(IPAddress.Parse(sourceIp).GetAddressBytes().Reverse().ToArray());
             var targetIpBits = new BitArray(IPAddress.Parse(ip).GetAddressBytes().Reverse().ToArray());
-            if (sourceIpBits.Length < prefix)
+            if (sourceIpBits.Length < prefix || sourceIpBits.Length != targetIpBits.Length)
             {
-                throw new ArgumentException($"Prefix {prefix} must be shorter or equal to ip length {sourceIpBits.Length}.");
+                return false;
             }
 
-            if (sourceIpBits.Length != targetIpBits.Length)
-            {
-                throw new ArgumentException("Length of source and target ips do not match.");
-            }
-                
             // Obviously, bit shifts would be more elegant than this nested for garbage, but this solution
             // is universal enough to even work for IPv6 addresses
             for (int i = sourceIpBits.Length - 1; i >= sourceIpBits.Length - prefix; i--)
