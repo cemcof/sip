@@ -44,8 +44,8 @@ public class OrganizationBuilder
 
         // Configure gui per-organization
         _services.AddOptions<MainGuiOptions>()
-            .GetOrganizationOptionsBuilder()
-            .BindOrganizationConfiguration(_configurationManager, "Gui");
+            .GetOrganizationOptionsBuilder(configurationManager)
+            .BindOrganizationConfiguration("Gui");
 
         _services.AddScoped<OrganizationActionFilter>();
 
@@ -114,7 +114,7 @@ public class OrganizationBuilder
         _services.AddSingleton<INodeStatusProvider>(s => s.GetRequiredService<CenterManager>());
 
         _services.AddOptions<NodesOptions>()
-            .GetOrganizationOptionsBuilder()
+            .GetOrganizationOptionsBuilder(_configurationManager)
             .Configure((options, configuration, _) =>
             {
                 var nodes = configuration.GetSection("LimsNodes").GetChildren();
@@ -131,8 +131,8 @@ public class OrganizationBuilder
         
         // Network options
         _services.AddOptions<CenterNetworkOptions>()
-            .GetOrganizationOptionsBuilder()
-            .BindOrganizationConfiguration(_configurationManager, "Network");
+            .GetOrganizationOptionsBuilder(_configurationManager)
+            .BindOrganizationConfiguration("Network");
         
         return this;
     }

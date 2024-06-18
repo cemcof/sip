@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using sip.Organizations.Centers;
 
 namespace sip.Organizations;
 public static class OrganizationExtensions
@@ -14,10 +16,11 @@ public static class OrganizationExtensions
         => options.Get(forOrganization.Id);
     
     
-    public static OrganizationOptionsBuilder<TOptions> GetOrganizationOptionsBuilder<TOptions>(this OptionsBuilder<TOptions> ob)
+    public static OrganizationOptionsBuilder<TOptions> GetOrganizationOptionsBuilder<TOptions>(
+        this OptionsBuilder<TOptions> ob, IConfigurationRoot configurationRoot)
         where TOptions : class
     {
-        return new OrganizationOptionsBuilder<TOptions>(ob);
+        return new OrganizationOptionsBuilder<TOptions>(ob, configurationRoot);
     }
     
 }
@@ -96,23 +99,52 @@ public class ConfigureOrganizationFromAction<TOptions>(
     }
 }
 
-public class OrganizationOptionsBuilder<TOptions>(OptionsBuilder<TOptions> optionsBuilder)
-    where TOptions : class
+public class OrganizationOptionsBuilder<TOptions> where TOptions : class
 {
-    public OrganizationOptionsBuilder<TOptions> BindOrganizationConfiguration(IConfigurationRoot configuration, string subsection)
+    private readonly OptionsBuilder<TOptions> _optionsBuilder;
+    private readonly IConfigurationRoot _configRoot;
+    private readonly CentersOptions _centers;
+    
+    public OrganizationOptionsBuilder(OptionsBuilder<TOptions> optionsBuilder,
+        IConfigurationRoot configRoot)
     {
-        optionsBuilder.Services.AddSingleton<IOptionsChangeTokenSource<TOptions>>(new ConfigurationChangeTokenSource<TOptions>(null, configuration));
-        optionsBuilder.Services.AddSingleton<IConfigureOptions<TOptions>>(
-            new ConfigureOrganizationOptionsFromConfiguration<TOptions>(configuration, subsection)
+        _optionsBuilder = optionsBuilder;
+        _configRoot = configRoot;
+        _centers = configRoot.Get<CentersOptions>()!;
+        
+        // Register change tokens for this options type and all centers as names
+        _RegisterChangeTokenForOrgs(configRoot);
+    }
+    
+    private void _RegisterChangeTokenForOrgs(IConfigurationRoot configurationRoot)
+    {
+        foreach (var centerId in _centers.Centers.Where(c => !string.IsNullOrEmpty(c.Id))
+                     .Select(c => c.Id))
+        {
+            // Check if this is already registered
+            var registered = _optionsBuilder.Services.Any(
+                sd => sd.ImplementationInstance is ConfigurationChangeTokenSource<TOptions> t && t.Name == centerId
+            );
+            if (registered) continue;
+            // Add it 
+            var ccts = new ConfigurationChangeTokenSource<TOptions>(centerId, configurationRoot);
+            _optionsBuilder.Services.AddSingleton<IOptionsChangeTokenSource<TOptions>>(ccts);
+        }
+    }
+
+    public OrganizationOptionsBuilder<TOptions> BindOrganizationConfiguration(string subsection)
+    {
+        _optionsBuilder.Services.AddSingleton<IConfigureOptions<TOptions>>(
+            new ConfigureOrganizationOptionsFromConfiguration<TOptions>(_configRoot, subsection)
             );
         
         return this;
     }
-
+    
     public OrganizationOptionsBuilder<TOptions> ConfigureWithOptionsDependency<TDep1>(Action<TOptions, IConfiguration, TDep1> action)
         where TDep1 : class
     {
-        optionsBuilder.Services.AddSingleton<IConfigureOptions<TOptions>>(s =>
+        _optionsBuilder.Services.AddSingleton<IConfigureOptions<TOptions>>(s =>
         {
             var dep1 = s.GetRequiredService<IOptionsMonitor<TDep1>>();
             var config = s.GetRequiredService<IConfiguration>();
@@ -125,7 +157,7 @@ public class OrganizationOptionsBuilder<TOptions>(OptionsBuilder<TOptions> optio
 
     public OrganizationOptionsBuilder<TOptions> Configure(Action<TOptions, IConfiguration, IOrganization> configure)
     {
-        optionsBuilder.Services.AddSingleton<IConfigureOptions<TOptions>>(s =>
+        _optionsBuilder.Services.AddSingleton<IConfigureOptions<TOptions>>(s =>
         {
             var orgProvider = s.GetRequiredService<IOrganizationProvider>();
             var config = s.GetRequiredService<IConfiguration>(); 

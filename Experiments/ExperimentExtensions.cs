@@ -36,16 +36,16 @@ public class ExperimentsBuilder
         services.AddSingleton<IWorkflowProvider, FromConfigWorkflowProvider>();
         services.AddSingleton<IWorkflowProvider, WorkflowhubWorkflowProvider>();
         services.AddOptions<WorkflowhubOptions>()
-            .GetOrganizationOptionsBuilder()
-            .BindOrganizationConfiguration(configurationRoot, "Workflowhub");
+            .GetOrganizationOptionsBuilder(configurationRoot)
+            .BindOrganizationConfiguration("Workflowhub");
         
         services.AddOptions<List<Workflow>>()
-            .GetOrganizationOptionsBuilder()
-            .BindOrganizationConfiguration(configurationRoot, "Workflows");
+            .GetOrganizationOptionsBuilder(configurationRoot)
+            .BindOrganizationConfiguration("Workflows");
 
         services.AddOptions<EnginesOptions>()
-            .GetOrganizationOptionsBuilder()
-            .BindOrganizationConfiguration(configurationRoot, "Engines");
+            .GetOrganizationOptionsBuilder(configurationRoot)
+            .BindOrganizationConfiguration("Engines");
         
         services.AddSingleton<IWorkflowProvider, CompositeWorkflowProvider>();
         
@@ -154,7 +154,7 @@ public class ExperimentsBuilder
         
         // Instruments config
         _services.AddOptions<InstrumentsOptions>()
-            .GetOrganizationOptionsBuilder()
+            .GetOrganizationOptionsBuilder(configurationRoot)
             .Configure((options, configuration, organization) =>
             {
                 foreach (var cs in configuration.GetSection("Instruments")
@@ -172,7 +172,7 @@ public class ExperimentsBuilder
             });
         
         _services.AddOptions<ExperimentsOptions>()
-            .GetOrganizationOptionsBuilder()
+            .GetOrganizationOptionsBuilder(configurationRoot)
             .ConfigureWithOptionsDependency<InstrumentsOptions>((options, conf, instrumentsOptions) =>
             {
                 foreach (var expConfig in conf.GetSection("Experiments")

@@ -22,8 +22,8 @@ public static class ScheduleExtensions
         services.AddSingleton<IScheduleEngine>(s => s.GetRequiredService<CrmReservationsEngine>());
         
         services.AddOptions<ScheduleOptions>()
-            .GetOrganizationOptionsBuilder()
-            .BindOrganizationConfiguration(config, "Schedule")
+            .GetOrganizationOptionsBuilder(config)
+            .BindOrganizationConfiguration("Schedule")
             .ConfigureWithOptionsDependency<InstrumentsOptions>((c, _,  io) =>
             {
                 c.ReservationSubjects = io.Instruments.ToList();

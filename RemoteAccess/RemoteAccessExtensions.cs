@@ -11,7 +11,7 @@ public static class RemoteAccessExtensions
         services.AddSingleton<IRemoteAccess>(s => s.GetRequiredService<RemoteAccessService>());
 
         services.AddOptions<RemoteAccessOptions>()
-            .GetOrganizationOptionsBuilder()
+            .GetOrganizationOptionsBuilder(config)
             .ConfigureWithOptionsDependency<InstrumentsOptions>((ro, conf, io) =>
             {
                 foreach (var instConf in conf.GetSection("RemoteAccess:Instruments").GetChildren())
@@ -27,8 +27,8 @@ public static class RemoteAccessExtensions
         
         // Guacamole
         services.AddOptions<GuacamoleOptions>()
-            .GetOrganizationOptionsBuilder()
-            .BindOrganizationConfiguration(config, "Guacamole");
+            .GetOrganizationOptionsBuilder(config)
+            .BindOrganizationConfiguration("Guacamole");
         
         services.AddSingleton<GuacamoleDriver>();
         return services;

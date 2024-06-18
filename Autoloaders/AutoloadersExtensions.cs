@@ -9,7 +9,7 @@ public static class AutoloadersExtensions
         services.TryAddSingleton<AutoloadersService>();
 
         services.AddOptions<AutoloadersOptions>()
-            .GetOrganizationOptionsBuilder()
-            .BindOrganizationConfiguration(config, "Autoloaders");
+            .GetOrganizationOptionsBuilder(config)
+            .BindOrganizationConfiguration("Autoloaders");
     }
 }
