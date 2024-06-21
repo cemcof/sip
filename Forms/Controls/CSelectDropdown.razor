@@ -41,7 +41,6 @@
 
     [Parameter]
     public Func<TItem, string> DisplayNameMapper { get; set; } = value => value?.ToString().Humanize() ?? "";
-    
 
     private Dictionary<string,TItem> _currentOptions = new();
 
@@ -82,27 +81,31 @@
         
         
         // Load items 
-        // TODO - there might be a problem with Guid key and binding after another OnParametersSet async call
         var result = await ItemsProvider(new ItemsProviderRequest(default, Int32.MaxValue, default));
         var resultItems = result.Items.ToList();
-        
-        
-        if (typeof(TItem).IsPrimitive || typeof(TItem) == typeof(string))
+
+        try
         {
-            // It type of the item is string, enum, or primitive, supply key directly as value.ToString
-            _currentOptions = resultItems.ToDictionary(i => i?.ToString() ?? "", i => i);
+            _currentOptions = resultItems.ToDictionary(i => (string)BindConverter.FormatValue(i)!, i => i);
         }
-        else
+        catch (InvalidOperationException)
         {
-            // However, if it is a custom type, attach guid to each item
-            _currentOptions = resultItems.ToDictionary(i => Guid.NewGuid().ToString(), i => i);
+            // The way to covert TItem to string is not defined, use guids
+            var lastOptions = _currentOptions;
+            // But we need special care for equality
+            string GetGuid(TItem item)
+            {
+                var eqItemKey = lastOptions.FirstOrDefault(
+                    kvp => Equals(kvp.Value, item)).Key;
+                return eqItemKey ?? Guid.NewGuid().ToString();
+            }
+            _currentOptions = resultItems.ToDictionary(GetGuid, i => i);
         }
     }
 
     protected override string? FormatValueAsString(TItem? value)
     {
         if (value is null) return null;
-
         var opt = _currentOptions.FirstOrDefault(kvp => value.Equals(kvp.Value));
         return opt.Key;
     }
