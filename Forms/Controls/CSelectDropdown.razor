@@ -95,9 +95,12 @@
 
             _currentOptions = resultItems.ToDictionary(KeySelector, i => i);
         }
-        catch (InvalidOperationException)
+        catch (Exception ex) when (ex is ArgumentException or InvalidOperationException)
         {
-            // The way to covert TItem to string is not defined, use guids
+            // The way to covert TItem to string is either:
+            // - not defined (InvalidOperationException thrown from BindConverter)
+            // - defined, but not producing unique values (ArgumentException throw from ToDictionary)
+            // Therefore - use guids
             var lastOptions = _currentOptions;
             // But we need special care for equality
             string GetGuid(TItem item)
