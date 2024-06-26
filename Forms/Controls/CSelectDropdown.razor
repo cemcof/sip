@@ -8,7 +8,7 @@
 
 @typeparam TItem
 @inherits CInputBase<TItem>
-
+@inject ILogger<CSelectDropdown<TItem>> Logger
 
 <div class="form-group select-group cinput-container cselectdropdown-container rendering-strategy-@(RenderingStrategy) @(HasLabel ? "labeled" : "labelless") @(IsRequired ? "required" : "")">
     @if (HasLabel)
@@ -97,6 +97,9 @@
             {
                 var eqItemKey = lastOptions.FirstOrDefault(
                     kvp => Equals(kvp.Value, item)).Key;
+                
+                Logger.LogTrace("GetGuid for {Item}, {EqItemKey} is null={IsNull}", 
+                    item, eqItemKey, eqItemKey is null);
                 return eqItemKey ?? Guid.NewGuid().ToString();
             }
             _currentOptions = resultItems.ToDictionary(GetGuid, i => i);
