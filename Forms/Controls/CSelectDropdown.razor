@@ -86,7 +86,14 @@
 
         try
         {
-            _currentOptions = resultItems.ToDictionary(i => (string)BindConverter.FormatValue(i)!, i => i);
+            string KeySelector(TItem i)
+            {
+                var formatValue = (string) BindConverter.FormatValue(i)!;
+                Logger.LogTrace("KeySelector for {Item} is {FormatValue}", i, formatValue);
+                return formatValue;
+            }
+
+            _currentOptions = resultItems.ToDictionary(KeySelector, i => i);
         }
         catch (InvalidOperationException)
         {
