@@ -103,9 +103,18 @@
 
         var logLast = await LogProvider.GetLogsAsync(Exp, LogLevel.Information, new ItemsProviderRequest(0, 1, default));
         _lastLog = logLast.Items.FirstOrDefault();
-
+        
+        
         await DocumentService.LoadDocumentAsync(Exp.Processing.ResultReport);
+
+        var lastLogReports = Exp.Processing.LogReport.FilesInDocuments;
         await DocumentService.LoadDocumentAsync(Exp.Processing.LogReport);
+        // foreach (var logReportFilesInDocument in Exp.Processing.LogReport.FilesInDocuments)
+        // {
+        //     Logger.LogTrace(" reference eq={RefEq}", ReferenceEquals());
+        // }
+        Logger.LogTrace("refeq find={}, c0 {}, c1 {}", lastLogReports.SequenceEqual(Exp.Processing.LogReport.FilesInDocuments), lastLogReports.Count, Exp.Processing.LogReport.FilesInDocuments.Count);
+        Logger.LogTrace("refeq fmeta={}", lastLogReports.Select(l=>l.FileMetadata).SequenceEqual(Exp.Processing.LogReport.FilesInDocuments.Select(f=>f.FileMetadata)));
         
         if (_currentFilePreview is null)
         {
