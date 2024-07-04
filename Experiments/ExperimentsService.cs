@@ -85,6 +85,7 @@ public class ExperimentsService(
 
     public async Task<ItemsResult<Experiment>> GetExperimentsAsync(ExperimentsFilter filter, bool cacheResults = false)
     {
+        logger.LogTrace("GettingExperimentAsync: cache={}", cacheResults);
         await using var db = await dbContextFactory.CreateDbContextAsync(filter.CancellationToken);
         var query = db.Set<Experiment>().AsQueryable();
 
