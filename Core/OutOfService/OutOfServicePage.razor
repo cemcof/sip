@@ -1,0 +1,19 @@
+@layout NoLayout
+@inject IOptions<AppOptions> Opts
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-danger text-center my-2" role="alert">
+                <h4 class="alert-heading">Out of service</h4>
+                <p>The system is currently out of service. Please try again later.</p>
+                @if (Opts.Value.OutOfService.Reason is not null)
+                {
+                    <hr>
+                    <p class="mb-0">Reason: @Opts.Value.OutOfService.Reason</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

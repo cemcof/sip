@@ -1,3 +1,5 @@
+using sip.Core.OutOfService;
+
 namespace sip.Core;
 
 public class AppOptions
@@ -17,6 +19,8 @@ public class AppOptions
     public string Identifier => HostAppAssembly.GetName().Name!;
 
     public Type MasterComponent { get; set; } = typeof(App);
+
+    public OutOfServiceOptions OutOfService { get; set; } = new();
 
     [Required] public string DataDirectory { get; set; } = null!;
 }

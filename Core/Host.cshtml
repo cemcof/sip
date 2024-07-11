@@ -2,7 +2,11 @@
 @namespace sip.Core
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-@inject IOptions<AppOptions> Options
+@inject IOptionsMonitor<AppOptions> Options
+
+@{
+    var opt = Options.CurrentValue;
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,8 +20,8 @@
     @* <script src="https://cdn.tailwindcss.com"></script> *@
     <link rel="stylesheet" href="css/bootstrap/bootstrap.css"/>
     <link rel="stylesheet" href="css/fontawesome-free-5.15.4-web/css/all.css"/>
-    <link rel="stylesheet"  href="css/@(Options.Value.Identifier).css"/>
-    <link rel="stylesheet"  href="@(Options.Value.Identifier).styles.css"/>
+    <link rel="stylesheet"  href="css/@(opt.Identifier).css"/>
+    <link rel="stylesheet"  href="@(opt.Identifier).styles.css"/>
 
     <script type="text/javascript" src="js/common.js"></script>
 
@@ -25,7 +29,17 @@
 </head>
 
 <body>
-<component type="@Options.Value.MasterComponent" render-mode="Server"/>
+
+@if (opt.OutOfService.Enabled && !opt.OutOfService.IsClientAllowed(Context))
+{
+    // Out of service mode
+    <component type="@opt.OutOfService.Component" render-mode="Static" />
+}
+else
+{
+    // Normal functional mode
+    <component type="@opt.MasterComponent" render-mode="Server"/>
+}
 
 <div id="blazor-error-ui">
     <environment include="Staging,Production">
