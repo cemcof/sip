@@ -316,18 +316,21 @@ public class AppUserManager(
         }
 
         await db.SaveChangesAsync();
-    }   
-
-    public async Task<AppUser?> FindByIdAsync(string id)
+    }
+    
+    public async Task<AppUser?> FindByIdAsync(Guid? userId)
     {
         // Wrapping - create scope for original user manager and get     db context from it
         await using var db = await dbContextFactory.CreateDbContextAsync();
         var user = await db.Set<AppUser>()
             .Include(u => u.Contacts)
-            .FirstOrDefaultAsync(u => u.Id == Guid.Parse(id));
+            .FirstOrDefaultAsync(u => u.Id == userId);
 
         return user;
     }
+
+    public Task<AppUser?> FindByIdAsync(string id)
+        => FindByIdAsync(Guid.Parse(id));
 
     public async Task<string> GetSecurityStampAsync(AppUser user)
     {
@@ -520,6 +523,7 @@ public class AppUserManager(
         await NewUserAsync(newUserModel);
         return newUserModel.UserDetails;
     }
-    
+
+
     
 }

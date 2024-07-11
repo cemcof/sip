@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using sip.Userman;
@@ -51,7 +52,7 @@ public class ImpersonationOptions
 public class ImpersonationController(
         ILogger<ImpersonationController>      logger,
         IOptionsMonitor<ImpersonationOptions> options,
-        UserManager<AppUser>                  userManager,
+        AppUserManager                        userManager,
         IUserClaimsPrincipalFactory<AppUser>  claimsPrincipalFactory,
         IAuthorizationService                 authorizationService)
     : ControllerBase
@@ -75,6 +76,7 @@ public class ImpersonationController(
         var authorizationResult =  await authorizationService.AuthorizeAsync(HttpContext.User, ImpersonationOptions.ImpersonatorPolicy);
         if (opts.Protected && !authorizationResult.Succeeded)
         {
+            logger.LogDebug("Forbidding impersonation");
             return Forbid();
         }
         
@@ -85,7 +87,7 @@ public class ImpersonationController(
         if (userId is not null)
         {
             // If we are targeting a user, get the claims
-            var user = await userManager.FindByIdAsync(userId.ToString());
+            var user = await userManager.FindByIdAsync(userId);
             if (user is not null)
             {
                 var claimsPrincipal = await claimsPrincipalFactory.CreateAsync(user);
@@ -121,13 +123,15 @@ public class ImpersonationController(
         // Prepare impersonated principal and sign him in
         // Consider using different scheme.
         var cp = new ClaimsPrincipal(new ClaimsIdentity(cls, opts.SignInScheme));
+        logger.LogDebug("Prepared CP for impersonation (sign in), scheme {}", opts.SignInScheme);
         await HttpContext.SignInAsync(opts.SignInScheme, cp, new AuthenticationProperties()
         {
             IsPersistent = true,
             AllowRefresh = true
         });
         
-        logger.LogInformation("User impersonated, claims are:\n{}",
+        logger.LogInformation("User impersonated, redirecting to: {}, claims are:\n{}",
+            opts.RedirectTarget,
             string.Join("\n", cls.Select(c => $"{c.Type}={c.Value}")));
 
         return Redirect(opts.RedirectTarget);
