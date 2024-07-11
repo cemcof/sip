@@ -20,7 +20,7 @@
         <div class="session-buttons-container">
             @foreach (var ac in _remoteSessions)
             {
-                <button @onclick="@(() => ConnectClick(ac))">@ac.ForInstrument.Name - @ac.ForConnection.Name (until @ac.Expiration.StandardFormat())</button>
+                <button class="btn btn-primary" @onclick="@(() => ConnectClick(ac))">@ac.ForInstrument.Name - @ac.ForConnection.Name (until @ac.Expiration.StandardFormat())</button>
             }
         </div>
     }
