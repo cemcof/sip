@@ -62,8 +62,8 @@ public static class ClaimsPrincipalExtensions
     public static IUserClientInfo ToUserClientInfo(this ClaimsPrincipal cp)
     {
         var uinfo = cp.ToUserInfo();
-        return new ClientInfo(uinfo.Id, uinfo.Firstname, uinfo.Lastname, uinfo.EmailAddress,
-            cp.GetRemoteIp() ??
+        return new ClientInfo(Id: uinfo.Id, EmailAddress: uinfo.EmailAddress, Firstname: uinfo.Firstname, Lastname: uinfo.Lastname,
+            IpAddress: cp.GetRemoteIp() ??
             throw new NotAvailableException("IpAddress of current claims principal is not available"));
     }
 }

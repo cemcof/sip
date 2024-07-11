@@ -167,9 +167,7 @@ public class InstrumentRemoteConnectAuthorizationHandler(
                 .Where(r => UserNameComparer(r.ForUser, forUser) || UserNameComparer(r.CreatedBy, forUser))
                 // Reservations for this moment
                 .Where(r => r.Since < moment && r.Until > moment)
-                // Reservation that ends latest
-                .OrderByDescending(r => r.Until)
-                .FirstOrDefault();
+                .MaxBy(r => r.Until);
 
             if (reservation is not null)
             {
