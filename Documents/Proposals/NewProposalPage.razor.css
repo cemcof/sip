@@ -1,13 +1,19 @@
 .orer .or {
-    top: -26px;
+    top: -13px;
     width: 6rem;
     background: white;
     display: inline-block;
     left: calc(50% - 3rem);
-    position: relative;
+    position: absolute;
     font-size: 120%;
     text-align: center;
 }
 
 .orer hr {
+    margin: 0;
 }
+
+.orer {
+    margin: 1rem 0rem;
+    position: relative;
+}i
