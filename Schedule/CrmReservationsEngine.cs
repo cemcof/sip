@@ -13,7 +13,7 @@ public class CrmReservationsEngine(
         CrmService                     crmService,
         IMemoryCache                   cache,
         ILogger<CrmReservationsEngine> logger,
-        ISystemClock                   systemClock)
+        TimeProvider                   timeProvider)
     : IScheduleEngine
 {
     private readonly Dictionary<int, string> _subtypeMap = new()
@@ -74,7 +74,7 @@ public class CrmReservationsEngine(
 
     private string PrepareTemplate(Guid forInstrumentId, int daysPast)
     {
-        var t0 = systemClock.DtUtcNow().Date;
+        var t0 = timeProvider.DtUtcNow().Date;
         var anchor = t0 - TimeSpan.FromDays((int)t0.DayOfWeek);
         var dtStart = anchor - TimeSpan.FromDays(daysPast);
         logger.LogDebug("Limit for past (scheduled start): {}", dtStart);
@@ -112,7 +112,7 @@ public class CrmReservationsEngine(
     public async Task RefreshAsync(IOrganization organization, IEnumerable<IInstrument> reservationSubjects,
         int daysPast)
     {
-        var now = systemClock.DtUtcNow();
+        var now = timeProvider.DtUtcNow();
         var reservationInstruments = new List<ScheduleInstrument>();
         var result = new ScheduleData(now, reservationInstruments);
         

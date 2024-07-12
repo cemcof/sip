@@ -9,12 +9,12 @@ namespace sip.Projects;
 /// </summary>
 public class ProjectPeriodicWorkflowRunner(
         IOptionsMonitor<ScheduledServiceOptions> optionsMonitor,
-        ISystemClock                             systemClock,
+        TimeProvider                             timeProvider,
         ILogger<ProjectPeriodicWorkflowRunner>   logger,
         IDbContextFactory<AppDbContext>          dbContextFactory,
         IProjectLoader                           projectLoader,
         IServiceProvider                         serviceProvider)
-    : ScheduledService(optionsMonitor, systemClock, logger)
+    : ScheduledService(optionsMonitor, timeProvider, logger)
 {
     protected override async Task ExecuteRoundAsync(CancellationToken stoppingToken)
     {

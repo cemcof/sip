@@ -7,9 +7,9 @@ namespace sip.Scheduling;
 /// </summary>
 public class TestScheduledService(
         IOptionsMonitor<ScheduledServiceOptions> optionsMonitor,
-        ISystemClock                             systemClock,
+        TimeProvider                             timeProvider,
         ILogger<TestScheduledService>            logger)
-    : ScheduledService(optionsMonitor, systemClock, logger)
+    : ScheduledService(optionsMonitor, timeProvider, logger)
 {
     protected override async Task ExecuteRoundAsync(CancellationToken stoppingToken)
     {

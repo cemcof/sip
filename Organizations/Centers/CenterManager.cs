@@ -9,11 +9,11 @@ namespace sip.Organizations.Centers;
 public class CenterManager(
         IOptionsMonitor<CentersOptions> centersOptions,
         IOptionsMonitor<ScheduledServiceOptions> schedOpts,
-        ISystemClock systemClock,
+        TimeProvider timeProvider,
         ILogger<CenterManager> logger,
         CenterConfigurationProvider centerConfigurationProvider,
         IOrganizationProvider organizationProvider)
-    : ScheduledService(schedOpts, systemClock, logger),
+    : ScheduledService(schedOpts, timeProvider, logger),
         ICenterProvider,
         INodeStatusProvider
 {
@@ -48,7 +48,7 @@ public class CenterManager(
                 centerConfigurationProvider.LoadCenter(organization.Id, deserializedConfig);
                 return new CenterStatus(org, SELF_NODE_NAME, deserializedConfig)
                 {
-                    LastChange = systemClock.DtUtcNow(), LastPing = systemClock.DtUtcNow()
+                    LastChange = timeProvider.DtUtcNow(), LastPing = timeProvider.DtUtcNow()
                 };
             }
             
@@ -59,10 +59,10 @@ public class CenterManager(
                 {
                     centerStatus.Configuration = DeserializeConfigurationFromFile(centerOptions.ConfigFile!);
                     centerConfigurationProvider.LoadCenter(organization.Id, centerStatus.Configuration);
-                    centerStatus.LastChange = SystemClock.DtUtcNow();
+                    centerStatus.LastChange = timeProvider.DtUtcNow();
                 }
 
-                centerStatus.LastPing = SystemClock.DtUtcNow();
+                centerStatus.LastPing = timeProvider.DtUtcNow();
                 centerStatus.SubmittedByNode = SELF_NODE_NAME;
                 return centerStatus;
             }
@@ -77,7 +77,7 @@ public class CenterManager(
         // Kill/remove center that are inactive for too long
         var killAfter = centersOptions.CurrentValue.KillAfterInactive;
         foreach (var centerDead in _centers
-                     .Where(c => SystemClock.DtUtcNow() - c.Value.LastPing > killAfter)
+                     .Where(c => timeProvider.DtUtcNow() - c.Value.LastPing > killAfter)
                      .ToList())
         {
             _centers.Remove(centerDead.Key, out _);
@@ -107,8 +107,8 @@ public class CenterManager(
             });
         
         // Adjust center timing info
-        currCenter.LastChange = SystemClock.DtUtcNow();
-        currCenter.LastPing = SystemClock.DtUtcNow();
+        currCenter.LastChange = timeProvider.DtUtcNow();
+        currCenter.LastPing = timeProvider.DtUtcNow();
         
         // Refresh options so the fetch new configuration for this center
         centerConfigurationProvider.LoadCenter(organizationId, configuration);

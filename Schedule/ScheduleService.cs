@@ -16,9 +16,9 @@ public class ScheduleService(
         IEnumerable<IScheduleEngine> scheduleEngines,
         IOptionsMonitor<ScheduleOptions> scheduleOptions,
         IOptionsMonitor<ScheduledServiceOptions> scheduleServiceOptions,
-        ISystemClock systemClock,
+        TimeProvider timeProvider,
         IOrganizationProvider organizationProvider)
-    : ScheduledService(scheduleServiceOptions, systemClock, logger), IReservationsProvider
+    : ScheduledService(scheduleServiceOptions, timeProvider, logger), IReservationsProvider
 {
     // private void FetchScheduleData()
 

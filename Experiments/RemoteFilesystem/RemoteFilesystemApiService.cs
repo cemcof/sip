@@ -7,9 +7,9 @@ namespace sip.Experiments.RemoteFilesystem;
 
 public class RemoteFilesystemApiService(
         IOptionsMonitor<ScheduledServiceOptions> optionsMonitor,
-        ISystemClock                             systemClock,
+        TimeProvider                             timeProvider,
         ILogger<RemoteFilesystemApiService>      logger)
-    : ScheduledService(optionsMonitor, systemClock, logger), IFilesystemProvider
+    : ScheduledService(optionsMonitor, timeProvider, logger), IFilesystemProvider
 {
     private readonly ConcurrentDictionary<Guid, PathRequest> _requests = new();
 

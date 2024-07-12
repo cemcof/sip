@@ -16,7 +16,7 @@ public class DocumentService(
     HandlebarsService handlebarsService,
     MsWordRenderer msWordRenderer,
     IEmbeddedFilesProvider embeddedFilesProvider,
-    ISystemClock systemClock,
+    TimeProvider timeProvider,
     WeasyPrintPdfRenderer pdfRenderer,
     ZipArchiver archiver,
     DocSelfHttp docSelfHttp)
@@ -207,7 +207,7 @@ public class DocumentService(
         tf.FileMetadata.ContentType = fileMetadata.ContentType;
 
         tf.FileMetadata.DtModified = fileMetadata.DtModified == default
-            ? systemClock.DtUtcNow()
+            ? timeProvider.DtUtcNow()
             : fileMetadata.DtModified;
         
         tf.FileMetadata.Length = fbytes.Length;
@@ -216,7 +216,7 @@ public class DocumentService(
         if (isNewFile)
         {
             tf.FileMetadata.DtCreated = fileMetadata.DtCreated == default
-                ? systemClock.DtUtcNow()
+                ? timeProvider.DtUtcNow()
                 : fileMetadata.DtCreated;
             tf.FileMetadata.FileData = new FileData() {Data = fbytes};
             document.FilesInDocuments.Add(tf);
@@ -272,7 +272,7 @@ public class DocumentService(
         var resultingDocMeta = await SaveDocumentFileAsync(doc, new FileMetadata()
         {
             ContentType = new ContentType("application", "pdf"),
-            DtCreated = systemClock.DtUtcNow(), FileName = name
+            DtCreated = timeProvider.DtUtcNow(), FileName = name
         }, pdfData, DocumentFileType.Primary);
 
         return resultingDocMeta;

@@ -22,7 +22,7 @@ public class YearOrderIdGeneratorOptions
 /// Id generated this way is always sortable. 
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public class YearOrderIdGeneratorService(IDbContextFactory<AppDbContext> dbContextFactory, ISystemClock systemClock)
+public class YearOrderIdGeneratorService(IDbContextFactory<AppDbContext> dbContextFactory, TimeProvider timeProvider)
 {
     public async Task<string> GenerateNextIdAsync<TEntity>(YearOrderIdGeneratorOptions options)
         where TEntity : class, IStringIdentified 
@@ -39,7 +39,7 @@ public class YearOrderIdGeneratorService(IDbContextFactory<AppDbContext> dbConte
     {
         var yrlen = opts.ShortYear ? 2 : 4;
         
-        var year = systemClock.UtcNow.ToString(opts.ShortYear ? "yy" : "yyyy");
+        var year = timeProvider.DtUtcNow().ToString(opts.ShortYear ? "yy" : "yyyy");
         var order = 1;
         if (lastpid != null && lastpid.Substring(0, yrlen) != year)
         {

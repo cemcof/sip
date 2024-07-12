@@ -8,9 +8,8 @@ public class Saml2AuthenticationHandler(
         IOptionsMonitor<Saml2AuthenticationOptions> options,
         ILoggerFactory                              logger,
         UrlEncoder                                  encoder,
-        ISystemClock                                clock,
         ISaml2MetadataProvider                      saml2MetadataProvider)
-    : RemoteAuthenticationHandler<Saml2AuthenticationOptions>(options, logger, encoder, clock)
+    : RemoteAuthenticationHandler<Saml2AuthenticationOptions>(options, logger, encoder)
 {
     public override async Task<bool> HandleRequestAsync()
     {

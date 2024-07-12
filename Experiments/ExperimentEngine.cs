@@ -19,13 +19,13 @@ public class ExperimentEngine(
         IMemoryCache                             memoryCache,
         IOptions<AppOptions>                     appOptions,
         SmtpSender                               emailService,
-        ISystemClock                             systemClock,
+        TimeProvider                             timeProvider,
         ExperimentsService                       experimentsService,
         GeneralMessageBuilderProvider            messageBuilderProvider,
         IOptionsMonitor<ScheduledServiceOptions> schedOpts,
         IOptionsMonitor<ExperimentsOptions>            experimentsOptions,
         IOptionsMonitor<InstrumentsOptions>            instrumentOptions)
-    : ScheduledService(schedOpts, systemClock, logger), IExperimentHandler
+    : ScheduledService(schedOpts, timeProvider, logger), IExperimentHandler
 {
     private readonly IOptions<AppOptions> _appOptions   = appOptions;
     private readonly SmtpSender           _emailService = emailService;

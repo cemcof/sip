@@ -7,7 +7,7 @@ using sip.Utils;
 namespace sip.Projects;
 
 public class ProjectStatusHelperService(IDbContextFactory<AppDbContext> dbContextFactory,
-                                        ISystemClock                    systemClock,
+                                        TimeProvider                    timeProvider,
                                         IOptionsMonitor<StatusOptions> statusOptionsMonitor,
                                         OrganizationService             organizationService,
                                         IOrganizationProvider          organizationProvider)
@@ -42,7 +42,7 @@ public class ProjectStatusHelperService(IDbContextFactory<AppDbContext> dbContex
             var status = new Status()
             {
                 Active = true, 
-                DtEntered = systemClock.DtUtcNow(),
+                DtEntered = timeProvider.DtUtcNow(),
                 OrganizationId = org.Id,
                 StatusInfoId = statusId,
                 EnteredFromStatus = enteredFromStatus,
@@ -53,7 +53,7 @@ public class ProjectStatusHelperService(IDbContextFactory<AppDbContext> dbContex
             {
                 enteredFromStatus.LeftToStatus = status;
                 enteredFromStatus.Active = false;
-                enteredFromStatus.DtLeft = systemClock.DtUtcNow();
+                enteredFromStatus.DtLeft = timeProvider.DtUtcNow();
             }
             
             project.ProjectStatuses.Add(status);

@@ -49,5 +49,5 @@ public static class DateUtils
         return dt.ToString("yyyy-MM-ddTHH:mm:ss.ffffff");
     }
 
-    public static DateTime DtUtcNow(this ISystemClock clk) => clk.UtcNow.UtcDateTime;
+    public static DateTime DtUtcNow(this TimeProvider clk) => clk.GetUtcNow().UtcDateTime;
 }

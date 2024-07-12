@@ -9,10 +9,10 @@ namespace sip.Messaging.Email;
 public class ImapReceiver(
         IOptionsMonitor<ScheduledServiceOptions> optionsMonitor,
         IOptions<ImapOptions>                    imapOptions,
-        ISystemClock                             systemClock,
+        TimeProvider                             timeProvider,
         ILogger<ImapReceiver>                    logger,
         IRawMessageReceiver                      receiver)
-    : ScheduledService(optionsMonitor, systemClock, logger)
+    : ScheduledService(optionsMonitor, timeProvider, logger)
 {
     protected override async Task ExecuteRoundAsync(CancellationToken stoppingToken)
     {

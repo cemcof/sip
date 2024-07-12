@@ -6,7 +6,7 @@ namespace sip.Messaging;
 public class GeneralMessageHandler(
         IDbContextFactory<AppDbContext> dbFac,
         IRawMessageSender               sender,
-        ISystemClock                    systemClock,
+        TimeProvider                    timeProvider,
         ILogger<GeneralMessageHandler>  logger)
     : IMessageEgressHandler<GeneralMessage>
 {
@@ -26,7 +26,7 @@ public class GeneralMessageHandler(
         await using var dbctx = await DbFac.CreateDbContextAsync();
 
         message.MessageType = MessageType.SystemOut;
-        message.DtCreated = systemClock.DtUtcNow();
+        message.DtCreated = timeProvider.DtUtcNow();
         message.MessageStatus = MessageStatus.Pending;
 
         dbctx.Add(message);
@@ -39,7 +39,7 @@ public class GeneralMessageHandler(
         message.MessageId = message.MessageData.Message.MessageId;
         message.MimeHeaders = message.MessageData.Message.Headers.GetAsString();
         message.MessageStatus = MessageStatus.Handled;
-        message.DtStatusChanged = systemClock.DtUtcNow();
+        message.DtStatusChanged = timeProvider.DtUtcNow();
         await dbctx.SaveChangesAsync();
     }
 }

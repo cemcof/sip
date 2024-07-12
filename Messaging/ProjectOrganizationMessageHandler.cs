@@ -11,7 +11,7 @@ public class ProjectOrganizationMessageHandler(
         IDbContextFactory<AppDbContext>                           dbContextFactory,
         IEnumerable<IMessageConsumer<ProjectOrganizationMessage>> projOrgMessageConsumers,
         IRawMessageSender                                         sender,
-        ISystemClock                                              systemClock,
+        TimeProvider                                              timeProvider,
         IProjectMessaging                                         projectMessaging,
         IProjectLoader                                            projectLoader,
         IServiceProvider                                          serviceProvider,
@@ -19,7 +19,7 @@ public class ProjectOrganizationMessageHandler(
         ILogger<ProjectOrganizationMessageHandler>                logger)
     : IMessageEgressHandler<ProjectOrganizationMessage>, IMessageIngressHandler
 {
-    private readonly ISystemClock                               _systemClock = systemClock;
+    private readonly TimeProvider                               _timeProvider = timeProvider;
 
     public async ValueTask<MessageHandleResult> HandleIngress(MimeMessage message)
     {

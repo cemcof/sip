@@ -5,11 +5,11 @@ namespace sip.Scheduling;
 
 public abstract class ScheduledService(
         IOptionsMonitor<ScheduledServiceOptions> optionsMonitor,
-        ISystemClock                             systemClock,
+        TimeProvider                             timeProvider,
         ILogger                                  logger)
     : BackgroundService
 {
-    protected readonly ISystemClock                             SystemClock     = systemClock;
+    protected readonly TimeProvider                             timeProvider     = timeProvider;
     protected readonly ILogger                                  Logger          = logger;
 
     private ScheduledServiceOptions Opts => optionsMonitor.Get(GetType().Name) ?? optionsMonitor.CurrentValue;
@@ -65,13 +65,13 @@ public abstract class ScheduledService(
             if (stoppingToken.IsCancellationRequested) return;
             
             var ts = opts.Interval;
-            var now = SystemClock.DtUtcNow();
+            var now = timeProvider.DtUtcNow();
 
             if (ts == default)
             {
                 // Lets wait a bit to avoid busy loop since getting next occurence does not work for as expected
                 await Task.Delay(TimeSpan.FromMilliseconds(400), stoppingToken);
-                now = SystemClock.DtUtcNow();
+                now = timeProvider.DtUtcNow();
                 var cronExpr = CronExpression.Parse(opts.Cron, CronFormat.IncludeSeconds);
                 var nextSched = cronExpr.GetNextOccurrence(now);
                 if (!nextSched.HasValue) return;

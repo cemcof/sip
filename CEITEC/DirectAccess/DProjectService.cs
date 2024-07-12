@@ -9,7 +9,7 @@ namespace sip.CEITEC.DirectAccess;
 
 public class DProjectService(
         ProjectManipulationHelperService          project,
-        ISystemClock                              systemClock,
+        TimeProvider                              timeProvider,
         IOptionsMonitor<StatusOptions>           statusOptions,
         ProjectStatusHelperService                status,
         YearOrderIdGeneratorService               idGen,
@@ -20,7 +20,7 @@ public class DProjectService(
         IProjectLoader<DProject>
 
 {
-    private readonly ISystemClock                              _systemClock            = systemClock;
+    private readonly TimeProvider                              _timeProvider            = timeProvider;
     private readonly IOptionsMonitor<StatusOptions>           _statusOptions          = statusOptions;
     private readonly ProjectStatusHelperService                _status                 = status;
     private readonly ProjectOrganizationMessageBuilderProvider _messageBuilderProvider = messageBuilderProvider;

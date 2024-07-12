@@ -67,11 +67,11 @@ public class RemoteAccessService(
         IOptionsMonitor<RemoteAccessOptions>              options,
         GuacamoleDriver                             guacamoleDriver,
         IOptionsMonitor<GuacamoleOptions>                 gcOptions,
-        ISystemClock                                systemClock,
+        TimeProvider                                timeProvider,
         IOptionsMonitor<ScheduledServiceOptions>    schedOpts,
         ILogger<RemoteAccessService>                logger,
         InstrumentRemoteConnectAuthorizationHandler authorizationAuthorizationHandler)
-    : ScheduledService(schedOpts, systemClock, logger), IRemoteAccess
+    : ScheduledService(schedOpts, timeProvider, logger), IRemoteAccess
 {
     private readonly HashSet<RemoteAccessSession> _sessions = new();
 
@@ -118,7 +118,7 @@ public class RemoteAccessService(
 
     private string GenerateSessionName(RemoteAccessSessionRequest sessionRequest) =>
         sessionRequest.ForUser.Firstname + " " + sessionRequest.ForUser.Lastname + "/" + sessionRequest.ForUser.IpAddress +
-        "/" + SystemClock.DtUtcNow().StandardFormat();
+        "/" + timeProvider.DtUtcNow().StandardFormat();
 
     public async Task<RemoteAccessSession> JoinSession(RemoteAccessSession session, RemoteAccessSessionRequest joinRequest)
     {
@@ -171,7 +171,7 @@ public class RemoteAccessService(
     protected override async Task ExecuteRoundAsync(CancellationToken stoppingToken)
     {
         // Check for expired sessions and kill them
-        var toBeDeleted = _sessions.Where(s => s.Until < SystemClock.DtUtcNow())
+        var toBeDeleted = _sessions.Where(s => s.Until < timeProvider.DtUtcNow())
             .ToHashSet();
         
         foreach (var delme in toBeDeleted)

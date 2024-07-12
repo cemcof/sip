@@ -75,6 +75,7 @@ public class SipSetup(string[] args)
             .ValidateOnStart();
         
         var se = wb.Services;
+        se.AddSingleton(TimeProvider.System);
         // =================================================================
         // Configure database, identity and authentication
         // =================================================================
@@ -96,7 +97,6 @@ public class SipSetup(string[] args)
         se.AddSingleton<IDbSeeder, DbSeeder>();
         se.Configure<DbSeedOptions>(conf1.GetSection("Db:Init"));
         se.AddHttpClient();
-        se.TryAddSingleton<Microsoft.Extensions.Internal.ISystemClock, Microsoft.Extensions.Internal.SystemClock>();
         se.ConfigureDbModel(cf => cf.ApplyConfigurationsFromAssembly(hostAssembly)); 
         // =================================================================
         // Configure necessary framework core services 

@@ -7,9 +7,8 @@ namespace sip.Auth.Orcid;
 public class OrcidHandler(
         IOptionsMonitor<OrcidOptions> options,
         ILoggerFactory                logger,
-        UrlEncoder                    encoder,
-        ISystemClock                  clock)
-    : OAuthHandler<OrcidOptions>(options, logger, encoder, clock)
+        UrlEncoder                    encoder)
+    : OAuthHandler<OrcidOptions>(options, logger, encoder)
 {
     protected override async Task<AuthenticationTicket> CreateTicketAsync(ClaimsIdentity identity,
                                                                           AuthenticationProperties properties, OAuthTokenResponse tokens)
@@ -17,7 +16,7 @@ public class OrcidHandler(
         // Todo - obtain name and email, if possible
 
         if (tokens.Response is null) throw new InvalidOperationException("ORCID: No token response available");
-        Logger.LogInformation(tokens.Response.ToString());
+        Logger.LogInformation("OrcidHandler ticket response: {}", tokens.Response.ToString());
         properties.SetString(nameof(OrcidDefaults.LOGIN_PROVIDER),
             OrcidDefaults.LOGIN_PROVIDER); // To identify external login type later
 
@@ -39,6 +38,7 @@ public class OrcidOptions : OAuthOptions
         // UserInformationEndpoint = OrcidDefaults.UserInformationEndpoint;
         // Scope.Add("openid");
         Scope.Add("/authenticate");
+        TimeProvider = TimeProvider.System;
 
         ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "orcid");
         ClaimActions.MapJsonKey(ClaimTypes.Name, "name");

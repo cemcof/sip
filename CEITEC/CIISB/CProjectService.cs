@@ -19,7 +19,7 @@ public class CProjectFilter : ProjectFilter, IProjectFilter<CProject>;
 public class CProjectService(
         IDbContextFactory<AppDbContext>           dbContextFactory,
         ProjectManipulationHelperService          projectService,
-        ISystemClock                              systemClock,
+        TimeProvider                              timeProvider,
         IOptionsMonitor<StatusOptions>           statusOptions,
         ProjectStatusHelperService                status,
         YearOrderIdGeneratorService               idGen,
@@ -58,7 +58,7 @@ public class CProjectService(
     {
         if (fromDate == null)
         {
-            fromDate = systemClock.DtUtcNow();
+            fromDate = timeProvider.DtUtcNow();
         }
 
         DateTime result = new DateTime(fromDate.Value.Year + 1, fromDate.Value.Month, 1);
@@ -76,7 +76,7 @@ public class CProjectService(
         var newProject = await CreateProjectAsync();
         
         // Bind this proposal with the new project
-        proposal.DtSubmitted = systemClock.DtUtcNow();
+        proposal.DtSubmitted = timeProvider.DtUtcNow();
         
         // Extract some information from the proposal to the project itself
         var genProjInfo = proposal.CProposalFormModel.GeneralProjectInformation;
