@@ -23,7 +23,7 @@ public class CenterManager(
 
     private const string SELF_NODE_NAME = "Webserver";
 
-    private async Task _RefreshSelfCentersAsyncHelper()
+    private Task _RefreshSelfCentersAsyncHelper()
     {
         JsonElement DeserializeConfigurationFromFile(string configFile)
         {
@@ -70,6 +70,7 @@ public class CenterManager(
             _centers.AddOrUpdate(org, AddValueFactory, UpdateValueFactory);
         }
 
+        return Task.CompletedTask;
     }
 
     private void _KillInactiveCentersHelper()
