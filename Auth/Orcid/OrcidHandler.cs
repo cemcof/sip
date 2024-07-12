@@ -1,4 +1,5 @@
 using System.Text.Encodings.Web;
+using System.Text.Json;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OAuth;
 
@@ -16,7 +17,8 @@ public class OrcidHandler(
         // Todo - obtain name and email, if possible
 
         if (tokens.Response is null) throw new InvalidOperationException("ORCID: No token response available");
-        Logger.LogInformation("OrcidHandler ticket response: {}", tokens.Response.ToString());
+        Logger.LogInformation("OrcidHandler ticket response: {@Response} \n\n{ResponseJson}", 
+            tokens.Response, JsonSerializer.Serialize(tokens.Response));
         properties.SetString(nameof(OrcidDefaults.LOGIN_PROVIDER),
             OrcidDefaults.LOGIN_PROVIDER); // To identify external login type later
 
