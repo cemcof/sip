@@ -23,6 +23,8 @@ public class OrcidHandler(
         var context = new OAuthCreatingTicketContext(new ClaimsPrincipal(identity), properties, Context, Scheme,
             Options, Backchannel, tokens, tokens.Response.RootElement);
         context.RunClaimActions();
+        Logger.LogInformation("Claims after mapping: \n{}", 
+            string.Join('\n', context.Identity!.Claims.Select(c => c.Type + " : " + c.Value)));
         await Events.CreatingTicket(context);
         return new AuthenticationTicket(context.Principal!, context.Properties, Scheme.Name);
     }
