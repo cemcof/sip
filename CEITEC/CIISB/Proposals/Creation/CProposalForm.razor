@@ -7,69 +7,70 @@
 @inject NavigationManager NavigationManager
 
 @* Top form header row *@
-<div class="top-row">
-    <a href="https://ciisb.org">
-        <img class="ciisb-panel-logo-small" src="/img/logos/ciisb_logo.png" alt="CIISB logo"/>
-    </a>
-    <div class="proposal-heading">Project proposal</div>
-    <div class="proposal-duration-notice">Proposals submitted now have maximal duration till @ProjectService.ComputeExpirationDate().StandardFormat()</div> 
-    <button @onclick="OnClear">Clear form</button>
+<div class="container">
+    <div class="top-row">
+        <a href="https://ciisb.org">
+            <img class="ciisb-panel-logo-small" src="/img/logos/ciisb_logo.png" alt="CIISB logo"/>
+        </a>
+        <div class="proposal-heading">Project proposal</div>
+        <div class="proposal-duration-notice">Proposals submitted now have maximal duration till @ProjectService.ComputeExpirationDate().StandardFormat()</div> 
+        <button @onclick="OnClear">Clear form</button>
+    </div>
+
+
+    <CEditForm OnFieldChanged="OnFChanged" OnSubmit="OnProposalSubmit" class="cform ccreate-proposal" TModelType="CProposalFormModel" FormFooter="@(CEditForm<CProposalFormModel>.EmptyFooter)">
+        
+        <div class="general-part">
+            
+            @* General project information *@
+            <FormPart Model="@GeneralInfoModel" DisplayName="Project information" Class="group-compactbox" Context="cx">
+                <CAutoformRenderer @bind-Value="@cx.ProjectTitle"></CAutoformRenderer>
+                <CAutoformRenderer @bind-Value="@cx.Acronym"></CAutoformRenderer>
+            </FormPart>
+
+            <CAutoformRenderer @bind-Value="@GeneralInfoModel.InvoicingAddress"></CAutoformRenderer>
+
+            @* Applicant *@
+            <CAutoformRenderer @bind-Value="@GeneralInfoModel.Applicant"></CAutoformRenderer>
+
+            @* Principal investigator *@
+            <CAutoformRenderer @bind-Value="@GeneralInfoModel.PrincipalInvestigator"></CAutoformRenderer>
+
+            @* Additional members *@
+            <CAutoformRenderer @bind-Value="@GeneralInfoModel.AdditionalMembers"></CAutoformRenderer>
+
+            @* Project details *@
+            <CAutoformRenderer @bind-Value="@GeneralInfoModel.ProjectDetails"></CAutoformRenderer>
+
+            <FileUploader FileListProvider="@(() => DocumentService.GetDocumentFilesAsync(Proposal.Id, DocumentFileType.Attachment))"
+                          UploadHandler="@(((metadata, stream) => DocumentService.SaveDocumentFileAsync(Proposal, metadata, stream, DocumentFileType.Attachment)))"
+                          RemoveHandler="@((metadata) => DocumentService.RemoveFileAsync(metadata))"
+                          UploaderInfo="@(new UploadFileAttribute() {BytesMax = 10000000, AcceptMimes = "image/*,application/pdf"})">
+
+                <span class="fw-bold" title="Max. size 10MB, graphical information documenting sample state and quality; compulsory only for cryo-EM facility access.">
+                    Files and figures<sup>?</sup>
+                </span>
+
+            </FileUploader>
+        </div>
+        
+        <div class="facility-part">
+            
+            @* CEITEC CFs *@
+            <span>Select CEITEC core facilities to be utilized and fill in their subform</span>
+            <CAutoformRenderer @bind-Value="@CoreCfModel.CeitecCoreFacilities"></CAutoformRenderer>
+
+            @* Biocev CFs *@
+            <span>Select BIOCEV core facilities to be utilized and fill in their subform</span>
+            <CAutoformRenderer @bind-Value="@CoreCfModel.BiocevCoreFacilities"></CAutoformRenderer>
+            
+        </div>
+        
+        <div class="form-footer">
+            <InteractiveButton Caption="Submit proposal" OnClick="context.TrySubmit"></InteractiveButton>
+        </div>
+    </CEditForm>
 </div>
-
-
-<CEditForm OnFieldChanged="OnFChanged" OnSubmit="OnProposalSubmit" class="cform ccreate-proposal" TModelType="CProposalFormModel" FormFooter="@(CEditForm<CProposalFormModel>.EmptyFooter)">
-    
-    <div class="general-part">
-        
-        @* General project information *@
-        <FormPart Model="@GeneralInfoModel" DisplayName="Project information" Class="group-compactbox" Context="cx">
-            <CAutoformRenderer @bind-Value="@cx.ProjectTitle"></CAutoformRenderer>
-            <CAutoformRenderer @bind-Value="@cx.Acronym"></CAutoformRenderer>
-        </FormPart>
-
-        <CAutoformRenderer @bind-Value="@GeneralInfoModel.InvoicingAddress"></CAutoformRenderer>
-
-        @* Applicant *@
-        <CAutoformRenderer @bind-Value="@GeneralInfoModel.Applicant"></CAutoformRenderer>
-
-        @* Principal investigator *@
-        <CAutoformRenderer @bind-Value="@GeneralInfoModel.PrincipalInvestigator"></CAutoformRenderer>
-
-        @* Additional members *@
-        <CAutoformRenderer @bind-Value="@GeneralInfoModel.AdditionalMembers"></CAutoformRenderer>
-
-        @* Project details *@
-        <CAutoformRenderer @bind-Value="@GeneralInfoModel.ProjectDetails"></CAutoformRenderer>
-
-        <FileUploader FileListProvider="@(() => DocumentService.GetDocumentFilesAsync(Proposal.Id, DocumentFileType.Attachment))"
-                      UploadHandler="@(((metadata, stream) => DocumentService.SaveDocumentFileAsync(Proposal, metadata, stream, DocumentFileType.Attachment)))"
-                      RemoveHandler="@((metadata) => DocumentService.RemoveFileAsync(metadata))"
-                      UploaderInfo="@(new UploadFileAttribute() {BytesMax = 10000000, AcceptMimes = "image/*,application/pdf"})">
-
-            <span class="fw-bold" title="Max. size 10MB, graphical information documenting sample state and quality; compulsory only for cryo-EM facility access.">
-                Files and figures<sup>?</sup>
-            </span>
-
-        </FileUploader>
-    </div>
-    
-    <div class="facility-part">
-        
-        @* CEITEC CFs *@
-        <span>Select CEITEC core facilities to be utilized and fill in their subform</span>
-        <CAutoformRenderer @bind-Value="@CoreCfModel.CeitecCoreFacilities"></CAutoformRenderer>
-
-        @* Biocev CFs *@
-        <span>Select BIOCEV core facilities to be utilized and fill in their subform</span>
-        <CAutoformRenderer @bind-Value="@CoreCfModel.BiocevCoreFacilities"></CAutoformRenderer>
-        
-    </div>
-    
-    <div class="form-footer">
-        <InteractiveButton Caption="Submit proposal" OnClick="context.TrySubmit"></InteractiveButton>
-    </div>
-</CEditForm>
-
 
 
 

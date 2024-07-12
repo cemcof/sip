@@ -258,8 +258,8 @@
         width: 100%;
         margin-left: 0.6rem;
         margin-right: 0.6rem;
-        border: 1px solid rgba(128, 128, 128, 0.61);
-        border-radius: 5px;
+        padding-right: 1rem;
+        background-color: var(--bs-light);
         margin-top: 0.5rem;
     }
     
@@ -268,10 +268,9 @@
     & .file-uploader > .header,
     & .cmultiobject-container > .clabel-container,
     & .cselecter-item > .clabel-container {
-        background-color: #e5e5e5;
         padding: 0.5rem;
         font-weight: bold;
-        font-size: 120%;
+        font-size: 115%;
         border-bottom: 1px solid rgba(128, 128, 128, 0.61);
     }
     
@@ -283,7 +282,7 @@
     }
     
     & .cform-part.group-compactbox {
-        width: 50rem;
+        flex: 1 0 45rem;
         margin: 0.6rem;
     }
     
