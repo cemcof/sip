@@ -15,7 +15,7 @@ public class OrcidHandler(
                                                                           AuthenticationProperties properties, OAuthTokenResponse tokens)
     {
         // Todo - obtain name and email, if possible
-
+        
         if (tokens.Response is null) throw new InvalidOperationException("ORCID: No token response available");
         Logger.LogInformation("OrcidHandler ticket response: {@Response} \n\n{ResponseJson}", 
             tokens.Response, JsonSerializer.Serialize(tokens.Response));
@@ -42,6 +42,7 @@ public class OrcidOptions : OAuthOptions
         // UserInformationEndpoint = OrcidDefaults.UserInformationEndpoint;
         // Scope.Add("openid");
         Scope.Add("/authenticate");
+        Scope.Add("/read-public");
         TimeProvider = TimeProvider.System;
 
         ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "orcid");
