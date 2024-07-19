@@ -8,7 +8,8 @@ namespace sip.Organizations;
 public class OrganizationService(
         IDbContextFactory<AppDbContext>       dbContextFactory,
         IOptionsMonitor<OrganizationOptions> optionsMonitor,
-        IMemoryCache cache)
+        IMemoryCache cache,
+        ILogger<OrganizationService> logger)
     : IOrganizationProvider
 {
     // For easier usage in components
@@ -17,6 +18,9 @@ public class OrganizationService(
         string? searchstring)
     {
         var result = GetAll().ToList();
+        
+        logger.LogTrace("GetOrganizationsAsync: all orgs count: {}, search: {} request start: {} request count {}", 
+            result.Count, searchstring, request.StartIndex, request.Count);
         
         if (!string.IsNullOrWhiteSpace(searchstring))
         {
@@ -36,6 +40,8 @@ public class OrganizationService(
                             .ToList();
         }
         
+        logger.LogTrace("GetOrganizationsAsync: {} items: {}", result.Count,
+            string.Join(", ", result.Select(r => r.Id)));
         var itemResult = new ItemsProviderResult<Organization>(result, result.Count);
         return ValueTask.FromResult(itemResult);
     }
