@@ -69,11 +69,32 @@ public class Saml2AuthenticationOptions : RemoteAuthenticationOptions
     /// </summary>
     public string UserIdAttribute { get; set; } = "urn:oid:1.3.6.1.4.1.5923.1.1.1.6";
 
+    /// <summary>
+    /// Used to extract additional claims from the saml response. Do not extract <see cref="ClaimTypes.NameIdentifier"/>, that is only
+    /// required claim and is done automatically using <see cref="UserIdAttribute"/>.
+    /// </summary>
+    public Func<Saml2Response, IEnumerable<Claim>> ResponseClaimsProvider { get; set; } = DefulatResponseClaimsProvider;
+    
     public Saml2AuthenticationOptions() : base()
     {
         // Set defaults
         SignInScheme = IdentityConstants.ExternalScheme;
         ReturnUrlParameter = "returnUrl";
     }
-
+    
+    public static IEnumerable<Claim> DefulatResponseClaimsProvider(Saml2Response saml2Response)
+    {
+        var claimMap = new Dictionary<string, Func<string?>>()
+        {
+            {ClaimTypes.Name, saml2Response.GetNameId},
+            {ClaimTypes.Email, saml2Response.GetEmail},
+            {ClaimTypes.GivenName, saml2Response.GetFirstName},
+            {ClaimTypes.Surname, saml2Response.GetLastName},
+            {ClaimTypes.Upn, saml2Response.GetUpn}
+        };
+        
+        // Now create claims when produced value for it is not null
+        return claimMap.Where(pair => pair.Value() is not null)
+            .Select(pair => new Claim(pair.Key, pair.Value()!));
+    } 
 }

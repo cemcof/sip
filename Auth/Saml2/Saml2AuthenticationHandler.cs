@@ -62,6 +62,10 @@ public class Saml2AuthenticationHandler(
             new(ClaimTypes.NameIdentifier, userid),
             new(ClaimTypes.AuthenticationMethod, Scheme.Name)
         };
+        
+        // Additional claims
+        var additionalClams = Options.ResponseClaimsProvider(samlRes);
+        claims.AddRange(additionalClams);
 
         var cp = new ClaimsPrincipal(new ClaimsIdentity(claims));
         
