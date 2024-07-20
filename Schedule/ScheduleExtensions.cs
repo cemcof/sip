@@ -11,7 +11,7 @@ public static class ScheduleExtensions
         services.AddScheduledService<ScheduleService>(c =>
         {
             c.InitRun = true;
-            c.Cron = "0 */15 * * * *";
+            c.CronString = "0 */15 * * * *";
             c.InitDueTime = TimeSpan.FromSeconds(10);
         });
         

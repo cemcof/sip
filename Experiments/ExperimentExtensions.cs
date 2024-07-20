@@ -25,7 +25,7 @@ public class ExperimentsBuilder
         services.AddScheduledService<ExperimentEngine>(c =>
         {
             // Daily cron
-            c.Cron = "0 0 1 * * *";
+            c.CronString = "0 0 1 * * *";
             c.Enabled = true;
         });
         
@@ -51,7 +51,7 @@ public class ExperimentsBuilder
         
         services.AddScheduledService<CenterManager>(c =>
         {
-            c.Cron = "*/5 * * * * *";
+            c.CronString = "*/5 * * * * *";
             c.Enabled = true;
             c.InitRun = true;
         });

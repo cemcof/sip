@@ -7,7 +7,7 @@ public static class RemoteAccessExtensions
 {
     public static IServiceCollection AddRemoteAccess(this IServiceCollection services, IConfigurationRoot config)
     {
-        services.AddScheduledService<RemoteAccessService>(c => c.Cron = "*/5 * * * * *");
+        services.AddScheduledService<RemoteAccessService>(c => c.CronString = "*/5 * * * * *");
         services.AddSingleton<IRemoteAccess>(s => s.GetRequiredService<RemoteAccessService>());
 
         services.AddOptions<RemoteAccessOptions>()

@@ -72,8 +72,7 @@ public abstract class ScheduledService(
                 // Lets wait a bit to avoid busy loop since getting next occurence does not work for as expected
                 await Task.Delay(TimeSpan.FromMilliseconds(400), stoppingToken);
                 now = timeProvider.DtUtcNow();
-                var cronExpr = CronExpression.Parse(opts.Cron, CronFormat.IncludeSeconds);
-                var nextSched = cronExpr.GetNextOccurrence(now);
+                var nextSched = opts.Cron!.GetNextOccurrence(now);
                 if (!nextSched.HasValue) return;
                 ts = nextSched.Value - now;
                 Logger.LogDebug("Scheduled next cron ({}) execution to {}, which is after {}", 

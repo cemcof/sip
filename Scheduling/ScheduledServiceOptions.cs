@@ -1,3 +1,5 @@
+using Cronos;
+
 namespace sip.Scheduling;
 
 public enum ScheduledRunStrategy
@@ -26,7 +28,13 @@ public class ScheduledServiceOptions
     /// Cron expression for the scheduled run in format including seconds
     /// User either this or specify <see cref="ScheduledServiceOptions.Interval"/>
     /// </summary>
-    public string? Cron { get; set; }
+    public string? CronString
+    {
+        get => Cron?.ToString();
+        set => Cron = CronExpression.Parse(value, CronFormat.IncludeSeconds);
+    }
+
+    public CronExpression? Cron { get; set; }
     
     /// <summary>
     /// Interval between scheduled runs.
