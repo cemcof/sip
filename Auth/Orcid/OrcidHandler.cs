@@ -36,8 +36,7 @@ public class OrcidHandler(
         if (tokens.Response is null) throw new InvalidOperationException("ORCID: No token response available");
         Logger.LogInformation("OrcidHandler ticket response: {@Response} \n\n{ResponseJson}", 
             tokens.Response, JsonSerializer.Serialize(tokens.Response));
-        properties.SetString(nameof(OrcidDefaults.LOGIN_PROVIDER),
-            OrcidDefaults.LOGIN_PROVIDER); // To identify external login type later
+        properties.SetString("LoginProvider", OrcidDefaults.LOGIN_PROVIDER); // To identify external login type later
 
         var context = new OAuthCreatingTicketContext(new ClaimsPrincipal(identity), properties, Context, Scheme,
             Options, Backchannel, tokens, userElement.Deserialize<JsonElement>());
