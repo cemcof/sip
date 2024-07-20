@@ -51,7 +51,7 @@ public class MainGuiOptions
 
 public class PanelItemOptions
 {
-    public string DisplayText { get; set; } = string.Empty;
+    public string? DisplayText { get; set; } = string.Empty;
     public string LinkHref { get; set; } = string.Empty;
 
     public RoleNetworkAuthOptions? RoleNetworkAuthorization { get; set; }
@@ -60,7 +60,8 @@ public class PanelItemOptions
     public string? CssIcon { get; set; }
 
     public bool RequiresActiveOrganization { get; set; }
-    
+    public bool Render => !string.IsNullOrEmpty(DisplayText) || !string.IsNullOrEmpty(CssIcon);
+
     public IEnumerable<IAuthorizationRequirement> GetAuthorizationRequirements(IOrganization? org = null)
     {
         if (UserRoleAuthorization is not null)

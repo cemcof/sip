@@ -27,7 +27,7 @@
 
     @* Render main navigation links *@
     <ul class="navlinks">
-        @foreach (var nl in _authorizedMainModules)
+        @foreach (var nl in _renderMainModules)
         {
             <li>
                 <NavLink href="@GetFullLinkHref(null, nl.Value.LinkHref)">
@@ -43,7 +43,7 @@
 
 
     @* Render organizations and their navigation links  *@
-    @foreach (var org in _authorizedOrgsModules)
+    @foreach (var org in _renderOrgsModules)
     {
         <div class="navlinks-header">@org.Key.Abbreviation</div>
         <hr/>
@@ -73,8 +73,8 @@
     [CascadingParameter]
     public OrganizationComponentContext ComponentContext { get; set; } = null!;
 
-    private Dictionary<IOrganization, Dictionary<string, PanelItemOptions>> _authorizedOrgsModules = new();
-    private Dictionary<string, PanelItemOptions> _authorizedMainModules = new();
+    private Dictionary<IOrganization, Dictionary<string, PanelItemOptions>> _renderOrgsModules = new();
+    private Dictionary<string, PanelItemOptions> _renderMainModules = new();
 
     private string GetFullLinkHref(IOrganization? org, string link)
         => (org is null) ?
@@ -85,33 +85,26 @@
     {
         Logger.LogDebug("OnParametersSetAsync MainNavPanel: {@ComponentContext}", ComponentContext);
 
-        Dictionary<IOrganization, Dictionary<string, PanelItemOptions>> authorizedOrgsModules = new();
+        Dictionary<IOrganization, Dictionary<string, PanelItemOptions>> renderOrgsModules = new();
 
-        async Task<Dictionary<string, PanelItemOptions>> GetAuthorizedModules(Dictionary<string, PanelItemOptions> modules, IOrganization? organization = null)
+        async Task<Dictionary<string, PanelItemOptions>> GetModulesToRender(Dictionary<string, PanelItemOptions> modules, IOrganization? organization = null)
         {
             var result = new Dictionary<string, PanelItemOptions>();
             foreach (var mainOptsModule in modules)
             {
                 var authReqs = mainOptsModule.Value.GetAuthorizationRequirements(organization).ToArray();
-                if (authReqs.Any())
-                {
-                    var authr = await AuthorizationService.AuthorizeAsync(ComponentContext.PrincipalUser, null, authReqs);
-                    if (authr.Succeeded)
-                    {
-                        result.Add(mainOptsModule.Key, mainOptsModule.Value);
-                    }
-                }
-                else
+                if (mainOptsModule.Value.Render &&
+                    (!authReqs.Any() || (await AuthorizationService.AuthorizeAsync(ComponentContext.PrincipalUser, null, authReqs)).Succeeded)
+                    )
                 {
                     result.Add(mainOptsModule.Key, mainOptsModule.Value);
-                    
                 }
             }
             return result;
         }
 
     // Authorize main modules 
-        Dictionary<string, PanelItemOptions> authorizedMainModules = await GetAuthorizedModules(GuiOpts.CurrentValue.Modules);
+        Dictionary<string, PanelItemOptions> renderMainModules = await GetModulesToRender(GuiOpts.CurrentValue.Modules);
 
     // Authorize org modules
     // First get list of organizations with some modules configured
@@ -120,15 +113,15 @@
         foreach (var organization in orgs)
         {
             var orgOptions = GuiOpts.Get(organization).Modules;
-            var authorized = await GetAuthorizedModules(orgOptions, organization);
+            var authorized = await GetModulesToRender(orgOptions, organization);
             if (authorized.Any())
             {
-                authorizedOrgsModules.Add(organization, authorized);
+                renderOrgsModules.Add(organization, authorized);
             }
         }
 
-        _authorizedMainModules = authorizedMainModules;
-        _authorizedOrgsModules = authorizedOrgsModules;
+        _renderMainModules = renderMainModules;
+        _renderOrgsModules = renderOrgsModules;
 
         Logger.LogDebug("End OnParametersSetAsync MainNavPanel: {@ComponentContext}", ComponentContext);
     }
