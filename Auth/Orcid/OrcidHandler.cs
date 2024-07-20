@@ -18,20 +18,20 @@ public class OrcidHandler(
                                                                           AuthenticationProperties properties, OAuthTokenResponse tokens)
     {
         var userElement = tokens.Response!.RootElement.Deserialize<JsonNode>();
-        // Use orcid api to obtain user information
-        if (!string.IsNullOrEmpty(Options.ApiEndpoint))
-        {
-            using var httpc = httpClientFactory.CreateClient();
-            httpc.BaseAddress = new Uri(Options.ApiEndpoint);
-            httpc.DefaultRequestHeaders.Add("Content-Type", "application/orcid+xml");
-            httpc.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
-            var orcid = tokens.Response!.RootElement.GetString("orcid")!;
-            var result = await httpc.GetStringAsync(orcid + "/" + "record");
-            // TODO - deterimine, parse xml...
-            Logger.LogInformation("OrcidHandler: Obtained user information from orcid api: {}", result);
-        }
-        
         // Todo - obtain name and email, if possible
+        // Use orcid api to obtain user information
+        // if (!string.IsNullOrEmpty(Options.ApiEndpoint))
+        // {
+        //     using var httpc = httpClientFactory.CreateClient();
+        //     httpc.BaseAddress = new Uri(Options.ApiEndpoint);
+        //     httpc.DefaultRequestHeaders.Add("Content-Type", "application/orcid+xml");
+        //     httpc.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
+        //     var orcid = tokens.Response!.RootElement.GetString("orcid")!;
+        //     var result = await httpc.GetStringAsync(orcid + "/" + "record");
+        //     // TODO - deterimine, parse xml...
+        //     Logger.LogInformation("OrcidHandler: Obtained user information from orcid api: {}", result);
+        // }
+        //
         
         if (tokens.Response is null) throw new InvalidOperationException("ORCID: No token response available");
         Logger.LogInformation("OrcidHandler ticket response: {@Response} \n\n{ResponseJson}", 
