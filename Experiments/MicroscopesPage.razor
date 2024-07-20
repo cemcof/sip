@@ -25,22 +25,24 @@
         <div class="nav-mics">
             @if (InternalView)
             {
-                <div class="instrument-container" active="@true">
-                    <div class="inst-name ">
-                        <i class="bi bi-chevron-down"></i>&nbsp;
-                        @_selectedInstrument!.Name
-                    </div>
-                    
-                    @foreach (var job in _jobsAvailable[_selectedInstrument])
-                    {
-                        <div class="nav-item">
-                            <NavLink href="@UrlProvider($"microscopes/{_selectedInstrument.Name}{job.Key}")">
-                                @job.Value.DisplayName
-                            </NavLink>
+                <NullAware Value="@_selectedInstrument" TValue="IInstrument" Context="selectedInst">
+                    <div class="instrument-container" active="@true">
+                        <div class="inst-name ">
+                            <i class="bi bi-chevron-down"></i>&nbsp;
+                            @selectedInst.Name
                         </div>
-                    }
+                        
+                        @foreach (var job in _jobsAvailable[selectedInst])
+                        {
+                            <div class="nav-item">
+                                <NavLink href="@UrlProvider($"internal/microscopes/{selectedInst.Name}/{job.Key}")">
+                                    @job.Value.DisplayName
+                                </NavLink>
+                            </div>
+                        }
 
-                </div>
+                    </div>
+                </NullAware>
             }
             else
             {
