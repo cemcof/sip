@@ -6,7 +6,7 @@
 <div class="container maxw-50r form-container">
     
     <NullAware TValue="AppUser" Context="user" Value="_user">
-        <CEditForm TModelType="AppUser" class="card cform flex-labels-10" Model="@user" FormFooter="@(CEditForm<AppUser>.EmptyFooter)">
+        <CEditForm Context="form" TModelType="AppUser" class="card cform flex-labels-10" Model="@user" FormFooter="@(CEditForm<AppUser>.EmptyFooter)" OnSubmit="_OnVerifyAsync">
             <div class="card-header mb-2">
                 <h3 class="text-center">Please verify personal information of your account</h3>
             </div>
@@ -23,7 +23,7 @@
             </div>
 
             <div class="card-footer">
-                <InteractiveButton Caption="Save personal information" ContainerClass="text-center" BtnClass="btn btn-primary" OnClick="@_OnVerifyAsync"/>
+                <InteractiveButton Caption="Save personal information" ContainerClass="text-center" BtnClass="btn btn-primary" OnClick="@form.TrySubmit"/>
             </div>
         </CEditForm>
     </NullAware>
