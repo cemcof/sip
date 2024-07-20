@@ -64,7 +64,7 @@ public class OrcidOptions : OAuthOptions
         // UserInformationEndpoint = OrcidDefaults.UserInformationEndpoint;
         // Scope.Add("openid");
         Scope.Add("/authenticate");
-        Scope.Add("/read-public");
+        // Scope.Add("/read-public");
         TimeProvider = TimeProvider.System;
 
         ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "orcid");
