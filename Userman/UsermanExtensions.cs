@@ -45,7 +45,7 @@ public static class UsermanExtensions
         var fname = cp.FindFirstValue(ClaimTypes.GivenName);
         if (!string.IsNullOrWhiteSpace(fname)) return fname;
         fname = cp.FindFirstValue(ClaimTypes.Name);
-        return fname.Split(" ", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
+        return fname?.Split(" ", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
     }
 
     
@@ -54,7 +54,7 @@ public static class UsermanExtensions
         var sname = cp.FindFirstValue(ClaimTypes.Surname);
         if (!string.IsNullOrWhiteSpace(sname)) return sname;
         sname = cp.FindFirstValue(ClaimTypes.Name);
-        return sname.Split(" ", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
+        return sname?.Split(" ", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
     }
 
     
