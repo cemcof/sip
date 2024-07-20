@@ -345,7 +345,9 @@ button {
     min-width: 25rem;
 }
 
-
+.maxw-50r {
+    max-width: 50rem;
+}
 
 .dot {
     width: 10px;

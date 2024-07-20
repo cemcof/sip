@@ -14,7 +14,6 @@
     margin: 0.2rem;
 }
 
-
 .form-control {
     width: 100%;
     padding: 0.1rem 0.5rem;
@@ -42,6 +41,12 @@
     text-align: right;
     margin-right: 1rem;
 }
+
+
+.cform.flex-labels-10 .clabel-container {
+    flex: 0 0 10rem;
+}
+
 
 .cfilesystem-container .cinput-input-container,
 .clinemultiinput-container .cinput-input-container,

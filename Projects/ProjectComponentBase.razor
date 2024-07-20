@@ -23,7 +23,7 @@
     protected override async Task OnParametersSetAsync()
     {
         await ReloadProject();
-        User = await UserManager.FindByCpAsync(CpUser, CancellationToken.None) ?? throw new InvalidOperationException("Missing claims principal");
+        User = await UserManager.FindByCpAsync(CpUser) ?? throw new InvalidOperationException("Missing claims principal");
         Statuses = Project.ProjectStatuses.ToList();
         SelectedDocument = Project.ProjectDocuments.FirstOrDefault();
         StatusFlow = (await ProjectStatusManager.GetRelevantStatusInfosAsync(Project)).ToList();

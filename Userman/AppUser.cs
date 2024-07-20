@@ -17,7 +17,7 @@ public interface IUserInfo : IUserIdentification
 {
     string? EmailAddress { get; }
     string? Firstname { get;  }
-    string? Lastname { get; }
+    string? Lastname { get; }   
 }
 
 public interface IUserClientInfo : IUserInfo
@@ -126,8 +126,36 @@ public sealed class AppUser : IdentityUser<Guid>, IStringFilter, IEquatable<AppU
     
     [YamlIgnore, JsonIgnore] public List<IdentityUserLogin<Guid>> IdentityUserLogins { get; set; } = new();
 
+    // Defined as property to simplify binding to it and serializing it
     [NotMapped]
-    public string? Orcid => IdentityUserLogins.FirstOrDefault(iu => iu.LoginProvider == "orcid")?.ProviderKey;
+    public string? Orcid
+    {
+        get => IdentityUserLogins.FirstOrDefault(iu => iu.LoginProvider == OrcidDefaults.LOGIN_PROVIDER)?.ProviderKey; 
+        set
+        {
+            var orcLogin = IdentityUserLogins.FirstOrDefault(iu => iu.LoginProvider == OrcidDefaults.LOGIN_PROVIDER);
+            if (string.IsNullOrWhiteSpace(value)) // Caution, null vs empty
+            {
+                if (orcLogin is not null)
+                    IdentityUserLogins.Remove(orcLogin);
+                return;
+            }
+            
+            if (orcLogin is null)
+            {
+                IdentityUserLogins.Add(new IdentityUserLogin<Guid>()
+                {
+                    LoginProvider = OrcidDefaults.LOGIN_PROVIDER,
+                    ProviderKey = value,
+                    ProviderDisplayName = OrcidDefaults.DisplayName
+                });
+            }
+            else
+            {
+                orcLogin.ProviderKey = value;
+            }
+        }
+    }
 
 
     public bool IsFilterMatch(string filter = "")

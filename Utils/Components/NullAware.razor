@@ -3,6 +3,7 @@
 @if (Value is not null)
 {
     @if (WhenReady is not null) @WhenReady(Value!)
+    else if (ChildContent is not null) @ChildContent(Value!)
 }
 else
 {
@@ -13,6 +14,9 @@ else
 @code {
     [Parameter]
     public TValue? Value { get; set; }
+    
+    [Parameter] 
+    public RenderFragment<TValue>? ChildContent { get; set; }
     
     [Parameter]
     public RenderFragment<TValue>? WhenReady { get; set; }

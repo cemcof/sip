@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using sip.Auth;
+using sip.Auth.Verification;
+using sip.Auth.Verification.Contact;
 using sip.Core;
 using sip.Messaging;
 using sip.Organizations;
@@ -121,7 +123,6 @@ public class UsermanBuilder(IServiceCollection services, ILogger<UsermanBuilder>
             .AddEntityFrameworkStores<AppDbContext>()
             .AddDefaultTokenProviders()
             .AddClaimsPrincipalFactory<AppClaimsPrincipalFactory>();
-
         services.AddScoped<AppSignInManager>();
         services.AddSingleton<AppClaimsPrincipalFactory>();
         services.AddSingleton<AppUserManager>();
@@ -134,6 +135,7 @@ public class UsermanBuilder(IServiceCollection services, ILogger<UsermanBuilder>
                 opts.RequireAuthenticatedSignIn = false; // TODO if this is true, saml2 to external sign in is blocked due 
                 // to the fact that saml2 does not set authentication type. Resolve how?
             })
+            .AddContactVerification()
             .AddIdentityCookies(o => o.ApplicationCookie.Configure(ac =>
             {
                 // Configure application cookie = reject the user in case security stamp was changed

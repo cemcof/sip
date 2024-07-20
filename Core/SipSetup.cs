@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Diagnostics.Metrics;
 using sip.Auth;
 using sip.Auth.Jwt;
+using sip.Auth.Verification;
 using sip.CEITEC.CIISB;
 using sip.CEITEC.DirectAccess;
 using sip.Core.IndexRedirecting;
@@ -139,12 +140,15 @@ public class SipSetup(string[] args)
         
         se.AddAuthorization(o =>
         {
+            // Add policy with no requirement, added verifiers will overwrite it
+            o.AddPolicy(IVerificator.USER_VERIFICATION_POLICY, p => p.AddRequirements(new DummyAuthRequirement()));
         });
         
         // se.AddTransient<IAuthorizationPolicyProvider, PolicyProvider>();
         se.AddSingleton<IAuthorizationHandler, RoleNetworkAuthorizationHandler>();
         se.AddSingleton<IAuthorizationHandler, NotIpBlacklistedHandler>();
         se.AddSingleton<IAuthorizationHandler, AppUserRolesRequirementHandler>();
+        se.AddSingleton<IAuthorizationHandler, DummyAuthHandler>();
         
         // In memory cache
         se.AddMemoryCache();

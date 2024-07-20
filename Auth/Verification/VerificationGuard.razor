@@ -1,0 +1,69 @@
+@inject IEnumerable<IVerificator> Verificators
+@inject IAuthorizationService AuthorizationService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+
+@* Wrapper component that will force user to verify itself if it is necessary *@
+@if (_authResult is not null)
+{
+    @if (_authResult.Succeeded)
+    {
+        @ChildContent
+    }
+    else
+    {
+        @* From here, we will render the first verification component that is not satisfied *@
+        @if (_verificationComponent.HasValue)
+        {
+            <CDynamicComponent ComponentRenderInfo="@_verificationComponent.Value"></CDynamicComponent>
+        }
+    }
+}
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    
+    private ComponentRenderInfo? _verificationComponent;
+    private ClaimsPrincipal? _user;
+    private AuthorizationResult? _authResult;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _user = (await AuthenticationStateProvider.GetAuthenticationStateAsync()).User;
+        _authResult = await AuthorizationService.AuthorizeAsync(_user, IVerificator.USER_VERIFICATION_POLICY);
+        
+        if (!_authResult.Succeeded)
+        {
+            foreach (var verificator in Verificators)
+            {
+                if (!await verificator.IsVerifiedAsync(_user))
+                {
+                    _verificationComponent = _PrepareVerificationComponent(verificator);
+                    break;
+                }
+            }
+        }
+    }
+
+    private ComponentRenderInfo _PrepareVerificationComponent(IVerificator verificator) =>
+        new(
+            verificator.GetVerificationComponent(),
+            new Dictionary<string, object>
+            {
+                {
+                    nameof(IVerifierComponent.OnVerified), 
+                    EventCallback.Factory.Create(this, _OnVerified) 
+                },
+                {
+                    nameof(IVerifierComponent.User), 
+                    _user!
+                }
+            });
+
+    private void _OnVerified()
+    {
+        // Redirect and refresh page so the login is refreshed
+        var uri = "/login/refresh" + QueryString.Create("returnUrl", NavigationManager.Uri);
+        NavigationManager.NavigateTo(uri, forceLoad:true);
+    }
+}

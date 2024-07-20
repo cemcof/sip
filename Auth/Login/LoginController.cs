@@ -1,14 +1,13 @@
-using System.Net;
 using System.Web;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using sip.Userman;
 
-namespace sip.Auth;
+namespace sip.Auth.Login;
 
 public class LoginController(
         AppSignInManager         signInManager,
         AppUserManager           userManager,
+        IUserClaimsPrincipalFactory<AppUser> claimsPrincipalFactory,
         IOptions<AuthOptions>    authOptions,
         ILogger<LoginController> logger)
     : ControllerBase
@@ -161,6 +160,19 @@ public class LoginController(
         await signInManager.SignInAsync(targetUser, new AuthenticationProperties() {RedirectUri = returnUrl});
         
         return Redirect(returnUrl); // TODO - let redirection on signinmanager?
+    }
+
+    [HttpGet("/login/refresh")]
+    public async Task<IActionResult> RefreshLoginAsync(string returnUrl)
+    {
+        var user = await userManager.FindByCpAsync(HttpContext.User);
+        if (user is not null && HttpContext.User.IsAppAuthenticated())
+        {
+            var newCp = await claimsPrincipalFactory.CreateAsync(user);
+            await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, newCp);
+        }
+
+        return Redirect(HttpUtility.UrlDecode(returnUrl));
     }
 
     

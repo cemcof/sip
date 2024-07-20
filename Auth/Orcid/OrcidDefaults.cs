@@ -26,4 +26,6 @@ public static class OrcidDefaults
     /// The OAuth endpoint used to exchange access tokens.
     /// </summary>
     public static readonly string TokenEndpoint = "https://orcid.org/oauth/token";
+    
+    public const string ORCID_REGEX = @"^(\d{4}-){3}(\d|X){4}$";
 }

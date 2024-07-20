@@ -7,13 +7,15 @@
 @inject AppUserManager AppUserManager
 @inject IOrganizationProvider OrganizationProvider
 
+@using sip.Auth.Verification
+
 <Router AppAssembly="@typeof(AppOptions).Assembly">
     <Found Context="routeData">
         @if (_ready)
         {
             var componentContext = _GetOrganizationComponentContext(routeData);
             var orgSpecified = _GetOrganizationIdFromRoute(routeData) is not null;
-            
+
             @if (componentContext.Organization is null && orgSpecified)
             {
                 // Organization requested but not found, in that case, use not found component as well
@@ -23,20 +25,26 @@
             {
                 // All good, lets render normally
                 <CascadingAuthenticationState>
-                    <CascadingValue TValue="OrganizationComponentContext" Value="@componentContext" IsFixed="@true">
+                    <VerificationGuard>
 
-                        <AuthorizeViewByRequirements Requirements="@_GetPageAuthorizationRequirements(routeData).ToArray()">
-                            <Authorized>
-                                <RouteView RouteData="routeData"
-                                           DefaultLayout="@Options.CurrentValue.DefaultLayoutComponent"/>
-                            </Authorized>
+                        <CascadingValue TValue="OrganizationComponentContext" Value="@componentContext" IsFixed="@true">
 
-                            <NotAuthorized>
-                                <DynamicComponent Type="@Options.CurrentValue.UnauthorizedComponent"/>
-                            </NotAuthorized>
-                        </AuthorizeViewByRequirements>
+                            @* Lets require user to be verified *@
 
-                    </CascadingValue>
+
+                            <AuthorizeViewByRequirements Requirements="@_GetPageAuthorizationRequirements(routeData).ToArray()">
+                                <Authorized>
+                                    <RouteView RouteData="routeData"
+                                               DefaultLayout="@Options.CurrentValue.DefaultLayoutComponent"/>
+                                </Authorized>
+
+                                <NotAuthorized>
+                                    <DynamicComponent Type="@Options.CurrentValue.UnauthorizedComponent"/>
+                                </NotAuthorized>
+                            </AuthorizeViewByRequirements>
+
+                        </CascadingValue>
+                    </VerificationGuard>
                 </CascadingAuthenticationState>
             }
         }

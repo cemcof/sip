@@ -1,13 +1,7 @@
 using System.Linq.Expressions;
 using System.Web;
 using Microsoft.AspNetCore.Components.Web.Virtualization;
-using sip.Auth;
-using sip.Auth.Jwt;
 using sip.Core;
-using sip.Messaging;
-using sip.Organizations;
-using sip.Utils;
-using sip.Utils.Items;
 
 namespace sip.Userman;
 
@@ -358,14 +352,21 @@ public class AppUserManager(
         db.Update(user);
         await db.SaveChangesAsync();
     }
+    
+    private (IServiceScope, UserManager<AppUser>, AppDbContext) _PrepareScopedDbHelper(AppUser? attachUser = null) 
+    {
+        var scope = serviceScopeFactory.CreateScope();
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+        var ctx = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        if (attachUser is not null)
+            ctx.Attach(attachUser);
+        return (scope, userManager, ctx);
+    } 
 
     public async Task AddLoginAsync(AppUser user, UserLoginInfo externalLoginInfo)
     {
-        using var scope = serviceScopeFactory.CreateScope();
-        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-        var ctx = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        ctx.Attach(user);
-        
+        var (s, userManager, ctx) = _PrepareScopedDbHelper(user);
+        using var scope = s;
         await userManager.AddLoginAsync(user, externalLoginInfo);
     }
 
@@ -460,17 +461,24 @@ public class AppUserManager(
     }
     
     
-    public async Task<AppUser?> FindByCpAsync(ClaimsPrincipal claimsPrincipal, CancellationToken cancellationToken=default)
+    public async Task<AppUser?> FindByCpAsync(
+        ClaimsPrincipal claimsPrincipal, 
+        bool loadLoginInfo = false,
+        CancellationToken cancellationToken=default)
     {
         await using var db = await dbContextFactory.CreateDbContextAsync(cancellationToken);
 
         var validid = Guid.TryParse(claimsPrincipal.GetId(), out var id);
         if (validid)
         {
-            var result = await db.Set<AppUser>()
+            var qry = db.Set<AppUser>()
                 .Include(u => u.Contacts)
                 .Include(u => u.UserInRoles)
-                .FirstOrDefaultAsync(a => a.Id == id, cancellationToken);
+                .AsQueryable();
+            if (loadLoginInfo)
+                qry = qry.Include(u => u.IdentityUserLogins);
+            var result =
+                await qry.FirstOrDefaultAsync(a => a.Id == id, cancellationToken);
             return result;
         }
 
@@ -524,6 +532,18 @@ public class AppUserManager(
         return newUserModel.UserDetails;
     }
 
+    public async Task<IList<Claim>> GetClaimsAsync(AppUser user)
+    {
+        var (s, userManager, _) = _PrepareScopedDbHelper(user);
+        using var scope = s;
+        var result = await userManager.GetClaimsAsync(user);
+        return result;
+    }
 
-    
+    public async Task AddClaimsAsync(AppUser user, IEnumerable<Claim> claims, CancellationToken ct = default)
+    {
+        var (s, userManager, _) = _PrepareScopedDbHelper(user);
+        using var scope = s;
+        await userManager.AddClaimsAsync(user, claims);
+    }
 }

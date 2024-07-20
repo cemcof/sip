@@ -1,0 +1,57 @@
+@inject AppUserManager AppUserManager
+@inject ContactVerifierService ContactVerifierService
+@implements IVerifierComponent
+
+@* For verification that contact exists on the user and it's details are set *@
+<div class="container maxw-50r form-container">
+    
+    <NullAware TValue="AppUser" Context="user" Value="_user">
+        <CEditForm TModelType="AppUser" class="card cform flex-labels-10" Model="@user" FormFooter="@(CEditForm<AppUser>.EmptyFooter)">
+            <div class="card-header mb-2">
+                <h3 class="text-center">Please verify personal information of your account</h3>
+            </div>
+            
+            <div class="card-body">
+
+                @{ var contact = user.PrimaryContact; }
+                <CTextInput IsRequired="@true" DisplayName="Firstname" @bind-Value="contact.Firstname"/>
+                <CTextInput IsRequired="@true" DisplayName="Lastname" @bind-Value="contact.Lastname"/>
+                <CTextInput IsRequired="@true" DisplayName="Email" @bind-Value="contact.Email"/>
+                <CTextInput DisplayName="Phone" @bind-Value="contact.Phone"/>
+                <CTextInput DisplayName="Affiliation" @bind-Value="contact.Affiliation"/>
+                <CTextInput DisplayName="ORCID" @bind-Value="user.Orcid" NoteIn="In format: XXXX-XXXX-XXXX-XXXX"/>
+            </div>
+
+            <div class="card-footer">
+                <InteractiveButton Caption="Save personal information" ContainerClass="text-center" BtnClass="btn btn-primary" OnClick="@_OnVerifyAsync"/>
+            </div>
+        </CEditForm>
+    </NullAware>
+        
+    
+</div>
+
+@code {
+
+    [Parameter] public ClaimsPrincipal User { get; set; } = null!;
+    [Parameter] public EventCallback OnVerified { get; set; }
+
+    private AppUser? _user;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        ArgumentNullException.ThrowIfNull(User);
+        
+        _user = await AppUserManager.FindByCpAsync(User, loadLoginInfo: true);
+    }
+
+    private async Task _OnVerifyAsync()
+    {
+        ArgumentNullException.ThrowIfNull(_user, "_user != null");
+        
+        await AppUserManager.UpdateAsync(_user);
+        await ContactVerifierService.SetVerifiedAsync(User);
+        await OnVerified.InvokeAsync();
+    }
+
+}

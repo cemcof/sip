@@ -12,7 +12,7 @@ public class AppClaimsPrincipalFactory(
         {
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new(ClaimTypes.Name, user.Id.ToString()),
-            new(claimsIdentityOptions.Value.SecurityStampClaimType, user.SecurityStamp)
+            new(claimsIdentityOptions.Value.SecurityStampClaimType, user.SecurityStamp ?? string.Empty)
         };
         
         // Extract claims from user contacts
@@ -24,11 +24,17 @@ public class AppClaimsPrincipalFactory(
             if (!string.IsNullOrEmpty(userContact.Phone)) claimsToAdd.Add(new(ClaimTypes.MobilePhone, userContact.Phone));
         }
         
+        
+        
         // Now load roles 
         var roles = await appUserManager.GetRolesForUserAsync(user);
         claimsToAdd.AddRange(
             roles.Select(r => new Claim(ClaimTypes.Role, r.organization is null ? r.role.Id : $"{r.role.Id}/{r.organization.Id}"))
         );
+        
+        // Load user claims 
+        var userClaims = await appUserManager.GetClaimsAsync(user);
+        claimsToAdd.AddRange(userClaims.Select(c => new Claim(c.Type, c.Value)));
         
         var claimsIdentity =
             new ClaimsIdentity(claimsToAdd, IdentityConstants.ApplicationScheme); // TODO - consider using custom scheme for app auth
