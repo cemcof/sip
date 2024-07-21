@@ -48,7 +48,7 @@
     private async Task _OnVerifyAsync()
     {
         ArgumentNullException.ThrowIfNull(_user, "_user != null");
-        
+        Console.WriteLine("VERIFy ASYNC");
         await AppUserManager.UpdateAsync(_user);
         await ContactVerifierService.SetVerifiedAsync(User);
         await OnVerified.InvokeAsync();
