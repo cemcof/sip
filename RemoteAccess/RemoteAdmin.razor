@@ -24,7 +24,10 @@
                                 <div class="connection-item">
                                     <div class="connection-item-header">
                                         <div>@conn.Name</div>
-                                        <button @onclick="@(() => SessionConnect(subj.Key, conn))" class="btn btn-link">Connect</button>
+                                        <div class="link-group">
+                                            <button @onclick="@(() => SessionConnect(subj.Key, conn))" class="btn btn-link">Connect here</button>
+                                            <button @onclick="@(() => SessionConnect(subj.Key, conn, popup:true))" class="btn btn-link">Connect in popup <i class="bi bi-box-arrow-up-right"></i></button>
+                                        </div>
                                     </div>
 
                                     <Each class="connection-item-sessions" Items="@remoteStatus.GetActiveSessions(subj.Key, conn).ToList()">
@@ -34,7 +37,8 @@
                                                 <div>@sess.From.StandardFormat() - @sess.Until.StandardFormat()</div>
 
                                                 <div class="link-group">
-                                                    <button @onclick="@(() => SessionJoin(sess))" class="btn btn-link">Join</button>
+                                                    <button @onclick="@(() => SessionJoin(sess))" class="btn btn-link">Join here</button>
+                                                    <button @onclick="@(() => SessionJoin(sess, popup:true))" class="btn btn-link">Join in popup <i class="bi bi-box-arrow-up-right"></i></button>
                                                     <button @onclick="@(() => RemoteAccess.KillSession(sess))" class="btn btn-link">Kill</button>
                                                 </div>
                                             </div>
@@ -61,7 +65,7 @@
 
 @code {
     
-    private async Task SessionJoin(RemoteAccessSession session)
+    private async Task SessionJoin(RemoteAccessSession session, bool popup = false)
     {
         var cp = AuthUser;
         var openSessionRequest = new RemoteAccessSessionRequest(
@@ -74,10 +78,10 @@
         
         var newSession = await RemoteAccess.JoinSession(session, openSessionRequest);
 
-        await JsRuntime.InvokeVoidAsync("open", newSession.TargetUrl, "_blank");
+        await _Redirect(newSession.TargetUrl, popup);
     }
     
-    private async Task SessionConnect(IInstrument instrument, RemoteConnectionInfo connection)
+    private async Task SessionConnect(IInstrument instrument, RemoteConnectionInfo connection, bool popup = false)
     {
         var cp = AuthUser;
         
@@ -91,6 +95,19 @@
 
         var session = await RemoteAccess.OpenSession(openSessionRequest);
         
-        await JsRuntime.InvokeVoidAsync("open", session.TargetUrl, "_blank");
+        await _Redirect(session.TargetUrl, popup);
     }
+
+    private async Task _Redirect(string target, bool popup = false)
+    {
+        if (popup)
+        {
+            await JsRuntime.InvokeVoidAsync("open", target, "_blank");
+        }
+        else
+        {
+            NavigationManager.NavigateTo(target, forceLoad:true);
+        }
+    }
+
 }
