@@ -48,7 +48,7 @@
                              @foreach (var inst in scheduleData.InstrumentsToRender)
                              {
                                  <div class="instrument-container" style="@GetRowStyle(scheduleData)">
-                                     <div class="instrument-caption" style="@GetInstrumentStyle(inst)">
+                                     <div class="instrument-caption @inst.InstrumentSubject.DisplayTheme">
                                          <div class="instrument-caption-text">@inst.InstrumentSubject.Name</div>
                                      </div>
                                      <div class="instrument-reservations">
@@ -57,7 +57,7 @@
                                              var renderInfo = GetEntryDayRenderInfo(res, day);
                                              @if (renderInfo.HasValue)
                                              {
-                                                 <div @onclick="@(_ => ShowResDetails(res))" class="reservation" style="@GetReservationStyle(res, inst, renderInfo.Value)">
+                                                 <div @onclick="@(_ => ShowResDetails(res))" class="reservation @inst.InstrumentSubject.DisplayTheme" style="@GetReservationStyle(res, inst, renderInfo.Value)">
                                                      <div class="reservation-caption">@res.ForUser.Lastname (@res.CreatedBy.Lastname)</div>
                                                  </div>
                                              }
@@ -236,11 +236,6 @@
         return (start, end - start);
     }
 
-    private string GetInstrumentStyle(ScheduleInstrument si)
-    {
-        return $"background-color: {si.InstrumentSubject.DisplayTheme}";
-    }
-
     private string GetReservationColour(ScheduleReservation sr)
     {
         return sr.Type switch {
@@ -254,12 +249,10 @@
         ScheduleInstrument scheduleInstrument, 
         (double offset, double width) renderInfo)
     {
-        return $"color: {GetReservationColour(sr)}; " +
-               $"margin-left: {renderInfo.offset}%; " +
-               $"width: {renderInfo.width}%; " +
-               $"background-color: {scheduleInstrument.InstrumentSubject.DisplayTheme}";
+        return $"margin-left: {renderInfo.offset}%; " +
+               $"width: {renderInfo.width}%; ";
     }
-
+    
     private string GetHourOffsetStyle(int hour)
     {
         var offset = _dayDistribution.Take(hour).Sum();
