@@ -508,6 +508,13 @@ public class AppUserManager(
 
         return null;
     }
+    
+    public async Task<IEntityContext<AppUser>?> FindByCpEditableAsync(ClaimsPrincipal cp, CancellationToken ct = default)
+    {
+        var user = await FindByCpAsync(cp, loadLoginInfo:true, cancellationToken: ct);
+        return user is null ? null : new EfCoreEntityContext<AppDbContext, AppUser>(user, dbContextFactory);
+    }
+    
 
     // -------- TODO
 

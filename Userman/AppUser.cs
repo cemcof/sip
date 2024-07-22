@@ -133,15 +133,9 @@ public sealed class AppUser : IdentityUser<Guid>, IStringFilter, IEquatable<AppU
         get => IdentityUserLogins.FirstOrDefault(iu => iu.LoginProvider == OrcidDefaults.LOGIN_PROVIDER)?.ProviderKey; 
         set
         {
-            var orcLogin = IdentityUserLogins.FirstOrDefault(iu => iu.LoginProvider == OrcidDefaults.LOGIN_PROVIDER);
-            if (string.IsNullOrWhiteSpace(value)) // Caution, null vs empty
-            {
-                if (orcLogin is not null)
-                    IdentityUserLogins.Remove(orcLogin);
-                return;
-            }
-            
-            if (orcLogin is null)
+            IdentityUserLogins.RemoveAll(iu => iu.LoginProvider == OrcidDefaults.LOGIN_PROVIDER);
+
+            if (!string.IsNullOrEmpty(value))
             {
                 IdentityUserLogins.Add(new IdentityUserLogin<Guid>()
                 {
@@ -149,10 +143,6 @@ public sealed class AppUser : IdentityUser<Guid>, IStringFilter, IEquatable<AppU
                     ProviderKey = value,
                     ProviderDisplayName = OrcidDefaults.DisplayName
                 });
-            }
-            else
-            {
-                orcLogin.ProviderKey = value;
             }
         }
     }

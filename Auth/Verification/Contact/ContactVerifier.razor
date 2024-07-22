@@ -1,11 +1,12 @@
 @inject AppUserManager AppUserManager
 @inject ContactVerifierService ContactVerifierService
 @implements IVerifierComponent
+@implements IDisposable
 
 @* For verification that contact exists on the user and it's details are set *@
 <div class="container maxw-50r form-container">
     
-    <NullAware TValue="AppUser" Context="user" Value="_user">
+    <NullAware TValue="AppUser" Context="user" Value="@(_user?.Entity)">
         <CEditForm Context="form" TModelType="AppUser" class="card cform flex-labels-10" Model="@user" FormFooter="@(CEditForm<AppUser>.EmptyFooter)" OnSubmit="_OnVerifyAsync">
             <div class="card-header mb-2">
                 <h3 class="text-center">Please verify personal information of your account</h3>
@@ -36,22 +37,24 @@
     [Parameter] public ClaimsPrincipal User { get; set; } = null!;
     [Parameter] public EventCallback OnVerified { get; set; }
 
-    private AppUser? _user;
-
-    protected override async Task OnParametersSetAsync()
+    private IEntityContext<AppUser>? _user;
+    
+    protected override async Task OnInitializedAsync()
     {
-        ArgumentNullException.ThrowIfNull(User);
-        
-        _user = await AppUserManager.FindByCpAsync(User, loadLoginInfo: true);
+        _user = await AppUserManager.FindByCpEditableAsync(User);
+
+        if (_user is null) throw new NotAvailableException();
     }
 
     private async Task _OnVerifyAsync()
     {
         ArgumentNullException.ThrowIfNull(_user, "_user != null");
-        Console.WriteLine("VERIFy ASYNC");
-        await AppUserManager.UpdateAsync(_user);
+        
+        await _user.SaveChangesAsync();
         await ContactVerifierService.SetVerifiedAsync(User);
         await OnVerified.InvokeAsync();
     }
+
+    public void Dispose() => _user?.Dispose();
 
 }
