@@ -89,6 +89,9 @@ public class AppUserManager(
 
         var result = await contactQuery.ToListAsync(cancellationToken: filter.CancellationToken);
         
+        logger.LogTrace("GetUsers: filter={}, offsetreq={}, countreq={}, count {}, resultcount {}", 
+            filter.FilterQuery, filter.Offset, filter.Count, count, result.Count);
+        
         return new ItemsResult<AppUser>(result.Select(c => c.AppUser), count);
     }
 
