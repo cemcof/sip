@@ -39,7 +39,7 @@ public class RawSqlEntityMerger<TDbContext>(
 
                 var principalColName = fkc.PrincipalColumns.Single().Name;
                 var referencingColName = fkc.Columns.Single().Name;
-                var referencingTableName = tb.Name;
+                var referencingTableName = tb.SchemaQualifiedName;
                 var fromPkStr = fromPk.ToString();
                 var toPkStr = toPk.ToString();
                 // TODO - handle pk argument better
