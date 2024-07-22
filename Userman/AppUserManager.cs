@@ -69,30 +69,51 @@ public class AppUserManager(
         await using var db = await dbContextFactory.CreateDbContextAsync(filter.CancellationToken);
         
         var contactQuery = db.Set<Contact>()
-            .Where(c => c.IsPrimary);
-        
-        if (filter.FilterQuery is not null)
-        {
-            // Filter by firstname, lastname of email
-            contactQuery = contactQuery.Where(c => c.Firstname!.Contains(filter.FilterQuery) || 
-                                                   c.Lastname!.Contains(filter.FilterQuery) || 
-                                                   c.Email!.Contains(filter.FilterQuery));
-        }
-        
-        var count = await contactQuery.CountAsync();
-        
-        contactQuery = contactQuery
             .Include(c => c.AppUser)
-            .OrderBy(c => c.Lastname)
-            .Skip(filter.Offset)
-            .Take(filter.Count);
-
+            .Where(c => c.IsPrimary)
+            .AsNoTracking();
+        
+        
+        // if (filter.FilterQuery is not null)
+        // {
+        //     // Filter by firstname, lastname of email
+        //     contactQuery = contactQuery.Where(c =>
+        //         EF.Functions.Like(c.Firstname ?? string.Empty, $"%{filter.FilterQuery}%") ||
+        //         EF.Functions.Like(c.Lastname ?? string.Empty, $"%{filter.FilterQuery}%") ||
+        //         EF.Functions.Like(c.Email ?? string.Empty, $"%{filter.FilterQuery}%"));
+        // }
+        
+        // var count = await contactQuery.CountAsync();
+        //
+        //
+        // contactQuery = contactQuery
+        //     .Include(c => c.AppUser)
+        //     .OrderBy(c => c.Lastname)
+        //     .Skip(filter.Offset)
+        //     .Take(filter.Count);
+        
+        // Implmentation above does not solve solve punctuation and case sensitivity problem
+        // For now, fetch all of them and filter in memory instead
         var result = await contactQuery.ToListAsync(cancellationToken: filter.CancellationToken);
         
-        logger.LogTrace("GetUsers: filter={}, offsetreq={}, countreq={}, count {}, resultcount {}", 
-            filter.FilterQuery, filter.Offset, filter.Count, count, result.Count);
+        var resultUsers = result
+            .Where(c => c.IsFilterMatch(filter.FilterQuery))
+            .Select(r => r.AppUser)
+            .Distinct()
+            .OrderBy(r => r.Lastname)
+            .ToList();
+            
+        var count = resultUsers.Count;
+        resultUsers = resultUsers    
+            .Skip(filter.Offset)
+            .Take(filter.Count)
+            .ToList();
         
-        return new ItemsResult<AppUser>(result.Select(c => c.AppUser), count);
+        
+        logger.LogTrace("GetUsers: filter={}, offsetreq={}, countreq={}, count {}, resultcount {}", 
+            filter.FilterQuery, filter.Offset, filter.Count, count, resultUsers.Count);
+        
+        return new ItemsResult<AppUser>(resultUsers, count);
     }
 
 

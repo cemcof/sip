@@ -8,7 +8,7 @@ namespace sip.Userman;
 // insert into Contact (ContactId, Email, Firstname, Lastname, IsPrimary, AppUserId) 
 // SELECT uuid(), Email, Firstname, Lastname, 1, Id from AppUsers where 1
 
-public class Contact
+public class Contact : IStringFilter
 {
     public Guid ContactId { get; set; }
     
@@ -38,4 +38,7 @@ public class Contact
 
     public Guid AppUserId { get; set; }
     [JsonIgnore] public AppUser AppUser { get; set; } = null!;
+
+    public bool IsFilterMatch(string? filter) => 
+        StringUtils.IsFilterMatchAtLeastOneOf(filter, Firstname, Lastname, Email, Affiliation);
 }

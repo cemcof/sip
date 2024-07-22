@@ -83,7 +83,7 @@
     
     private async ValueTask<ItemsProviderResult<AppUser>> _OperatorsProvider(ItemsProviderRequest request, string? searchstring)
     {
-        var users = await UserManager.GetUsersAsync(request.ToFilter());
+        var users = await UserManager.GetUsersAsync(request.ToFilter(searchstring));
         return new ItemsProviderResult<AppUser>(users.Items, users.TotalCount);
     }
 

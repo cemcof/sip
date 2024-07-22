@@ -45,7 +45,7 @@
 
     private async ValueTask<ItemsProviderResult<Sample>> _GetSamples(ItemsProviderRequest request, string? searchstring)
     {
-        var samplesResult = await SampleRepo.LoadSamplesAsync(request.ToFilter());
+        var samplesResult = await SampleRepo.LoadSamplesAsync(request.ToFilter(searchstring));
         return new ItemsProviderResult<Sample>(samplesResult.Items, samplesResult.TotalCount);
     }
 
