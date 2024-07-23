@@ -23,13 +23,19 @@
                     </div>
                 </div>
             </ItemTemplate>
+            
+            <Footer>
+                @if (context.State is not CDropdown<AppUser>.DropdownState.AlternativeMode)
+                {
+                    <button class="btn btn-outline-primary" @onclick="@context.EnterAltMode">New user</button>
+                }
+            </Footer>
 
             <AlternativeBody Context="dropdown">
-                 <CEditForm TModelType="AppUser" Context="form"
-                           ModelFactory="@(UserManager.CreateItem)"
+                 <CEditForm TModelType="NewUserModel" Context="form"
                            OnSubmit="@((p) => _createUserSubmit(p, dropdown))"
                            OnCancel="@(() => dropdown.SelectItem(null))">
-                    <CreateUser Model="@dropdown.Value"></CreateUser>
+                     <UserCreateForm Model="@form.Model" />
                 </CEditForm>
             </AlternativeBody>
 
@@ -50,24 +56,24 @@
         Exp.User = Exp.Operator;
     }
     
-    private async Task _onNewUser(AppUser u)
-    {
-        await UserManager.NewUserAsync(new NewUserModel() {UserDetails = u});
-        await UserManager.EnsureUserInRole(new UserInRole {UserId = u.Id, RoleId = nameof(LabUserRole), OrganizationId = Exp.OrganizationId});
-        // await _accountManager.RequestAccountActivation(acc.Id);
-    }
-    
     private async ValueTask<ItemsProviderResult<AppUser>> _UsersProvider(ItemsProviderRequest request, string? searchstring)
     {
         var users = await UserManager.GetUsersAsync(request.ToFilter(searchstring));
         return new ItemsProviderResult<AppUser>(users.Items, users.TotalCount);
     }
-
-    private async Task _createUserSubmit(AppUser appUser, CDropdown<AppUser> dropdown)
+    
+    // Handle creating new users 
+    private Task _onNewUserClick(CDropdown<AppUser> dropdownComponent)
     {
-        await UserManager.PersistItem(appUser);
-        await dropdown.SelectItem(appUser);
+        dropdownComponent.EnterAltMode();
+        return Task.CompletedTask;
     }
 
-
+    private async Task _createUserSubmit(NewUserModel appUser, CDropdown<AppUser> dropdown)
+    {
+        await UserManager.NewUserAsync(appUser);
+        // Add to lab user role 
+        await UserManager.EnsureUserInRole(UserInRole.FromUser<LabUserRole>(appUser.UserDetails, Exp.Organization));
+        await dropdown.SelectItem(appUser.UserDetails);
+    }
 }

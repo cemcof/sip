@@ -42,8 +42,16 @@
                     {
                         @AlternativeBody(this)
                     }
-
-                    @if (Footer is not null) @Footer(this)
+                        
+                    @if (Footer is not null)
+                    {
+                        // Prevent blurring and therefore hiding the dropdown - TODO - can be done better with different? Is touch supported?  
+                        <div class="card-footer"
+                             @onmousedown="@(() => {})" @onmousedown:preventDefault="@true" 
+                             @onclick="@(() => {})" @onclick:preventDefault="@true">
+                             @Footer(this)
+                        </div>
+                    }
 
                 </ToolTip>
 

@@ -15,6 +15,16 @@ public class UserInRole
 
     public Guid UserId { get; set; }
     public AppUser User { get; set; } = null!;
+
+    public static UserInRole FromUser<TRole>(AppUser user, IOrganization? org)
+    {
+        return new UserInRole()
+        {
+            UserId = user.Id,
+            OrganizationId = org?.Id,
+            RoleId = typeof(TRole).Name
+        };
+    }
 }
 
 public class UserInRoleEntityTypeConfiguration : IEntityTypeConfiguration<UserInRole>
