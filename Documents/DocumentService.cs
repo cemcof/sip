@@ -1,3 +1,4 @@
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Internal;
 using sip.Core;
 using sip.Documents.Proposals;
@@ -15,7 +16,7 @@ public class DocumentService(
     ILogger<DocumentService> logger,
     HandlebarsService handlebarsService,
     MsWordRenderer msWordRenderer,
-    IEmbeddedFilesProvider embeddedFilesProvider,
+    EmbeddedFileProvider embeddedFilesProvider,
     TimeProvider timeProvider,
     WeasyPrintPdfRenderer pdfRenderer,
     ZipArchiver archiver,

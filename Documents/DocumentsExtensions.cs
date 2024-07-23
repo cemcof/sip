@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.FileProviders;
 using sip.Core;
 using sip.Documents.Proposals;
 using sip.Documents.Renderers;
@@ -25,7 +26,7 @@ public class DocumentsBuilder
 
         _services.TryAddSingleton<DocumentService>();
         _services.TryAddSingleton<ZipArchiver>();
-        _services.TryAddSingleton<IEmbeddedFilesProvider, EmbeddedFilesProvider>();
+        _services.TryAddSingleton<EmbeddedFileProvider>(s => new EmbeddedFileProvider(Assembly.GetExecutingAssembly()));
 
         // Add renderers 
         _services.TryAddSingleton<MsWordRenderer>();
