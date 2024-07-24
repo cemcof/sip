@@ -13,7 +13,7 @@
     <div class="exp-overview flex-grow-1">
         <div class="fw-bold">@Exp.SecondaryId / @Exp.Sample.Name</div>
         
-        <div>@Exp.Operator.Fullname -&gt; @Exp.User.Fullname</div>
+        <div>@Exp.Operator.Fullname -&gt; @Exp.User.Fullname, @Exp.Storage.SourceDirectory -&gt; @Exp.Storage.Path</div>
         <em>Started @Exp.DtCreated.HappenAgo(), last log @((_lastLog?.Dt ?? Exp.DtCreated).HappenAgo(stripSeconds: false))</em>
         @* @if (MightBeDone) *@
         @* { *@
