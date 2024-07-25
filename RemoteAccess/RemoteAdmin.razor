@@ -33,8 +33,11 @@
                                     <Each class="connection-item-sessions" Items="@remoteStatus.GetActiveSessions(subj.Key, conn).ToList()">
                                         <Item Context="sess">
                                             <div class="subj-item">
-                                                <div class="user-identif">@sess.ForUser.Firstname @sess.ForUser.Lastname (@sess.ForUser.Id)</div>
-                                                <div>@sess.From.StandardFormat() - @sess.Until.StandardFormat()</div>
+                                                <div class="user-identif fw-bold" title="@sess.ForUser.Id">@sess.ForUser.Firstname @sess.ForUser.Lastname</div>
+                                                <div class="small">
+                                                    @sess.From.StandardFormat() <br/>
+                                                    @sess.Until.StandardFormat()
+                                                </div>
 
                                                 <div class="link-group">
                                                     <button @onclick="@(() => SessionJoin(sess))" class="btn btn-link">Join here</button>
