@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.JsonPatch.Operations;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Internal;
 using sip.Core;
@@ -218,21 +219,17 @@ public class ExperimentEngine(
         string            message,
         CancellationToken ct = default)
     {
-        await using var context = await dbContextFactory.CreateDbContextAsync(ct);
-
-        context.Set<Log>()
-            .Add(new Log()
-            {
-                Id           = Guid.NewGuid(),
-                Dt           = DateTime.UtcNow,
-                ExperimentId = exp.Id,
-                Message      = message,
-                Origin       = "LIMS Webserver",
-                Level        = level
-            });
-
-        await context.SaveChangesAsync(ct);
-        // OnExperimentChanged();
+        var log = new Log
+        {
+            Id           = Guid.NewGuid(),
+            Dt           = DateTime.UtcNow,
+            ExperimentId = exp.Id,
+            Message      = message,
+            Origin       = "LIMS Webserver",
+            Level        = level
+        };
+        
+        await SubmitLogsAsync([log], ct);
     }
 
     public async Task SubmitLogsAsync(List<Log> logs, CancellationToken ct)
@@ -240,11 +237,32 @@ public class ExperimentEngine(
         if (!logs.Any()) return;
 
         await using var context = await dbContextFactory.CreateDbContextAsync(ct);
+        
+        // For now, UPSERT logs one by one 
+        var logsSet = context.Set<Log>();
+        
+        foreach (var log in logs)
+        {
+            try
+            {
+                var hasLog = await logsSet.CountAsync(l => log.Id == l.Id, cancellationToken: ct);
+                if (hasLog == 0)
+                {
+                    logsSet.Add(log);
+                }
+                else
+                {
+                    logsSet.Update(log);
+                }
 
-        context.Set<Log>()
-            .AddRange(logs);
+                await context.SaveChangesAsync(ct);
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e, "Failed to save experiment log: {@Log}", log);       
+            }
+        }
 
-        await context.SaveChangesAsync(ct);
         OnExperimentChanged(null);
     }
 
