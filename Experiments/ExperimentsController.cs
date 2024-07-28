@@ -135,7 +135,8 @@ public class ExperimentsController(
             log.Dt = DateTime.SpecifyKind(log.Dt, DateTimeKind.Utc);
         }
         
-        logger.LogInformation("Received logs: {@Logs}", logs);
+        logger.LogInformation("Received logs {Count}", logs.Count);
+        
 
         try
         {
