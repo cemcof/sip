@@ -256,7 +256,6 @@ public class ExperimentEngine(
                 }
 
                 await context.SaveChangesAsync(ct);
-                Console.Write("Saved log " + log.Id);
             }
             catch (Exception e)
             {
