@@ -135,7 +135,17 @@ public class ExperimentsController(
             log.Dt = DateTime.SpecifyKind(log.Dt, DateTimeKind.Utc);
         }
         
-        await experimentEngine.SubmitLogsAsync(logs, ct);
+        logger.LogInformation("Received logs: {@Logs}", logs);
+
+        try
+        {
+            await experimentEngine.SubmitLogsAsync(logs, ct);
+        }
+        catch (Exception e) when (e is OperationCanceledException or TaskCanceledException)
+        {
+            logger.LogWarning("Operation canceled");
+        }
+        
         return Ok();
     }
     
