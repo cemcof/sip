@@ -135,7 +135,8 @@ public class ExperimentsController(
             log.Dt = DateTime.SpecifyKind(log.Dt, DateTimeKind.Utc);
         }
         
-        logger.LogInformation("Received logs {Count}", logs.Count);
+        logger.LogInformation("Received logs {Count}, distinct count {}", logs.Count, logs.DistinctBy(l => l.Id).Count());
+        
         
 
         try
