@@ -1,5 +1,6 @@
 <VerticalLayout>
-    <CTextInput @ref="_focusCompRef" @bind-Value="@Model.Title" DisplayName="Name"></CTextInput>
+    <CTextInput @ref="_focusCompRef" @bind-Value="@Model.Title" DisplayName="Title" IsRequired="@true"/>
+    <CTextInput @bind-Value="@Model.Acronym" DisplayName="Acronym" IsRequired="@true"/>
 </VerticalLayout>
 
 @code {

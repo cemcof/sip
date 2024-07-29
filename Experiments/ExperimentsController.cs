@@ -127,15 +127,16 @@ public class ExperimentsController(
     // }
     
     [HttpPost("logs")]
-    public async Task<IActionResult> SubmitLogsAsync([FromBody] List<Log> logs, CancellationToken ct)
+    public IActionResult SubmitLogsAsync([FromBody] List<Log> logs)
     {
         // Fix the date time kind of log messages, they are UTC, but were loaded as Local by the stupid model binder!
         foreach (var log in logs) 
         {
             log.Dt = DateTime.SpecifyKind(log.Dt, DateTimeKind.Utc);
+            logger.Log(log.Level, "Explog {}: {}", log.ExperimentId, log.Message);
         }
         
-        await experimentEngine.SubmitLogsAsync(logs, ct);
+        Task.Run(() => experimentEngine.SubmitLogsAsync(logs, CancellationToken.None));
         return Ok();
     }
     
