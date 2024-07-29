@@ -289,7 +289,10 @@ public class ExperimentEngine(
     {
         await using var context = await dbContextFactory.CreateDbContextAsync(ct);
         context.Attach(exp);
+        logger.LogDebug("Patching experiment {} by JsonPatch ApplyTo {}, \n state={}", 
+            exp.SecondaryId, string.Join(';', data.Operations.Select(o => $"op={o.op} path={o.path} value={o.value}")), exp.State);
         data.ApplyTo(exp);
+        logger.LogDebug("Patched experiment {}, state={}", exp.SecondaryId, exp.State);
         await context.SaveChangesAsync(ct);
         OnExperimentChanged(exp);
     }
