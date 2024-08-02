@@ -24,9 +24,9 @@
                                 <div class="connection-item">
                                     <div class="connection-item-header">
                                         <div>@conn.Name</div>
-                                        <div class="link-group">
-                                            <button @onclick="@(() => SessionConnect(subj.Key, conn))" class="btn btn-link">Connect here</button>
-                                            <button @onclick="@(() => SessionConnect(subj.Key, conn, popup:true))" class="btn btn-link">Connect in popup <i class="bi bi-box-arrow-up-right"></i></button>
+                                        <div class="btn-group btn-group-sm">
+                                            <button @onclick="@(() => SessionConnect(subj.Key, conn))" class="btn btn-outline-primary btn-sm">Connect</button>
+                                            <button @onclick="@(() => SessionConnect(subj.Key, conn, popup:true))" class="btn btn-outline-primary btn-sm">Connect <i class="bi bi-box-arrow-up-right"></i></button>
                                         </div>
                                     </div>
 
@@ -35,14 +35,14 @@
                                             <div class="subj-item">
                                                 <div class="user-identif fw-bold" title="@sess.ForUser.Id">@sess.ForUser.Firstname @sess.ForUser.Lastname</div>
                                                 <div class="small">
-                                                    @sess.From.StandardFormat() <br/>
-                                                    @sess.Until.StandardFormat()
+                                                    Since: @sess.From.StandardFormat() <br/>
+                                                    Until: @sess.Until.StandardFormat()
                                                 </div>
 
-                                                <div class="link-group">
-                                                    <button @onclick="@(() => SessionJoin(sess))" class="btn btn-link">Join here</button>
-                                                    <button @onclick="@(() => SessionJoin(sess, popup:true))" class="btn btn-link">Join in popup <i class="bi bi-box-arrow-up-right"></i></button>
-                                                    <button @onclick="@(() => RemoteAccess.KillSession(sess))" class="btn btn-link">Kill</button>
+                                                <div class="btn-group btn-group-sm">
+                                                    <button @onclick="@(() => SessionJoin(sess))" class="btn btn-outline-primary btn-sm">Join</button>
+                                                    <button @onclick="@(() => SessionJoin(sess, popup:true))" class="btn btn-outline-primary btn-sm">Join <i class="bi bi-box-arrow-up-right"></i></button>
+                                                    <button @onclick="@(() => RemoteAccess.KillSession(sess))" class="btn btn-outline-danger btn-sm">Kill</button>
                                                 </div>
                                             </div>
                                         </Item>
