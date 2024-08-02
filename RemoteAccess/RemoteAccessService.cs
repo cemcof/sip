@@ -86,6 +86,9 @@ public class RemoteAccessService(
     public async Task<RemoteAccessSession> OpenSession(RemoteAccessSessionRequest sessionRequest)
     {
         var gcOpts = gcOptions.Get(sessionRequest.ForInstrument.Organization.Id);
+        
+        await KillReqClientSessions(sessionRequest);
+        
         var guacaModel = GuacamoleDriver.GenerateSingleConnectionAuthModel(GenerateSessionName(sessionRequest),
             sessionRequest.Expiration,
             sessionRequest.ForInstrument.Name + "/" + sessionRequest.ForConnection.Name,
@@ -155,7 +158,6 @@ public class RemoteAccessService(
     public async Task KillSession(RemoteAccessSession sessionInfo)
     {
         var gcOpts = gcOptions.Get(sessionInfo.ForInstrument.Organization.Id);
-        
         if (_sessions.TryGetValue(sessionInfo, out var session) && !string.IsNullOrEmpty(session.AuthToken))
         {
             await guacamoleDriver.RemoveSessionIfExists(gcOpts.BaseUrl, session.AuthToken);
@@ -163,6 +165,26 @@ public class RemoteAccessService(
         }
 
     }
+
+    /// <summary>
+    /// Kill existing "same" sessions as would be opened by given request.
+    /// Same session is when:
+    /// - User is same
+    /// - Host is same 
+    /// </summary>
+    /// <param name="req"></param>
+    public async Task KillReqClientSessions(RemoteAccessSessionRequest req)
+    {
+        var toBeKilled = _sessions.Where(
+                s => s.ForUser.Id == req.ForUser.Id &&
+                     s.ForConnection.Hostname == req.ForConnection.Hostname)
+            .ToArray();
+        
+        foreach (var killme in toBeKilled)
+        {
+            await KillSession(killme);
+        }
+    } 
 
     public Task<IEnumerable<RemoteAccessSessionRequest>> GetAuthorizedSessionsForUser(IOrganization organization,
         IUserClientInfo forUser)
