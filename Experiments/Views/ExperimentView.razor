@@ -80,28 +80,55 @@
             
             @if (Exp.Storage.StorageEngine.StartsWith("irods"))
             {
-                <p>Your dataset has been stored in iRODS cloud. To <strong>download your data</strong>, use our prepared script</p>
+                <p>Your dataset has been stored in iRODS cloud. To <strong>download your data</strong>, 
+                    you may use our prepared script.</p>
 
                 <p><strong>On Linux <i class="fab fa-linux"></i> / macOS <i class="fab fa-apple"></i>:</strong></p>
 
                 <ol>
-                    <li>Open terminal and navigate to the directory where you want to download your data</li>
-                    <li>Copy following command, which will download a script that will execute and download the dataset.
+                    <li>Open terminal and navigate to the directory where you want your data downloaded</li>
+                    <li>To download the dataset, execute following command:
                         <CopiableCode CodeContent="@_GetIrodsFetchUnixOneliner()"></CopiableCode>
                     </li>
-                    <li>Paste it to the terminal and hit enter, follow instructions if any</li>
+                    
+                </ol>
+                    
+                <p>If previous command does not work, you can follow next steps one by one:</p>
+
+                <ol>
+                    <li>Ensure that python3 and pip are installed on your system.</li>
+                    <li>iRODS client for Python is also required, once you have Python, install it by the following command:
+                        <CopiableCode CodeContent="python3 -m pip install python-irodsclient" />
+                    </li>
+                    
+                    <li>
+                        Use for example wget to fetch our download script:
+                        <CopiableCode CodeContent="wget https://raw.githubusercontent.com/cemcof/cemcof.github.io/main/irods_fetch.py" />
+                    </li>
+                    
+                    <li>Start the data downloading using the following command:
+                        <CopiableCode CodeContent="@_GetPythonFetch()" />
+                    </li>
+                    
+                    
                 </ol>
 
                 <p><strong>On Windows <i class="bi bi-windows text-primary">:</i></strong></p>
 
                 <ol>
-                    <li>Go to a folder where you want do download your data</li>
-                    <li>Hold shift and right click</li>
-                    <li>Select "Open Powershell here"</li>
-                    <li>Copy following command:
-                        <CopiableCode CodeContent="@_GetPowershellFetch()"></CopiableCode>
+                    <li>You need to have <a href="https://www.python.org/downloads/">Python 3 and pip installed on your computer</a></li>
+                    <li>iRODS client for Python is also required, once you have Python, install it by the following command:
+                        <CopiableCode CodeContent="python3 -m pip install python-irodsclient" />
+                        </li>
+                    <li>In powershell, navigate to the folder where you want to have your dataset downloaded. You can do so 
+                        by right-clicking with shift in Windows explorer and selecting "Open Powershell here"</li>
+                    <li>Fetch our download script using the following command:
+                        <CopiableCode CodeContent="iwr https://raw.githubusercontent.com/cemcof/cemcof.github.io/main/irods_fetch.py -outfile irods_fetch.py" /></li>
+                    <li>Start the data downloading using the following command: 
+                        <CopiableCode CodeContent="@_GetPythonFetch()" />
                     </li>
-                    <li>Paste it to the powershell window and hit enter, follow instructions if any</li>
+                    <li>Keep the script running, it should download files one by one a report all of them. For large datasets, it 
+                        may take several seconds until script scans the files and starts the download process.</li>
                 </ol>
 
                 @* <div class="access-ways-container"> *@
@@ -217,6 +244,9 @@
     private string _GetPowershellFetch()
         => "Invoke-Command -ScriptBlock ([Scriptblock]::Create((iwr \"https://raw.githubusercontent.com/cemcof/cemcof.github.io/main/irods_fetch_win.ps1\").Content)) " +
            $"-ArgumentList ($args + @('--host', '{Exp.Storage.Target}', '-t', '{Exp.Storage.Token}', '-c', '{Exp.Storage.Path}'))";
+    
+    private string _GetPythonFetch()
+        => $"python3 irods_fetch.py --host {Exp.Storage.Target} -t {Exp.Storage.Token} -c {Exp.Storage.Path}";
     
     private string _SshTarget() => $"{Exp.Storage.Target}:{Exp.Storage.Path}";
 
