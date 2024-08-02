@@ -6,6 +6,7 @@ public class ExperimentOptions
 {
     public string DisplayName { get; set; } = null!;
     public string DisplayTheme { get; set; } = "default";
+    public int DisplayOrder { get; set; } = int.MaxValue;
 
     public Dictionary<string, DataLifecycleOptions> DataLifecycles { get; set; } = new();
     public Dictionary<string, Workflow> Workflows { get; set; } = new();

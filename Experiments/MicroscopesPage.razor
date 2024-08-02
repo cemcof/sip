@@ -56,7 +56,7 @@
                         </NavLink>
                         @if (InstrumentId == inst.Key.Name)
                         {
-                            @foreach (var exp in inst.Value)
+                            @foreach (var exp in inst.Value.OrderBy(v => v.Value.DisplayOrder))
                             {
                                 <div class="nav-item">
                                     <NavLink href="@UrlProvider($"microscopes/{inst.Key.Name}/{exp.Key}")">
@@ -140,7 +140,7 @@
                 if (string.IsNullOrEmpty(ExperimentType))
                 {
                     NavigationManager.NavigateTo(UrlProvider($"microscopes/" + InstrumentId + "/" + 
-                                                              instrumentJobs[selectedInstrument].First().Key));
+                                                              instrumentJobs[selectedInstrument].MinBy(i => i.Value.DisplayOrder).Key));
                     return;
                 }
 
