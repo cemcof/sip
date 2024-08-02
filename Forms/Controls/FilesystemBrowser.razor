@@ -268,9 +268,9 @@
 
     public override IEnumerable<string> SelfValidate(ValidationContext validationContext)
     {
-        Logger.LogTrace("Validating: {Value}, {@Items}, PickFolder={}", CurrentValue, _items, PickFolder);
 
         var picked = PickedItem;
+        Logger.LogTrace("Validating: {Value}, {@Items}, PickFolder={}, PickedItem={}", CurrentValue, _items, PickFolder, PickedItem);
         if (picked is null && IsRequired) 
             yield return "Filesystem path is required";
 
