@@ -286,4 +286,24 @@ public class ExperimentsService(
 
         return result;
     }
+
+    public async Task CleanLogsAsync(Func<Experiment, DateTime> olderThanProvider, CancellationToken ct = default)
+    {
+        await using var db = await dbContextFactory.CreateDbContextAsync(ct);
+        var exp = db.Set<Experiment>();
+        var exps = await exp.Where(e => e.Logs.Any())
+            .ToArrayAsync(cancellationToken: ct);
+        logger.LogDebug("Found {} experiments with logs", exps.Length);
+        
+        exps = exps.Where(e => e.DtCreated < olderThanProvider(e)).ToArray();
+        logger.LogDebug("About to clean logs for {} experiments", exps.Length);
+        
+        foreach (var experiment in exps)
+        {
+            logger.LogDebug("Cleaning logs for experiment {}", experiment.SecondaryId);
+            await db.Set<Log>()
+                .Where(l => l.ExperimentId == experiment.Id)
+                .ExecuteDeleteAsync(ct);
+        }
+    }
 }

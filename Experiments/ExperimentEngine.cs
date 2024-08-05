@@ -193,11 +193,7 @@ public class ExperimentEngine(
     
     protected override async Task ExecuteRoundAsync(CancellationToken stoppingToken)
     {
-        // Request expiration of experiments that are ready to be expired
-        await experimentsService.ExpireExperiments(ct: stoppingToken);
-        
-        // Request publication of experiments that are ready to be published (after embargo period)
-        await experimentsService.PublishExperiments(ct: stoppingToken);
+        // TODO - implement idle experiment stop
     }
 
     protected virtual void OnExperimentChanged(Experiment? exp)

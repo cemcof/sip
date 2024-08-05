@@ -6,6 +6,9 @@ public class ExperimentsOptions
 {
     public Dictionary<IInstrument, Dictionary<string,ExperimentOptions>> InstrumentJobs { get; set; } = new();
     
+    public ExperimentOptions FindExpOpts(string instrumentName, string technique) 
+        => InstrumentJobs.First(kv => kv.Key.Name == instrumentName).Value[technique];
+    
     public string FindTheme(Experiment experiment)
     {   
         // Find instrument
