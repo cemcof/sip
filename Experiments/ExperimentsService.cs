@@ -286,6 +286,7 @@ public class ExperimentsService(
 
         return result;
     }
+    
 
     public async Task CleanLogsAsync(Func<Experiment, DateTime> olderThanProvider, CancellationToken ct = default)
     {
@@ -304,6 +305,18 @@ public class ExperimentsService(
             await db.Set<Log>()
                 .Where(l => l.ExperimentId == experiment.Id)
                 .ExecuteDeleteAsync(ct);
+        }
+    }
+
+    public async Task StopIdleActiveExperimentsAsync(Func<Experiment,bool> isExpIdle, CancellationToken stoppingToken)
+    {
+        var exps = await GetExperimentsAsync(new ExperimentsFilter(ExpStates: [ExpState.Active]));
+        var idleExps = exps.Items.Where(isExpIdle).ToList();
+        logger.LogDebug("Found {} idle active experiments", idleExps.Count);
+        foreach (var exp in idleExps)
+        {
+            logger.LogDebug("Stopping idle active experiment {}", exp.SecondaryId);
+            
         }
     }
 }

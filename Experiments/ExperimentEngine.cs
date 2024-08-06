@@ -194,6 +194,14 @@ public class ExperimentEngine(
     protected override async Task ExecuteRoundAsync(CancellationToken stoppingToken)
     {
         // TODO - implement idle experiment stop
+        // Stop idle experiments
+        bool IsExpIdle(Experiment e)
+        {
+            var idleTimeout = experimentsOptions.Get(e.OrganizationId).FindExpOpts(e.InstrumentName, e.Technique)
+                .IdleTimeout;
+        }
+
+        await experimentsService.StopIdleActiveExperimentsAsync(IsExpIdle, stoppingToken);
     }
 
     protected virtual void OnExperimentChanged(Experiment? exp)
