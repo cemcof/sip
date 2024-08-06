@@ -23,7 +23,6 @@
                                OnValueSet="@SelectWorkflow"
                                DisplayName="Workflow template"
                                @bind-Value="@SelectedWorkflow"
-                               AutoDefault="@true"
                                ItemsProvider="_WorkflowTemplateItemsProvider">
                         <ItemTemplate>
                             <div class="py-1">
@@ -39,8 +38,16 @@
                             </div>
                         </ItemTemplate>
                         
-                        <SelectedItemTemplate>
-                            <div>@wfctx.Title</div>
+                        <SelectedItemTemplate Context="selWf">
+                            <NullAware TValue="Workflow" Value="@selWf">
+                                <WhenReady>
+                                    <div>@selWf.Title</div>
+                                </WhenReady>
+                                
+                                <WhenNull>
+                                    <div>&lt;no workflow&gt; <span class="text-muted"> click to select workflow if processing is desired </span></div>
+                                </WhenNull>
+                            </NullAware>
                         </SelectedItemTemplate>
 
                     </CDropdown>
@@ -54,7 +61,12 @@
                 <WorkflowGeneralRenderer Workflow="@SelectedWorkflow"
                                          InspectResult="@_inspectResult">
                 </WorkflowGeneralRenderer>
-            } 
+            }
+            else
+            {
+                <div class="text-center fs-5 text-info">You have not selected any workflow, the job will run only as data transfer without
+                    processing</div>
+            }
         </div>
         
         </Body>
@@ -64,28 +76,27 @@
 
 @code {
     private bool ShowWorkflowSetup => Exp.Processing.State is not ProcessingState.Disabled;
-    
+
     [Parameter] public Experiment Exp { get; set; } = null!;
     private Experiment? _prevExp = null;
-    
-    [Parameter]
-    public ExperimentOptions ExpMeta { get; set; } = null!;
-    
+
+    [Parameter] public ExperimentOptions ExpMeta { get; set; } = null!;
+
     protected override void OnParametersSet()
     {
         if (!ReferenceEquals(_prevExp, Exp))
         {
             SelectedWorkflow = null;
         }
-        
+
         _prevExp = Exp;
     }
 
-    
+
     // Processing / workflow setup state
     private Workflow? _selectedWorkflow;
     private DynamicFormTools.InspectResult? _inspectResult;
-    
+
     public Workflow? SelectedWorkflow
     {
         get => _selectedWorkflow;
@@ -96,9 +107,9 @@
             if (value is not null)
             {
                 // Logger.LogDebug("WF data {} {}", value.Data, value.Data?.GetType());
-                Logger.LogDebug("WF JSON: {}", JsonSerializer.Serialize(value.Data, new JsonSerializerOptions() { WriteIndented = true }));
+                Logger.LogDebug("WF JSON: {}", JsonSerializer.Serialize(value.Data, new JsonSerializerOptions() {WriteIndented = true}));
                 _inspectResult = DynamicFormTools.DynamicInspect(value.Data);
-                Logger.LogDebug("APPLIED RESULT: {}", JsonSerializer.Serialize(_inspectResult.Target, new JsonSerializerOptions() { WriteIndented = true }));
+                Logger.LogDebug("APPLIED RESULT: {}", JsonSerializer.Serialize(_inspectResult.Target, new JsonSerializerOptions() {WriteIndented = true}));
                 Exp.Processing.Workflow = _inspectResult.Target;
                 Exp.Processing.WorkflowRef = value.Id;
                 // Select processing engine - look for it in the tags, use configured engines to determine which tag is the engine
@@ -113,17 +124,18 @@
             {
                 Exp.Processing.Workflow = null;
                 Exp.Processing.WorkflowRef = null;
+                Exp.Processing.ProcessingEngine = string.Empty;
                 Logger.LogDebug("Workflow cleared");
             }
-            
+
         }
     }
-    
+
     private void SelectWorkflow(Workflow pipeline)
     {
         SelectedWorkflow = pipeline;
     }
-    
+
     private async ValueTask<ItemsProviderResult<Workflow>> _WorkflowTemplateItemsProvider(ItemsProviderRequest request, string? searchstring)
     {
         var wfs = await WorkflowProvider.GetWorkflowsAsync(new WorkflowFilter(
@@ -131,14 +143,13 @@
                 Tags: Exp.Processing.WorkflowTags)
             )
             .ToListAsync();
-        
+
         var result = wfs.Where(kv =>
-            StringUtils.IsFilterMatchAtLeastOneOf(searchstring, kv.Title, kv.Description))
+                StringUtils.IsFilterMatchAtLeastOneOf(searchstring, kv.Title, kv.Description))
             .ToList();
-        
+
         return new ItemsProviderResult<Workflow>(result, result.Count);
     }
 
-
-
 }
+
