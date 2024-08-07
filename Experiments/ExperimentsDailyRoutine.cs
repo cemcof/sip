@@ -3,7 +3,8 @@ using sip.Scheduling;
 
 namespace sip.Experiments;
 
-public class ExperimentsDailyRoutine(IOptionsMonitor<ScheduledServiceOptions> optionsMonitor, TimeProvider timeProvider, ILogger logger,
+public class ExperimentsDailyRoutine(IOptionsMonitor<ScheduledServiceOptions> optionsMonitor, TimeProvider timeProvider, 
+    ILogger<ExperimentsDailyRoutine> logger,
     ExperimentsService experimentsService, IOptionsMonitor<ExperimentsOptions> experimentsOptions) 
     : ScheduledService(optionsMonitor, timeProvider, logger)
 {
