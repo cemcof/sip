@@ -154,12 +154,13 @@ public class ExperimentEngine(
     }
 
     
-    public Task ChangeStatusAsync(ExpState to, Experiment forExp)
+    public  Task ChangeStatusAsync(ExpState to, Experiment forExp)
     {   
         var jsonPatch = new JsonPatchDocument<Experiment>();
         jsonPatch.Replace(e => e.State, to);
         return PatchExperimentAsync(forExp, jsonPatch, CancellationToken.None);
     }
+
     
     public Task ChangeStorageStatusAsync(StorageState to, Experiment forExp)
     {   
@@ -193,12 +194,14 @@ public class ExperimentEngine(
     
     protected override async Task ExecuteRoundAsync(CancellationToken stoppingToken)
     {
-        // TODO - implement idle experiment stop
-        // Stop idle experiments
+        // Stopping idle experiments
         bool IsExpIdle(Experiment e)
         {
             var idleTimeout = experimentsOptions.Get(e.OrganizationId).FindExpOpts(e.InstrumentName, e.Technique)
                 .IdleTimeout;
+            return idleTimeout.HasValue && e.State == ExpState.Active 
+                                        && e.Storage.DtLastUpdate != default 
+                                        && e.Storage.DtLastUpdate < DateTime.UtcNow - idleTimeout;
         }
 
         await experimentsService.StopIdleActiveExperimentsAsync(IsExpIdle, stoppingToken);

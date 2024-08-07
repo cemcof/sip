@@ -307,6 +307,27 @@ public class ExperimentsService(
                 .ExecuteDeleteAsync(ct);
         }
     }
+    
+    /// <summary>
+    /// Change status to given status only if the current status is "from" status
+    /// </summary>
+    /// <param name="fromState"></param>
+    /// <param name="toStatus"></param>
+    /// <param name="forExp"></param>
+    public async Task<bool> ChangeStatusFromAsync(ExpState fromState, ExpState toStatus, Experiment forExp)
+    {
+        await using var context = await dbContextFactory.CreateDbContextAsync();
+        var updateResult = await context.Set<Experiment>()
+            .Where(e => e.Id == forExp.Id && e.State == fromState)
+            .ExecuteUpdateAsync(ps => ps.SetProperty(p=> p.State, toStatus));
+        if (updateResult == 1)
+        {
+            forExp.State = toStatus;
+            return true;
+        }
+
+        return false;
+    }
 
     public async Task StopIdleActiveExperimentsAsync(Func<Experiment,bool> isExpIdle, CancellationToken stoppingToken)
     {
@@ -316,7 +337,7 @@ public class ExperimentsService(
         foreach (var exp in idleExps)
         {
             logger.LogDebug("Stopping idle active experiment {}", exp.SecondaryId);
-            
+            await ChangeStatusFromAsync(ExpState.Active, ExpState.StopRequested, exp);
         }
     }
 }
