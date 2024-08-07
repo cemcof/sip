@@ -1,5 +1,3 @@
-using System.Security.Principal;
-
 namespace sip.Auth.Verification;
 
 public interface IVerificator

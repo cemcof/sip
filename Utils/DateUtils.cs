@@ -1,5 +1,3 @@
-using Microsoft.Extensions.Internal;
-
 namespace sip.Utils;
 
 public static class DateUtils

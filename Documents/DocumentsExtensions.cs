@@ -6,7 +6,6 @@ using sip.Documents.Renderers;
 using sip.Documents.Renderers.Handlebars;
 using sip.Documents.Renderers.Pdf;
 using sip.Documents.Renderers.Word;
-using sip.Utils;
 
 namespace sip.Documents;
 

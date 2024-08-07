@@ -1,4 +1,3 @@
-using System.Net.Http.Headers;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -10,8 +9,7 @@ namespace sip.Auth.Orcid;
 public class OrcidHandler(
         IOptionsMonitor<OrcidOptions> options,
         ILoggerFactory                logger,
-        UrlEncoder                    encoder,
-        IHttpClientFactory httpClientFactory)
+        UrlEncoder                    encoder)
     : OAuthHandler<OrcidOptions>(options, logger, encoder)
 {
     protected override async Task<AuthenticationTicket> CreateTicketAsync(ClaimsIdentity identity,

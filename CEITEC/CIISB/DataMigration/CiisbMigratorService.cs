@@ -7,7 +7,6 @@
 // 3) Run the migration on page /migr
 
 using System.Data;
-using System.Net;
 using System.Text.Json;
 using System.Web;
 using MySqlConnector;
@@ -16,13 +15,8 @@ using sip.CEITEC.CIISB.Proposals.Extension;
 using sip.CEITEC.CIISB.Proposals.PeerReview;
 using sip.CEITEC.CIISB.Proposals.TechnicalFeasibility;
 using sip.Core;
-using sip.Documents;
 using sip.Documents.Proposals;
-using sip.Messaging;
-using sip.Organizations;
-using sip.Projects;
 using sip.Projects.Statuses;
-using sip.Userman;
 
 namespace sip.CEITEC.CIISB.DataMigration;
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.

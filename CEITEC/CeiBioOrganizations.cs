@@ -1,5 +1,3 @@
-using sip.Organizations;
-
 namespace sip.CEITEC;
 
 // ======== Organization types ==========

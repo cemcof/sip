@@ -1,5 +1,3 @@
-using sip.Utils;
-
 namespace sip.Userman;
 
 public class RoleDefinition : INamedSetup<RoleOptions>

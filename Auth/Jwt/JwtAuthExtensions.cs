@@ -1,6 +1,5 @@
 using System.Web;
 using Microsoft.AspNetCore.Authentication;
-using sip.Userman;
 
 namespace sip.Auth.Jwt;
 
@@ -124,7 +123,7 @@ public static class JwtAuthExtensions
         }
 
         // Check for token presence in headers
-        string authorization = ctx.Request.Headers.Authorization;
+        string? authorization = ctx.Request.Headers.Authorization;
 
         // If no authorization header found, nothing to process further
         if (!string.IsNullOrEmpty(authorization) &&

@@ -4,13 +4,11 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 namespace sip.Auth.Saml2;
 public static class Saml2Ext
 {
-    
     /// <summary>
     /// Adds Saml2 authentication configured via <see cref="IConfigurationSection"/>. Scheme name will be the section key />
     /// </summary>
     /// <param name="builder"></param>
     /// <param name="configurationSection"></param>
-    /// <param name="configure"></param>
     public static AuthenticationBuilder AddSaml2(this AuthenticationBuilder builder, IConfigurationSection configurationSection)
     {
         

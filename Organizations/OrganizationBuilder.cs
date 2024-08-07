@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using sip.Core;
 using sip.Organizations.Centers;
-using sip.Utils;
 
 namespace sip.Organizations;
 

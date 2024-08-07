@@ -1,5 +1,3 @@
-using sip.Utils;
-
 namespace sip.Projects.Statuses;
 
 public class StatusDefinition : INamedSetup<StatusOptions>

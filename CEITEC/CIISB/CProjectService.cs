@@ -1,16 +1,10 @@
 // ========= Implementation of CIISB projects ============
 
-using Microsoft.Extensions.Internal;
 using sip.CEITEC.CIISB.Proposals.Creation;
 using sip.CEITEC.CIISB.Proposals.TechnicalFeasibility;
 using sip.Core;
-using sip.Documents;
 using sip.Documents.Proposals;
-using sip.Messaging;
-using sip.Projects;
 using sip.Projects.Statuses;
-using sip.Userman;
-using sip.Utils;
 
 namespace sip.CEITEC.CIISB;
 

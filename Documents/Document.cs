@@ -1,6 +1,4 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using sip.Organizations;
-using sip.Projects;
 
 namespace sip.Documents;
 

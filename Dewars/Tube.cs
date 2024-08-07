@@ -106,8 +106,6 @@ INSERT INTO `sample_storage` (`Id`, `User`, `Description`, `LastChange`) VALUES
  * 
  */
 
-using sip.Organizations;
-
 namespace sip.Dewars;
 
 /// <summary>

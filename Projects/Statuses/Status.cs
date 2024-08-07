@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using sip.Organizations;
 
 namespace sip.Projects.Statuses;
 

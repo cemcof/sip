@@ -1,11 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
-using sip.Auth;
-using sip.Auth.Verification;
 using sip.Auth.Verification.Contact;
 using sip.Core;
-using sip.Messaging;
-using sip.Organizations;
-using sip.Utils;
 
 namespace sip.Userman;
 

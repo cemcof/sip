@@ -1,5 +1,3 @@
-using sip.Utils;
-
 namespace sip.Organizations;
 
 public class OrganizationDefinition : INamedSetup<OrganizationOptions>

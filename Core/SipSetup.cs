@@ -2,21 +2,10 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.EntityFrameworkCore.Scaffolding;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Diagnostics.Metrics;
-using sip.Auth;
-using sip.Auth.Jwt;
 using sip.Auth.Verification;
 using sip.CEITEC.CIISB;
 using sip.CEITEC.DirectAccess;
 using sip.Core.IndexRedirecting;
-using sip.Documents;
-using sip.Messaging;
-using sip.Organizations;
-using sip.Projects;
-using sip.Userman;
-using sip.Utils;
 
 namespace sip.Core;
 

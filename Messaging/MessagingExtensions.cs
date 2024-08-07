@@ -1,7 +1,6 @@
 using sip.Core;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using sip.Messaging.Email;
-using sip.Projects;
 using sip.Scheduling;
 
 namespace sip.Messaging;

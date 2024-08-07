@@ -1,5 +1,3 @@
-using sip.Userman;
-
 namespace sip.Auth;
 
 public interface IAppUserProvider

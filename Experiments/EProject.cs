@@ -1,7 +1,3 @@
-using sip.Core;
-using sip.Projects;
-using sip.Utils;
-
 namespace sip.Experiments;
 
 public class EProject : Project, IStringFilter

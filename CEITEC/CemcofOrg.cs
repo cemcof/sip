@@ -1,5 +1,3 @@
-using sip.Userman;
-
 namespace sip.CEITEC;
 //
 // public class CeitecEmOrg : OrganizationRef

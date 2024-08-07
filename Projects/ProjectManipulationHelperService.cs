@@ -1,10 +1,6 @@
 using System.Linq.Expressions;
 using sip.Core;
-using sip.Documents;
 using sip.Documents.Proposals;
-using sip.Organizations;
-using sip.Userman;
-using sip.Utils;
 
 namespace sip.Projects;
 

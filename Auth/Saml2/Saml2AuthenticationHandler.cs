@@ -1,6 +1,8 @@
 using System.Text.Encodings.Web;
 using System.Web;
+using DocumentFormat.OpenXml;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.Primitives;
 
 namespace sip.Auth.Saml2;
 
@@ -28,11 +30,16 @@ public class Saml2AuthenticationHandler(
 
     protected override async Task<HandleRequestResult> HandleRemoteAuthenticateAsync()
     {
-        // TODO - try/catch?
+        // From here it is safe to either throw exceptions or use HandleRequestResult.Fail, framework wraps it anyways.
         // TODO - support query together with form? 
-        var samlResponse = Request.Form["SAMLResponse"];
+        string? samlResponse = Request.Form["SAMLResponse"];
+        if (string.IsNullOrWhiteSpace(samlResponse))
+            return HandleRequestResult.Fail("No SAMLResponse found in the request form");
+        
         var samlResponseDecoded = Convert.FromBase64String(samlResponse);
-        var relayState = Request.Form["RelayState"];
+        string? relayState = Request.Form["RelayState"][0];
+        if (string.IsNullOrWhiteSpace(relayState))
+            return HandleRequestResult.Fail("No RelayState found in the request form");
         
         Logger.LogDebug("Received saml response: \nSAMLResponse={} \nSAMLResponseDecoded={} \nRelayState={}", 
             samlResponse, Encoding.UTF8.GetString(samlResponseDecoded), relayState);

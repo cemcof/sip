@@ -1,7 +1,6 @@
 using MailKit;
 using MailKit.Net.Imap;
 using MailKit.Search;
-using Microsoft.Extensions.Internal;
 using sip.Scheduling;
 
 namespace sip.Messaging.Email;

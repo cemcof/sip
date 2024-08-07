@@ -1,6 +1,3 @@
-using sip.Auth;
-using sip.Utils;
-
 namespace sip.Userman;
 
 public static class ClaimsPrincipalExtensions

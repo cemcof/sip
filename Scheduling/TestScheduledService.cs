@@ -1,5 +1,3 @@
-using Microsoft.Extensions.Internal;
-
 namespace sip.Scheduling;
 
 /// <summary>

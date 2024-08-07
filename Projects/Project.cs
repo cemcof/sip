@@ -1,11 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using sip.Documents;
 using sip.Documents.Proposals;
-using sip.Messaging;
-using sip.Organizations;
 using sip.Projects.Statuses;
-using sip.Userman;
-using sip.Utils;
 
 namespace sip.Projects;
 
