@@ -5,5 +5,5 @@ namespace sip.Experiments;
 public interface IExperimentHandler
 {
     Task RequestStart(Experiment experiment);
-    Task RequestStop(Experiment  experiment);
+    Task RequestStop(Experiment experiment, ExperimentStopModel stopModel);
 }

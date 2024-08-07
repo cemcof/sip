@@ -95,21 +95,23 @@ public class ExperimentEngine(
         // _logger.LogExp(LogLevel.Information, experiment, $"Requested experiment run.");
     }
 
-    public async Task RequestStop(Experiment experiment)
+    public async Task RequestStop(Experiment experiment, ExperimentStopModel stopModel)
     { 
         await SubmitLogAsync(experiment, LogLevel.Information,
             "Experiment stop requested, waiting for processing machines...");
         
         Logger.LogDebug("Requesting stop for experiment {Id} notify={NotifyUser}, notes={Notes}",
-            experiment.Id, experiment.NotifyUser, experiment.Notes);
-        
-        await using (var dbctx = await dbContextFactory.CreateDbContextAsync())
-        {
-            dbctx.Entry(experiment).State = EntityState.Modified;
-            await dbctx.SaveChangesAsync();
-        }
-        
-        await ChangeStatusAsync(ExpState.StopRequested, experiment);
+            experiment.Id, stopModel.NotifyUser, stopModel.Notes);
+
+        await using var dbctx = await dbContextFactory.CreateDbContextAsync();
+        dbctx.Entry(experiment).State = EntityState.Unchanged;
+            
+        experiment.NotifyUser = stopModel.NotifyUser;
+        experiment.Notes = stopModel.Notes;
+        experiment.State = ExpState.StartRequested;
+            
+        await dbctx.SaveChangesAsync();
+        OnExperimentChanged(experiment);
     }
 
     public async Task<Experiment?> GetRunningExperimentAsync(
