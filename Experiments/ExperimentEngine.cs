@@ -109,7 +109,7 @@ public class ExperimentEngine(
             
         experiment.NotifyUser = stopModel.NotifyUser;
         experiment.Notes = stopModel.Notes;
-        experiment.State = ExpState.StartRequested;
+        experiment.State = ExpState.StopRequested;
             
         await dbctx.SaveChangesAsync();
         OnExperimentChanged(experiment);
