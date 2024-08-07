@@ -21,7 +21,8 @@
                            AdditionalClass="@FieldCssClass"
                            OnNavigationKeyDown="_searchInputNavigationKeyDown"
                            OnSearchFocused="_searchInputFocused"
-                           OnSearchBlurred="_searchInputBlurred">
+                           OnSearchBlurred="_searchInputBlurred"
+                           Placeholder="@Placeholder">
 
                 </SearchBar>
 
@@ -111,6 +112,8 @@
     // If default value is set, automatically select first value from the provider instead
     [Parameter]
     public bool AutoDefault { get; set; }
+    
+    [Parameter] public string? Placeholder { get; set; }
 
     protected override async Task OnInitializedAsync()
     {

@@ -158,6 +158,8 @@ public class CEditForm<TModelType> : ComponentBase, IDisposable
     {
         // Ensure we always have the Model
         // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+        
+        // TODO - this is wrong! will overwrite on each component update (Model becomes always null from parameter)
         if (Model is null)
         {
             if (ModelFactory is not null) Model = ModelFactory.Invoke();

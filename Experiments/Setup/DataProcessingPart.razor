@@ -23,7 +23,8 @@
                                OnValueSet="@SelectWorkflow"
                                DisplayName="Workflow template"
                                @bind-Value="@SelectedWorkflow"
-                               ItemsProvider="_WorkflowTemplateItemsProvider">
+                               ItemsProvider="_WorkflowTemplateItemsProvider"
+                               Placeholder="<no workflow> click to select workflow if processing is desired">
                         <ItemTemplate>
                             <div class="py-1">
                                 <span class="fw-bold">@wfctx.Title</span> <br/>
@@ -39,15 +40,7 @@
                         </ItemTemplate>
                         
                         <SelectedItemTemplate Context="selWf">
-                            <NullAware TValue="Workflow" Value="@selWf">
-                                <WhenReady>
-                                    <div>@selWf.Title</div>
-                                </WhenReady>
-                                
-                                <WhenNull>
-                                    <div>&lt;no workflow&gt; <span class="text-muted"> click to select workflow if processing is desired </span></div>
-                                </WhenNull>
-                            </NullAware>
+                            <div>@selWf.Title</div>
                         </SelectedItemTemplate>
 
                     </CDropdown>
@@ -64,7 +57,7 @@
             }
             else
             {
-                <div class="text-center fs-5 text-info">You have not selected any workflow, the job will run only as data transfer without
+                <div class="text-center text-info">You have not selected any workflow, the job will run only as data transfer without
                     processing</div>
             }
         </div>
