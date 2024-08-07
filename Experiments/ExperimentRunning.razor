@@ -7,6 +7,7 @@
 @inject DocumentService DocumentService
 @inject ExperimentsService ExperimentsService
 @inject ILogger<ExperimentRunning> Logger
+@implements IDisposable
 
 <div class="exp-status-bar status-@Exp.State d-flex align-items-center p-3">
     
@@ -57,7 +58,7 @@
 </div>
 
 <div class="exp-log-results-container">
-    <Loglist Autorefresh="@true" LogsProvider="@_logsProvider"></Loglist>
+    <Loglist @ref="@_logListComponent" LogsProvider="@_logsProvider" />
     
     @* In cas there is some processing, show results *@
     @* There are possibly multiple documents and files, make it possible to select between them *@
@@ -90,16 +91,28 @@
     // TODO - make this configurable per experiment type...
     private bool MightBeDone => (DateTime.UtcNow - (_lastLog?.Dt ?? Exp.DtCreated)) > TimeSpan.FromMinutes(1);
 
+    protected override void OnInitialized()
+    {
+        ExpHandler.ExperimentLogAdded += OnExpHandlerOnExperimentLogAdded;
+    }
+    
+    public void Dispose()
+    {
+        ExpHandler.ExperimentLogAdded -= OnExpHandlerOnExperimentLogAdded;
+    }
+
+    private async void OnExpHandlerOnExperimentLogAdded(IReadOnlyCollection<Log> logs)
+    {
+        if (_logListComponent is not null && logs.Any(l => l.ExperimentId == Exp.Id))
+        {
+            await _logListComponent.ReloadLogsAsync();
+        }
+    }
+
     protected override async Task OnParametersSetAsync()
     {
-        if (_logListComponent is not null)
-        {
-            await _logListComponent.RefreshAsync();
-        }
-
         var logLast = await LogProvider.GetLogsAsync(Exp, LogLevel.Information, new ItemsProviderRequest(0, 1, default));
         _lastLog = logLast.Items.FirstOrDefault();
-        
         
         await DocumentService.LoadDocumentAsync(Exp.Processing.ResultReport);
 
@@ -122,8 +135,8 @@
     }
 
 
-    private LogLIstTabbed? _logListComponent;
     public FileMetadata? _currentFilePreview;
+    private Loglist? _logListComponent;
 
     private ValueTask<ItemsProviderResult<FileMetadata>> _docItemsProvider(ItemsProviderRequest request)
     {

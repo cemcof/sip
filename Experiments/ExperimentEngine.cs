@@ -32,6 +32,7 @@ public class ExperimentEngine(
     private readonly SmtpSender           _emailService = emailService;
 
     public event Action? ExperimentChanged;
+    public event Action<IReadOnlyCollection<Log>>? ExperimentLogAdded;
 
     public Experiment CreateExperiment(Organization organization, string instrument, string technique)
     {
@@ -58,7 +59,7 @@ public class ExperimentEngine(
     }
 
     public Task<Experiment> GetExperimentAsync(Guid id, CancellationToken cancellationToken)
-        => experimentsService.GetExperimentAsync(id, true, cancellationToken);
+        => experimentsService.GetExperimentAsync(id, false, cancellationToken);
 
 
     public async Task RequestStart(Experiment experiment)
@@ -118,16 +119,11 @@ public class ExperimentEngine(
         (string center, string instrument, string job) key,
         CancellationToken                              cancellationToken = default)
     {
-        var cached = memoryCache.TryGetValue(key, out Guid activeExperiment);
-        if (cached) return await GetExperimentAsync(activeExperiment, cancellationToken);
-
         var experiments = await experimentsService.GetExperimentsAsync(new ExperimentsFilter(
             ExpStates: new List<ExpState>() {ExpState.Active, ExpState.StartRequested, ExpState.StopRequested}
         ));
         
         var exp = experiments.Items.FirstOrDefault(e => e.KeyIdentif == key);
-        if (exp is not null)
-            memoryCache.Set(key, exp.Id);
         return exp;
     }
 
@@ -272,7 +268,7 @@ public class ExperimentEngine(
             }
         }
 
-        OnExperimentChanged(null);
+        ExperimentLogAdded?.Invoke(logs);
     }
 
     public async Task RequestPublicationAsync(Experiment exp, CancellationToken ct = default)
