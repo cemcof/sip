@@ -26,7 +26,11 @@ public static class DewarsExtensions
             entity.Ignore(x => x.TrimmedId);
             entity.Ignore(x => x.IsEmpty);
         });
-        services.Configure<DewarsOptions>(conf.GetSection("Dewars"));
+        
+        services.AddOptions<DewarsOptions>()
+            .GetOrganizationOptionsBuilder(conf)
+            .BindOrganizationConfiguration("Dewars");
+        
         services.AddSingleton<TubesService>();
     }
 }

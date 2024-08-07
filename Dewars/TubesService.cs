@@ -64,7 +64,7 @@ public class TubesService(IDbContextFactory<AppDbContext> dbContextFactory, ILog
         await using var dbContext = await dbContextFactory.CreateDbContextAsync(ct);
         
         tube.LastChange = DateTime.UtcNow;
-        var trackedEntry = await dbContext.Set<Tube>().FindAsync(tube.Structure);
+        var trackedEntry = await dbContext.Set<Tube>().FindAsync(tube.Structure, tube.OrganizationId);
         if (trackedEntry is null)
         {
             dbContext.Set<Tube>().Add(tube);
