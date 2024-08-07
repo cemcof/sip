@@ -44,12 +44,16 @@
     public bool RichLogs { get; set; }
 
 
-    public async Task ReloadLogsAsync()
+    public async Task ReloadLogsAsync(bool rerender = false)
     {
         Logger.LogTrace("Reloading logs...");
         if (_virtualize is not null)
         {
             await _virtualize.RefreshDataAsync();
+            if (rerender)
+            {
+                await InvokeAsync(StateHasChanged);
+            }
         }
     }
 

@@ -107,7 +107,7 @@
     {
         if (_logListComponent is not null && logs.Any(l => l.ExperimentId == Exp.Id))
         {
-            await _logListComponent.ReloadLogsAsync();
+            await _logListComponent.ReloadLogsAsync(true);
         }
     }
 
