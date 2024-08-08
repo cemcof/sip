@@ -6,10 +6,10 @@ public abstract class ScheduledService(
         ILogger                                  logger)
     : BackgroundService
 {
-    protected readonly TimeProvider                             timeProvider     = timeProvider;
+    protected readonly TimeProvider                             TimeProvider     = timeProvider;
     protected readonly ILogger                                  Logger          = logger;
 
-    private ScheduledServiceOptions Opts => optionsMonitor.Get(GetType().Name) ?? optionsMonitor.CurrentValue;
+    private ScheduledServiceOptions Opts => optionsMonitor.Get(GetType().Name);
     
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
@@ -62,13 +62,13 @@ public abstract class ScheduledService(
             if (stoppingToken.IsCancellationRequested) return;
             
             var ts = opts.Interval;
-            var now = timeProvider.DtUtcNow();
+            var now = TimeProvider.DtUtcNow();
 
             if (ts == default)
             {
                 // Lets wait a bit to avoid busy loop since getting next occurence does not work for as expected
                 await Task.Delay(TimeSpan.FromMilliseconds(400), stoppingToken);
-                now = timeProvider.DtUtcNow();
+                now = TimeProvider.DtUtcNow();
                 var nextSched = opts.Cron!.GetNextOccurrence(now);
                 if (!nextSched.HasValue) return;
                 ts = nextSched.Value - now;
@@ -87,7 +87,7 @@ public abstract class ScheduledService(
             {
                 await Task.Delay(ts, stoppingToken);
             }
-            catch (System.ArgumentException)
+            catch (ArgumentException)
             {
                 // Meybe this was fixed by not calling DtUtcNow again
                 Logger.LogError("! BAD cron -  now={} ts={}", now, ts);

@@ -7,8 +7,6 @@ public class GeneralMessageBuilderProvider(
         IMessageSender                             sender)
     : IMessageBuilderProvider<GeneralMessageBuilder>
 {
-    private readonly IServiceProvider _serviceProvider = serviceProvider;
-
     public GeneralMessageBuilder CreateBuilder()
     {
         // Create scope

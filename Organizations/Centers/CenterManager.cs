@@ -46,7 +46,7 @@ public class CenterManager(
                 centerConfigurationProvider.LoadCenter(organization.Id, deserializedConfig);
                 return new CenterStatus(org, SELF_NODE_NAME, deserializedConfig)
                 {
-                    LastChange = timeProvider.DtUtcNow(), LastPing = timeProvider.DtUtcNow()
+                    LastChange = TimeProvider.DtUtcNow(), LastPing = TimeProvider.DtUtcNow()
                 };
             }
             
@@ -57,10 +57,10 @@ public class CenterManager(
                 {
                     centerStatus.Configuration = DeserializeConfigurationFromFile(centerOptions.ConfigFile!);
                     centerConfigurationProvider.LoadCenter(organization.Id, centerStatus.Configuration);
-                    centerStatus.LastChange = timeProvider.DtUtcNow();
+                    centerStatus.LastChange = TimeProvider.DtUtcNow();
                 }
 
-                centerStatus.LastPing = timeProvider.DtUtcNow();
+                centerStatus.LastPing = TimeProvider.DtUtcNow();
                 centerStatus.SubmittedByNode = SELF_NODE_NAME;
                 return centerStatus;
             }
@@ -76,7 +76,7 @@ public class CenterManager(
         // Kill/remove center that are inactive for too long
         var killAfter = centersOptions.CurrentValue.KillAfterInactive;
         foreach (var centerDead in _centers
-                     .Where(c => timeProvider.DtUtcNow() - c.Value.LastPing > killAfter)
+                     .Where(c => TimeProvider.DtUtcNow() - c.Value.LastPing > killAfter)
                      .ToList())
         {
             _centers.Remove(centerDead.Key, out _);
@@ -106,8 +106,8 @@ public class CenterManager(
             });
         
         // Adjust center timing info
-        currCenter.LastChange = timeProvider.DtUtcNow();
-        currCenter.LastPing = timeProvider.DtUtcNow();
+        currCenter.LastChange = TimeProvider.DtUtcNow();
+        currCenter.LastPing = TimeProvider.DtUtcNow();
         
         // Refresh options so the fetch new configuration for this center
         centerConfigurationProvider.LoadCenter(organizationId, configuration);

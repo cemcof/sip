@@ -15,7 +15,6 @@ public class AppUserManager(
         IOptions<AppOptions>            appOptions)
     : IFilterItemsProvider<AppUser>, IAppUserProvider
 {
-    private static int test = 0;
     public string GenerateAccountmapRelativeUrl(AppUser forUser)
     {
         var accMapClaim = new Claim(AuthOptions.EXTERNALMAP_CLAIM_TYPE, forUser.Id.ToString());
@@ -120,8 +119,6 @@ public class AppUserManager(
     // Following interface implementation is obsolete
     public async Task<IEnumerable<AppUser>> GetItems(string? filter = null, CancellationToken ct = default)
     {
-        logger.LogDebug("GetItems called {Test}", test);
-        test += 1;
         var dt = DateTime.UtcNow;
         await using var db = await dbContextFactory.CreateDbContextAsync(ct);
         var users = await db.Set<AppUser>()
@@ -389,7 +386,7 @@ public class AppUserManager(
 
     public async Task AddLoginAsync(AppUser user, UserLoginInfo externalLoginInfo)
     {
-        var (s, userManager, ctx) = _PrepareScopedDbHelper(user);
+        var (s, userManager, _) = _PrepareScopedDbHelper(user);
         using var scope = s;
         await userManager.AddLoginAsync(user, externalLoginInfo);
     }

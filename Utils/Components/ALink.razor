@@ -7,18 +7,17 @@
 
 @code {
     [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+    public IReadOnlyDictionary<string, object?>? AdditionalAttributes { get; set; }
     
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
     private void LinkClick()
     {
-        if (AdditionalAttributes is not null && AdditionalAttributes.ContainsKey("href"))
+        var href = (string?)AdditionalAttributes?.GetValueOrDefault("href");
+        if (href is not null)
         {
-            var href = (string)AdditionalAttributes["href"];
             NavigationManager.NavigateTo(href, forceLoad:true);
         }
     }
-
 }

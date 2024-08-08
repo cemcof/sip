@@ -27,7 +27,7 @@ public class ExperimentsDailyRoutine(IOptionsMonitor<ScheduledServiceOptions> op
             var delAfter = experimentsOptions.Get(e.OrganizationId)
                 .FindExpOpts(e.InstrumentName, e.Technique)
                 .CleanLogsAfter;
-            return delAfter.HasValue ? timeProvider.DtUtcNow() - delAfter.Value : DateTime.MinValue;
+            return delAfter.HasValue ? TimeProvider.DtUtcNow() - delAfter.Value : DateTime.MinValue;
         }
 
         try

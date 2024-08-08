@@ -17,7 +17,7 @@
     public RenderFragment? ChildContent { get; set; }
     
     [Parameter(CaptureUnmatchedValues = true)] 
-    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+    public IReadOnlyDictionary<string, object?>? AdditionalAttributes { get; set; }
     
     [CascadingParameter]
     public TooltipContainerContext? ContainerContext { get; set; }
