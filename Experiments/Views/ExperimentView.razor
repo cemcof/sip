@@ -59,6 +59,15 @@
                     <th scope="row">Sample keywords</th>
                     <td>@Exp.Sample.KeywordsStr</td>
                 </tr>
+            
+            @if (!string.IsNullOrWhiteSpace(Exp.Notes))
+            {
+                <tr>
+                    <th>Operator notes</th>
+                    <td>@Exp.Notes</td>
+                </tr>
+            } 
+            
             </tbody>
         </table>
     </div>
