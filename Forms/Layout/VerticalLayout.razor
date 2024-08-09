@@ -1,4 +1,4 @@
-<div class="layout layout-vertical" @attributes="@AllOtherAttributes">
+<div class="layout layout-vertical" @attributes="@AdditionalAttributes">
     @ChildContent
 </div>
 
@@ -7,5 +7,5 @@
     public RenderFragment? ChildContent { get; set; }
     
     [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object>? AllOtherAttributes { get; set; }
+    public Dictionary<string, object?>? AdditionalAttributes { get; set; }
 }

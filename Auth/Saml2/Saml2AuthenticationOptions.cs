@@ -75,7 +75,7 @@ public class Saml2AuthenticationOptions : RemoteAuthenticationOptions
     /// </summary>
     public Func<Saml2Response, IEnumerable<Claim>> ResponseClaimsProvider { get; set; } = DefulatResponseClaimsProvider;
     
-    public Saml2AuthenticationOptions() : base()
+    public Saml2AuthenticationOptions()
     {
         // Set defaults
         SignInScheme = IdentityConstants.ExternalScheme;

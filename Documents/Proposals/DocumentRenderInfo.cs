@@ -1,5 +1,3 @@
-using sip.Utils;
-
 namespace sip.Documents.Proposals;
 
 public struct DocumentRenderInfo

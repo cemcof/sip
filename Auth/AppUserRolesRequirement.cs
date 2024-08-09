@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authorization;
-using sip.Organizations;
 
 namespace sip.Auth;
 

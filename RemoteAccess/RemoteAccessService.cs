@@ -1,8 +1,5 @@
-using Microsoft.Extensions.Internal;
 using sip.Experiments;
-using sip.Organizations;
 using sip.Scheduling;
-using sip.Userman;
 
 namespace sip.RemoteAccess;
 
@@ -121,7 +118,7 @@ public class RemoteAccessService(
 
     private string GenerateSessionName(RemoteAccessSessionRequest sessionRequest) =>
         sessionRequest.ForUser.Firstname + " " + sessionRequest.ForUser.Lastname + "/" + sessionRequest.ForUser.IpAddress +
-        "/" + timeProvider.DtUtcNow().StandardFormat();
+        "/" + TimeProvider.DtUtcNow().StandardFormat();
 
     public async Task<RemoteAccessSession> JoinSession(RemoteAccessSession session, RemoteAccessSessionRequest joinRequest)
     {
@@ -193,7 +190,7 @@ public class RemoteAccessService(
     protected override async Task ExecuteRoundAsync(CancellationToken stoppingToken)
     {
         // Check for expired sessions and kill them
-        var toBeDeleted = _sessions.Where(s => s.Until < timeProvider.DtUtcNow())
+        var toBeDeleted = _sessions.Where(s => s.Until < TimeProvider.DtUtcNow())
             .ToHashSet();
         
         foreach (var delme in toBeDeleted)

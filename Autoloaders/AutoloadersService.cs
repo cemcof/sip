@@ -1,10 +1,8 @@
-using sip.Organizations;
-
 namespace sip.Autoloaders;
 
 using States = Dictionary<DateTime, Dictionary<string, string>>;
 
-public class AutoloadersService(IOptionsMonitor<AutoloadersOptions> options, ILogger<AutoloadersService> logger)
+public class AutoloadersService(IOptionsMonitor<AutoloadersOptions> options)
 {
     private readonly Dictionary<string, List<AutoloaderInstrumentData>> _data    = new();  
     public           DateTime                                           DtLastUpdate { get; private set; }

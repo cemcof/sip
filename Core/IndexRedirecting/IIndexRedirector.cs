@@ -1,5 +1,3 @@
-using sip.Organizations;
-
 namespace sip.Core.IndexRedirecting;
 
 public interface IIndexRedirector

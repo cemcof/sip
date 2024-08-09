@@ -1,5 +1,3 @@
-using sip.Userman;
-
 namespace sip.Documents.Proposals;
 
 public enum ProposalState

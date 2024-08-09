@@ -1,6 +1,3 @@
-namespace sip.Auth.Verification;
+namespace sip.Auth.Verification.Contact;
 
-public class ContactVerifierOptions
-{
-    
-}
+public class ContactVerifierOptions;

@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Internal;
 using sip.Core;
 using sip.Scheduling;
 

@@ -1,6 +1,4 @@
 @typeparam TValue
-@using sip.Utils
-@using System.Collections
 @inherits CInputBase<TValue>
 
 @* Component for selecting one of arbitrary items *@
@@ -102,7 +100,7 @@
         else
         {
             // However, if it is a custom type, attach guid to each item
-            _currentOptions = resultItems.ToDictionary(i => Guid.NewGuid().ToString(), i => i);
+            _currentOptions = resultItems.ToDictionary(_ => Guid.NewGuid().ToString(), i => i);
         }
     }
 

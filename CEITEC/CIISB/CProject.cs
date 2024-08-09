@@ -5,9 +5,6 @@ using sip.CEITEC.CIISB.Proposals.Creation;
 using sip.CEITEC.CIISB.Proposals.Extension;
 using sip.CEITEC.CIISB.Proposals.PeerReview;
 using sip.CEITEC.CIISB.Proposals.TechnicalFeasibility;
-using sip.Organizations;
-using sip.Projects;
-using sip.Userman;
 
 namespace sip.CEITEC.CIISB;
 
@@ -66,7 +63,7 @@ public class CProject : Project
             var orgname = AffiliationDetails.Name;
             var words = orgname.Split(" ", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
             if (words.Length < 2) return orgname.Substring(0, 2);
-            var irrelevants = new string[] {"and", "of", "from", "in", "at", "the", "a"};
+            var irrelevants = new[] {"and", "of", "from", "in", "at", "the", "a"};
             var relevantonly = words.Where(w => !irrelevants.Contains(w)).ToArray();
             var word1 = relevantonly.FirstOrDefault() ?? "institute";
             var word2 = (relevantonly.Length >= 2) ? relevantonly[1] : "institute";

@@ -1,6 +1,3 @@
-using sip.Organizations;
-using sip.Userman;
-
 namespace sip.RemoteAccess;
 
 public interface IRemoteAccess

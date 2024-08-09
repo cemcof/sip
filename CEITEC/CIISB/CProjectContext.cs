@@ -1,5 +1,3 @@
-using sip.Projects;
-
 namespace sip.CEITEC.CIISB;
 
 public class CProjectContext : ProjectContext

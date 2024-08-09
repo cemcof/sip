@@ -1,5 +1,3 @@
-using sip.Organizations;
-
 namespace sip.Experiments;
 
 public interface IInstrument

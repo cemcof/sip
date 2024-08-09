@@ -2,8 +2,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using sip.Auth.Orcid;
-using sip.Organizations;
-using sip.Utils;
 
 namespace sip.Userman;
 

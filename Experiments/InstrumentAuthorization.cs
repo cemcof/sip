@@ -1,11 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
-using sip.CEITEC;
-using sip.Organizations;
 using sip.Organizations.Centers;
 using sip.RemoteAccess;
 using sip.Schedule;
-using sip.Userman;
-using sip.Utils;
 
 // Authorization logic for using jobs for instruments and accessing instruments remotely
 

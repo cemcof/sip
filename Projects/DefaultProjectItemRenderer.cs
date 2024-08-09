@@ -1,5 +1,3 @@
-using sip.Utils;
-
 namespace sip.Projects;
 
 public class DefaultProjectItemRenderProvider<TProject> : IProjectItemRenderProvider<TProject> where TProject : Project

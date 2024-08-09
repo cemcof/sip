@@ -2,10 +2,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using sip.Experiments.Logs;
 using sip.Experiments.Samples;
-using sip.Forms;
-using sip.Organizations;
-using sip.Projects;
-using sip.Userman;
 
 // ReSharper disable InconsistentNaming
 // ReSharper disable UnusedAutoPropertyAccessor.Global

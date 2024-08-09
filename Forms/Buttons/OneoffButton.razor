@@ -1,6 +1,6 @@
 @* Obsolete, replace with InteractiveButton *@
 
-<button @attributes="@AllOtherAttributes" @onclick="OnClicked" disabled="@_used" data-used="@_used">
+<button @attributes="@AdditionalAttributes" @onclick="OnClicked" disabled="@_used" data-used="@_used">
     @(_used ? UsedCaption : UnusedCaption)
 </button>
 
@@ -9,7 +9,7 @@
     private bool _used;
     
     [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object>? AllOtherAttributes { get; set; }
+    public Dictionary<string, object?>? AdditionalAttributes { get; set; }
     
     [Parameter]
     [EditorRequired]

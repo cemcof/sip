@@ -1,6 +1,3 @@
-using sip.Organizations;
-using sip.Projects;
-
 namespace sip.Messaging;
 
 public class ProjectOrganizationMessage : Message

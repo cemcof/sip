@@ -2,10 +2,6 @@
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 // ReSharper disable ClassNeverInstantiated.Global, 'Jiri Novacek', '2019-06-12 05:43:13', '2019-06-12 05:43:13', '2019-06-12 05:43:13', '2019-06-12 05:43:13', '1S118', 'Resolved', '2019-12-09 07:58:38', 'high temperature and humidity in the laboratory.\n190611 - P. Mokros contacted to regulate the cooling unit\n190619 - the unit can only cool down the air, but the consequent heating is disabled due to the fact that heating water is off in Summer at the whole campus, system switched back to auto mode, will re-visit the issue after P. Saranchuk is back from vacation (190624).\n- no response from SUKB for several month.', 'The issue will be solved during facility reconstruction.'),
 
-using sip.Forms;
-using sip.Userman;
-using sip.Utils;
-
 namespace sip.LabIssues;
 
 public enum IssueStatus

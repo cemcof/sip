@@ -1,13 +1,8 @@
-using sip.CEITEC.DirectAccess;
 using sip.Scheduling;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Scrutor;
 using sip.Core;
-using sip.Messaging;
-using sip.Organizations;
 using sip.Projects.Statuses;
-using sip.Utils;
 
 namespace sip.Projects;
 

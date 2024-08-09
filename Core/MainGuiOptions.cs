@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
-using sip.Auth;
-using sip.Organizations;
 
 namespace sip.Core;
 

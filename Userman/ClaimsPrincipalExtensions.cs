@@ -1,6 +1,3 @@
-using sip.Auth;
-using sip.Utils;
-
 namespace sip.Userman;
 
 public static class ClaimsPrincipalExtensions
@@ -20,7 +17,7 @@ public static class ClaimsPrincipalExtensions
     public static string? GetId(this ClaimsPrincipal cp) =>
         cp.FindFirstValue(ClaimTypes.NameIdentifier);
     
-    public static string? GetFullcontact(this ClaimsPrincipal cp) =>
+    public static string? GetFullContact(this ClaimsPrincipal cp) =>
         cp.GetFullname() + $" <{cp.GetEmail()}>";
 
     public static IEnumerable<(string role, string org)> GetOrganizationScopedRoles(this ClaimsPrincipal cp)

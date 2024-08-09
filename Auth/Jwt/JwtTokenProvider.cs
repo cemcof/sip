@@ -1,9 +1,8 @@
 using System.IdentityModel.Tokens.Jwt;
-using Microsoft.Extensions.Internal;
 
 namespace sip.Auth.Jwt;
 
-public class JwtTokenProvider(IOptionsMonitor<JwtProducerOptions> jwtOptions, TimeProvider TimeProvider)
+public class JwtTokenProvider(IOptionsMonitor<JwtProducerOptions> jwtOptions, TimeProvider timeProvider)
 {
     private string CreateToken(IEnumerable<Claim> claims, TimeSpan? expireAfter = null)
     {
@@ -15,7 +14,7 @@ public class JwtTokenProvider(IOptionsMonitor<JwtProducerOptions> jwtOptions, Ti
 
         var secKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(opts.IssuerSigningKey));
         var issuer = opts.Issuer;
-        var expires = TimeProvider.DtUtcNow() + expireAfter;
+        var expires = timeProvider.DtUtcNow() + expireAfter;
 
         // TODO - from https://dotnetcoretutorials.com/2020/01/15/creating-and-validating-jwt-tokens-in-asp-net-core/
         var tokenHandler = new JwtSecurityTokenHandler();

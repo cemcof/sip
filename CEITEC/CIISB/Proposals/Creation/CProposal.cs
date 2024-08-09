@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using sip.Documents.Proposals;
-using sip.Forms;
 
 // ReSharper disable InconsistentNaming
 // ReSharper disable StringLiteralTypo

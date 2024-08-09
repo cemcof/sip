@@ -21,11 +21,9 @@ public interface ISaml2MetadataProvider
     Task<Saml2Metadata> GetMetadata(Saml2AuthenticationOptions saml2AuthenticationOptions, string? idpEntityId = null);
 }
 
-public class Saml2MetadataProvider(ILogger<Saml2MetadataProvider> logger, IHttpClientFactory clientFactory)
+public class Saml2MetadataProvider(IHttpClientFactory clientFactory)
     : ISaml2MetadataProvider
 {
-    private readonly ILogger<Saml2MetadataProvider> _logger        = logger;
-
     private Dictionary<string, Saml2Metadata>? _metadataCache;
     
     public async Task<Saml2Metadata> GetMetadata(Saml2AuthenticationOptions options, string? entityId = null)
@@ -33,7 +31,7 @@ public class Saml2MetadataProvider(ILogger<Saml2MetadataProvider> logger, IHttpC
         // Metadata not cached, get them, parse them, cache them.
         if (_metadataCache is null)
         {
-            await ParseMetadataToCache(options, true);
+            await ParseMetadataToCache(options);
         }
         
         entityId ??= _metadataCache!.Keys.First();
@@ -67,7 +65,7 @@ public class Saml2MetadataProvider(ILogger<Saml2MetadataProvider> logger, IHttpC
         return new StreamReader(options.IdpMetaCachePath);
     }
 
-    private async Task ParseMetadataToCache(Saml2AuthenticationOptions options, bool validate)
+    private async Task ParseMetadataToCache(Saml2AuthenticationOptions options)
     {
         using var metaRaw = await GetRawMetadata(options);
         var xml = new XmlDocument();

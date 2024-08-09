@@ -1,4 +1,4 @@
-<div class="card group group-vertical @ContainerClasses" @attributes="@AllOtherAttributes">
+<div class="card group group-vertical @ContainerClasses" @attributes="@AdditionalAttributes">
     
     @if (Header is not null)
     {
@@ -28,5 +28,5 @@
     [Parameter] public string HeadClasses { get; set; } = string.Empty;    
     
     [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object>? AllOtherAttributes { get; set; }
+    public Dictionary<string, object?>? AdditionalAttributes { get; set; }
 }

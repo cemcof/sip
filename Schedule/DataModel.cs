@@ -4,7 +4,6 @@
 // ReSharper disable ClassNeverInstantiated.Global
 
 using sip.Experiments;
-using sip.Userman;
 
 namespace sip.Schedule;
 

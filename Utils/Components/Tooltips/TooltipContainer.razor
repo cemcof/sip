@@ -12,7 +12,7 @@
     public RenderFragment? ChildContent { get; set; }
 
     [Parameter(CaptureUnmatchedValues = true)] 
-    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+    public IReadOnlyDictionary<string, object?>? AdditionalAttributes { get; set; }
     
     [Parameter]
     public TooltipDirection TooltipDirection { get; set; }

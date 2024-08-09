@@ -1,5 +1,3 @@
-using sip.Messaging;
-
 namespace sip.Projects;
 
 public interface IProjectMessaging

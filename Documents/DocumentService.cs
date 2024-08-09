@@ -1,12 +1,10 @@
 using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.Internal;
 using sip.Core;
 using sip.Documents.Proposals;
 using sip.Documents.Renderers;
 using sip.Documents.Renderers.Handlebars;
 using sip.Documents.Renderers.Pdf;
 using sip.Documents.Renderers.Word;
-using sip.Utils;
 
 namespace sip.Documents;
 
