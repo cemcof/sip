@@ -38,7 +38,7 @@ public class ExperimentsService(
         string? searchstring)
     {
         await using var db = await dbContextFactory.CreateDbContextAsync(request.CancellationToken);
-        logger.LogInformation("GetFiltered exps: {}, {}", request.Count, request.StartIndex);
+        logger.LogTrace("GetFiltered exps: {}, {}", request.Count, request.StartIndex);
 
         List<Experiment> resultItems;
         var query = db.Set<Experiment>()
