@@ -299,9 +299,10 @@ public class ExperimentsService(
         foreach (var experiment in exps)
         {
             logger.LogDebug("Cleaning logs for experiment {}", experiment.SecondaryId);
-            await db.Set<Log>()
+            var deletedCount = await db.Set<Log>()
                 .Where(l => l.ExperimentId == experiment.Id)
                 .ExecuteDeleteAsync(ct);
+            logger.LogDebug("Deleted {} logs for experiment {}", deletedCount, experiment.SecondaryId);
         }
     }
     
