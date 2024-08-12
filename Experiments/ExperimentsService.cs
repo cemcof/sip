@@ -326,16 +326,4 @@ public class ExperimentsService(
 
         return false;
     }
-
-    public async Task StopIdleActiveExperimentsAsync(Func<Experiment,bool> isExpIdle, CancellationToken stoppingToken)
-    {
-        var exps = await GetExperimentsAsync(new ExperimentsFilter(ExpStates: [ExpState.Active]));
-        var idleExps = exps.Items.Where(isExpIdle).ToList();
-        logger.LogDebug("Found {} idle active experiments", idleExps.Count);
-        foreach (var exp in idleExps)
-        {
-            logger.LogDebug("Stopping idle active experiment {}", exp.SecondaryId);
-            await ChangeStatusFromAsync(ExpState.Active, ExpState.StopRequested, exp);
-        }
-    }
 }

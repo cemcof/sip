@@ -80,7 +80,7 @@ public class ExperimentEngine(
         experiment.SecondaryId = $"{sourceDir}_{guidPart}";
 
         experiment.Processing.SerializeWorkflow();
-
+        experiment.Storage.DtLastUpdate = TimeProvider.DtUtcNow();
         db.Attach(experiment);
         await db.SaveChangesAsync();
 
@@ -184,19 +184,9 @@ public class ExperimentEngine(
     }
 
     
-    protected override async Task ExecuteRoundAsync(CancellationToken stoppingToken)
+    protected override Task ExecuteRoundAsync(CancellationToken stoppingToken)
     {
-        // Stopping idle experiments
-        bool IsExpIdle(Experiment e)
-        {
-            var idleTimeout = experimentsOptions.Get(e.OrganizationId).FindExpOpts(e.InstrumentName, e.Technique)
-                .IdleTimeout;
-            return idleTimeout.HasValue && e.State == ExpState.Active 
-                                        && e.Storage.DtLastUpdate != default 
-                                        && e.Storage.DtLastUpdate < DateTime.UtcNow - idleTimeout;
-        }
-
-        await experimentsService.StopIdleActiveExperimentsAsync(IsExpIdle, stoppingToken);
+        return Task.CompletedTask;
     }
 
     protected virtual void OnExperimentChanged(Experiment? exp)
