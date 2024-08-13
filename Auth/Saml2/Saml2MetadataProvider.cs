@@ -125,7 +125,7 @@ public class Saml2MetadataProvider(IHttpClientFactory clientFactory)
                 {
                     if (obj is KeyInfoX509Data keyInfoX509Data)
                     {
-                        foreach (var certificate in keyInfoX509Data.Certificates)
+                        foreach (var certificate in keyInfoX509Data.Certificates ?? [])
                         {
                             if (certificate is X509Certificate2 cert)
                                 yield return cert;

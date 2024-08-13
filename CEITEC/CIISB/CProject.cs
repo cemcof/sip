@@ -39,8 +39,8 @@ public class CProject : Project
                 return CProjectType.Internal;
             }
         
-            var mailPostfix = Applicant.Email.Split("@").Last();
-            if (Regex.IsMatch(mailPostfix, @"(muni\.|ceitec\.|ibt\.cas\.)"))
+            var mailPostfix =  Applicant.Email?.Split("@").Last();
+            if (!string.IsNullOrEmpty(mailPostfix) && Regex.IsMatch(mailPostfix, @"(muni\.|ceitec\.|ibt\.cas\.)"))
             {
                 return CProjectType.Internal;
             }

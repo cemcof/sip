@@ -1,8 +1,6 @@
 using System.Text.Encodings.Web;
 using System.Web;
-using DocumentFormat.OpenXml;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.Extensions.Primitives;
 
 namespace sip.Auth.Saml2;
 
