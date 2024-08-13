@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace sip.Documents;
 
-public class FileMetadata
+public class FileMetadata : IIdentified<Guid>
 {
     public Guid Id { get; set; }
 
