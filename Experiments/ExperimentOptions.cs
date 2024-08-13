@@ -1,4 +1,5 @@
 using sip.Experiments.Workflows;
+using sip.Messaging.Email;
 
 namespace sip.Experiments;
 
@@ -14,6 +15,8 @@ public class ExperimentOptions
     public TimeSpan? IdleTimeout { get; set; } = TimeSpan.FromHours(3);
     public TimeSpan? CleanLogsAfter { get; set; } = TimeSpan.FromDays(14);
     
+    public int[] NotifyDaysBeforeExpiration { get; set; } = [];
+    public EmailTemplateOptions? ExpirationNotifyEmail { get; set; }
 }
 
 public class EngineOptions

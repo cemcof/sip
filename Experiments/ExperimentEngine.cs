@@ -13,17 +13,14 @@ public class ExperimentEngine(
         IDbContextFactory<AppDbContext>          dbContextFactory,
         IMemoryCache                             memoryCache,
         IOptions<AppOptions>                     appOptions,
-        SmtpSender                               emailService,
         TimeProvider                             timeProvider,
         ExperimentsService                       experimentsService,
-        GeneralMessageBuilderProvider            messageBuilderProvider,
         IOptionsMonitor<ScheduledServiceOptions> schedOpts,
         IOptionsMonitor<ExperimentsOptions>            experimentsOptions,
         IOptionsMonitor<InstrumentsOptions>            instrumentOptions)
     : ScheduledService(schedOpts, timeProvider, logger), IExperimentHandler
 {
     private readonly IOptions<AppOptions> _appOptions   = appOptions;
-    private readonly SmtpSender           _emailService = emailService;
 
     public event Action? ExperimentChanged;
     public event Action<IReadOnlyCollection<Log>>? ExperimentLogAdded;
@@ -129,21 +126,8 @@ public class ExperimentEngine(
         return expo;
     }
 
-    public async Task SendEmailNotificationAsync(Experiment exp, string subjectTemplate, string bodyTemplate)
-    {
-        
-        var messageBuilder = messageBuilderProvider.CreateBuilder();
-        
-
-        messageBuilder.SubjectFromHbsStringTemplate(exp, subjectTemplate);
-        messageBuilder.BodyFromHbsStringTemplate(exp, bodyTemplate);
-
-        messageBuilder.AddRecipient(exp.User);
-        messageBuilder.AddRecipient(exp.Operator, MessageRecipientType.Copy);
-
-        Logger.LogDebug("Sending email notification for experiment {ExpId}", exp.Id);
-        await messageBuilder.BuildAndSendAsync();
-    }
+    public Task SendEmailNotificationAsync(Experiment exp, EmailTemplateOptions template)
+        => experimentsService.SendEmailNotificationAsync(exp, template);
 
     
     public  Task ChangeStatusAsync(ExpState to, Experiment forExp)

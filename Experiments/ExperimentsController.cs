@@ -90,7 +90,7 @@ public class ExperimentsController(
     public async Task<IActionResult> SendEmailNotificationAsync(Guid experimentId, [FromBody] EmailTemplateOptions data, CancellationToken ct)
     {
         var exp = await experimentEngine.GetExperimentAsync(experimentId, ct);
-        await experimentEngine.SendEmailNotificationAsync(exp, data.Subject, data.Body);
+        await experimentEngine.SendEmailNotificationAsync(exp, data);
         return Ok();
     }
     

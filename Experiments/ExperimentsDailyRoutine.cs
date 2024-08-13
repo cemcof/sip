@@ -1,4 +1,5 @@
 using sip.Experiments.Model;
+using sip.Messaging.Email;
 using sip.Scheduling;
 
 namespace sip.Experiments;
@@ -17,6 +18,43 @@ public class ExperimentsDailyRoutine(IOptionsMonitor<ScheduledServiceOptions> op
         await _SafePublishExperiments(stoppingToken);
         // Clean logs of experiments that are old enough
         await _SafeCleanLogs(stoppingToken);
+        // Sent email notification on experiments about to expire
+        await _SafeNotifyExpiringExperiments(stoppingToken);
+    }
+
+    private async Task _SafeNotifyExpiringExperiments(CancellationToken ct)
+    {
+        EmailTemplateOptions? NotifyTodayProvider(Experiment e)
+        {
+            var expOpts = experimentsOptions.Get(e.OrganizationId)
+                .FindExpOpts(e.InstrumentName, e.Technique);
+            
+            var notifyDays = expOpts.NotifyDaysBeforeExpiration;
+            var today = TimeProvider.DtUtcNow().Date;
+            var expDate = e.Storage.DtExpiration;
+            var daysToExp = (int) (expDate - today).TotalDays;
+            if (notifyDays.Any(d => d == daysToExp))
+                return expOpts.ExpirationNotifyEmail ??
+                       throw new InvalidOperationException("Expiration mail template not configured");
+            return null;
+        }
+
+        try
+        {
+            var expsInIdleStorageState =
+                await experimentsService.GetExperimentsAsync(new ExperimentsFilter(StorageStates: [StorageState.Idle]));
+            foreach (var exp in expsInIdleStorageState.Items)
+            {
+                var template = NotifyTodayProvider(exp);
+                if (template is null) continue;
+                await experimentsService.SendEmailNotificationAsync(exp, template, ct);
+            }
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, "Failed to notify expiring experiments");
+        }
+
     }
 
     private async Task _SafeCleanLogs(CancellationToken stoppingToken)

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Caching.Memory;
 using sip.Core;
 using sip.Experiments.Logs;
 using sip.Experiments.Model;
+using sip.Messaging.Email;
 
 namespace sip.Experiments;
 
@@ -23,7 +24,8 @@ public record ExperimentsFilter(
 public class ExperimentsService(
     IDbContextFactory<AppDbContext> dbContextFactory,
     ILogger<ExperimentsService> logger,
-    IMemoryCache memoryCache) : IExperimentLogProvider
+    IMemoryCache memoryCache,
+    GeneralMessageBuilderProvider messageBuilderProvider) : IExperimentLogProvider
 {
     public ItemProviderRequestWithSearchDelegate<Experiment> GetFilteredExperimentsProviderByOrg(
         IOrganization organizationSubject)
@@ -325,5 +327,21 @@ public class ExperimentsService(
         }
 
         return false;
+    }
+    
+    public async Task SendEmailNotificationAsync(
+        Experiment exp, 
+        EmailTemplateOptions template, 
+        CancellationToken ct = default)
+    {
+        var messageBuilder = messageBuilderProvider.CreateBuilder();
+        messageBuilder.SubjectFromHbsStringTemplate(exp, template.Subject);
+        messageBuilder.BodyFromHbsStringTemplate(exp, template.Body);
+
+        messageBuilder.AddRecipient(exp.User);
+        messageBuilder.AddRecipient(exp.Operator, MessageRecipientType.Copy);
+
+        logger.LogDebug("Sending email notification for experiment {ExpId}", exp.Id);
+        await messageBuilder.BuildAndSendAsync();
     }
 }
