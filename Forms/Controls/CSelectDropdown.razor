@@ -38,6 +38,8 @@
 @code {
     [Parameter]
     public ItemsProviderDelegate<TItem> ItemsProvider { get; set; } = null!;
+    
+    [Parameter] public IEqualityComparer<TItem> EqualityComparer { get; set; } = EqualityComparer<TItem>.Default; 
 
     [Parameter]
     public Func<TItem, string> DisplayNameMapper { get; set; } = value => value?.ToString().Humanize() ?? "";
@@ -106,7 +108,7 @@
             string GetGuid(TItem item)
             {
                 var eqItemKey = lastOptions.FirstOrDefault(
-                    kvp => Equals(kvp.Value, item)).Key;
+                    kvp => EqualityComparer.Equals(kvp.Value, item)).Key;
                 
                 Logger.LogTrace("GetGuid for {Item}, {EqItemKey} is null={IsNull}", 
                     item, eqItemKey, eqItemKey is null);

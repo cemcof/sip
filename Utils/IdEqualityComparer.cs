@@ -24,4 +24,6 @@ public class IdEqualityComparer<T, TId> : EqualityComparer<T> where T : IIdentif
 
     public override int GetHashCode(T obj) =>
         obj.Id?.GetHashCode() ?? 0;
+
+    public static readonly IEqualityComparer<T> Comparer = new IdEqualityComparer<T, TId>();
 }    
