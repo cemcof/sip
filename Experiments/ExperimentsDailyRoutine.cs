@@ -42,7 +42,9 @@ public class ExperimentsDailyRoutine(IOptionsMonitor<ScheduledServiceOptions> op
         try
         {
             var expsInIdleStorageState =
-                await experimentsService.GetExperimentsAsync(new ExperimentsFilter(StorageStates: [StorageState.Idle]));
+                await experimentsService.GetExperimentsAsync(new ExperimentsFilter(
+                    StorageStates: [StorageState.Idle],
+                    CustomFilter: e => !e.Storage.Archive));
             foreach (var exp in expsInIdleStorageState.Items)
             {
                 var template = NotifyTodayProvider(exp);
