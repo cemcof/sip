@@ -84,6 +84,7 @@ public class SipSetup(string[] args)
         
         se.AddDbContextFactory<AppDbContext>();
         se.AddSingleton<IEntityMerger<AppDbContext>, RawSqlEntityMerger<AppDbContext>>();
+        se.AddOptions<EntityMergerOptions>().Bind(conf1.GetSection("Db"));
         se.AddSingleton<IDbSeeder, DbSeeder>();
         se.Configure<DbSeedOptions>(conf1.GetSection("Db:Init"));
         se.AddHttpClient();
