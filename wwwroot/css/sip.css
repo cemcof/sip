@@ -371,6 +371,7 @@ button {
 /* Layout for page that has a column with items on the left and "page" for selected item next to it */
 .itemspage-layout {
     display: flex;
+    height: calc(100vh - 1rem);
 }
 
 .itemspage-layout > * {
@@ -384,12 +385,13 @@ button {
 }
 
 .itemspage-layout > *:first-child .item-viewer-body {
-    height: calc(100vh - 7rem);
+    height: calc(100vh - 4rem);
     overflow: auto;
 }
 
 .itemspage-layout > *:nth-child(2) {
     flex-grow: 1;
+    overflow: auto;
 }
 
 .badg {
