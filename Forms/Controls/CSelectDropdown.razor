@@ -121,8 +121,10 @@
 
     protected override string? FormatValueAsString(TItem? value)
     {
+        Logger.LogTrace("FormatValueAsString for {Value}", value);
         if (value is null) return null;
-        var opt = _currentOptions.FirstOrDefault(kvp => value.Equals(kvp.Value));
+        var opt = _currentOptions.FirstOrDefault(kvp => EqualityComparer.Equals(value, kvp.Value));
+        Logger.LogTrace("FormatValueAsString for {Value} found {Key}", value, opt.Key);
         return opt.Key;
     }
 
