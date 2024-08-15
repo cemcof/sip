@@ -48,6 +48,7 @@
 
     protected override async Task OnParametersSetAsync()
     {
+        Logger.LogTrace("OnParametersSetAsync for CSelectDropdown");  
         // Try to gather options from the render attribute if no items at all are provided and dropdown uses simple strings
         // ReSharper disable once ConditionIsAlwaysTrueOrFalse
         // Items provider might be null here because we are still handling parameters
