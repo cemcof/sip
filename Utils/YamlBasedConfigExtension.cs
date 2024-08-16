@@ -20,6 +20,8 @@ public static class YamlBasedConfigExtension
             "appsettings",
             $"appsettings.{builder.Environment.EnvironmentName}.yml"
             )!;
+
+        appsettingsFile = Path.GetFullPath(appsettingsFile);
         
         conf.Sources.Clear();
         conf.AddYamlFile(appsettingsFile, false, true);
