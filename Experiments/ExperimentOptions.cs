@@ -12,7 +12,7 @@ public class ExperimentOptions
     public Dictionary<string, DataLifecycleOptions> DataLifecycles { get; set; } = new();
     public Dictionary<string, Workflow> Workflows { get; set; } = new();
 
-    public TimeSpan? IdleTimeout { get; set; } = TimeSpan.FromHours(3);
+    public TimeSpan? IdleTimeout { get; set; }
     public TimeSpan? CleanLogsAfter { get; set; } = TimeSpan.FromDays(14);
     
     public int[] NotifyDaysBeforeExpiration { get; set; } = [];

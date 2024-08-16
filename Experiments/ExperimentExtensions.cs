@@ -180,6 +180,7 @@ public class ExperimentsBuilder
             .GetOrganizationOptionsBuilder(configurationRoot)
             .ConfigureWithOptionsDependency<InstrumentsOptions>((options, conf, instrumentsOptions) =>
             {
+                // TODO - refactor, will be used again for network instrument config
                 foreach (var expConfig in conf.GetSection("Experiments")
                              .GetChildren())
                 {

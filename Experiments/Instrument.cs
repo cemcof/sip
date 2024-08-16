@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Components.Web.Virtualization;
+
 namespace sip.Experiments;
 
 public interface IInstrument
