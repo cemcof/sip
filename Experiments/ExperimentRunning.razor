@@ -84,6 +84,7 @@
 
     [Parameter]
     public Experiment Exp { get; set; } = null!;
+    private Experiment? _prevExp = null!;
 
     private Log? _lastLog;
 
@@ -131,6 +132,17 @@
             var items = (await _docItemsProvider(default)).Items;
             _currentFilePreview = items.FirstOrDefault();
             Logger.LogTrace("Set default file preview {Id}", _currentFilePreview?.Id);
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        // To reload logs on changing the experiment parameter
+        if (!IdEqualityComparer<Experiment, Guid>.Comparer.Equals(_prevExp, Exp))
+        {
+            _prevExp = Exp;
+            if (_logListComponent is not null) 
+                await _logListComponent.ReloadLogsAsync();
         }
     }
 

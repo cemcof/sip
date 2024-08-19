@@ -8,7 +8,7 @@ using sip.Experiments.Samples;
 
 namespace sip.Experiments.Model;
 
-public class Experiment
+public class Experiment : IIdentified<Guid>
 {
     // Identification, names and types
     public Guid Id { get; set; }
