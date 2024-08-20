@@ -13,3 +13,8 @@
 .microscopes-page > div {
     flex-grow: 1;
 }
+
+.instrument-container {
+    border-radius: 4px;
+    padding-bottom: 0.5rem;
+}

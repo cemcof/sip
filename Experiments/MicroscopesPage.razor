@@ -47,7 +47,7 @@
             {
                 @foreach (var inst in _jobsAvailable)
                 {
-                    <div class="instrument-container" active="@(inst.Key.Name == InstrumentId)">
+                    <div class="instrument-container @inst.Key.DisplayTheme" active="@(inst.Key.Name == InstrumentId)">
                         <NavLink href="@UrlProvider($"microscopes/" + inst.Key.Name)"
                                  class="inst-name ">
                             <i class="bi @(inst.Key.Name == InstrumentId ? "bi-chevron-down" : "bi-chevron-right")"></i>&nbsp;

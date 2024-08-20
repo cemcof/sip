@@ -287,17 +287,13 @@ button {
     padding: 0 1rem;
     
     & .inst-name {
-        color: black;
+        color: inherit;
         display: block;
         text-decoration: none;
         font-weight: bold;
         padding: .5rem;
     }
-
-    & .inst-name:hover {
-        background-color: #eeeeee;
-    }
-
+    
     & .nav-item {
         margin-left: 1rem;
         margin-right: 1rem;
@@ -308,6 +304,10 @@ button {
             color: black;
             display: block;
             padding: 0.15rem 1rem;
+        }
+        
+        & a:last-child {
+            margin-bottom: 0.5rem;
         }
 
         & a.active {
