@@ -16,7 +16,7 @@
 .item-viewer-body ::deep > a {
     color: initial;
     text-decoration: none;
-    padding: 0.5rem;
+    padding: 0.3rem;
     border-bottom: 1px solid lightgray;
 }
 

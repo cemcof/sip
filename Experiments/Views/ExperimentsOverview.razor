@@ -21,11 +21,11 @@
         
         <ItemTemplate>
             <NavLink class="exp-item" href="@UrlProvider("/experiments/" + context.Id)">
-                <div class="badge @ExperimentsOptions.Get(Organization).FindTheme(context)">
+                <div class="badge inst @ExperimentsOptions.Get(Organization).FindTheme(context)">
                     <div>@context.Technique</div>
                     <div>@context.InstrumentName</div>
                 </div>
-                <span class="sample">@context.SecondaryId.Truncate(22)</span> 
+                <span class="sample">@context.SecondaryId</span> 
                 <span class="names">@context.Operator.Lastname -&gt; @context.User.Lastname <br/>@context.DtCreated.HappenAgo()</span>
             </NavLink>
         </ItemTemplate>

@@ -379,9 +379,10 @@ button {
 }
 
 .itemspage-layout > *:first-child {
+    min-width: 0;
+    flex: 0 0 30rem;
     flex-grow: 0;
     flex-shrink: 0;
-    flex-basis: 30rem;
 }
 
 .itemspage-layout > *:first-child .item-viewer-body {
