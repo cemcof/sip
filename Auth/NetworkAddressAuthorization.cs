@@ -17,18 +17,18 @@ public class RoleNetworkAuthOptions
     public bool ReqireAllRoles { get; set; }
         
     public ICollection<string> Roles { get; set; } = new List<string>();
-    public ICollection<string> RemoteAddresses { get; set; } = new List<string>();
+    public ICollection<IPAddr> RemoteAddresses { get; set; } = new List<IPAddr>();
 }
 
-public class NotRemoteIpRequirement(string disallowedIpOrNetworkAddress) : AuthorizationHandler<NotRemoteIpRequirement>,
+public class NotRemoteIpRequirement(IPAddr disallowedIpOrNetworkAddress) : AuthorizationHandler<NotRemoteIpRequirement>,
                                                                            IAuthorizationRequirement
 {
-    public string DisallowedIpOrNetworkAddress { get; } = disallowedIpOrNetworkAddress;
+    public IPAddr DisallowedIpOrNetworkAddress { get; } = disallowedIpOrNetworkAddress;
 
     protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, NotRemoteIpRequirement requirement)
     {
         var ip = context.User.GetRemoteIp();
-        if (!string.IsNullOrWhiteSpace(ip) && !ip.CheckIp(DisallowedIpOrNetworkAddress))
+        if (ip is not null && !ip.CheckAgainst(DisallowedIpOrNetworkAddress))
         {
             context.Succeed(requirement);
             return Task.CompletedTask;
@@ -70,10 +70,10 @@ public class RoleNetworkAuthorizationHandler(ILogger<RoleNetworkAuthorizationHan
         var allowedRemoteIps = opts.RemoteAddresses.ToArray();
         var anyIps = allowedRemoteIps.Any();
         var ipSatisfied = false;
-        var userRemoteIp = context.User.FindFirst(c => c.Type == NetworkAddressAuth.REMOTE_IP_CLAIMTYPE)?.Value;
+        var userRemoteIp = context.User.GetRemoteIp();
         if (anyIps)
         {
-            ipSatisfied = userRemoteIp is not null && userRemoteIp.CheckIp(allowedRemoteIps);
+            ipSatisfied = userRemoteIp is not null && userRemoteIp.CheckAgainst(allowedRemoteIps);
         }
 
         if (anyIps || anyRoles)
@@ -86,48 +86,5 @@ public class RoleNetworkAuthorizationHandler(ILogger<RoleNetworkAuthorizationHan
         }
 
         return Task.CompletedTask;
-    }
-}
-
-/// <summary>
-/// Static helpers for working with IP addresses.
-/// </summary>
-public static class IpHelper
-{
-    public static bool CheckIp(this string sourceIp, params string[] targetIp)
-    {
-        return targetIp.Any(sourceIp.CheckIp);
-    }
-
-    private static bool CheckIp(this string sourceIp, string targetIp)
-    {
-        if (targetIp.Contains('/'))
-        {
-            // This means the sourceIp is specifiead as network address with prefix
-            var ip = targetIp.Split('/')[0];
-            var prefix = int.Parse(targetIp.Split('/')[1]);
-            
-            var sourceIpBits = new BitArray(IPAddress.Parse(sourceIp).GetAddressBytes().Reverse().ToArray());
-            var targetIpBits = new BitArray(IPAddress.Parse(ip).GetAddressBytes().Reverse().ToArray());
-            if (sourceIpBits.Length < prefix || sourceIpBits.Length != targetIpBits.Length)
-            {
-                return false;
-            }
-
-            // Obviously, bit shifts would be more elegant than this nested for garbage, but this solution
-            // is universal enough to even work for IPv6 addresses
-            for (int i = sourceIpBits.Length - 1; i >= sourceIpBits.Length - prefix; i--)
-            {
-                if (sourceIpBits[i] != targetIpBits[i])
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-        
-        // Just compare addresses
-        return sourceIp.Equals(targetIp);
     }
 }

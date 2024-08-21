@@ -20,13 +20,15 @@ public class NotIpBlacklistedHandler(IConfiguration configuration) : Authorizati
             configuration.GetSection(requirement.BlacklistConfSectionName);
         
         var ip = context.User.GetRemoteIp();
-        if (string.IsNullOrWhiteSpace(ip))
+        if (ip is null)
         {
             context.Fail(new AuthorizationFailureReason(this, "No identity with remote IP found"));
             return Task.CompletedTask;
         }
-
-        var blacklisted = ip.CheckIp(confSection.GetChildren().Select(c => c.Value).ToArray()!);
+        
+        var blackListed = new List<IPAddr>();
+        confSection.Bind(blackListed);
+        var blacklisted = ip.CheckAgainst(blackListed.ToArray());
         if (blacklisted)
         {
             context.Fail(new AuthorizationFailureReason(this, "IP is blacklisted"));

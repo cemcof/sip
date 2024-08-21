@@ -20,13 +20,13 @@ public interface IUserInfo : IUserIdentification
 
 public interface IUserClientInfo : IUserInfo
 {
-    string IpAddress { get; }
+    IPAddr IpAddress { get; }
 }
 
 public record UserInfo(Guid Id, string? EmailAddress, string? Firstname, string? Lastname) : IUserInfo;
 
 public record ClientInfo
-    (Guid Id, string? EmailAddress, string? Firstname, string? Lastname, string IpAddress) 
+    (Guid Id, string? EmailAddress, string? Firstname, string? Lastname, IPAddr IpAddress) 
     : UserInfo(Id, EmailAddress, Firstname, Lastname), IUserClientInfo;
 
 

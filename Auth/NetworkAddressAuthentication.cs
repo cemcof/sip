@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Primitives;
+
 namespace sip.Auth;
 
 /// <summary>
@@ -9,6 +11,7 @@ public static class NetworkAddressAuth
     public const string REMOTE_IP_CLAIMTYPE = "REMOTE_IP";
     public const string LOCAL_PORT_CLAIMTYPE = "LOCAL_PORT";
     public const string REMOTE_PORT_CLAIMTYPE = "REMOTE_PORT";
+    public const string REMOTE_IP_FORWARDED_FOR_CLAIMTYPE = "REMOTE_IP_FORWARDED_FOR";
     public const string NETWORK_ADDRESS_AUTHENTICATION = "NETWORK_ADDRESS_AUTHENTICATION";
 }
 
@@ -30,6 +33,14 @@ public class NetworkAddressAuthenticationMiddleware(RequestDelegate next)
 
         if (context.Connection.RemoteIpAddress is not null)
             networkIdentity.AddClaim(new Claim(NetworkAddressAuth.REMOTE_IP_CLAIMTYPE, context.Connection.RemoteIpAddress.ToString()));
+        
+        // From X-Forwarded-For header
+        if (context.Request.Headers.TryGetValue("X-Forwarded-For", out var forwardedFor))
+        {
+            var forwardedForStr = forwardedFor.FirstOrDefault();
+            if (!string.IsNullOrWhiteSpace(forwardedForStr))
+                networkIdentity.AddClaim(new Claim(NetworkAddressAuth.REMOTE_IP_FORWARDED_FOR_CLAIMTYPE, forwardedForStr));
+        }
             
         // Ports
         networkIdentity.AddClaim(new Claim(NetworkAddressAuth.LOCAL_PORT_CLAIMTYPE, context.Connection.LocalPort.ToString()));

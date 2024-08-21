@@ -1,3 +1,4 @@
+using System.Net.NetworkInformation;
 using Microsoft.AspNetCore.Authorization;
 using sip.Organizations.Centers;
 using sip.RemoteAccess;
@@ -46,14 +47,13 @@ public class InstrumentJobsUseHandler(
         // Computers from internal IP can access everything as well
         var internalNetworks = centerNetworkOptions.Get(requirement.Instrument.Organization).InternalNetworks;
         var userIp = context.User.GetRemoteIp();
-        if (!string.IsNullOrWhiteSpace(userIp) && userIp.CheckIp(internalNetworks.ToArray()))
+        if (userIp is not null && userIp.CheckAgainst(internalNetworks.ToArray()))
         {
             context.Succeed(requirement);
         }
 
         // If we are requiring full control, dont give a chance to ordinary lab user
         if (requirement.FullControl) return;
-
         if (context.User.IsInRoleOfScope(nameof(LabUserRole), requirement.Instrument.Organization.Id))
         {
             // However, lab users can only use if they have reservation at the moment

@@ -32,8 +32,14 @@ public static class UsermanExtensions
     /// </summary>
     /// <param name="cp"></param>
     /// <returns></returns>
-    public static string? GetRemoteIp(this ClaimsPrincipal cp) =>
-        cp.FindFirstValue(NetworkAddressAuth.REMOTE_IP_CLAIMTYPE);
+    public static IPAddr? GetRemoteIp(this ClaimsPrincipal cp)
+    {
+        var ip = cp.FindFirstValue(NetworkAddressAuth.REMOTE_IP_CLAIMTYPE);
+        if (!string.IsNullOrWhiteSpace(ip) && IPAddr.TryParse(ip, out var ipAddr))
+            return ipAddr;
+
+        return null;
+    }
 
     public static string? GetFirstname(this ClaimsPrincipal cp)
     {
