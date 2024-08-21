@@ -288,7 +288,8 @@ button {
     
     & .inst-name {
         color: inherit;
-        display: block;
+        display: flex;
+        align-items: center;
         text-decoration: none;
         font-weight: bold;
         padding: .5rem;
@@ -306,14 +307,14 @@ button {
             padding: 0.15rem 1rem;
         }
         
-        & a:last-child {
-            margin-bottom: 0.5rem;
-        }
-
         & a.active {
             background-color: #2f2f2f;
             color: white;
         }
+    }
+    
+    & .nav-item:last-child {
+        margin-bottom: 0.5rem;
     }
 }
 

@@ -21,6 +21,18 @@ public record ExperimentsFilter(
     CancellationToken CancellationToken = default
 ) : IFilter;
 
+public record ExperimentsResult(IReadOnlyCollection<Experiment> Experiments)
+{
+    public Experiment? ByKeyIdentif((string center, string instrument, string job) key)
+        => Experiments.FirstOrDefault(e => e.KeyIdentif == key);
+
+    public static ExperimentsResult Empty()
+        => new(Array.Empty<Experiment>());
+    
+    public IEnumerable<Experiment> ForInstrument(string instrument)
+        => Experiments.Where(e => e.InstrumentName == instrument);
+}
+
 public class ExperimentsService(
     IDbContextFactory<AppDbContext> dbContextFactory,
     ILogger<ExperimentsService> logger,
@@ -30,7 +42,21 @@ public class ExperimentsService(
     public ItemProviderRequestWithSearchDelegate<Experiment> GetFilteredExperimentsProviderByOrg(
         IOrganization organizationSubject)
         => (request, searchString) => GetFilteredExperiments(request, organizationSubject, searchString);
+    
+    public async Task<ExperimentsResult> GetRunningExperimentAsync(
+        IOrganization organization,
+        CancellationToken cancellationToken = default)
+    {
+        var experiments = await GetExperimentsAsync(new ExperimentsFilter(
+            Organization: organization,
+            ExpStates: new List<ExpState>() {ExpState.Active, ExpState.StartRequested, ExpState.StopRequested},
+            CancellationToken: cancellationToken
+        ));
 
+        return new ExperimentsResult(experiments.Items.ToArray());
+    }
+
+    
     public async ValueTask<ItemsProviderResult<Experiment>> GetFilteredExperiments(
         ItemsProviderRequest request,
         IOrganization organizationSubject,

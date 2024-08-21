@@ -106,18 +106,6 @@ public class ExperimentEngine(
         OnExperimentChanged(experiment);
     }
 
-    public async Task<Experiment?> GetRunningExperimentAsync(
-        (string center, string instrument, string job) key,
-        CancellationToken                              cancellationToken = default)
-    {
-        var experiments = await experimentsService.GetExperimentsAsync(new ExperimentsFilter(
-            ExpStates: new List<ExpState>() {ExpState.Active, ExpState.StartRequested, ExpState.StopRequested}
-        ));
-        
-        var exp = experiments.Items.FirstOrDefault(e => e.KeyIdentif == key);
-        return exp;
-    }
-
     public ExperimentOptions GetExpConfig(Experiment exp)
     {
         var expOpts = experimentsOptions.Get(exp.OrganizationId).InstrumentJobs;

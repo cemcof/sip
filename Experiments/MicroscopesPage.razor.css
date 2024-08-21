@@ -16,5 +16,5 @@
 
 .instrument-container {
     border-radius: 4px;
-    padding-bottom: 0.5rem;
+    overflow: hidden; /* New BFC */
 }

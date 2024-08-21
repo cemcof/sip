@@ -9,15 +9,13 @@
 
 @inject NavigationManager NavigationManager
 @inject ExperimentEngine ExperimentEngine
+@inject ExperimentsService ExperimentsService
 @inject IAuthorizationService AuthorizationService
 @inject ILogger<MicroscopesPage> Logger
 @inject IOptionsMonitor<InstrumentsOptions> InstrumentOptions
 @inject IOptionsMonitor<ExperimentsOptions> ExperimentsOptions
 
 <PageTitle>Microscopes - @InstrumentId</PageTitle>
-
-@* Probably useless, event is enough *@
-@* <RefreshTimer Action="OnParametersSetAsyncByTimer" Interval="@(TimeSpan.FromSeconds(5))" DueTime="@(TimeSpan.FromSeconds(5))"></RefreshTimer> *@
 
 <div class="microscopes-page">
     <nav>
@@ -47,19 +45,30 @@
             {
                 @foreach (var inst in _jobsAvailable)
                 {
+                    var activeJobs = _activeExperiments.ForInstrument(inst.Key.Name).ToArray();
                     <div class="instrument-container @inst.Key.DisplayTheme" active="@(inst.Key.Name == InstrumentId)">
                         <NavLink href="@UrlProvider($"microscopes/" + inst.Key.Name)"
-                                 class="inst-name ">
+                                 class="inst-name d-flex">
                             <i class="bi @(inst.Key.Name == InstrumentId ? "bi-chevron-down" : "bi-chevron-right")"></i>&nbsp;
                             @inst.Key.DisplayName
+                            @if (activeJobs.Length > 0)
+                            {
+                                <span class="d-block ms-auto badge badge-pill bg-dark text-light">@activeJobs.Length</span>
+                            }
                         </NavLink>
                         @if (InstrumentId == inst.Key.Name)
                         {
                             @foreach (var exp in inst.Value.OrderBy(v => v.Value.DisplayOrder))
                             {
                                 <div class="nav-item">
-                                    <NavLink href="@UrlProvider($"microscopes/{inst.Key.Name}/{exp.Key}")">
+                                    <NavLink class="d-flex align-items-center justify-content-between" 
+                                             href="@UrlProvider($"microscopes/{inst.Key.Name}/{exp.Key}")">
                                         @exp.Value.DisplayName
+                                        
+                                        @if (activeJobs.Any(j => j.Technique == exp.Key)) 
+                                        {
+                                            <span class="badge badge-pill bg-light text-dark">R</span>
+                                        }
                                     </NavLink>
                                 </div>
                             }
@@ -73,7 +82,7 @@
             }
         </div>
         
-        <NodesStatus Organization="@Organization"></NodesStatus>
+        <NodesStatus Organization="@Organization" />
     </nav>
     
     <div>
@@ -102,8 +111,7 @@
     private ExperimentOptions? _selecteJob = null!;
     private Experiment? _currentExperiment;
     private ExperimentOptions? _currentExperimentMeta;
-
-   
+    private ExperimentsResult _activeExperiments = ExperimentsResult.Empty();
 
     private async Task RefreshState()
     {
@@ -112,6 +120,7 @@
         ExperimentOptions? selectedJob = null;
         ExperimentOptions? currentExperimentMeta = null;
         Experiment? currentExperiment = null; 
+        ExperimentsResult activeExperiments = ExperimentsResult.Empty();
         
         var instrumentJobs = ExperimentsOptions.Get(Organization).InstrumentJobs;
         var instruments = InstrumentOptions.Get(Organization);
@@ -147,9 +156,10 @@
 
                 var expkey = (Organization.Id, selectedInstrument.Name, ExperimentType);
                 currentExperimentMeta = jobsAvailable[selectedInstrument][ExperimentType];
+                activeExperiments = await ExperimentsService.GetRunningExperimentAsync(Organization);
                 // We should always have an experiment.
                 // If there is active experiment in the engine, there is nothing to discuss
-                var crexp = await ExperimentEngine.GetRunningExperimentAsync(expkey);
+                var crexp = activeExperiments.ByKeyIdentif(expkey);
                 if (crexp is not null)
                 {
                     currentExperiment = crexp;
@@ -185,6 +195,7 @@
         _selectedInstrument = selectedInstrument;
         _currentExperimentMeta = currentExperimentMeta;
         _jobsAvailable = jobsAvailable;
+        _activeExperiments = activeExperiments;
         
         Logger.LogTrace("Refresh done: meta_display_name={}, current_exp_id={}, current_exp_key_identif={}, current_exp_state={}", _currentExperimentMeta?.DisplayName, _currentExperiment?.Id, _currentExperiment?.KeyIdentifStr, _currentExperiment?.State);
     }
