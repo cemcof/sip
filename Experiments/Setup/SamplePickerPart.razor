@@ -6,7 +6,9 @@
 <GroupVertical>
     <Header>
         <strong> Sample </strong>
-        <CDropdown HasLabel="@false" TValue="Sample" ItemsProvider="_GetSamples" @bind-Value="@Exp.Sample">
+        <CDropdown HasLabel="@false" TValue="Sample" ItemsProvider="_GetSamples" 
+                   EqualityComparer="@(IdEqualityComparer<Sample, Guid>.Comparer)" 
+                   @bind-Value="@Exp.Sample">
             <ItemTemplate>
                 <div class="basic-item-template">
                     @context.Name <br/>
