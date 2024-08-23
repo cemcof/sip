@@ -87,15 +87,8 @@ public class CEditForm<TModelType> : ComponentBase, IDisposable
         };
     } 
     
-    public static RenderFragment EmptyFooter(CEditForm<TModelType> context)
-    {
-        return builder =>
-        {
-        };
-    } 
-    
-    
-    
+    public static RenderFragment EmptyFooter(CEditForm<TModelType> context) =>
+        _ => { };
 
     public CEditForm()
     {

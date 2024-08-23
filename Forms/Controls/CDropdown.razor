@@ -93,10 +93,10 @@
     public ItemProviderRequestWithSearchDelegate<TValue> ItemsProvider { get; set; } = null!;
 
     [Parameter]
-    public RenderFragment<TValue> ItemTemplate { get; set; } = val => @<div>@val.ToString().Humanize()</div>;
+    public RenderFragment<TValue> ItemTemplate { get; set; } = val => @<div>@val?.ToString().Humanize()</div>;
 
     [Parameter]
-    public RenderFragment<TValue> SelectedItemTemplate { get; set; } = null!;
+    public RenderFragment<TValue> SelectedItemTemplate { get; set; } = val => @<div>@val?.ToString().Humanize()</div>;
 
     // Optional content rendered before the dropdown listview 
     [Parameter]
@@ -126,14 +126,8 @@
         }
     }
 
-    protected override Task OnParametersSetAsync()
-    {
-        ArgumentNullException.ThrowIfNull(ItemsProvider, nameof(ItemsProvider));
-
-    // ReSharper disable once ConstantNullCoalescingCondition
-        SelectedItemTemplate ??= ItemTemplate;
-        return Task.CompletedTask;
-    }
+    protected override void OnParametersSet() 
+        => ArgumentNullException.ThrowIfNull(ItemsProvider, nameof(ItemsProvider));
 
 
     protected override bool TryParseValueFromString(string? value, out TValue result, out string validationErrorMessage)

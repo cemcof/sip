@@ -67,7 +67,7 @@
                 <CSelectDropdown @bind-Value="@_currentFilePreview" TItem="FileMetadata"
                                  HasLabel="@false"
                                  EqualityComparer="@(IdEqualityComparer<FileMetadata, Guid>.Comparer)"
-                                 ItemsProvider="@_docItemsProvider" 
+                                 _itemsProvider="@_docItemsProvider" 
                                  DisplayNameMapper="_docDisplayNameMapper" />
             </CEditForm>
             

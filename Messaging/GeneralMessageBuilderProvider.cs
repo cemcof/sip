@@ -1,8 +1,7 @@
 namespace sip.Messaging;
 
 public class GeneralMessageBuilderProvider(
-        IServiceProvider                           serviceProvider,
-        DocumentService                            documentService,
+    DocumentService                            documentService,
         ILogger<ProjectOrganizationMessageBuilder> logger,
         IMessageSender                             sender)
     : IMessageBuilderProvider<GeneralMessageBuilder>

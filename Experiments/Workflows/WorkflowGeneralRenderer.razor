@@ -10,7 +10,7 @@
 <div class="wf-prot-properties">
     @if (AsForm)
     {
-        <CEditForm TModelType="WorkflowGeneralRenderer" Model="@(this)" FormFooter="@(CEditForm<WorkflowGeneralRenderer>.EmptyFooter)" Context="ctxx">
+        <CEditForm TModelType="WorkflowGeneralRenderer" Model="@(this)" FormFooter="@(CEditForm<WorkflowGeneralRenderer>.EmptyFooter)" Context="_">
             <InputAligner Flex="0 0 40%, 1, 0 0 20%">
                 @foreach (var group in InspectResult.ToGroups())
                 {
@@ -70,8 +70,13 @@
     [Parameter, EditorRequired]
     public Workflow Workflow { get; set; } = null!;
 
-    [Parameter, EditorRequired] public DynamicFormTools.InspectResult InspectResult { get; set; } = null;
+    [Parameter, EditorRequired] public DynamicFormTools.InspectResult InspectResult { get; set; } = null!;
 
     [Parameter] public bool AsForm { get; set; } = true;
+
+    protected override void OnParametersSet()
+    {
+        ArgumentNullException.ThrowIfNull(InspectResult, nameof(InspectResult));
+    }
 
 }

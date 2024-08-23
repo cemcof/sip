@@ -7,7 +7,6 @@ public class ProjectOrganizationMessageHandler(
         IDbContextFactory<AppDbContext>                           dbContextFactory,
         IEnumerable<IMessageConsumer<ProjectOrganizationMessage>> projOrgMessageConsumers,
         IRawMessageSender                                         sender,
-        TimeProvider                                              timeProvider,
         IProjectMessaging                                         projectMessaging,
         IProjectLoader                                            projectLoader,
         IServiceProvider                                          serviceProvider,
@@ -15,8 +14,6 @@ public class ProjectOrganizationMessageHandler(
         ILogger<ProjectOrganizationMessageHandler>                logger)
     : IMessageEgressHandler<ProjectOrganizationMessage>, IMessageIngressHandler
 {
-    private readonly TimeProvider                               _timeProvider = timeProvider;
-
     public async ValueTask<MessageHandleResult> HandleIngress(MimeMessage message)
     {
         var dbctx = await dbContextFactory.CreateDbContextAsync();

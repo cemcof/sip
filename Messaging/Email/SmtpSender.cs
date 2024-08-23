@@ -81,7 +81,7 @@ public class SmtpSender : IRawMessageSender
         var opts = _options.Value;
         client ??= _smtpClient;
         client.CheckCertificateRevocation = false;
-        client.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => true;
+        client.ServerCertificateValidationCallback = (_, _, _, _) => true;
         _logger.LogInformation("Connecting to smtp server: {}, {}", opts.Host, opts.Port);
         await client.ConnectAsync(opts.Host, opts.Port, opts.SecureSocket);
     }

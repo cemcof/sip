@@ -53,8 +53,8 @@ public record DynamicElementSetup(
                 Flex: dict.PickValue<string>(nameof(Flex)),
                 Min: dict.PickValue<int>(nameof(Min)),
                 Max: dict.PickValue<int>(nameof(Max)),
-                Group: dict.PickValue<string>(nameof(Group), string.Empty)!,
-                GroupDesc: dict.PickValue<string>(nameof(GroupDesc), string.Empty)!
+                Group: dict.PickValue(nameof(Group), string.Empty)!,
+                GroupDesc: dict.PickValue(nameof(GroupDesc), string.Empty)!
             );
         }
         else
@@ -453,7 +453,7 @@ public static class DynamicFormTools
             Console.WriteLine($"Set def terminal: {target.Key} to {dynElement.Default} after is: {target.GetValue()}");
             resultElements.Add((dynElement, target));
         }
-        catch (NotSupportedException e)
+        catch (NotSupportedException)
         {
             // We are dealing with a collection or mapping and need to recurse further
             if (metadata is IDictionary mdict)

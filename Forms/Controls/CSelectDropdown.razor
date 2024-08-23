@@ -37,7 +37,8 @@
 
 @code {
     [Parameter]
-    public ItemsProviderDelegate<TItem> ItemsProvider { get; set; } = null!;
+    public ItemsProviderDelegate<TItem>? ItemsProvider { get; set; }
+    private ItemsProviderDelegate<TItem> _itemsProvider = null!;
     
     [Parameter] public IEqualityComparer<TItem> EqualityComparer { get; set; } = EqualityComparer<TItem>.Default; 
 
@@ -57,7 +58,7 @@
             var items = ModelPropertyType.GetCustomAttribute<SelectionAttribute>()?.GetKeyValues().ToList() ?? new List<KeyValuePair<string, string>>();
             if (typeof(TItem) == typeof(string))
             {
-                ItemsProvider = _ => ValueTask.FromResult(
+                _itemsProvider = _ => ValueTask.FromResult(
                     new ItemsProviderResult<TItem>(
                             items.Select(i => i.Key).Cast<TItem>(), items.Count
                         )
@@ -67,7 +68,7 @@
             }
             else if (typeof(TItem) == typeof(int))
             {
-                ItemsProvider = _ => ValueTask.FromResult(
+                _itemsProvider = _ => ValueTask.FromResult(
                     new ItemsProviderResult<TItem>(
                         items.Select(i => (TItem)(object)int.Parse(i.Key)), items.Count
                         )
@@ -79,12 +80,15 @@
             {
                 throw new InvalidOperationException("Dropdown cannot find any item source");
             }
-            
+        }
+        else
+        {
+            _itemsProvider = ItemsProvider;
         }
         
         
         // Load items 
-        var result = await ItemsProvider(new ItemsProviderRequest(default, Int32.MaxValue, default));
+        var result = await _itemsProvider(new ItemsProviderRequest(default, Int32.MaxValue, default));
         var resultItems = result.Items.ToList();
 
         try

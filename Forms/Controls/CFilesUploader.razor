@@ -1,7 +1,6 @@
 @using MimeTypes
 @inherits CInputBase<string>
 @inject ILogger<CFilesUploader> Logger
-@inject IJSRuntime Js 
 
 <div class="form-group cinput-container csingleuploadinput-container rendering-strategy-@(RenderingStrategy) @(HasLabel ? "labeled" : "labelless") @(IsRequired ? "required" : "")">
     @if (HasLabel)
@@ -86,7 +85,7 @@
     private bool Prepickable => PrepickProvider != null;
 
     private UploaderState _state = UploaderState.Picking;
-    private string? _filePath = null;
+    private string? _filePath;
     private InputFile? _inputFileComponent;
 
     protected override void OnInitialized()

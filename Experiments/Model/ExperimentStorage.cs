@@ -26,6 +26,7 @@ public class ExperimentStorage
     public string? Source { get; set; }
     public string? Target { get; set; }
     public string? Path { get; set; }
+    public string? SubPath { get; set; }
     public string? Token { get; set; }
 
     public bool Clean { get; set; } = false;

@@ -10,8 +10,6 @@ public class Organization(string id) :
 {
     #region EQUALS_BOILERPLATE
 
-    
-
         public bool Equals(Organization? other)
         {
             if (ReferenceEquals(null, other)) return false;
