@@ -85,6 +85,8 @@
 
     private DropdownState _state = DropdownState.Idle;
     public DropdownState State => _state;
+    
+    [Parameter] public IEqualityComparer<TValue> EqualityComparer { get; set; } = EqualityComparer<TValue>.Default; 
 
     [Parameter]
     public ItemProviderRequestWithSearchDelegate<TValue> ItemsProvider { get; set; } = null!;
@@ -115,8 +117,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-    // Check if we should try to automatically set default value from provider 
-        if (AutoDefault && (CurrentValue is null || CurrentValue.Equals(default)))
+        // Check if we should try to automatically set default value from provider 
+        if (AutoDefault && (CurrentValue is null || EqualityComparer.Equals(CurrentValue, default)))
         {
             var providerItem = await ItemsProvider(new ItemsProviderRequest(0, 1, CancellationToken.None), null);
             CurrentValue = providerItem.Items.FirstOrDefault();
