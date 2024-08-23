@@ -20,6 +20,7 @@
                                Context="wfctx"
                                OnValueSet="@SelectWorkflow"
                                DisplayName="Workflow template"
+                               EqualityComparer="@(IdEqualityComparer<Workflow, string>.Comparer)"
                                @bind-Value="@SelectedWorkflow"
                                ItemsProvider="_WorkflowTemplateItemsProvider"
                                Placeholder="<no workflow> click to select workflow if processing is desired">
