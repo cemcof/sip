@@ -1,4 +1,4 @@
-@typeparam TValue where TValue : IEquatable<TValue>
+@typeparam TValue
 @inherits CInputBase<TValue>
 @inject ILogger<CDropdown<TValue>> Logger
 
@@ -33,6 +33,7 @@
                         <SListView @ref="_selectListViewRef" TItem="TValue"
                                    ItemContent="@ItemTemplate"
                                    OnItemConfirmed="SelectItem"
+                                   EqualityComparer="@EqualityComparer"
                                    ItemsProvider="@(request => ItemsProvider(request, _currentSearchString))">
                         </SListView>
                     }

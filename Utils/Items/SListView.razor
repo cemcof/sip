@@ -1,4 +1,4 @@
-@typeparam TItem where TItem : IEquatable<TItem>
+@typeparam TItem
 @inherits ItemsRenderer<TItem>
 @inject ILogger<SListView<TItem>> Logger 
 @inject IJSRuntime Js
@@ -11,7 +11,7 @@
                 ItemsProvider="@ItemProviderWrapper">
         
         <ItemContent Context="i">
-            @if (i.Equals(_selectedItem))
+            @if (EqualityComparer.Equals(i, _selectedItem))
             {
                 <div @ref="@_selectedItemElementRef" class="listview-item selectable" selected="@true"
                      @onmousedown="@(() => _itemClick(i))" @onmousedown:preventDefault="@true">
@@ -39,6 +39,10 @@
 
     [Parameter]
     public Func<TItem, bool> ItemSelectable { get; set; } = (_) => true;
+    
+    [Parameter] 
+    public IEqualityComparer<TItem> EqualityComparer { get; set; } = EqualityComparer<TItem>.Default;
+    
 
     private TItem? _selectedItem;
     private int SelectedIndex => _selectedItem is null ? -1 : CurrentItems.IndexOf(_selectedItem); 
@@ -86,7 +90,7 @@
     public void SelectItem(TItem? item)
     {
         if (item is null || !CurrentItems.Contains(item)) item = default;
-        if (item is not null && item.Equals(_selectedItem)) return;
+        if (item is not null && EqualityComparer.Equals(item, _selectedItem)) return;
         if (item is not null && !ItemSelectable(item)) return;
         _selectedItem = item;
         OnItemSelected.InvokeAsync(item);
