@@ -27,6 +27,16 @@ public class ExperimentStorage
     public string? Target { get; set; }
     public string? Path { get; set; }
     public string? SubPath { get; set; }
+    [NotMapped] public string? FullPath
+    {
+        get
+        {
+            if (string.IsNullOrWhiteSpace(SubPath) || string.IsNullOrWhiteSpace(Path))
+                return null;
+            return System.IO.Path.Combine(Path, SubPath);
+        }
+    }
+
     public string? Token { get; set; }
 
     public bool Clean { get; set; } = false;

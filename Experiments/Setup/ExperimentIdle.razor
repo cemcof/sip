@@ -23,12 +23,14 @@
             </div>
 
         </div>
-        <div class="exp-form-button-part group">
+        <div class="exp-form-button-part group d-flex align-items-center">
             <OneoffButton @ref="@_btnRun"
                           type="submit"
-                          class="btn btn-primary"
+                          class="btn btn-primary me-1"
                           UsedCaption="Please wait..."
                           UnusedCaption="Run job"/>
+
+            <CCheckBox HasLabel="@false" @bind-Value="@Exp.NotifyUser" />
         </div>
 
 

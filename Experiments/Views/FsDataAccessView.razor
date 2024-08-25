@@ -1,0 +1,31 @@
+﻿@using sip.Experiments.Model
+
+
+@if (IsAccessible)
+{
+    <p>The dataset has been stored at the following location, and you can access it provided that you were
+        given credentials (username/password/ssh key) by the facility: <br/> <code>@_SshTarget()</code></p>
+                
+    <p>
+        <strong>On Windows <i class="bi bi-windows text-primary"></i></strong>, you can use for example <a target="_blank" href="https://winscp.net/">WinSCP<i class="bi bi-box-arrow-up-right"></i></a> program to access and copy the data.
+    </p>
+
+    <p>
+        <strong>On Linux <i class="fab fa-linux"></i> / macOS <i class="fab fa-apple"></i></strong>, you can use for example the rsync utility: <br/>
+        <code>rsync -av --progress [username]@("@")@ExperimentStorage.Target .</code>
+    </p>
+}
+else
+{
+    <p class="text-danger">Data access information is not available yet</p>
+}
+
+@code {
+    [Parameter, EditorRequired] public ExperimentStorage ExperimentStorage { get; set; } = null!;
+    
+    private bool IsAccessible => 
+        ExperimentStorage.Target is not null && 
+        ExperimentStorage.FullPath is not null;
+    
+    private string _SshTarget() => $"{ExperimentStorage.Target}:{ExperimentStorage.FullPath}";
+}

@@ -93,13 +93,10 @@ public class ExperimentEngine(
             "Experiment stop requested, waiting for processing machines...");
         
         Logger.LogDebug("Requesting stop for experiment {Id} notify={NotifyUser}, notes={Notes}",
-            experiment.Id, stopModel.NotifyUser, stopModel.Notes);
+            experiment.Id, experiment.NotifyUser, experiment.Notes);
 
         await using var dbctx = await dbContextFactory.CreateDbContextAsync();
         dbctx.Entry(experiment).State = EntityState.Unchanged;
-            
-        experiment.NotifyUser = stopModel.NotifyUser;
-        experiment.Notes = stopModel.Notes;
         experiment.State = ExpState.StopRequested;
             
         await dbctx.SaveChangesAsync();

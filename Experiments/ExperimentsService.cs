@@ -370,4 +370,13 @@ public class ExperimentsService(
         logger.LogDebug("Sending email notification for experiment {ExpId}", exp.Id);
         await messageBuilder.BuildAndSendAsync();
     }
+
+    public async Task UpdatePropertyAsync(Experiment exp, Expression<Func<Experiment, string?>> property)
+    {
+        await using var context = await dbContextFactory.CreateDbContextAsync();
+        var entry = context.Set<Experiment>().Entry(exp);
+        entry.State = EntityState.Unchanged;
+        entry.Property(property).IsModified = true;
+        await context.SaveChangesAsync();
+    }
 }

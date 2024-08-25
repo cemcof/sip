@@ -42,10 +42,6 @@
                                    Caption="Stop aquisition" BtnClass="w-100 btn btn-sm btn-danger" TooltipDirection="@TooltipDirection.BottomLeft"
                                    OnSubmit="@_StopJobRequest"
                                    Context="stopForm">
-                
-                <CTextInput Sizing="Sizing.Small" Flex="0, 1" @bind-Value="@stopForm.Model.Notes" />
-                <CCheckBox HasLabel="@false" @bind-Value="@stopForm.Model.NotifyUser" />
-
             </InteractiveButtonForm>
 
             <em class="d-block p-1 text-muted small text-center">Please stop the acquisition once desired data are 
@@ -55,8 +51,12 @@
 
 </div>
 
-<div class="exp-log-results-container">
-    <Loglist @ref="@_logListComponent" LogsProvider="@_logsProvider" />
+<div class="exp-log-results-container">\
+    <div>
+        <CTextInput Sizing="Sizing.Small" Flex="0, 1" @bind-Value="@Exp.Notes"
+                    OnValueSet="_SaveExperimentNotes"/>
+        <Loglist @ref="@_logListComponent" LogsProvider="@_logsProvider" />
+    </div>
     
     @* In cas there is some processing, show results *@
     @* There are possibly multiple documents and files, make it possible to select between them *@
@@ -67,7 +67,7 @@
                 <CSelectDropdown @bind-Value="@_currentFilePreview" TItem="FileMetadata"
                                  HasLabel="@false"
                                  EqualityComparer="@(IdEqualityComparer<FileMetadata, Guid>.Comparer)"
-                                 _itemsProvider="@_docItemsProvider" 
+                                 ItemsProvider="@_docItemsProvider" 
                                  DisplayNameMapper="_docDisplayNameMapper" />
             </CEditForm>
             
@@ -173,4 +173,6 @@
         return LogProvider.GetLogsAsync(Exp, LogLevel.Debug, request);
     }
 
+    private Task _SaveExperimentNotes(string _) => 
+        ExperimentsService.UpdatePropertyAsync(Exp, e => e.Notes);
 }
