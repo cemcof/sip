@@ -87,10 +87,14 @@
         <div class="card-body">
             
             @if (Exp.Storage.StorageEngine.StartsWith("irods"))
+            {
                 <IrodsDataAccessView ExperimentStorage="@Exp.Storage" />
+            }
 
             @if (Exp.Storage.StorageEngine.StartsWith("fs"))
+            {
                 <FsDataAccessView ExperimentStorage="@Exp.Storage" />
+            }
 
         </div>
     </section>
