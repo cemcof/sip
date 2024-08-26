@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using sip.Core.OutOfService;
 
 namespace sip.Core;
 
@@ -52,6 +53,7 @@ public class PanelItemOptions
     public string? DisplayText { get; set; } = string.Empty;
     public string LinkHref { get; set; } = string.Empty;
 
+    public OutOfServiceOptions OutOfService { get; set; } = new();
     public RoleNetworkAuthOptions? RoleNetworkAuthorization { get; set; }
     
     public UserRoleAuthOptions? UserRoleAuthorization { get; set; }

@@ -25,16 +25,22 @@
             {
                 // All good, lets render normally
                 <CascadingAuthenticationState>
+                    @* Lets require user to be verified *@
                     <VerificationGuard>
-
                         <CascadingValue TValue="OrganizationComponentContext" Value="@componentContext" IsFixed="@true">
 
-                            @* Lets require user to be verified *@
-
+                            @{
+                                var resultRouteData = routeData;
+                                var modOpts = _ExtractFromRouteData(routeData).moduleOpts;
+                                if (modOpts is not null && modOpts.OutOfService.Enabled)
+                                {
+                                    resultRouteData = new RouteData(modOpts.OutOfService.Component, new Dictionary<string, object?>() );
+                                }
+                            }
 
                             <AuthorizeViewByRequirements Requirements="@_GetPageAuthorizationRequirements(routeData).ToArray()">
                                 <Authorized>
-                                    <RouteView RouteData="routeData"
+                                    <RouteView RouteData="resultRouteData"
                                                DefaultLayout="@Options.CurrentValue.DefaultLayoutComponent"/>
                                 </Authorized>
 
@@ -42,7 +48,6 @@
                                     <DynamicComponent Type="@Options.CurrentValue.UnauthorizedComponent"/>
                                 </NotAuthorized>
                             </AuthorizeViewByRequirements>
-
                         </CascadingValue>
                     </VerificationGuard>
                 </CascadingAuthenticationState>
@@ -82,7 +87,9 @@
         return tmporgId?.ToString();
     }
     
-    private IEnumerable<IAuthorizationRequirement> _GetPageAuthorizationRequirements(RouteData routeData)
+    
+    
+    private (string modName, PanelItemOptions? moduleOpts, IOrganization? org) _ExtractFromRouteData(RouteData routeData)
     {
         // By default, we use global configuration of gui
         var guiOpts = Options.CurrentValue;
@@ -99,10 +106,15 @@
         
         // Determine name of page/module
         var modName = routeData.PageType.Name.Replace("Page", "").ToLower();
-        
+        return (modName, guiOpts.Modules.GetValueOrDefault(modName), org);
+    }
+    
+    
+    private IEnumerable<IAuthorizationRequirement> _GetPageAuthorizationRequirements(RouteData routeData)
+    {
+        var (_, modOpts, org) = _ExtractFromRouteData(routeData);
         // Now we have everything to determine authorization requirements
         // We search for this module in options and see if it requires some auth
-        var modOpts = guiOpts.Modules.GetValueOrDefault(modName);
         if (modOpts is not null)
         {
             foreach (var authorizationRequirement in modOpts.GetAuthorizationRequirements(org))
