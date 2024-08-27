@@ -96,7 +96,8 @@
     public RenderFragment<TValue> ItemTemplate { get; set; } = val => @<div>@val?.ToString().Humanize()</div>;
 
     [Parameter]
-    public RenderFragment<TValue> SelectedItemTemplate { get; set; } = val => @<div>@val?.ToString().Humanize()</div>;
+    public RenderFragment<TValue>? SelectedItemTemplate { get; set; }
+    private RenderFragment<TValue> _selectedItemTemplate = null!;
 
     // Optional content rendered before the dropdown listview 
     [Parameter]
@@ -126,8 +127,11 @@
         }
     }
 
-    protected override void OnParametersSet() 
-        => ArgumentNullException.ThrowIfNull(ItemsProvider, nameof(ItemsProvider));
+    protected override void OnParametersSet()
+    {
+        ArgumentNullException.ThrowIfNull(ItemsProvider, nameof(ItemsProvider));
+        _selectedItemTemplate = SelectedItemTemplate ?? ItemTemplate;
+    }
 
 
     protected override bool TryParseValueFromString(string? value, out TValue result, out string validationErrorMessage)
