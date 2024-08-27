@@ -66,7 +66,7 @@ public class Experiment : IIdentified<Guid>
     public string? Notes { get; set; } = string.Empty;
     
     [Render(Tip = "Send email notification to the user with information how to access the data.", 
-        Title = "Notify user after completion (uncheck only if job somehow failed or result is not expected)")]
+        Title = "Notify user after completion")]
     public bool NotifyUser { get; set; } = true;
 
     

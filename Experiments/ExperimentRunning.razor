@@ -53,9 +53,12 @@
 
 <div class="exp-log-results-container">\
     <div>
-        <CTextInput Sizing="Sizing.Small" Flex="0, 1" @bind-Value="@Exp.Notes"
-                    OnValueSet="_SaveExperimentNotes"/>
-        <Loglist @ref="@_logListComponent" LogsProvider="@_logsProvider" />
+        <CEditForm Model="@Exp" TModelType="Experiment">
+            <CTextInput Sizing="Sizing.Small" Flex="0, 1" @bind-Value="@Exp.Notes"
+                        OnValueSet="_SaveExperimentNotes"/>
+        </CEditForm>
+        
+        <Loglist @ref="@_logListComponent" LogsProvider="@_logsProvider"/>
     </div>
     
     @* In cas there is some processing, show results *@
