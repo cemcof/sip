@@ -51,9 +51,9 @@
 
 </div>
 
-<div class="exp-log-results-container">\
+<div class="exp-log-results-container">
     <div>
-        <CEditForm Model="@Exp" TModelType="Experiment">
+        <CEditForm Model="@Exp" TModelType="Experiment" FormFooter="@(CEditForm<Experiment>.EmptyFooter)">
             <CTextInput Sizing="Sizing.Small" Flex="0, 1" @bind-Value="@Exp.Notes"
                         OnValueSet="_SaveExperimentNotes"/>
         </CEditForm>
