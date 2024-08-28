@@ -32,7 +32,9 @@
                             @{
                                 var resultRouteData = routeData;
                                 var modOpts = _ExtractFromRouteData(routeData).moduleOpts;
-                                if (modOpts is not null && modOpts.OutOfService.Enabled)
+                                var remoteIp = _cp.GetRemoteIp();
+                                if (modOpts is not null && modOpts.OutOfService.Enabled && 
+                                    (remoteIp is null || !remoteIp.CheckAgainst(modOpts.OutOfService.AllowIps)))
                                 {
                                     resultRouteData = new RouteData(modOpts.OutOfService.Component, new Dictionary<string, object?>() );
                                 }
