@@ -30,7 +30,13 @@ public static class StringUtils
 
     public static string[] SplitWithTrim(this string str, params string[] separators)
         => str.Split(separators, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-    
+
+    public static string ToSafeFilename(this string str)
+    {
+        var regex = new Regex("[\\/*?:\"<>| ]");
+        return regex.Replace(str, "_");
+    }
+
     // public static byte[] HexToByteArray(this ReadOnlySpan<char> str)
     // {
     //     var chars = str;
@@ -39,9 +45,9 @@ public static class StringUtils
     //         .Select(x => Convert.ToByte(chars.Slice(x, 2), 16))
     //         .ToArray();
     // }
-    //     
-    
-    
+    //
+
+
     // DEL - this implementation is already in humanize lib
     // public static string LimitLength(this string str, int maxChars = 50, string suffix = "...", bool fromEnd = false)
     // {
@@ -52,8 +58,8 @@ public static class StringUtils
     //
     //     if (str.Length > maxChars + suffix.Length)
     //     {
-    //         return fromEnd ? 
-    //             suffix + str[(str.Length - maxChars + suffix.Length)..] : 
+    //         return fromEnd ?
+    //             suffix + str[(str.Length - maxChars + suffix.Length)..] :
     //             str[..(maxChars - suffix.Length)] + suffix;
     //     }
     //
@@ -69,17 +75,17 @@ public static class StringUtils
     {
         return (str is null) ? "".WithPlaceholderExt(placeholder) : str.WithPlaceholderExt(placeholder);
     }
-        
+
     public static bool IsFilterMatchAtLeastOneOf(string? filter, params string?[] targets)
     {
         // On empty search string we just assume a match (user is not searching)
         if (string.IsNullOrWhiteSpace(filter))
             return true;
-        
+
         filter = filter.Trim();
         IEnumerable<string> tgts = targets.Where(t => !string.IsNullOrEmpty(t))!;
         var compareInfo = CultureInfo.CurrentCulture.CompareInfo;
-        var options = CompareOptions.IgnoreCase | 
+        var options = CompareOptions.IgnoreCase |
                       CompareOptions.IgnoreNonSpace;
 
         return tgts.Any(t => compareInfo.IndexOf(t.Trim(), filter, options) != -1);
@@ -88,19 +94,19 @@ public static class StringUtils
     {
         return filters.All(f => IsFilterMatchAtLeastOneOf(f, targets));
     }
-        
+
     public static string UnderscoreToUpperCamelCase(this String s)
     {
         if (string.IsNullOrEmpty(s)) return s;
-            
+
         // return Regex.Replace(s1,).ToLower();
         var camelcase = Regex.Replace(s, "_[a-z]", (m) => m.ToString().TrimStart('_').ToUpper());
-            
+
         // Make first letter uppercase
         var firstletter = char.ToUpper(camelcase[0]);
         return (s.Length >= 2) ? firstletter + camelcase[1..] : firstletter.ToString();
     }
-        
+
     public static string TitleCaseToText(this String str)
     {
         if (string.IsNullOrEmpty(str))
@@ -112,7 +118,7 @@ public static class StringUtils
         {
             return str.ToUpper();
         }
-            
+
         // AAA => AAA
         // Abb => Abb
         // ABc => A bc
@@ -123,17 +129,17 @@ public static class StringUtils
         // tmp = Regex.Replace(tmp, " [A-Z]")
         return tmp;
     }
-        
-        
-    // !! TAKEN FROM - https://github.com/aaubry/YamlDotNet/blob/master/YamlDotNet/Serialization/Utilities/StringExtensions.cs !! 
+
+
+    // !! TAKEN FROM - https://github.com/aaubry/YamlDotNet/blob/master/YamlDotNet/Serialization/Utilities/StringExtensions.cs !!
     private static string ToCamelOrPascalCase(string str, Func<char, char> firstLetterTransform)
     {
         var text = Regex.Replace(str, "([_\\-])(?<char>[a-z])", match => match.Groups["char"].Value.ToUpperInvariant(), RegexOptions.IgnoreCase);
         return firstLetterTransform(text[0]) + text.Substring(1);
     }
-        
+
     /// <summary>
-    /// Convert the string with underscores (this_is_a_test) or hyphens (this-is-a-test) to 
+    /// Convert the string with underscores (this_is_a_test) or hyphens (this-is-a-test) to
     /// camel case (thisIsATest). Camel case is the same as Pascal case, except the first letter
     /// is lowercase.
     /// </summary>
@@ -145,7 +151,7 @@ public static class StringUtils
     }
 
     /// <summary>
-    /// Convert the string with underscores (this_is_a_test) or hyphens (this-is-a-test) to 
+    /// Convert the string with underscores (this_is_a_test) or hyphens (this-is-a-test) to
     /// pascal case (ThisIsATest). Pascal case is the same as camel case, except the first letter
     /// is uppercase.
     /// </summary>
@@ -157,7 +163,7 @@ public static class StringUtils
     }
 
     /// <summary>
-    /// Convert the string from camelcase (thisIsATest) to a hyphenated (this-is-a-test) or 
+    /// Convert the string from camelcase (thisIsATest) to a hyphenated (this-is-a-test) or
     /// underscored (this_is_a_test) string
     /// </summary>
     /// <param name="str">String to convert</param>
@@ -188,10 +194,10 @@ public static class StringUtils
         var spl = str.Split("@");
         return (spl.Length > 1) ? spl[1] : "";
     }
-    
+
     public static bool IsEqualIgnoreWsAndDiacritics(this string str, string other)
     {
-        var result = string.Compare(str, other, CultureInfo.CurrentCulture, 
+        var result = string.Compare(str, other, CultureInfo.CurrentCulture,
             CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace);
         return result == 0;
     }
@@ -205,7 +211,7 @@ public static class StringUtils
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="str"></param>
     /// <param name="newlineSequence"></param>
@@ -215,12 +221,12 @@ public static class StringUtils
         // Get rid of line breaks and merge multiple whitespaces
         str = str.ReplaceLineEndings("");
         str = Regex.Replace(str, @"\s\s+", " ");
-        
+
         // Transfer breakline and paragraph tags to newlins
         str = str.Replace("<br/>", newlineSequence);
         str = str.Replace("<br>", newlineSequence);
         str = str.Replace("</p>", newlineSequence + newlineSequence);
-        
+
         // Now strip all remaining tags
         str = Regex.Replace(str, "<[^>]*>", "");
 
@@ -238,15 +244,15 @@ public static class StringUtils
             ));
 
         return propertyBuilder;
-    } 
-    
+    }
+
     public static PropertyBuilder<TProperty> ToJsonConvertedProperty<TProperty>(this PropertyBuilder<TProperty> propertyBuilder)
     {
         propertyBuilder.HasConversion(v => JsonSerializer.Serialize(v, (JsonSerializerOptions?) null),
             v => JsonSerializer.Deserialize<TProperty>(v, (JsonSerializerOptions?) null)!);
-        
+
         // TODO- is value comparer needed?
 
         return propertyBuilder;
-    } 
+    }
 }
