@@ -167,8 +167,7 @@ public class ExperimentsBuilder
                         organization,
                         cs.GetValue<string>("DisplayName")!,
                         cs.GetValue<string>("DisplayTheme")!,
-                        cs.GetValue<IPAddr[]>("IPs") ?? []));
-                        
+                        cs.GetSection("IPs").Get<IPAddr[]>() ?? []));
                 }
             });
         
