@@ -68,7 +68,12 @@ public static class UsermanExtensions
     public static bool CheckRemoteIp(this ClaimsPrincipal cp, IPAddr[] against, IPAddr[]? trustedProxies = null)
     {
         trustedProxies ??= [];
+        
         var (remoteIp, forwardedIp) = cp.GetRemoteIps();
+        
+        Console.WriteLine($"IPCHECK: remoteip={remoteIp}, forwarded={forwardedIp}, against={string.Join<IPAddr>(", ", against)}, " +
+                          $"trusted={string.Join<IPAddr>(", ", trustedProxies)}, proxycheck={remoteIp?.CheckAgainst(trustedProxies)}, " +
+                          $"forwardedcheck={forwardedIp?.CheckAgainst(against)}");
         
         // Standard IP
         if (remoteIp is not null && remoteIp.CheckAgainst(against))
