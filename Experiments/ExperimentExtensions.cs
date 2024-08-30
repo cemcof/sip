@@ -61,11 +61,6 @@ public class ExperimentsBuilder
             c.InitRun = true;
         });
         
-        
-        // services.AddSingleton<IInstrumentProvider>(s => s.GetRequiredService<CenterManager>());
-
-        
-
         services.AddSingleton<SampleRepo>();
         
         
@@ -171,8 +166,9 @@ public class ExperimentsBuilder
                         cs.GetValue<string>("Alias")!,
                         organization,
                         cs.GetValue<string>("DisplayName")!,
-                        cs.GetValue<string>("DisplayTheme")!
-                        ));
+                        cs.GetValue<string>("DisplayTheme")!,
+                        cs.GetValue<IPAddr[]>("IPs") ?? []));
+                        
                 }
             });
         
