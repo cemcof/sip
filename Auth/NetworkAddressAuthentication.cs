@@ -37,14 +37,20 @@ public class NetworkAddressAuthenticationMiddleware(RequestDelegate next, IOptio
             networkIdentity.AddClaim(new Claim(NetworkAddressAuth.REMOTE_IP_CLAIMTYPE, context.Connection.RemoteIpAddress.ToString()));
         
         // From X-Forwarded-For header
-        if (context.Request.Headers.TryGetValue("X-Forwarded-For", out var forwardedFor) &&
-            remoteIp is not null 
-            && new IPAddr(remoteIp).CheckAgainst(centerNetworkOptions.CurrentValue.TrustedProxies))
+        var isForwarded = context.Request.Headers.TryGetValue("X-Forwarded-For", out var forwardedFor);
+        if (isForwarded)
         {
-            var forwardedForStr = forwardedFor.FirstOrDefault();
-            logger.LogDebug("X-Forwarded-For: {ForwardedFor}", forwardedForStr);
-            if (!string.IsNullOrWhiteSpace(forwardedForStr))
-                networkIdentity.AddClaim(new Claim(NetworkAddressAuth.REMOTE_IP_FORWARDED_FOR_CLAIMTYPE, forwardedForStr));
+            logger.LogDebug("X-Forwarded-For: {ForwardedFor}, as str: {AsStr}", forwardedFor, forwardedFor.FirstOrDefault());
+            if (remoteIp is not null 
+                && new IPAddr(remoteIp).CheckAgainst(centerNetworkOptions.CurrentValue.TrustedProxies))
+            {
+                var forwardedForStr = forwardedFor.FirstOrDefault();
+                if (!string.IsNullOrWhiteSpace(forwardedForStr))
+                {
+                    logger.LogDebug("Forwarding is trusted, adding claim: {}", forwardedForStr);
+                    networkIdentity.AddClaim(new Claim(NetworkAddressAuth.REMOTE_IP_FORWARDED_FOR_CLAIMTYPE, forwardedForStr));
+                }
+            }
         }
             
         // Ports
