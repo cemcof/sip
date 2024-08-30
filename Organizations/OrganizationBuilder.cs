@@ -130,6 +130,7 @@ public class OrganizationBuilder
         
         // Network options
         _services.AddOptions<CenterNetworkOptions>()
+            .Bind(_configurationManager.GetSection("Network"))
             .GetOrganizationOptionsBuilder(_configurationManager)
             .BindOrganizationConfiguration("Network");
         

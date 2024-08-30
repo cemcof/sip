@@ -15,6 +15,9 @@ public interface IInstrument
 
     string DisplayName { get; }
     string DisplayTheme { get; }
+    
+    // ReSharper disable once InconsistentNaming
+    IPAddr[] IPs { get; }
 }
 
 public record InstrumentRecord(
@@ -23,7 +26,9 @@ public record InstrumentRecord(
     string Alias,
     IOrganization Organization,
     string DisplayName,
-    string DisplayTheme
+    string DisplayTheme,
+    // ReSharper disable once InconsistentNaming
+    IPAddr[] IPs
 ) : IInstrument
 {
     public virtual bool Equals(InstrumentRecord? other)

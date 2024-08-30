@@ -139,6 +139,8 @@ public class SipSetup(string[] args)
         se.AddSingleton<IAuthorizationHandler, NotIpBlacklistedHandler>();
         se.AddSingleton<IAuthorizationHandler, AppUserRolesRequirementHandler>();
         se.AddSingleton<IAuthorizationHandler, DummyAuthHandler>();
+        se.AddSingleton<IAuthorizationHandler, NotUserAppAuthenticatedRequirement>();
+        se.AddSingleton<IAuthorizationHandler, NotMatchesNoSignInNetworkHandler>();
         
         // In memory cache
         se.AddMemoryCache();

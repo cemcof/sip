@@ -31,14 +31,57 @@ public static class UsermanExtensions
     /// Finds remote ip claim in the user, if available, returns ip as string.
     /// </summary>
     /// <param name="cp"></param>
+    /// <param name="preferForwarded"></param>
     /// <returns></returns>
-    public static IPAddr? GetRemoteIp(this ClaimsPrincipal cp)
+    public static IPAddr? GetRemoteIp(this ClaimsPrincipal cp, bool preferForwarded = true)
     {
+        if (preferForwarded)
+        {
+            var forwardedIp = cp.FindFirstValue(NetworkAddressAuth.REMOTE_IP_FORWARDED_FOR_CLAIMTYPE);
+            if (!string.IsNullOrWhiteSpace(forwardedIp) && IPAddr.TryParse(forwardedIp, out var forwardedIpAddr))
+                return forwardedIpAddr;
+        }
+        
         var ip = cp.FindFirstValue(NetworkAddressAuth.REMOTE_IP_CLAIMTYPE);
         if (!string.IsNullOrWhiteSpace(ip) && IPAddr.TryParse(ip, out var ipAddr))
             return ipAddr;
 
         return null;
+    }
+    
+    public static (IPAddr? remoteIp, IPAddr? remoteForwardedIp) GetRemoteIps(this ClaimsPrincipal cp)
+    {
+        IPAddr? ParseFromClaim(string claimType)
+        {
+            var ipStr = cp.FindFirstValue(claimType);
+            if (!string.IsNullOrWhiteSpace(ipStr) && IPAddr.TryParse(ipStr, out var ipAddr))
+                return ipAddr;
+            return null;
+        }
+        
+        IPAddr? remoteIp = ParseFromClaim(NetworkAddressAuth.REMOTE_IP_CLAIMTYPE);
+        IPAddr? forwardedIpAddr = ParseFromClaim(NetworkAddressAuth.REMOTE_IP_FORWARDED_FOR_CLAIMTYPE);
+        
+        return (remoteIp, forwardedIpAddr);
+    }
+    
+    public static bool CheckRemoteIp(this ClaimsPrincipal cp, IPAddr[] against, IPAddr[]? trustedProxies = null)
+    {
+        trustedProxies ??= [];
+        var (remoteIp, forwardedIp) = cp.GetRemoteIps();
+        
+        // Standard IP
+        if (remoteIp is not null && remoteIp.CheckAgainst(against))
+            return true;
+
+        // Forwarded IP
+        if (forwardedIp is not null &&
+            remoteIp is not null &&
+            remoteIp.CheckAgainst(trustedProxies) &&
+            forwardedIp.CheckAgainst(against))
+            return true;
+
+        return false;
     }
 
     public static string? GetFirstname(this ClaimsPrincipal cp)
@@ -165,6 +208,16 @@ public class UsermanBuilder(IServiceCollection services, ILogger<UsermanBuilder>
                 seed.SeedEntities.AddRange(appRoles);
             });
 
+        services.AddAuthorization(a =>
+        {
+            a.AddPolicy(AuthorizationConstants.PolicyLoginable, pb =>
+            {
+                pb.AddRequirements(
+                    new NotUserAppAuthenticatedRequirement(),
+                    new NotMatchesNoSignInNetworkRequirement());
+            });
+        });
+        
         return this;
     }
 

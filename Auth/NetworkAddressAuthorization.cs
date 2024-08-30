@@ -1,5 +1,6 @@
 using System.Collections;
 using Microsoft.AspNetCore.Authorization;
+using sip.Organizations.Centers;
 
 // ReSharper disable CollectionNeverUpdated.Global
 
@@ -35,6 +36,35 @@ public class NotRemoteIpRequirement(IPAddr disallowedIpOrNetworkAddress) : Autho
         }
 
         context.Fail();
+        return Task.CompletedTask;
+    }
+}
+
+/// <summary>
+/// Requires that the request does not come from IP address or network that is configured as disabled for sign in.
+/// </summary>
+public class NotMatchesNoSignInNetworkRequirement : IAuthorizationRequirement;
+public class NotMatchesNoSignInNetworkHandler(IOptionsMonitor<CenterNetworkOptions> networkOptions, ILogger<NotMatchesNoSignInNetworkHandler> logger) : AuthorizationHandler<NotMatchesNoSignInNetworkRequirement>
+{
+    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, NotMatchesNoSignInNetworkRequirement requirement)
+    {
+        var org = context.Resource as IOrganization;
+        var opts = networkOptions.Get(org?.Id ?? Options.DefaultName);
+        var ipMatches = context.User.CheckRemoteIp(opts.NoSignInNetworks, opts.TrustedProxies);
+        
+        logger.LogDebug("Checking if remote ip matches no sign in network. Org: {Org}, NoSignIns: {@NoSign}, Trusted: {@Trusted}, Result: {IpMatches}",
+            org?.Id, opts.NoSignInNetworks, opts.TrustedProxies, ipMatches);
+        
+        if (ipMatches)
+        {
+            // IP matches, we should not sign, reject
+            context.Fail();
+        }
+        else
+        {
+            context.Succeed(requirement);
+        }
+        
         return Task.CompletedTask;
     }
 }

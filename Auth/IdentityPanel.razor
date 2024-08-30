@@ -18,16 +18,16 @@
         @* No user is logged in *@
         <NotAuthorized>
             @* Do we permit login? The render login button *@
-            <AuthorizeViewByRequirements Requirements="@_GetLoginableRequirements().ToArray()">
+            <AuthorizeView Policy="@AuthorizationConstants.PolicyLoginable" Resource="@Organization">
                 <Authorized Context="ctx">
                     <a class="bt-transparent" href="/login?returnUrl=@WebUtility.UrlEncode(NavigationManager.Uri)">Login</a>
                 </Authorized>
-                
+
                 @* Login not permitted, so show only IP *@
                 <NotAuthorized Context="ctx">
                     @context.GetRemoteIp()
                 </NotAuthorized>
-            </AuthorizeViewByRequirements>
+            </AuthorizeView>
         </NotAuthorized>
         
     </AuthorizeViewByRequirements>
@@ -48,16 +48,6 @@
     [Parameter]
     public IOrganization? Organization { get; set; }
 
-    private IEnumerable<IAuthorizationRequirement> _GetLoginableRequirements()
-    {
-        yield return new AssertionRequirement(a => !a.User.IsAppAuthenticated());
-        var opts = (Organization is null) ? GuiOpts.CurrentValue : GuiOpts.Get(Organization);
-        foreach (var address in opts.NoSignInNetworks)
-        {
-            yield return new NotRemoteIpRequirement(address);
-        }
-    }
-    
     private IEnumerable<IAuthorizationRequirement> _GetLogoutableRequirements()
     {
         yield return new AssertionRequirement(a => a.User.IsAppAuthenticated());

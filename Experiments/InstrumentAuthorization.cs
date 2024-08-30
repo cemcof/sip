@@ -44,10 +44,9 @@ public class InstrumentJobsUseHandler(
             context.Succeed(requirement);
         }
 
-        // Computers from internal IP can access everything as well
-        var internalNetworks = centerNetworkOptions.Get(requirement.Instrument.Organization).InternalNetworks;
-        var userIp = context.User.GetRemoteIp();
-        if (userIp is not null && userIp.CheckAgainst(internalNetworks.ToArray()))
+        // IP access is also possible
+        var trustedProxies = centerNetworkOptions.Get(requirement.Instrument.Organization).TrustedProxies;
+        if (context.User.CheckRemoteIp(requirement.Instrument.IPs, trustedProxies))
         {
             context.Succeed(requirement);
         }

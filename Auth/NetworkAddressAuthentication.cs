@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Primitives;
+using sip.Organizations.Centers;
 
 namespace sip.Auth;
 
@@ -20,12 +21,13 @@ public static class NetworkAddressAuth
 /// New identity contains claims about network connection, such as remote ip address, local ip address and ports. 
 /// The <see cref="ClaimTypes"/> can be found as constants in <see cref="NetworkAddressAuth"/> 
 /// </summary>
-public class NetworkAddressAuthenticationMiddleware(RequestDelegate next)
+public class NetworkAddressAuthenticationMiddleware(RequestDelegate next, IOptionsMonitor<CenterNetworkOptions> centerNetworkOptions)
 {
-    public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext context, ILogger<NetworkAddressAuthenticationMiddleware> logger)
     {
             
         var networkIdentity = new ClaimsIdentity(NetworkAddressAuth.NETWORK_ADDRESS_AUTHENTICATION);
+        var remoteIp = context.Connection.RemoteIpAddress;
         
         // IPs
         if (context.Connection.LocalIpAddress is not null)
@@ -35,9 +37,12 @@ public class NetworkAddressAuthenticationMiddleware(RequestDelegate next)
             networkIdentity.AddClaim(new Claim(NetworkAddressAuth.REMOTE_IP_CLAIMTYPE, context.Connection.RemoteIpAddress.ToString()));
         
         // From X-Forwarded-For header
-        if (context.Request.Headers.TryGetValue("X-Forwarded-For", out var forwardedFor))
+        if (context.Request.Headers.TryGetValue("X-Forwarded-For", out var forwardedFor) &&
+            remoteIp is not null 
+            && new IPAddr(remoteIp).CheckAgainst(centerNetworkOptions.CurrentValue.TrustedProxies))
         {
             var forwardedForStr = forwardedFor.FirstOrDefault();
+            logger.LogDebug("X-Forwarded-For: {ForwardedFor}", forwardedForStr);
             if (!string.IsNullOrWhiteSpace(forwardedForStr))
                 networkIdentity.AddClaim(new Claim(NetworkAddressAuth.REMOTE_IP_FORWARDED_FOR_CLAIMTYPE, forwardedForStr));
         }

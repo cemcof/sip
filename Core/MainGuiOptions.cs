@@ -39,13 +39,6 @@ public class MainGuiOptions
 
 
     public Dictionary<string, PanelItemOptions> Modules { get; set; } = new();
-    
-    /// <summary>
-    /// It will not be possible to login when accessing from these networks / IPs
-    /// Useful for internal computers where login is not desired.
-    /// </summary>
-    public IPAddr[] NoSignInNetworks { get; set; } = [];
-
 }
 
 public class PanelItemOptions
