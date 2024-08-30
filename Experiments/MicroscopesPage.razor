@@ -20,66 +20,42 @@
 <div class="microscopes-page">
     <nav>
         <div class="nav-mics">
-            @if (InternalView)
+            
+            @foreach (var inst in _jobsAvailable)
             {
-                <NullAware Value="@_selectedInstrument" TValue="IInstrument" Context="selectedInst">
-                    <div class="instrument-container" active="@true">
-                        <div class="inst-name ">
-                            <i class="bi bi-chevron-down"></i>&nbsp;
-                            @selectedInst.Name
-                        </div>
-                        
-                        @foreach (var job in _jobsAvailable[selectedInst])
+                var activeJobs = _activeExperiments.ForInstrument(inst.Key.Name).ToArray();
+                <div class="instrument-container @inst.Key.DisplayTheme" active="@(inst.Key.Name == InstrumentId)">
+                    <NavLink href="@UrlProvider($"microscopes/" + inst.Key.Name)"
+                             class="inst-name d-flex">
+                        <i class="bi @(inst.Key.Name == InstrumentId ? "bi-chevron-down" : "bi-chevron-right")"></i>&nbsp;
+                        @inst.Key.DisplayName
+                        @if (activeJobs.Length > 0)
+                        {
+                            <span class="d-block ms-auto badge badge-pill bg-dark text-light">@activeJobs.Length</span>
+                        }
+                    </NavLink>
+                    @if (InstrumentId == inst.Key.Name)
+                    {
+                        @foreach (var exp in inst.Value.OrderBy(v => v.Value.DisplayOrder))
                         {
                             <div class="nav-item">
-                                <NavLink href="@UrlProvider($"internal/microscopes/{selectedInst.Name}/{job.Key}")">
-                                    @job.Value.DisplayName
+                                <NavLink class="d-flex align-items-center justify-content-between" 
+                                         href="@UrlProvider($"microscopes/{inst.Key.Name}/{exp.Key}")">
+                                    @exp.Value.DisplayName
+                                    
+                                    @if (activeJobs.Any(j => j.Technique == exp.Key)) 
+                                    {
+                                        <span class="badge badge-pill bg-light text-dark">R</span>
+                                    }
                                 </NavLink>
                             </div>
                         }
+                    }
 
-                    </div>
-                </NullAware>
+                </div>
+                <div style="height: 0.2rem"></div>
             }
-            else
-            {
-                @foreach (var inst in _jobsAvailable)
-                {
-                    var activeJobs = _activeExperiments.ForInstrument(inst.Key.Name).ToArray();
-                    <div class="instrument-container @inst.Key.DisplayTheme" active="@(inst.Key.Name == InstrumentId)">
-                        <NavLink href="@UrlProvider($"microscopes/" + inst.Key.Name)"
-                                 class="inst-name d-flex">
-                            <i class="bi @(inst.Key.Name == InstrumentId ? "bi-chevron-down" : "bi-chevron-right")"></i>&nbsp;
-                            @inst.Key.DisplayName
-                            @if (activeJobs.Length > 0)
-                            {
-                                <span class="d-block ms-auto badge badge-pill bg-dark text-light">@activeJobs.Length</span>
-                            }
-                        </NavLink>
-                        @if (InstrumentId == inst.Key.Name)
-                        {
-                            @foreach (var exp in inst.Value.OrderBy(v => v.Value.DisplayOrder))
-                            {
-                                <div class="nav-item">
-                                    <NavLink class="d-flex align-items-center justify-content-between" 
-                                             href="@UrlProvider($"microscopes/{inst.Key.Name}/{exp.Key}")">
-                                        @exp.Value.DisplayName
-                                        
-                                        @if (activeJobs.Any(j => j.Technique == exp.Key)) 
-                                        {
-                                            <span class="badge badge-pill bg-light text-dark">R</span>
-                                        }
-                                    </NavLink>
-                                </div>
-                            }
-                        }
 
-                    </div>
-                    <div style="height: 0.2rem"></div>
-                }
-            
-
-            }
         </div>
         
         <NodesStatus Organization="@Organization" />
@@ -102,7 +78,6 @@
 
     [Parameter] public string? ExperimentType { get; set; }
     [Parameter] public string? InstrumentId { get; set; }
-    [Parameter] public bool InternalView { get; set; }
 
     private CancellationTokenSource _cts = new();
     private bool _renderReady = true;
