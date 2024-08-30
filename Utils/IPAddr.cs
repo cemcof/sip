@@ -80,6 +80,9 @@ public class IPAddr : IEquatable<IPAddr>
     // Constructor for Span<byte> with optional prefix length
     public IPAddr(Span<byte> addressSpan, int prefixLength = -1)
         : this(addressSpan.ToArray(), prefixLength) { }
+    
+    public IPAddr(IPAddress address, int prefixLength = -1)
+        : this(address.GetAddressBytes(), prefixLength) { }
 
     public bool CheckAgainst(string address)
     {
