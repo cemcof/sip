@@ -28,7 +28,8 @@ public class InstrumentRemoteDesktopRequirement(
 
 public class InstrumentJobsUseHandler(
         InstrumentRemoteConnectAuthorizationHandler remoteConnectAuthorizationHandler,
-        IOptionsMonitor<CenterNetworkOptions> centerNetworkOptions)
+        IOptionsMonitor<CenterNetworkOptions> centerNetworkOptions,
+        ILogger<InstrumentJobsUseHandler> logger)
     : AuthorizationHandler<IntrumentJobsUseRequirement>
 {
     // We use same feature implemented in other handler. Consider moving this somewhere else 
