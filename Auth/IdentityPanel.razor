@@ -4,14 +4,13 @@
 @using sip.Core
 
 <div class="identity-panel">
-    <div class="user-icon"><i class="bi bi-person-circle"></i></div>
-
     @* According to login state, render userinfo, login button or IP address *@
     <AuthorizeViewByRequirements Requirements="@_GetUserLoggedInRequirement().ToArray()">
         @* The user is logged in *@
         <Authorized>
             <NavLink href="/authinfo" class="user-link">
-                @context.GetFullname()
+                <span class="user-icon"><i class="bi bi-person-circle"></i></span>
+                <span class="user-caption"> @context.GetFullname() </span>
             </NavLink>
         </Authorized>
         
@@ -20,12 +19,15 @@
             @* Do we permit login? The render login button *@
             <AuthorizeView Policy="@AuthorizationConstants.PolicyLoginable" Resource="@Organization">
                 <Authorized Context="ctx">
-                    <a class="bt-transparent" href="/login?returnUrl=@WebUtility.UrlEncode(NavigationManager.Uri)">Login</a>
+                    <a class="bt-transparent" href="/login?returnUrl=@WebUtility.UrlEncode(NavigationManager.Uri)">
+                        <span class="user-icon"><i class="bi bi-person-circle"></i></span>
+                        <span class="user-caption">Login</span>
+                    </a>
                 </Authorized>
 
                 @* Login not permitted, so show only IP *@
                 <NotAuthorized Context="ctx">
-                    @context.GetRemoteIp()
+                    <span class="user-caption">@context.GetRemoteIp()</span>
                 </NotAuthorized>
             </AuthorizeView>
         </NotAuthorized>

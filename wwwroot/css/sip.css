@@ -10,108 +10,163 @@ html {
     font-size: 14px;
 }
 
+/* Base styles */
 main {
     display: flex;
     overflow: hidden;
     min-height: 100vh;
     height: 100vh;
-    
-    .main-menu-container {
-        flex: 0 0 13rem;
-        /*Mobile*/
-        /*flex: 0 0 4rem;*/
-        color: white;
-        
-        & hr {
-            margin: 0.5rem 0;
-        }
-        
-        & a {
-            text-decoration: none;
-            color: white;
-        }
-        
-        & a.brand {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            white-space: nowrap;
-            & img { 
-               max-height: 30px;  
-            }
-            & div {
-                font-weight: bold;
-                font-size: 120%;
-                padding: 1rem;
-                /*Mobile*/
-                /*display: none;*/
-            }
-        }
-        
-        & .identity-panel {
-            display: flex;
-            /*Mobile*/
-            /*flex-direction: column;*/
-            align-items: center;
-            
-            & i {
-                padding: 0.7rem;
-                font-size: 110%;
-            }
-            
-            & .user-link {
-                flex-grow: 1;
-                text-align: center;
-                /*Mobile*/
-                /*display: none;*/
-            }
-        }
-        
-        & .navlinks-header {
-            font-weight: bold;
-            text-align: center;
-            margin-top: 2.5rem;
-            
-            /*Mobile*/
-            /*display: none;*/
-        }
+}
 
-        & ul.navlinks {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            
-            & li {
-                & a {
-                    display: block;
-                    padding: 0.5rem 0.7rem;
-                    margin-top: 0.3rem;
-                }
-                
-                /*Mobile*/
-                /*& a .nav-item-caption {*/
-                /*    display: none;*/
-                /*}*/
-                
-                & a:hover, & a.active {
-                    background-color: #005400;
-                }
-            }
-            
-        }
+/* Menu container styles */
+.main-menu-container {
+    flex: 0 0 13rem;
+    color: white;
+}
+
+.main-menu-container hr {
+    margin: 0.5rem 0;
+}
+
+.main-menu-container a {
+    text-decoration: none;
+    color: white;
+}
+
+.main-menu-container a.brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.main-menu-container a.brand img {
+    max-height: 30px;
+}
+
+.main-menu-container a.brand div {
+    font-weight: bold;
+    font-size: 120%;
+    padding: 1rem;
+}
+
+/* Identity panel styles */
+.main-menu-container .identity-panel {
+    display: flex;
+    align-items: center;
+}
+
+.main-menu-container .identity-panel i {
+    padding: 0.7rem;
+    font-size: 110%;
+}
+
+.main-menu-container .identity-panel .user-link {
+    flex-grow: 1;
+    text-align: center;
+}
+
+/* Navlinks styles */
+.main-menu-container .navlinks-header {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+.main-menu-container ul.navlinks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.main-menu-container ul.navlinks li a {
+    display: block;
+    padding: 0.5rem 0.7rem;
+    margin-top: 0.3rem;
+}
+
+.main-menu-container ul.navlinks li a:hover,
+.main-menu-container ul.navlinks li a.active {
+    background-color: #005400;
+}
+
+/* Main body container styles */
+.main-body-container {
+    padding: 0.5rem;
+    flex-grow: 1;
+    overflow: auto;
+}
+
+/* Lightgreen theme */
+main.theme-lightgreen .main-menu-container {
+    background-color: rgb(109, 178, 64);
+}
+
+main.theme-lightgreen .main-body-container {
+    background-color: white;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
     }
     
-    .main-body-container {
+
+    .main-menu-container {
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        background-color: rgb(109, 178, 64); /* Lightgreen theme */
+        padding: 0;
+    }
+    
+    .main-menu-container nav {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .main-menu-container nav > hr {
+        display: none;
+    }
+    
+    .main-menu-container nav > *,
+    .main-menu-container ul.navlinks {
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+    }
+
+    .main-menu-container a.brand div {
+        display: none; /* Hide the brand caption on small screens */
+    }
+
+    .main-menu-container .identity-panel .user-caption,
+    .main-menu-container .navlinks-header {
+        display: none; /* Hide these elements on small screens */
+    }
+
+    .main-menu-container ul.navlinks {
+        display: flex;
+        flex-direction: row;
+        width: auto;
+    }
+
+    .main-menu-container ul.navlinks li {
+        flex-shrink: 0;
+    }
+
+    .main-menu-container ul.navlinks li a {
         padding: 0.5rem;
+        margin-top: 0;
+        white-space: nowrap;
     }
-    
-    /* Lightgreen theme */
-    &.lightgreen .main-menu-container {
-        background-color: rgb(109, 178, 64);
-    }
-    
-    &.lightgreen .main-body-container {
-        background-color: white;
+
+    .main-menu-container ul.navlinks li a .nav-item-caption {
+        /*display: none;*/
     }
 
     .main-body-container {
