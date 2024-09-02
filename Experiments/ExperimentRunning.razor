@@ -148,7 +148,7 @@
         {
             _prevExp = Exp;
             if (_logListComponent is not null) 
-                await _logListComponent.ReloadLogsAsync();
+                await _logListComponent.ReloadLogsAsync(true);
         }
     }
 
