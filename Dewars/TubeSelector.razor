@@ -87,7 +87,7 @@
     
     private void _selectDewarAndHodler(string dewar, string holder)
     {
-        Console.WriteLine("Selecting dewar {0} and holder {1}", dewar, holder);
+        Debug.WriteLine("Selecting dewar {0} and holder {1}", dewar, holder);
         _tube.Dewar = dewar;
         _tube.Holder = holder;
         _guiStatus = TubeSelectorGuiStatus.SelectingTube;

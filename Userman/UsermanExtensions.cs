@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using sip.Auth.Verification.Contact;
 using sip.Core;
@@ -71,7 +72,7 @@ public static class UsermanExtensions
         
         var (remoteIp, forwardedIp) = cp.GetRemoteIps();
         
-        Console.WriteLine($"IPCHECK: remoteip={remoteIp}, forwarded={forwardedIp}, against={string.Join<IPAddr>(", ", against)}, " +
+        Debug.WriteLine($"IPCHECK: remoteip={remoteIp}, forwarded={forwardedIp}, against={string.Join<IPAddr>(", ", against)}, " +
                           $"trusted={string.Join<IPAddr>(", ", trustedProxies)}, proxycheck={remoteIp?.CheckAgainst(trustedProxies)}, " +
                           $"forwardedcheck={forwardedIp?.CheckAgainst(against)}");
         

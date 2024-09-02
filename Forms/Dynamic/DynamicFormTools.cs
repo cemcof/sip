@@ -445,12 +445,12 @@ public static class DynamicFormTools
         try
         {
             var targetType = (target is ObjectBindPoint obp) ? obp.PropertyInfo?.PropertyType : null;
-            Console.WriteLine($"Dyn: {target.Key}, meta {metadata}, targetType: {targetType?.Name}");
+            Debug.WriteLine($"Dyn: {target.Key}, meta {metadata}, targetType: {targetType?.Name}");
             var dynElement = DynamicElementSetup.FromObject(metadata, targetType);
             // We are dealing with terminal value
             if (forceSet) target.SetValue(dynElement.Default);
             else target.SetDefault(dynElement.Default);
-            Console.WriteLine($"Set def terminal: {target.Key} to {dynElement.Default} after is: {target.GetValue()}");
+            Debug.WriteLine($"Set def terminal: {target.Key} to {dynElement.Default} after is: {target.GetValue()}");
             resultElements.Add((dynElement, target));
         }
         catch (NotSupportedException)

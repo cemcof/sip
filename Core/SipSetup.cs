@@ -47,7 +47,7 @@ public class SipSetup(string[] args)
         //     }
         //     catch (Exception e)
         //     {
-        //         Console.WriteLine(e);
+        //         Debug.WriteLine(e);
         //         return false;
         //     }
         // }
@@ -222,9 +222,9 @@ public class SipSetup(string[] args)
         app.MapFallbackToController(nameof(MainController.Host), "Main");
 
         // DEBUG
-        // app.Lifetime.ApplicationStarted.Register(() => Console.WriteLine("! Application is starting"));
-        // app.Lifetime.ApplicationStopping.Register(() => Console.WriteLine("! Application is stopping"));
-        // app.Lifetime.ApplicationStopped.Register(() => Console.WriteLine("! Application is stopped"));
+        // app.Lifetime.ApplicationStarted.Register(() => Debug.WriteLine("! Application is starting"));
+        // app.Lifetime.ApplicationStopping.Register(() => Debug.WriteLine("! Application is stopping"));
+        // app.Lifetime.ApplicationStopped.Register(() => Debug.WriteLine("! Application is stopped"));
         //
         #region POST CONFIG
         // Run configured delegates

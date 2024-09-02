@@ -29,7 +29,7 @@ public class HttpNtlmPyWrapper(IOptions<HttpNtlmPyOptions> options, ILogger<Http
         // var outstream = new MemoryStream(); // This has to be disposed! 
         // var errorOutput = await process.StandardError.ReadToEndAsync();
         // var resultErr = await process.StandardError.ReadToEndAsync();
-        // Console.WriteLine(resultErr);
+        // Debug.WriteLine(resultErr);
         var result = await process.StandardOutput.ReadToEndAsync();
         await process.WaitForExitAsync();
         
