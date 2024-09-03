@@ -165,8 +165,8 @@ main.theme-lightgreen .main-body-container {
         white-space: nowrap;
     }
 
-    .main-menu-container ul.navlinks li a .nav-item-caption {
-        /*display: none;*/
+    .main-menu-container ul.navlinks li a i + .nav-item-caption {
+        display: none;
     }
 
     .main-body-container {
