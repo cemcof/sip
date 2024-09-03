@@ -83,9 +83,8 @@ public class ExperimentEngine(
         experiment.SecondaryId = sourceDir;
         if (experiment.Project is not null)
         {
-            var projN = (string.IsNullOrEmpty(experiment.Project.Acronym))
-                ? experiment.Project.Acronym
-                : experiment.Project.Title;
+            var projN = (string.IsNullOrEmpty(experiment.Project.Acronym)) 
+                ? experiment.Project.Title : experiment.Project.Acronym;
             projN = projN.ToSafeFilename();
             if (string.IsNullOrWhiteSpace(projN))
                 throw new InvalidOperationException($"Project name or acronym is invalid, cannot be used in path, " +
