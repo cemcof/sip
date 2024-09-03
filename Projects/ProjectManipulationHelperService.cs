@@ -92,7 +92,6 @@ public class ProjectManipulationHelperService(IDbContextFactory<AppDbContext> db
             .OrderByDescending(p => p.Id)
             .ToListAsync();
 
-        var count = result.Count;
         
         if (!string.IsNullOrWhiteSpace(filter.FilterQuery))
         {
@@ -101,8 +100,15 @@ public class ProjectManipulationHelperService(IDbContextFactory<AppDbContext> db
                 string.Join(" ", p.ProjectMembers.Select(pm => pm.MemberUser.Fullcontact)),
                 string.Join(" ", p.Statuses.Select(ps => ps.StatusInfo.DisplayName)))).ToList();
         }
+        
+        var count = result.Count;
+        var res = result
+            .Cast<Project>()
+            .Skip(filter.Offset)
+            .Take(filter.Count)
+            .ToList();
 
-        return new ProjectLoadResults(Items: result.Cast<Project>().ToList(), TotalCount: count);
+        return new ProjectLoadResults(Items: res, TotalCount: count);
     }
     
     public async IAsyncEnumerable<Project> EnumerateProjectsAsync(Expression<Func<Project, bool>>? predicate = null)
