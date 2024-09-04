@@ -18,6 +18,11 @@
 </div>        
 
 @code {
+    
+    [Parameter] public string SeparatorPattern { get; set; } = SEP_COMMA_COLON_SPACE;
+    
+    public const string SEP_COMMA_COLON_SPACE = "[,; ]";
+    public const string SEP_COMMA_COLON = "[,;]";
 
     protected override string? FormatValueAsString(List<string>? value)
     {
@@ -36,7 +41,9 @@
             return true;
         }
         
-        result = Regex.Split(value, "\\s*[,;]\\s*").ToList();
+        result = Regex.Split(value, SeparatorPattern)
+            .Where(s => !string.IsNullOrWhiteSpace(s))
+            .ToList();
         return true;
     }
 

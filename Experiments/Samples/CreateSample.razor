@@ -6,7 +6,7 @@
     <CTextInput @bind-Value="@Model.Identifier" DisplayName="Identifier"></CTextInput>
     
     <InputAligner Flex="0 0 20%">
-        <CLineMultiInput @bind-Value="@Model.Keywords" DisplayName="Keywords"></CLineMultiInput>
+        <CLineMultiInput @bind-Value="@Model.Keywords" DisplayName="Keywords" SeparatorPattern="@CLineMultiInput.SEP_COMMA_COLON" />
         <CSingleFileUploader DisplayName="Project proposal" @bind-Value="Model.File" 
                              TargetDirectory="@SampleOptions.Value.ProposalsFolder"
                              FilenamePrefix="sample_proposal"></CSingleFileUploader>
