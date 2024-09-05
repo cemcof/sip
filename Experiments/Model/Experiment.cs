@@ -66,7 +66,7 @@ public class Experiment : IIdentified<Guid>
     public string? Notes { get; set; } = string.Empty;
     
     [Render(Tip = "Send email notification to the user with information how to access the data.", 
-        Title = "Notify user after completion")]
+        Title = "Send user link to this experiment")]
     public bool NotifyUser { get; set; } = true;
 
     
