@@ -56,6 +56,20 @@ public class ExperimentsController(
         var exps = await experimentsService.GetExperimentsAsync(filter);
         return new JsonResult(exps.Items);
     }
+    
+    [HttpGet("with_sourcedir")]
+    public async Task<IActionResult> GetExperimentsWithSourceDirAsync(CancellationToken cancellationToken)
+    {
+        // Prepare filter
+        var filter = new ExperimentsFilter(
+            Organization,
+            CustomFilter: e => e.Storage.SourceDirectory != null,
+            CancellationToken: cancellationToken
+        );
+        
+        var exps = await experimentsService.GetExperimentsAsync(filter);
+        return new JsonResult(exps.Items);
+    }
 
 
     // DELME
