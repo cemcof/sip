@@ -12,7 +12,7 @@ public class ExperimentStorage
     
     public string StorageEngine { get; set; } = null!;
 
-    public string SourceDirectory { get; set; } = null!;
+    public string? SourceDirectory { get; set; }
     public string SourcePatternsStr { get; set; } = string.Empty;
         
     [NotMapped]
