@@ -61,8 +61,17 @@ public class ExperimentEngine(
         experiment.DtCreated = DateTime.UtcNow;
 
         // Set publication embargo date and expiration date
-        experiment.Publication.DtEmbargo = (DateTime.UtcNow + experiment.Publication.EmbargoPeriod).Date;
-        experiment.Storage.DtExpiration  = (DateTime.UtcNow + experiment.Storage.ExpirationPeriod).Date;
+        experiment.Publication.DtEmbargo = experiment.Publication.EmbargoPeriod switch
+        {
+            var period when period != default => (DateTime.UtcNow + period).Date,
+            _ => default // Default if EmbargoPeriod is not set
+        };
+
+        experiment.Storage.DtExpiration = experiment.Storage.ExpirationPeriod switch
+        {
+            var period when period != default => (DateTime.UtcNow + period).Date,
+            _ => default // Default if ExpirationPeriod is not set
+        };
 
 
         // We have to ensure that the reference is same in case users are the same - otherwise EF complains
@@ -81,6 +90,8 @@ public class ExperimentEngine(
         }
         
         experiment.SecondaryId = sourceDir;
+        string subPath;
+        
         if (experiment.Project is not null)
         {
             var projN = (string.IsNullOrEmpty(experiment.Project.Acronym)) 
@@ -89,15 +100,21 @@ public class ExperimentEngine(
             if (string.IsNullOrWhiteSpace(projN))
                 throw new InvalidOperationException($"Project name or acronym is invalid, cannot be used in path, " +
                                                     $"{experiment.Project.Acronym} {experiment.Project.Title}");
-            experiment.Storage.SubPath = Path.Combine("projects", projN, experiment.SecondaryId);
+            subPath = Path.Combine("projects", projN, experiment.SecondaryId);
         }
         else
         {
             var yearSubfolder = "DATA_" + TimeProvider.DtUtcNow().ToString("yy");
-            experiment.Storage.SubPath = Path.Combine(yearSubfolder, experiment.SecondaryId);
+            subPath = Path.Combine(yearSubfolder, experiment.SecondaryId);
+        }
+        
+        if (experiment.OrganizationUser is not null)
+        {
+            subPath = Path.Combine(experiment.OrganizationUser.LinkId, subPath);
         }
         
         experiment.Processing.SerializeWorkflow();
+        experiment.Storage.SubPath  = subPath;
         experiment.Storage.DtLastUpdate = TimeProvider.DtUtcNow();
         db.Attach(experiment);
         await db.SaveChangesAsync();

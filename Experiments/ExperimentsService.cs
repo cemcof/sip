@@ -194,7 +194,7 @@ public class ExperimentsService(
 
         await using var dbContext = await dbContextFactory.CreateDbContextAsync(ct);
         var result = await dbContext.Set<ExperimentStorage>()
-            .Where(e => e.State == StorageState.Idle && e.DtExpiration < dt)
+            .Where(e => e.State == StorageState.Idle && e.DtExpiration != default && e.DtExpiration < dt)
             .Include(e => e.Experiment)
             .ToListAsync(ct);
 
