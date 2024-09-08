@@ -4,6 +4,7 @@ namespace sip.CEITEC;
 public class ResearchInfrastructure(string id) : Organization(id);
 public class ResearchCenter(string id) : Organization(id);
 public class ResearchFacility(string id) : Organization(id);
+public class Company(string id) : Organization(id);
 
 
 public class InfrastructureOrg : OrganizationDefinition
@@ -214,4 +215,20 @@ public class Biocev : OrganizationDefinition
             opts.SetParent<Biocev>();
         }
     }
+    
+    public class Eyen : OrganizationDefinition
+    {
+        public override void Setup(OrganizationOptions opts)
+        {
+            opts.OrganizationDetails = new Company(Name)
+            {
+                Name = "EYEN",
+                Url = "",
+                LinkId = "eyen",
+                Abbreviation = "EYEN"
+            };
+        }
+    }
 }
+
+

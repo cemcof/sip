@@ -15,6 +15,10 @@ public class Experiment : IIdentified<Guid>
 
     [MaxLength(128)] public string SecondaryId { get; set; } = null!;
     
+    // Organization 
+    public Organization Organization { get; set; } = null!;
+    public string OrganizationId { get; set; } = null!;
+
     // Operator  
     [YamlIgnore, JsonIgnore] public Guid OperatorId { get; set; }
     [Required] public AppUser Operator { get; set; } = null!;
@@ -24,6 +28,9 @@ public class Experiment : IIdentified<Guid>
     [Required] public AppUser User { get; set; } = null!;
     [MaxLength(128), Required] public string UserType { get; set; } = null!;
     
+    // Organization user
+    public string? OrganizationUserId { get; set; }
+    public Organization? OrganizationUser { get; set; }
         
     // Project
     public string? ProjectId { get; set; }
@@ -35,10 +42,6 @@ public class Experiment : IIdentified<Guid>
     [YamlIgnore, JsonIgnore] public Guid SampleId { get; set; }
     [Required] public Sample Sample { get; set; } = null!;
     
-    // Organization 
-    public Organization Organization { get; set; } = null!;
-    public string OrganizationId { get; set; } = null!;
-
     // Logs
     [YamlIgnore, JsonIgnore] public List<Log> Logs { get; set; } = new();
 
