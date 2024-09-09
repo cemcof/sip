@@ -36,6 +36,7 @@ public class ExperimentEngine(
             Organization   = organization,
             Storage        = new ExperimentStorage(),
             Publication    = new ExperimentPublication(),
+            DataSource     = new ExperimentDataSource(), 
             Processing = new ExperimentProcessing()
             {
                 ExperimentProcessingDocuments = new List<ExperimentProcessingDocument>()
@@ -81,7 +82,7 @@ public class ExperimentEngine(
         }
 
         // Set secondary ID and supath - refactor
-        var sourceDir = PathLib.GetName(experiment.Storage.SourceDirectory);
+        var sourceDir = PathLib.GetName(experiment.DataSource.SourceDirectory);
         // Check if sourceDir starts with at least two digits
         if ( ! ( sourceDir.Length > 2 && sourceDir[..2].All(char.IsDigit)) )
         {
@@ -154,7 +155,7 @@ public class ExperimentEngine(
 
     
     public  Task ChangeStatusAsync(ExpState to, Experiment forExp)
-    {   
+    {
         var jsonPatch = new JsonPatchDocument<Experiment>();
         jsonPatch.Replace(e => e.State, to);
         return PatchExperimentAsync(forExp, jsonPatch, CancellationToken.None);

@@ -12,18 +12,6 @@ public class ExperimentStorage
     
     public string StorageEngine { get; set; } = null!;
 
-    public string? SourceDirectory { get; set; }
-    public string SourcePatternsStr { get; set; } = string.Empty;
-        
-    [NotMapped]
-    public List<string> SourcePatterns { 
-        get => SourcePatternsStr.Split(";", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-            .ToList(); 
-        set => SourcePatternsStr = string.Join(";", value); 
-    }
-
-
-    public string? Source { get; set; }
     public string? Target { get; set; }
     public string? Path { get; set; }
     public string? SubPath { get; set; }
@@ -39,9 +27,7 @@ public class ExperimentStorage
 
     public string? Token { get; set; }
 
-    public bool Clean { get; set; } = false;
     public bool Archive { get; set; } = false;
-    public bool KeepSourceFiles { get; set; } = false;
 
     public DateTime DtExpiration { get; set; }
     public TimeSpan ExpirationPeriod { get; set; }

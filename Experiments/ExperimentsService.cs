@@ -172,6 +172,7 @@ public class ExperimentsService(
             .ThenInclude(e => e.IdentityUserLogins)
             .Include(e => e.Storage)
             .Include(e => e.Publication)
+            .Include(e => e.DataSource)
             .Include(e => e.Processing)
             .ThenInclude(ep => ep.ExperimentProcessingDocuments)
                 .ThenInclude(epd => epd.FilesInDocuments)

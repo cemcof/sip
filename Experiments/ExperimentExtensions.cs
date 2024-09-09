@@ -105,6 +105,9 @@ public class ExperimentsBuilder
             experiment.HasOne(e => e.Processing)
                 .WithOne(ed => ed.Experiment)
                 .HasForeignKey<ExperimentProcessing>(e => e.ExperimentId);
+            experiment.HasOne(e => e.DataSource)
+                .WithOne(ed => ed.Experiment)
+                .HasForeignKey<ExperimentDataSource>(e => e.ExperimentId);
 
             modelBuilder.Entity<Log>()
                 .Property(u => u.Level)

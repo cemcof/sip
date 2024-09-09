@@ -59,6 +59,8 @@ public class Experiment : IIdentified<Guid>
     public ExperimentProcessing Processing { get; set; } = null!;
     public ExperimentPublication Publication { get; set; } = null!;
     
+    public ExperimentDataSource DataSource { get; set; } = null!;
+    
     
     
     [NotMapped, YamlIgnore, JsonIgnore] public (string center, string instrument, string technique) KeyIdentif => (OrganizationId, InstrumentName, Technique);

@@ -63,7 +63,7 @@ public class ExperimentsController(
         // Prepare filter
         var filter = new ExperimentsFilter(
             Organization,
-            CustomFilter: e => e.Storage.SourceDirectory != null,
+            CustomFilter: e => e.DataSource.SourceDirectory != null,
             CancellationToken: cancellationToken
         );
         
