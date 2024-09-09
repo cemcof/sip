@@ -57,13 +57,13 @@ public class ExperimentsController(
         return new JsonResult(exps.Items);
     }
     
-    [HttpGet("with_sourcedir")]
+    [HttpGet("source_cleanable")]
     public async Task<IActionResult> GetExperimentsWithSourceDirAsync(CancellationToken cancellationToken)
     {
         // Prepare filter
         var filter = new ExperimentsFilter(
             Organization,
-            CustomFilter: e => e.DataSource.SourceDirectory != null,
+            CustomFilter: e => e.DataSource.CleanAfter != null && e.DataSource.DtCleaned == null,
             CancellationToken: cancellationToken
         );
         
