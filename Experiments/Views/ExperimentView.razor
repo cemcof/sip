@@ -9,7 +9,14 @@
 
     <div class="card-header @ExperimentsOptions.Get(Exp.Organization).FindTheme(Exp) d-flex align-items-center justify-content-between">
         
-        <h1>@Exp.SecondaryId - @Exp.Sample.Name </h1>
+        <h1>
+            @if (Exp.Project is not null)
+            {
+                <span>@("<unnamed project>".PickNonEmpty(Exp.Project.Acronym, Exp.Project.Title))</span>
+                <span>/</span> 
+            }
+            <span>@Exp.SecondaryId - @Exp.Sample.Name</span>
+        </h1>
 
         @if (IsHeadlessPage)
         {

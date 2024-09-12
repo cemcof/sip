@@ -70,6 +70,9 @@ public static class StringUtils
     {
         return (string.IsNullOrWhiteSpace(str)) ? placeholder : str;
     }
+    
+    public static string PickNonEmpty(this string placeholder, params string[] strs) => 
+        strs.FirstOrDefault(s => !string.IsNullOrWhiteSpace(s)) ?? placeholder;
 
     public static string WithPlaceholder(string? str, string placeholder = " - ")
     {
