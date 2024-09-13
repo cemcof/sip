@@ -304,11 +304,13 @@ public static class DynamicFormTools
             "file" => typeof(string),
             "folder" => typeof(string),
             "strlist" => typeof(List<string>),
+            "organization" => typeof(Organization),
             _ => throw new ArgumentOutOfRangeException(nameof(typeAsString), typeAsString, null)};
     }
 
     public static bool IsSimpleTypeSupported(Type t)
     {
+        t = Nullable.GetUnderlyingType(t) ?? t;
         return t.IsPrimitive ||
                t == typeof(string) ||
                t.IsEnum ||
@@ -366,7 +368,7 @@ public static class DynamicFormTools
         if (!IsSimpleTypeSupported(type))
             throw new NotSupportedException(
                 $"Only simple types are supported for conversion, not {type.Name}, value: {value}");
-
+        
         if (value is null)
         {
             return (type.IsValueType) ? 
@@ -453,7 +455,7 @@ public static class DynamicFormTools
             Debug.WriteLine($"Set def terminal: {target.Key} to {dynElement.Default} after is: {target.GetValue()}");
             resultElements.Add((dynElement, target));
         }
-        catch (NotSupportedException)
+        catch (NotSupportedException ex)
         {
             // We are dealing with a collection or mapping and need to recurse further
             if (metadata is IDictionary mdict)
@@ -523,7 +525,7 @@ public static class DynamicFormTools
                 return;
             }
 
-            throw new InvalidOperationException($"Could not inspect/bind {metadata} to {target.Key}");
+            throw new InvalidOperationException($"Could not inspect/bind {metadata} to {target.Key}", ex);
         }
         
         
