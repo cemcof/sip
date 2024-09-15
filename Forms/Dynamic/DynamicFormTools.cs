@@ -18,7 +18,7 @@ public record DynamicElementSetup(
     string? Flex = null,
     string Group = "",
     string GroupDesc = "",
-    int Order = -1,
+    int Order = int.MaxValue,
     double Min = double.MinValue,
     double Max = double.MaxValue,
     double Step = 1.0,
@@ -42,7 +42,7 @@ public record DynamicElementSetup(
                 : DynamicFormTools.GetDynValueType(defaultVal);
             result = new DynamicElementSetup(
                 Type: type,
-                Default:defaultVal,
+                Default: defaultVal,
                 SpecifiedType: dict.PickValue<string>(nameof(Type)),
                 DisplayName: dict.PickValue<string>(nameof(DisplayName)),
                 Selection: dict.PickValue<IList>(nameof(Selection)),
@@ -55,6 +55,7 @@ public record DynamicElementSetup(
                 Min: dict.PickValue<int>(nameof(Min)),
                 Max: dict.PickValue<int>(nameof(Max)),
                 Group: dict.PickValue(nameof(Group), string.Empty)!,
+                Order: dict.PickValue<int>(nameof(Order), int.MaxValue),
                 GroupDesc: dict.PickValue(nameof(GroupDesc), string.Empty)!,
                 Filter: dict.PickValue<string>(nameof(Filter))
             );
@@ -434,7 +435,7 @@ public static class DynamicFormTools
         var bp = BindPoint.From(fakeTarget, "key");
         var result = new List<(DynamicElementSetup, IBindPoint)>();
         DynamicInspect(metadata, bp, result, forceSet);
-        return new InspectResult(fakeTarget["key"]!, result);
+        return new InspectResult(fakeTarget["key"]!, result.OrderBy(d => d.Item1.Order).ToList());
     }
     
     // TODO - rework this madness
