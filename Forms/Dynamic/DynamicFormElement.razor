@@ -222,8 +222,12 @@
                 var provider = IDW<Organization>.WrapSimpleSearch((search, ct) =>
                 {
                     var orgs = OrganizationProvider.GetAll();
+                    if (!string.IsNullOrWhiteSpace(setup.Filter)) // Hardcode - filter by type
+                        orgs = orgs.Where(o => o.GetType().Name.Equals(setup.Filter, StringComparison.OrdinalIgnoreCase));
+                    orgs = orgs.Where(o => o.IsFilterMatch(search));
                     return Task.FromResult(orgs);
                 });
+                
                 compParams.Add(nameof(CDropdown<object>.ItemsProvider), provider);
                 compParams.Add(nameof(CDropdown<object>.EqualityComparer), IdEqualityComparer<Organization, string>.Comparer);
                 var filter = setup.Filter;
