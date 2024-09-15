@@ -50,7 +50,7 @@ public class Issue : IStringFilter
     [Range(0.0, 365.0)]
     public double NotifyIntervalDays { get; set; } = 7;
 
-    public bool IsFilterMatch(string filter = "")
+    public bool IsFilterMatch(string? filter = null)
     {
         return StringUtils.IsFilterMatchAtLeastOneOf(filter, 
             Subject, 

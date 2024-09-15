@@ -2,5 +2,5 @@ namespace sip.Utils;
 
 public interface IStringFilter
 {
-    bool IsFilterMatch(string filter = "");
+    bool IsFilterMatch(string? filter = null);
 }

@@ -33,7 +33,7 @@ public class Sample : IStringFilter, IIdentified<Guid>
 
     [JsonIgnore] [YamlIgnore] public List<Experiment> InExperiments { get; set; } = new();
         
-    public bool IsFilterMatch(string filter = "")
+    public bool IsFilterMatch(string? filter = null)
     {
         return StringUtils.IsFilterMatchAtLeastOneOf(filter, Name, KeywordsStr, Identifier);
     }

@@ -28,7 +28,7 @@ public class Organization(string id) :
             return Id.GetHashCode();
         }
 
-        public bool IsFilterMatch(string filter = "")
+        public bool IsFilterMatch(string? filter = null)
         {
             return StringUtils.IsFilterMatchAtLeastOneOf(filter, Name, Id, Abbreviation, Description);
         }

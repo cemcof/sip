@@ -146,7 +146,7 @@ public sealed class AppUser : IdentityUser<Guid>, IStringFilter, IEquatable<AppU
     }
 
 
-    public bool IsFilterMatch(string filter = "")
+    public bool IsFilterMatch(string? filter = null)
     {
         return StringUtils.IsFilterMatchAtLeastOneOf(filter, Fullcontact, PrimaryContact.Affiliation,
             Identifier ?? string.Empty);
