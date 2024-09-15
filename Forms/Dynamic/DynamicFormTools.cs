@@ -21,7 +21,8 @@ public record DynamicElementSetup(
     int Order = -1,
     double Min = double.MinValue,
     double Max = double.MaxValue,
-    double Step = 1.0
+    double Step = 1.0,
+    string? Filter = null
 )
 {
     public static DynamicElementSetup FromObject(object? setup, Type? targetType = null)
@@ -54,7 +55,8 @@ public record DynamicElementSetup(
                 Min: dict.PickValue<int>(nameof(Min)),
                 Max: dict.PickValue<int>(nameof(Max)),
                 Group: dict.PickValue(nameof(Group), string.Empty)!,
-                GroupDesc: dict.PickValue(nameof(GroupDesc), string.Empty)!
+                GroupDesc: dict.PickValue(nameof(GroupDesc), string.Empty)!,
+                Filter: dict.PickValue<string>(nameof(Filter))
             );
         }
         else
@@ -315,7 +317,8 @@ public static class DynamicFormTools
                t == typeof(string) ||
                t.IsEnum ||
                t == typeof(DateTime) ||
-               t == typeof(TimeSpan);
+               t == typeof(TimeSpan) || 
+               t == typeof(Organization);
     }
 
     public static (Type, object?) InferTypeFromStringValue(string? value)

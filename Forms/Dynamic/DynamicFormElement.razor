@@ -3,6 +3,7 @@
 @using System.Collections
 @using System.Linq.Expressions
 @inject IFilesystemProvider FilesystemProvider
+@inject IOrganizationProvider OrganizationProvider
 @inject ILogger<DynamicFormElement> Logger
 
 @if (_renderMode is RenderMode.Input && string.IsNullOrEmpty(_error) && _componentType is not null)
@@ -55,6 +56,7 @@
     
     public Single SingleValueBinder { get; set; }
     public Double DoubleValueBinder { get; set; }
+    public Organization OrganizationValueBinder { get; set; }
     public List<string> StringListValueBinder { get; set; } = null!;
     
 
@@ -151,6 +153,7 @@
                 nameof(Int64) => typeof(CNumberInput<Int64>),
                 nameof(Single) => typeof(CNumberInput<Single>),
                 nameof(Double) => typeof(CNumberInput<Double>),
+                nameof(Organization) => typeof(CDropdown<Organization>),
                 _ => null};
 
             if (compType is null && setup.Type == typeof(List<string>))
@@ -211,6 +214,19 @@
                 compParams.Add(nameof(FilesystemBrowser.FileSystemProvider), reqdel);
                 compParams.Add(nameof(FilesystemBrowser.PickFolder), setup.SpecifiedType == "folder");
                 compParams.Add(nameof(FilesystemBrowser.Scope), setup.Scope);
+            }
+
+            if (compType == typeof(CDropdown<Organization>))
+            {
+                // TODO - this is a hack, should be done better, this code needs to be completely on different location
+                var provider = IDW<Organization>.WrapSimpleSearch((search, ct) =>
+                {
+                    var orgs = OrganizationProvider.GetAll();
+                    return Task.FromResult(orgs);
+                });
+                compParams.Add(nameof(CDropdown<object>.ItemsProvider), provider);
+                compParams.Add(nameof(CDropdown<object>.EqualityComparer), IdEqualityComparer<Organization, string>.Comparer);
+                var filter = setup.Filter;
             }
             
             // What about selections? 

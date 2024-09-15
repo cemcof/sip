@@ -6,7 +6,8 @@ public class Organization(string id) :
     IOrganization, 
     ITreeItem<Organization>, 
     IEquatable<Organization>, 
-    IStringFilter
+    IStringFilter,
+    IIdentified<string>
 {
     #region EQUALS_BOILERPLATE
 
@@ -64,5 +65,9 @@ public class Organization(string id) :
     
     public bool IsOrParent<TOrganizationRef>()
         => Tree<Organization>.EnumerateToRoot(this).Any(o => o.Id == typeof(TOrganizationRef).Name);
-    
+
+    public override string ToString()
+    {
+        return $"{Name} ({Id})";
+    }
 }
