@@ -33,6 +33,12 @@
 
             <CCheckBox HasLabel="@false" @bind-Value="@Exp.NotifyUser" />
         </div>
+        
+        @if (Exp.DataSource.CleanAfter.HasValue)
+        {
+            <div class="text-danger">To prevent cluttering microscope drives, the selected source directory will be automatically purged
+                after @Exp.DataSource.CleanAfter.Value.Humanize(2, false)</div>
+        }
 
 
     </CEditForm>
