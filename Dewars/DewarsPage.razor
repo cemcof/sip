@@ -4,8 +4,8 @@
 
 <PageTitle>Dewars</PageTitle>
 
-<div class="tubes-page-container">
-    <div class="card tubes-edit-container">
+<div class="tubes-page-container row">
+    <div class="card col-lg tubes-edit-container">
         <div class="tube-selector-caption card-header">Edit tube</div>
         <div class="card card-body">
             <TubeSelector TubesService="TubesService"
@@ -17,7 +17,7 @@
     </div>
 
 
-    <div class="card tubes-search-container">
+    <div class="card col-lg tubes-search-container">
         <div class="card-header d-flex align-items-center">
             <input @bind="_searchText" type="text" placeholder="Search tubes by user, description or id" 
                    class="text-center w-50 flex-grow-1" 
