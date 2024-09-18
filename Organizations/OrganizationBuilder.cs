@@ -16,20 +16,6 @@ public class OrganizationBuilder
         _logger = logger;
         _configurationManager = configurationManager;
 
-        _services.ConfigureDbModel(mb =>
-        {
-            mb.Entity<Organization>()
-                .HasOne(o => o.Parent)
-                .WithMany(o => o.Children)
-                .HasForeignKey(o => o.ParentId);
-
-            mb.Entity<Organization>()
-                .HasDiscriminator();
-
-            mb.Entity<Organization>()
-                .HasKey(o => o.Id);
-        });
-
         // Organizations seeding (from named options)
         _services.AddOptions<DbSeedOptions>()
             .Configure<IOptionListProvider<OrganizationOptions>>((seed, orgopts) =>

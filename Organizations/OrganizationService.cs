@@ -62,7 +62,7 @@ public class OrganizationService(
             .Include(o => o.Parent)
             .ToList();
 
-        var rootOrg = new Organization("root");
+        var rootOrg = new Organization("root", "root", "Root", "root");
         
         // Attach all organizations not having parent to the root org
         foreach (var org in orgs.Where(org => org.Parent is null))
