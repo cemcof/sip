@@ -2,7 +2,7 @@ namespace sip.Utils;
 
 public struct ComponentRenderInfo
 {
-    public ComponentRenderInfo(Type component, Dictionary<string, object>? parameters = null)
+    public ComponentRenderInfo(Type component, Dictionary<string, object?>? parameters = null)
     {
         Component = component;
         if (parameters is not null)
@@ -10,5 +10,5 @@ public struct ComponentRenderInfo
     }
 
     public Type Component { get; }
-    public Dictionary<string, object> Parameters { get; } = new();
+    public Dictionary<string, object?> Parameters { get; } = new();
 }

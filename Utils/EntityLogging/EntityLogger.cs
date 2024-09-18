@@ -6,7 +6,7 @@ public class EntityLogger<TEntity>(
     Func<LogLevel, string, string, TEntity>? standardLogFactory = null)
     : ILogger
 {
-    public IDisposable BeginScope<TState>(TState state) => default!;
+    public IDisposable BeginScope<TState>(TState state) where TState : notnull => default!;
 
     public bool IsEnabled(LogLevel logLevel)
     {
