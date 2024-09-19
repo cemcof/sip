@@ -33,7 +33,13 @@ public class ExperimentsDailyRoutine(IOptionsMonitor<ScheduledServiceOptions> op
             var today = TimeProvider.DtUtcNow().Date;
             var expDate = e.Storage.DtExpiration;
             var daysToExp = (int) (expDate - today).TotalDays;
-            if (notifyDays.Any(d => d == daysToExp))
+            var shouldNotify = notifyDays.Any(d => d == daysToExp);
+            logger.LogDebug("Exp {ExpId} {Instrument}/{Technique} should notify={ShouldNotify}, \n" +
+                            "expDate={ExpDate}, \n" +
+                            "daysToExp={DaysToExp}, \n" +
+                            "notifyDays={@NotifyDays}", 
+                e.SecondaryId, e.InstrumentName, e.Technique, shouldNotify, expDate, daysToExp, notifyDays);
+            if (shouldNotify)
                 return expOpts.ExpirationNotifyEmail ??
                        throw new InvalidOperationException("Expiration mail template not configured");
             return null;
