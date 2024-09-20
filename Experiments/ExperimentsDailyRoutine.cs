@@ -47,6 +47,7 @@ public class ExperimentsDailyRoutine(IOptionsMonitor<ScheduledServiceOptions> op
 
         try
         {
+            Logger.LogDebug("Notify expiring...");
             var expsInIdleStorageState =
                 await experimentsService.GetExperimentsAsync(new ExperimentsFilter(
                     StorageStates: [StorageState.Idle],
@@ -78,6 +79,7 @@ public class ExperimentsDailyRoutine(IOptionsMonitor<ScheduledServiceOptions> op
 
         try
         {
+            Logger.LogDebug("Cleaning logs...");
             await experimentsService.CleanLogsAsync(OlderThanProvider, ct: stoppingToken);
         }
         catch (Exception e)
@@ -90,6 +92,7 @@ public class ExperimentsDailyRoutine(IOptionsMonitor<ScheduledServiceOptions> op
     {
         try
         {
+            Logger.LogDebug("Publishing experiments...");
             await experimentsService.PublishExperiments(ct: stoppingToken);
         }
         catch (Exception e)
@@ -102,6 +105,7 @@ public class ExperimentsDailyRoutine(IOptionsMonitor<ScheduledServiceOptions> op
     {
         try
         {
+            Logger.LogDebug("Expiring experiments...");
             await experimentsService.ExpireExperiments(ct: stoppingToken);
         }
         catch (Exception e)
