@@ -1,4 +1,3 @@
-using System.Net.NetworkInformation;
 using Microsoft.AspNetCore.Authorization;
 using sip.Organizations.Centers;
 using sip.RemoteAccess;

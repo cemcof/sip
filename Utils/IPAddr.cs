@@ -140,7 +140,7 @@ public class IPAddr : IEquatable<IPAddr>
             ip = new IPAddr(ipStr);
             return true;
         }
-        catch (FormatException e)
+        catch (FormatException)
         {
             ip = null;
             return false;

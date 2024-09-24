@@ -268,7 +268,7 @@ public class ExperimentsService(
                 countTotal, result.Count, request.StartIndex, request.Count);
             return new ItemsProviderResult<Log>(result, countTotal);
         }
-        catch (OperationCanceledException ex)
+        catch (OperationCanceledException)
         {
             request.CancellationToken
                 .ThrowIfCancellationRequested(); // fixes the isuue, throws correct exception with corresponding token

@@ -1,4 +1,3 @@
-using System.Collections;
 using Microsoft.AspNetCore.Authorization;
 using sip.Organizations.Centers;
 
@@ -74,6 +73,8 @@ public record RoleNetworkAuthRequirement
     
 public class RoleNetworkAuthorizationHandler(ILogger<RoleNetworkAuthorizationHandler> logger) : AuthorizationHandler<RoleNetworkAuthRequirement>
 {
+    private readonly ILogger<RoleNetworkAuthorizationHandler> _logger = logger;
+
     protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
                                                    RoleNetworkAuthRequirement requirement)
     {
