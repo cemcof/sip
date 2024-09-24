@@ -79,12 +79,10 @@ public class ExperimentsBuilder
 
             // TimeSpans to strings
             modelBuilder.Entity<ExperimentStorage>()
-                .Property(e => e.ExpirationPeriod)
-                .HasConversion<string>();
+                .Property(e => e.ExpirationPeriod);
 
             modelBuilder.Entity<ExperimentPublication>()
-                .Property(p => p.EmbargoPeriod)
-                .HasConversion<string>();
+                .Property(p => p.EmbargoPeriod);
             
             var experiment = modelBuilder.Entity<Experiment>();
             
