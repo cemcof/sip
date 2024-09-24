@@ -114,6 +114,7 @@ public class SipSetup(string[] args)
             .AddJsonOptions(o => {
                 o.JsonSerializerOptions.PropertyNamingPolicy = null; 
                 o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                o.JsonSerializerOptions.Converters.Add(new ContentTypeJsonConverter());
             });
         
         se.AddServerSideBlazor();

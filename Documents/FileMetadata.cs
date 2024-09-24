@@ -8,7 +8,7 @@ public class FileMetadata : IIdentified<Guid>
 {
     public Guid Id { get; set; }
 
-    public List<FileInDocument> FileInDocuments { get; set; } = new();
+    [JsonIgnore] public List<FileInDocument> FileInDocuments { get; set; } = new();
 
     public string FileName { get; set; } = string.Empty;
 
@@ -26,11 +26,7 @@ public class FileMetadata : IIdentified<Guid>
     public int Length { get; set; }
     public DateTime DtCreated { get; set; }
     public DateTime DtModified { get; set; }
-    
-    [JsonConverter(typeof(ContentTypeJsonConverter))]
     public ContentType ContentType { get; set; } = null!;
-    
-    
     public Guid FileDataId { get; set; }
     [MaybeNull] public FileData FileData { get; set; } = null!;
 

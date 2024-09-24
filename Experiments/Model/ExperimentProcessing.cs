@@ -18,13 +18,11 @@ public class ExperimentProcessing
 
     [YamlIgnore, JsonIgnore] public List<ExperimentProcessingDocument> ExperimentProcessingDocuments { get; set; } = new();
 
-    [YamlIgnore, JsonIgnore, NotMapped] public ExperimentProcessingDocument ResultReport =>
+    [YamlIgnore, NotMapped] public ExperimentProcessingDocument ResultReport =>
         ExperimentProcessingDocuments.Single(d => d.Name == nameof(ResultReport));
-    public Guid ResultDocumentId => ResultReport.Id; // For json output, cannot serialize document for some reason
     
-    [YamlIgnore, JsonIgnore, NotMapped] public ExperimentProcessingDocument LogReport =>
+    [YamlIgnore, NotMapped] public ExperimentProcessingDocument LogReport =>
         ExperimentProcessingDocuments.Single(d => d.Name == nameof(LogReport));
-    public Guid LogDocumentId => LogReport.Id; // For json output, cannot serialize document for some reason
     
     public void DeserializeWorkflow()
     {
