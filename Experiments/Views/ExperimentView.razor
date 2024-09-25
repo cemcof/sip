@@ -1,7 +1,6 @@
 @using sip.Experiments.Model
 @using sip.Experiments.Workflows
 
-@inject ExperimentEngine ExperimentEngine
 @inject IWorkflowProvider WorkflowProvider
 @inject IOptionsMonitor<ExperimentsOptions> ExperimentsOptions
 
@@ -81,7 +80,7 @@
     
 </div>
 
-<DataStateCard Exp="Exp" OnPublicationRequest="@((exp) => ExperimentEngine.RequestPublicationAsync(exp))"></DataStateCard>
+<DataStateCard Exp="Exp" />
 
 @if (Exp.Storage.State is StorageState.Idle or StorageState.Transfering or StorageState.Archived)
 {

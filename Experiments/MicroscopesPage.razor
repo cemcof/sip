@@ -8,7 +8,6 @@
 @page "/{OrganizationId}/microscopes/{InstrumentId}/{ExperimentType}"
 
 @inject NavigationManager NavigationManager
-@inject ExperimentEngine ExperimentEngine
 @inject ExperimentsService ExperimentsService
 @inject IAuthorizationService AuthorizationService
 @inject ILogger<MicroscopesPage> Logger
@@ -143,7 +142,7 @@
                 // There is not experiment in the engine, create new, but only if not already created previously!
                 else if (_currentExperiment is null || _currentExperiment.KeyIdentif != expkey || _currentExperiment.Id != default)
                 {
-                    currentExperiment = ExperimentEngine.CreateExperiment((Organization)Organization, expkey.Item2, expkey.ExperimentType);
+                    currentExperiment = ExperimentsService.CreateExperiment((Organization)Organization, expkey.Item2, expkey.ExperimentType);
                     Logger.LogTrace("Created new exp {}", currentExperiment.Id);
                 }
                 else 
@@ -209,12 +208,12 @@
 
     protected override void OnInitialized()
     {
-        ExperimentEngine.ExperimentChanged += _onEventRefresh;
+        ExperimentsService.ExperimentChanged += _onEventRefresh;
     }
 
     public void Dispose()
     {
-        ExperimentEngine.ExperimentChanged -= _onEventRefresh;
+        ExperimentsService.ExperimentChanged -= _onEventRefresh;
     }
 
 }

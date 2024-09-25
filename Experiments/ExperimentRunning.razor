@@ -3,6 +3,8 @@
 @inject IExperimentLogProvider LogProvider
 @inject DocumentService DocumentService
 @inject ExperimentsService ExperimentsService
+@inject ExperimentLoggingService ExpLogging
+@inject ExperimentControlService ExperimentControlService
 @inject ILogger<ExperimentRunning> Logger
 @implements IDisposable
 
@@ -85,9 +87,6 @@
 
 @code {
     
-    [Parameter] 
-    public IExperimentHandler ExpHandler { get; set; } = null!;
-
     [Parameter]
     public Experiment Exp { get; set; } = null!;
     private Experiment? _prevExp = null!;
@@ -99,13 +98,13 @@
 
     protected override void OnInitialized()
     {
-        ExpHandler.ExperimentLogAdded += OnExpHandlerOnExperimentLogAdded;
+        ExpLogging.ExperimentLogAdded += OnExpHandlerOnExperimentLogAdded;
         _stopModel = new ExperimentStopModel();
     }
     
     public void Dispose()
     {
-        ExpHandler.ExperimentLogAdded -= OnExpHandlerOnExperimentLogAdded;
+        ExpLogging.ExperimentLogAdded -= OnExpHandlerOnExperimentLogAdded;
     }
 
     private async void OnExpHandlerOnExperimentLogAdded(IReadOnlyCollection<Log> logs)
@@ -171,7 +170,7 @@
     private async Task _StopJobRequest(ExperimentStopModel stopModel)
     {
         Logger.LogTrace("Stop job request handler");
-        await ExpHandler.RequestStop(Exp, stopModel);
+        await ExperimentControlService.RequestStop(Exp, stopModel);
     }
 
     private ValueTask<ItemsProviderResult<Log>> _logsProvider(ItemsProviderRequest request)

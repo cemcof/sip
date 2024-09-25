@@ -1,5 +1,6 @@
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Components.Web.Virtualization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.Extensions.Caching.Memory;
 using sip.Core;
 using sip.Experiments.Logs;
@@ -39,6 +40,35 @@ public class ExperimentsService(
     IMemoryCache memoryCache,
     GeneralMessageBuilderProvider messageBuilderProvider) : IExperimentLogProvider
 {
+    
+    public event Action? ExperimentChanged; 
+    
+    public Experiment CreateExperiment(Organization organization, string instrument, string technique)
+    {
+        // Create metadata for the experiment 
+        var ex = new Experiment
+        {
+            InstrumentName = instrument,
+            Technique      = technique,
+            OrganizationId = organization.Id,
+            Organization   = organization,
+            Storage        = new ExperimentStorage(),
+            Publication    = new ExperimentPublication(),
+            DataSource     = new ExperimentDataSource(), 
+            Processing = new ExperimentProcessing()
+            {
+                ExperimentProcessingDocuments = new List<ExperimentProcessingDocument>()
+                {
+                    new() { Name = nameof(ExperimentProcessing.ResultReport) },
+                    new() { Name = nameof(ExperimentProcessing.LogReport) },
+                },
+                
+            }
+        };
+        return ex;
+    }
+    
+    
     public ItemProviderRequestWithSearchDelegate<Experiment> GetFilteredExperimentsProviderByOrg(
         IOrganization organizationSubject)
         => (request, searchString) => GetFilteredExperiments(request, organizationSubject, searchString);
@@ -355,6 +385,79 @@ public class ExperimentsService(
 
         return false;
     }
+    
+    public  Task ChangeStatusAsync(ExpState to, Experiment forExp)
+    {
+        var jsonPatch = new JsonPatchDocument<Experiment>();
+        jsonPatch.Replace(e => e.State, to);
+        return PatchExperimentAsync(forExp, jsonPatch, CancellationToken.None);
+    }
+
+    
+    public Task ChangeStorageStatusAsync(StorageState to, Experiment forExp)
+    {   
+        var jsonPatch = new JsonPatchDocument<Experiment>();
+        jsonPatch.Replace(e => e.Storage.State, to);
+        return PatchExperimentAsync(forExp, jsonPatch, CancellationToken.None);
+    }
+    
+    public Task ChangeProcessingStatusAsync(ProcessingState to, Experiment forExp)
+    {   
+        var jsonPatch = new JsonPatchDocument<Experiment>();
+        jsonPatch.Replace(e => e.Processing.State, to);
+        return PatchExperimentAsync(forExp, jsonPatch, CancellationToken.None);
+    }
+    
+    public Task ChangePublicationStatusAsync(PublicationState to, Experiment forExp)
+    {   
+        var jsonPatch = new JsonPatchDocument<Experiment>();
+        jsonPatch.Replace(e => e.Publication.State, to);
+        return PatchExperimentAsync(forExp, jsonPatch, CancellationToken.None);
+    }
+    
+    public async Task ChangeStatusAsync(ExpState to, Guid expId, CancellationToken ct = default)
+    {
+        await ChangeStatusAsync(
+            to,
+            await GetExperimentAsync(expId, cancellationToken: ct)
+        );
+    }
+
+    
+
+    public virtual void OnExperimentChanged(Experiment? exp)
+    {
+        if (exp is not null)
+        {
+            // Invalidate caches
+            memoryCache.Remove(exp.Id);
+            memoryCache.Remove(exp.KeyIdentif);
+        }
+        
+        ExperimentChanged?.Invoke();
+    }
+
+    
+    // Move to service
+
+    public async Task PatchExperimentAsync(Guid experimentId, JsonPatchDocument<Experiment> data, CancellationToken ct = default)
+    {
+        var exp = await GetExperimentAsync(experimentId, cancellationToken: ct);
+        await PatchExperimentAsync(exp, data, ct);
+    }
+    
+    public async Task PatchExperimentAsync(Experiment exp, JsonPatchDocument<Experiment> data, CancellationToken ct)
+    {
+        await using var context = await dbContextFactory.CreateDbContextAsync(ct);
+        context.Attach(exp);
+        logger.LogDebug("Patching experiment {} by JsonPatch ApplyTo {}, \n state={}", 
+            exp.SecondaryId, string.Join(';', data.Operations.Select(o => $"op={o.op} path={o.path} value={o.value}")), exp.State);
+        data.ApplyTo(exp);
+        logger.LogDebug("Patched experiment {}, state={}", exp.SecondaryId, exp.State);
+        await context.SaveChangesAsync(ct);
+        OnExperimentChanged(exp);
+    }
+
     
     public async Task SendEmailNotificationAsync(
         Experiment exp, 

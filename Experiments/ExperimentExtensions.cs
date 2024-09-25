@@ -21,12 +21,6 @@ public class ExperimentsBuilder
         _services = services;
         _configurationRoot = configurationRoot;
 
-        services.AddScheduledService<ExperimentEngine>(c =>
-        {
-            // Daily cron
-            c.CronString = "0 0 1 * * *";
-            c.Enabled = true;
-        });
         
         services.AddScheduledService<ExperimentsDailyRoutine>(c =>
         {
@@ -34,9 +28,11 @@ public class ExperimentsBuilder
             c.Enabled = true;
         });
         
-        services.AddSingleton<IExperimentHandler>(s => s.GetRequiredService<ExperimentEngine>());
         services.AddSingleton<IExperimentLogProvider>(s => s.GetRequiredService<ExperimentsService>());
         services.AddSingleton<ExperimentsService>();
+        services.AddSingleton<ExperimentLoggingService>();
+        services.AddSingleton<ExperimentControlService>();
+        services.AddSingleton<ExperimentPublicationService>();
 
         services.AddSingleton<IWorkflowProvider, FromConfigWorkflowProvider>();
         services.AddSingleton<IWorkflowProvider, WorkflowhubWorkflowProvider>();

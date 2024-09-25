@@ -19,8 +19,8 @@ public class OrganizationControllerBase : ControllerBase
 [Route("/api/experiments")]
 public class ExperimentsController(
         IDbContextFactory<AppDbContext> dbContextFactory,
-        ExperimentEngine                experimentEngine,
         ExperimentsService            experimentsService,
+        ExperimentLoggingService     experimentLoggingService,
         ILogger<ExperimentsController>  logger,
         IOptions<AppOptions>            appOptions)
     : OrganizationControllerBase
@@ -28,7 +28,7 @@ public class ExperimentsController(
     [HttpGet("{experimentId:guid}")]
     public async Task<Experiment> GetExperimentAsync(Guid experimentId, CancellationToken cancellationToken)
     {
-        var exp = await experimentEngine.GetExperimentAsync(experimentId, cancellationToken);
+        var exp = await experimentsService.GetExperimentAsync(experimentId, cancellationToken: cancellationToken);
         return exp;
     }
 
@@ -103,8 +103,8 @@ public class ExperimentsController(
     [HttpPost("{experimentId:guid}/email")]
     public async Task<IActionResult> SendEmailNotificationAsync(Guid experimentId, [FromBody] EmailTemplateOptions data, CancellationToken ct)
     {
-        var exp = await experimentEngine.GetExperimentAsync(experimentId, ct);
-        await experimentEngine.SendEmailNotificationAsync(exp, data);
+        var exp = await experimentsService.GetExperimentAsync(experimentId, cancellationToken: ct);
+        await experimentsService.SendEmailNotificationAsync(exp, data, ct);
         return Ok();
     }
     
@@ -114,7 +114,7 @@ public class ExperimentsController(
         var strData = data.GetRawText();
         var jpatch = Newtonsoft.Json.JsonConvert.DeserializeObject<JsonPatchDocument<Experiment>>(strData)!;
         logger.LogInformation("Patch data: {@Data}, Pid: {}, {}", jpatch, experimentId, Request.ContentType);
-        await experimentEngine.PatchExperimentAsync(experimentId, jpatch, ct);
+        await experimentsService.PatchExperimentAsync(experimentId, jpatch, ct);
         
         return Ok(Newtonsoft.Json.JsonConvert.SerializeObject(jpatch));
         await Task.Delay(0);
@@ -148,7 +148,7 @@ public class ExperimentsController(
             logger.Log(log.Level, "Explog {}: {}", log.ExperimentId, log.Message);
         }
         
-        Task.Run(() => experimentEngine.SubmitLogsAsync(logs, CancellationToken.None));
+        Task.Run(() => experimentLoggingService.SubmitLogsAsync(logs, CancellationToken.None));
         return Ok();
     }
     

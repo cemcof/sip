@@ -3,24 +3,19 @@
 
 @if (Exp.State == ExpState.Idle)
 {
-    <ExperimentIdle ExpHandler="ExpHandler" Exp="Exp" ExpMeta="@ExpMeta"></ExperimentIdle>
+    <ExperimentIdle  Exp="Exp" ExpMeta="@ExpMeta"></ExperimentIdle>
 }
 else
 {
-    <ExperimentRunning ExpHandler="ExpHandler" Exp="Exp"></ExperimentRunning>
+    <ExperimentRunning  Exp="Exp"></ExperimentRunning>
 }
 
 @code {
-
-    [Parameter]
-    public IExperimentHandler ExpHandler { get; set; } = null!;
 
     [Parameter]
     public Experiment Exp { get; set; } = null!;
 
     [Parameter]
     public ExperimentOptions ExpMeta { get; set; } = null!;
-
-
     
 }

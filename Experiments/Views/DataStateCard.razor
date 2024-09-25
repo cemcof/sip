@@ -1,7 +1,6 @@
 @using sip.Experiments.Model
 
-@inject ExperimentEngine ExperimentEngine
-
+@inject ExperimentPublicationService ExperimentPublicationService
 @* For expired data  *@
 @if (Exp is {Storage.State: StorageState.Expired or StorageState.ExpirationRequested or StorageState.Expiring})
 {
@@ -27,11 +26,11 @@
         <div class="card-header">
             <span class="fw-bold">Data status</span>
             
-            <ConditionalRender Condition="@ExperimentEngine.CanEnablePublication(Exp)">
+            <ConditionalRender Condition="@ExperimentPublicationService.CanEnablePublication(Exp)">
                 <TrueContent>
                     <InteractiveButton Caption="Archive and publish this dataset"
                                        BtnClass="btn btn-outline-primary btn-sm"
-                                       OnClick="OnEnablePublishRequest"
+                                       OnClick="@OnEnablePublishRequest"
                                        Tip="Use only if the data is relevant enough to be preserved. This will mark the experiment dataset to be archived and published."
                                        />
                 </TrueContent>
@@ -56,11 +55,11 @@
         <div class="card-header d-flex justify-content-between">
             <span class="fw-bold">Data status</span>
             
-            <ConditionalRender Condition="@ExperimentEngine.CanDisablePublication(Exp)">
+            <ConditionalRender Condition="@ExperimentPublicationService.CanDisablePublication(Exp)">
                 <TrueContent>
                     <InteractiveButton Caption="Do not archive and publish this dataset"
                                        BtnClass="btn btn-outline-primary btn-sm"
-                                       OnClick="OnDisablePublishRequest"
+                                       OnClick="@OnDisablePublishRequest"
                                        Tip="Use if the data is not relevant enough to be preserved. This will mark the experiment dataset to eventually expire."
                                        />
                 </TrueContent>
@@ -81,7 +80,7 @@
             {
                 <InteractiveButton Caption="Request publication now"
                                    BtnClass="btn btn-secondary btn-sm"
-                                   OnClick="@(() => OnPublicationRequest.InvokeAsync(Exp))">
+                                   OnClick="@(() => ExperimentPublicationService.RequestPublicationAsync(Exp)))">
                 </InteractiveButton>
             }
         </div>
@@ -133,13 +132,11 @@
 @code {
     [Parameter] public Experiment Exp { get; set; } = null!;
     
-    [Parameter] public EventCallback<Experiment> OnPublicationRequest { get; set; }
-
    
     private Task OnDisablePublishRequest(object arg)
-     => ExperimentEngine.DisablePublicationAsync(Exp);
+     => ExperimentPublicationService.DisablePublicationAsync(Exp);
     
     private Task OnEnablePublishRequest(object arg)
-     => ExperimentEngine.EnablePublicationAsync(Exp);
+     => ExperimentPublicationService.EnablePublicationAsync(Exp);
 
 }

@@ -1,9 +1,11 @@
 @using sip.Experiments.Model
 @inject ILogger<ExperimentIdle> Logger
+@inject ExperimentsService ExperimentsService
+@inject ExperimentControlService ExperimentControlService
 
 @* <div> Needed to apply ::deep in css *@
 <div>
-    <CEditForm TModelType="Experiment" novalidate OnSubmit="@ExpHandler.RequestStart" OnInvalidSubmit="@(() => _btnRun!.Unlock())"
+    <CEditForm TModelType="Experiment" novalidate OnSubmit="@ExperimentControlService.RequestStart" OnInvalidSubmit="@(() => _btnRun!.Unlock())"
                class="cform exp-idle-form"
                FormFooter="@(CEditForm<Experiment>.EmptyFooter)"
                Model="Exp">
@@ -46,9 +48,6 @@
 </div>
 
 @code {
-
-    [Parameter]
-    public IExperimentHandler ExpHandler { get; set; } = null!;
 
     [Parameter]
     public Experiment Exp { get; set; } = null!;
