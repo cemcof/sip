@@ -34,6 +34,7 @@ public enum PublicationState
     Unpublished,
     DraftCreationRequested,
     DraftCreated,
+    DraftRemovalRequested,
     PublicationRequested,
     Published
 }
