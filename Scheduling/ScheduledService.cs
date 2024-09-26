@@ -72,12 +72,12 @@ public abstract class ScheduledService(
                 var nextSched = opts.Cron!.GetNextOccurrence(now);
                 if (!nextSched.HasValue) return;
                 ts = nextSched.Value - now;
-                Logger.LogDebug("Scheduled next cron ({}) execution to {}, which is after {}", 
+                Logger.LogTrace("Scheduled next cron ({}) execution to {}, which is after {}", 
                     opts.Cron, nextSched, ts);
             }
             else
             {
-                Logger.LogDebug("Scheduled next interval ({}) execution to {} which is after {}", 
+                Logger.LogTrace("Scheduled next interval ({}) execution to {} which is after {}", 
                     opts.Interval, now + opts.Interval, ts);
             }
             
