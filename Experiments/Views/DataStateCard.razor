@@ -23,7 +23,7 @@
 {
     <section class="card border-warning mx-0 my-1">
         
-        <div class="card-header">
+        <div class="card-header d-flex justify-content-between align-items-center">
             <span class="fw-bold">Data status</span>
             
             <ConditionalRender Condition="@ExperimentPublicationService.CanEnablePublication(Exp)">
@@ -52,7 +52,7 @@
 {
     <section class="card border-success mx-0 my-1">
         
-        <div class="card-header d-flex justify-content-between">
+        <div class="card-header d-flex justify-content-between align-items-center">
             <span class="fw-bold">Data status</span>
             
             <ConditionalRender Condition="@ExperimentPublicationService.CanDisablePublication(Exp)">
