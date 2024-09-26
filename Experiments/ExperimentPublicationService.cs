@@ -5,7 +5,8 @@ using sip.Experiments.Model;
 namespace sip.Experiments;
 
 public class ExperimentPublicationService(ExperimentsService experimentsService,
-     IDbContextFactory<AppDbContext> dbContextFactory)
+     IDbContextFactory<AppDbContext> dbContextFactory,
+     TimeProvider timeProvider)
 {
      public async Task RequestPublicationAsync(Experiment exp, CancellationToken ct = default)
     {
@@ -33,11 +34,12 @@ public class ExperimentPublicationService(ExperimentsService experimentsService,
         if (!CanDisablePublication(exp)) 
             throw new InvalidOperationException("Cannot disable publication for this experiment");
         
-        await using var context = await dbContextFactory.CreateDbContextAsync(ct);
-        exp.Storage.Archive = false;
-        exp.Publication.State = PublicationState.DraftRemovalRequested;
-        exp.Storage.DtExpiration = DateTime.UtcNow + exp.Storage.ExpirationPeriod;
-        await context.SaveChangesAsync(ct);
+        await experimentsService.PatchExperimentAsync(exp, e =>
+        {
+            e.Storage.Archive = false;
+            e.Publication.State = PublicationState.DraftRemovalRequested;
+            e.Storage.DtExpiration = timeProvider.DtUtcNow() + e.Storage.ExpirationPeriod;
+        });
     }
 
     public bool CanEnablePublication(Experiment exp)
@@ -52,14 +54,11 @@ public class ExperimentPublicationService(ExperimentsService experimentsService,
     {
         if (!CanEnablePublication(exp)) 
             throw new InvalidOperationException("Cannot enable publication for this experiment");
-        
-        await using var context = await dbContextFactory.CreateDbContextAsync(ct);
-        exp.Storage.Archive = true;
-        exp.Publication.State = PublicationState.DraftCreationRequested;
-        await context.SaveChangesAsync(ct);
+
+        await experimentsService.PatchExperimentAsync(exp, e =>
+        {
+            e.Storage.Archive = true;
+            e.Publication.State = PublicationState.DraftCreationRequested;
+        });
     }
-    
-    
-    
-    
 }

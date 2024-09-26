@@ -439,6 +439,14 @@ public class ExperimentsService(
 
     
     // Move to service
+    public async Task PatchExperimentAsync(Experiment exp, Action<Experiment> changes)
+    {
+        await using var context = await dbContextFactory.CreateDbContextAsync();
+        context.Attach(exp);
+        changes(exp);
+        await context.SaveChangesAsync();
+        OnExperimentChanged(exp);
+    }
 
     public async Task PatchExperimentAsync(Guid experimentId, JsonPatchDocument<Experiment> data, CancellationToken ct = default)
     {
