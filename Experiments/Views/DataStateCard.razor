@@ -1,6 +1,7 @@
 @using sip.Experiments.Model
 
 @inject ExperimentPublicationService ExperimentPublicationService
+
 @* For expired data  *@
 @if (Exp is {Storage.State: StorageState.Expired or StorageState.ExpirationRequested or StorageState.Expiring})
 {
@@ -48,12 +49,12 @@
 
 @* For data to be archived and published *@
 
-@if (Exp.Storage.Archive && Exp.Publication.State is PublicationState.DraftCreated or PublicationState.PublicationRequested)
+@if (Exp.Storage.Archive && Exp.Publication.State is PublicationState.DraftCreated or PublicationState.DraftCreationRequested or PublicationState.PublicationRequested)
 {
     <section class="card border-success mx-0 my-1">
         
         <div class="card-header d-flex justify-content-between align-items-center">
-            <span class="fw-bold">Data status</span>
+            <span class="fw-bold">Data status: @Exp.Publication.State.Humanize()</span>
             
             <ConditionalRender Condition="@ExperimentPublicationService.CanDisablePublication(Exp)">
                 <TrueContent>

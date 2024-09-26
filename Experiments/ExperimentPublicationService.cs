@@ -24,7 +24,7 @@ public class ExperimentPublicationService(ExperimentsService experimentsService,
     public bool CanDisablePublication(Experiment exp) =>
         exp is
         {
-            Publication.State: PublicationState.DraftCreated,
+            Publication.State: PublicationState.DraftCreated or PublicationState.DraftCreationRequested,
             Storage.State: StorageState.Idle,
             Storage.Archive: true
         };
