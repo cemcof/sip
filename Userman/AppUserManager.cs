@@ -235,7 +235,7 @@ public class AppUserManager(
 
             // Updating security stamp will force user to relog and get a new cookie, if configured so
             var user = await userManager.FindByIdAsync(userInRole.UserId.ToString());
-            await UpdateSecurityStampAsync(user);
+            if (user != null) await UpdateSecurityStampAsync(user);
         }
     }
 

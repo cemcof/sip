@@ -6,7 +6,6 @@ namespace sip.Projects;
 public class ProjectStatusHelperService(IDbContextFactory<AppDbContext> dbContextFactory,
                                         TimeProvider                    timeProvider,
                                         IOptionsMonitor<StatusOptions> statusOptionsMonitor,
-                                        OrganizationService             organizationService,
                                         IOrganizationProvider          organizationProvider)
 {
     public Task ChangeStatusAsync<TStatusRef>(Project project, IEnumerable<string> organizationIds)

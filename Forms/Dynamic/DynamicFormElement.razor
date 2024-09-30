@@ -219,7 +219,7 @@
             if (compType == typeof(CDropdown<Organization>))
             {
                 // TODO - this is a hack, should be done better, this code needs to be completely on different location
-                var provider = IDW<Organization>.WrapSimpleSearch((search, ct) =>
+                var provider = IDW<Organization>.WrapSimpleSearch((search, _) =>
                 {
                     var orgs = OrganizationProvider.GetAll();
                     if (!string.IsNullOrWhiteSpace(setup.Filter)) // Hardcode - filter by type
@@ -230,7 +230,6 @@
                 
                 compParams.Add(nameof(CDropdown<object>.ItemsProvider), provider);
                 compParams.Add(nameof(CDropdown<object>.EqualityComparer), IdEqualityComparer<Organization, string>.Comparer);
-                var filter = setup.Filter;
             }
             
             // What about selections? 

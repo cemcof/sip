@@ -29,7 +29,7 @@ sipSetup.AutoDefault(builder =>
         
     services.AddDewars(config);
     services.AddAutoloaders(config);
-    var ebuilser = new ExperimentsBuilder(services, config);
+    _ = new ExperimentsBuilder(services, config);
     services.AddIssues(config);
     services.AddEnvironment(config);
     services.AddSchedule(config);

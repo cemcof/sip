@@ -13,7 +13,7 @@ public class DefaultProjectItemRenderProvider<TProject> : IProjectItemRenderProv
     {
         return new ComponentRenderInfo(
             typeof(DefaultProjectItem),
-            new Dictionary<string, object>
+            new Dictionary<string, object?>
             {
                 [nameof(DefaultProjectItem.Badge)] = _projectDefine.DisplayName,
                 [nameof(DefaultProjectItem.Theme)] = _projectDefine.Theme,

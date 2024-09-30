@@ -92,7 +92,7 @@ public class CrmReservationsEngine(
             throw new NotAvailableException($"Planning board data is not available at the moment for {organization}");
         }
 
-        return Task.FromResult(scheduleData);
+        return Task.FromResult(scheduleData!);
     }
 
     private ReservationType GetReservationType(string subtype, int statecode, int statuscode)

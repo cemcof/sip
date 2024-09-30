@@ -80,7 +80,6 @@
     private AppUser _user = null!;
     private ProjectsFilter _projectsFilter = null!;
     private string _search = string.Empty;
-    private ProjectsLoadResults _loadResults = new();
     private ItemsRenderer<Project>? _itemsRendererRef;
     
     
@@ -108,7 +107,6 @@
         _projectsFilter.UserRequester = _user;
         // _projectsFilter.ProjectFilters = ProjectDefines.Select(pd => (ProjectFilter) Activator.CreateInstance(pd.ProjectType.FilterType)!).DistinctBy(x => x.GetType()).ToList();
         var projectsLoadResults = await ProjectLoader.LoadManyAsync(_projectsFilter);
-        _loadResults = projectsLoadResults;
         var projects = projectsLoadResults.Projects.ToList();
         if (NavigationManager.Uri.EndsWith("/projects"))
         {

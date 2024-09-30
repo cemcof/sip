@@ -17,7 +17,7 @@ public class MessageReceiver(IEnumerable<IMessageIngressHandler> messageHandlers
         
         if (message.From.Mailboxes.Any(m => m.Address.Contains("mailer-daemon")))
         {
-            logger.LogInformation("Mailer daemon detected: {address}", message.From.Mailboxes.First());
+            logger.LogInformation("Mailer daemon detected: {Address}", message.From.Mailboxes.First());
             return; // Just skip further handling
         }
         

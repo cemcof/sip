@@ -9,7 +9,7 @@ public class Scheduler(ILogger logger) : ISchedulerStarter
             try
             {
                 var nextRun = ComputeDelay();
-                logger.LogInformation("Next execution scheduled to: {cd} (after {timespan})", DateTime.Now + nextRun, nextRun); 
+                logger.LogInformation("Next execution scheduled to: {Cd} (after {Timespan})", DateTime.Now + nextRun, nextRun); 
                 await Task.Delay(nextRun);
                 logger.LogInformation("Executing action");
                 await ExecAction();

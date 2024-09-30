@@ -93,7 +93,7 @@ public class IssuesService(
                 continue;
 
             var days = (DateTime.Today - issue.DtAssigned.Date).Days;
-            var notifyDays = (int) issue.NotifyIntervalDays == 0 ? 1 : (int) issue.NotifyIntervalDays;
+            // var notifyDays = (int) issue.NotifyIntervalDays == 0 ? 1 : (int) issue.NotifyIntervalDays;
             if (days > 0 && (days % (int)issue.NotifyIntervalDays) == 0 && issue.DtLastNotified.Date != DateTime.Today)
             {
                 await NotifyRemiderResponsible(issue);

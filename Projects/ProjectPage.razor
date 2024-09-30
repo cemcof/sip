@@ -20,9 +20,10 @@
 
     private Type? _compType;
     
-    protected override async Task OnParametersSetAsync()
+    protected override Task OnParametersSetAsync()
     {
         _compType = null; // await ProjectItemRenderProvider.GetProjectComponent(ProjectId);
+        return Task.CompletedTask;
     }
 
 }

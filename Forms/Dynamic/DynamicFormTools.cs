@@ -55,7 +55,7 @@ public record DynamicElementSetup(
                 Min: dict.PickValue<int>(nameof(Min)),
                 Max: dict.PickValue<int>(nameof(Max)),
                 Group: dict.PickValue(nameof(Group), string.Empty)!,
-                Order: dict.PickValue<int>(nameof(Order), int.MaxValue),
+                Order: dict.PickValue(nameof(Order), int.MaxValue),
                 GroupDesc: dict.PickValue(nameof(GroupDesc), string.Empty)!,
                 Filter: dict.PickValue<string>(nameof(Filter))
             );
