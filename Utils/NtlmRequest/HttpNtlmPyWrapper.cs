@@ -22,7 +22,8 @@ public class HttpNtlmPyWrapper(IOptions<HttpNtlmPyOptions> options, ILogger<Http
             UseShellExecute = false
         };
 
-        using Process process = new Process() { StartInfo = processStartInfo };
+        using Process process = new Process();
+        process.StartInfo = processStartInfo;
         logger.LogDebug("Invoking process {@ProcessInfo}", process);
         process.Start();
 

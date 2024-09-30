@@ -48,7 +48,7 @@
     private ComponentRenderInfo _PrepareVerificationComponent(IVerificator verificator) =>
         new(
             verificator.GetVerificationComponent(),
-            new Dictionary<string, object>
+            new Dictionary<string, object?>
             {
                 {
                     nameof(IVerifierComponent.OnVerified), 

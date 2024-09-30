@@ -38,12 +38,19 @@
 
 @code {
     
-    [Parameter]
-    public PeerReview PeerReview { get; set; }
+    [Parameter, EditorRequired]
+    public PeerReview PeerReview { get; set; } = null!;
     
-    [Parameter]
-    public Project Project { get; set; }
+    [Parameter, EditorRequired]
+    public Project Project { get; set; } = null!;
     
-    [Parameter]
-    public AppUser CurrentUser { get; set; }
+    [Parameter, EditorRequired]
+    public AppUser CurrentUser { get; set; } = null!;
+    
+    protected override void OnParametersSet()
+    {
+        ArgumentNullException.ThrowIfNull(PeerReview, nameof(PeerReview));
+        ArgumentNullException.ThrowIfNull(Project, nameof(Project));
+        ArgumentNullException.ThrowIfNull(CurrentUser, nameof(CurrentUser));
+    }
 }

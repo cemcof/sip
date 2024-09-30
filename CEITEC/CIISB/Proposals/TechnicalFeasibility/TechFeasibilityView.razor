@@ -2,7 +2,7 @@
 <div class="a4doc d-flex flex-column">
     
 <header>
-    <img src="/img/logos/ciisb_logo.png" />
+    <img src="/img/logos/ciisb_logo.png" alt="CIISB" />
 </header>
 
 <div class="body">
@@ -11,7 +11,7 @@
     <div class="aligned-items-render">
         <div class="item">
             <div>Facility</div>
-            <div>@Document.Organization.Abbreviation - @Document.Organization.Name</div>
+            <div>@Document.Organization?.Abbreviation - @Document.Organization?.Name</div>
         </div>
         
         <div class="item">
@@ -44,7 +44,7 @@
             CIISB (Czech Infrastructure for Integrative Structural Biology), ID number LM2018127, is funded by the Ministry of Education,
             Youth and Sports of the Czech Republic.
         </div>
-        <img src="/img/logos/msmt.png"/>
+        <img src="/img/logos/msmt.png" alt="MSMT"/>
     </div>
 </footer>
 

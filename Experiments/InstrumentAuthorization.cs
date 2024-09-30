@@ -27,8 +27,7 @@ public class InstrumentRemoteDesktopRequirement(
 
 public class InstrumentJobsUseHandler(
         InstrumentRemoteConnectAuthorizationHandler remoteConnectAuthorizationHandler,
-        IOptionsMonitor<CenterNetworkOptions> centerNetworkOptions,
-        ILogger<InstrumentJobsUseHandler> logger)
+        IOptionsMonitor<CenterNetworkOptions> centerNetworkOptions)
     : AuthorizationHandler<IntrumentJobsUseRequirement>
 {
     // We use same feature implemented in other handler. Consider moving this somewhere else 
@@ -79,13 +78,9 @@ public class InstrumentJobsUseHandler(
 
 public class InstrumentRemoteConnectAuthorizationHandler(
         IReservationsProvider reservationsConnector,
-        ICenterProvider centerProvider,
-        IOptionsMonitor<RemoteAccessOptions> remoteAccessOptions,
-        ILogger<InstrumentRemoteConnectAuthorizationHandler> logger)
+        IOptionsMonitor<RemoteAccessOptions> remoteAccessOptions)
     : AuthorizationHandler<InstrumentRemoteDesktopRequirement>
 {
-    private readonly ILogger<InstrumentRemoteConnectAuthorizationHandler> _logger = logger;
-
     protected override async Task HandleRequirementAsync(
         AuthorizationHandlerContext context,
         InstrumentRemoteDesktopRequirement requirement)

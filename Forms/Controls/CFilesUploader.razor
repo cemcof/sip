@@ -49,13 +49,7 @@
     public bool IsMultiple => MaxFilesCount > 1;
 
     private const string ACCEPT_DEFAULT = "*";
-    private string? _accept;
-    [Parameter]
-    public string Accept
-    {
-        get => _accept ?? ACCEPT_DEFAULT;
-        set => _accept = value;
-    }
+    [Parameter] public string Accept { get; set; } = ACCEPT_DEFAULT;
 
 
     private enum UploaderState

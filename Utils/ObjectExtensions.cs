@@ -53,7 +53,7 @@ public static class ObjectExtensions
         // Source object might be a collection, in that case, do not enumerate properties. 
         // Instead, enumerate collection itself and copy the items.
         // But for now, this is not implemented, skip, TODO
-        if (sourceType.GetInterface(nameof(System.Collections.IEnumerable)) is not null)
+        if (sourceType.GetInterface(nameof(IEnumerable)) is not null)
             return target; // TODO
 
         foreach (PropertyInfo tProperty in targetProperties)

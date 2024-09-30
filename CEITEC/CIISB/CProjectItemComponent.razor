@@ -40,6 +40,7 @@
         return AttentionLevel.Standard;
     }
 
-    public string GetNamePart() => (Project.Applicant.Equals(Project.Principal)) ? Project.Applicant.Lastname : $"{Project.Applicant.Lastname}/{Project.Principal.Lastname}";
+    public string GetNamePart() =>
+        (Project.Applicant.Equals(Project.Principal)) ? Project.Applicant.Lastname ?? string.Empty : $"{Project.Applicant.Lastname}/{Project.Principal.Lastname}";
 
 }

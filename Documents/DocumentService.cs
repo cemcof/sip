@@ -286,7 +286,7 @@ public class DocumentService(
 
     public DocumentRenderInfo? GetDocumentRenderInfo(Document document)
     {
-        object rendInfoProvider =
+        object? rendInfoProvider =
             serviceProvider.GetService(typeof(IDocumentRenderInfoProvider<>).MakeGenericType(document.GetType()));
         if (rendInfoProvider is null) return null;
         dynamic result = rendInfoProvider.GetType()

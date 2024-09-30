@@ -27,7 +27,7 @@
                 {
                     <div class="card panel-card bg-light" selected="@(SelectedDocument == tf)">
                         <div class="card-header d-flex align-items-center">
-                            <strong>Technical feasibility - @tf.Organization.Abbreviation</strong>
+                            <strong>Technical feasibility - @tf.Organization?.Abbreviation</strong>
                             <div class="flex-grow-1"></div>
                             <button @onclick="@(() => SelectDocument(tf))" class="btn btn-outline-primary">View &gt;</button>
                         </div>

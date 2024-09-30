@@ -54,7 +54,7 @@ public class EntityLoggerProvider<TDbContext, TEntity>(
             // THIS WHILE LOOP MUST NOT PRODUCE ANY LOGS, INIFINITE LOOP OTHERWISE
             var deqResult = ConcurrentQueue.TryDequeue(out var item);
             if (!deqResult || item is null) return;
-            Debug.Assert(typeof(TEntity) == item?.GetType());
+            Debug.Assert(typeof(TEntity) == item.GetType());
             logs.Add(item);
         }
         
@@ -78,7 +78,7 @@ public class EntityLoggerProvider<TDbContext, TEntity>(
     
     public ILogger CreateLogger(string categoryName)
     {
-        return _loggersCache.GetOrAdd(categoryName, name => new EntityLogger<TEntity>(categoryName, Add, standardLogFactory));
+        return _loggersCache.GetOrAdd(categoryName, _ => new EntityLogger<TEntity>(categoryName, Add, standardLogFactory));
     }
 
 }

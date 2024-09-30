@@ -186,11 +186,16 @@ public class UsermanBuilder(IServiceCollection services, ILogger<UsermanBuilder>
                 // to the fact that saml2 does not set authentication type. Resolve how?
             })
             .AddContactVerification()
-            .AddIdentityCookies(o => o.ApplicationCookie.Configure(ac =>
+            .AddIdentityCookies(o =>
             {
-                // Configure application cookie = reject the user in case security stamp was changed
-                ac.Events.OnValidatePrincipal = UsermanExtensions.ValidatePrincipalHandler;
-            }));
+                if (o.ApplicationCookie is null) 
+                    throw new InvalidOperationException("Unexpected null in cookies options configuration");
+                o.ApplicationCookie.Configure(ac =>
+                {
+                    // Configure application cookie = reject the user in case security stamp was changed
+                    ac.Events.OnValidatePrincipal = UsermanExtensions.ValidatePrincipalHandler;
+                });
+            });
         
         // Now setup the db
         void Mb(ModelBuilder builder)

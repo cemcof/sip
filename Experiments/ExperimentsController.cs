@@ -18,8 +18,7 @@ public class OrganizationControllerBase : ControllerBase
 [ServiceFilter(typeof(OrganizationActionFilter))]
 [Route("/api/experiments")]
 public class ExperimentsController(
-        IDbContextFactory<AppDbContext> dbContextFactory,
-        ExperimentsService            experimentsService,
+    ExperimentsService            experimentsService,
         ExperimentLoggingService     experimentLoggingService,
         ILogger<ExperimentsController>  logger,
         IOptions<AppOptions>            appOptions)
@@ -70,35 +69,6 @@ public class ExperimentsController(
         var exps = await experimentsService.GetExperimentsAsync(filter);
         return new JsonResult(exps.Items);
     }
-
-
-    // DELME
-    // [HttpPatch("{experimentId:guid}/published")]
-    // public async Task<IActionResult> ExperimentPublishedAsync(Guid experimentId, [FromBody] ExperimentPublished data, CancellationToken ct)
-    // {
-    //     // DELME and send notification as another api request
-    //     var exp = await experimentEngine.GetExperimentAsync(experimentId, ct);
-    //     if (exp.Publication.PublicationState != PublicationState.PublicationRequested) return BadRequest("Incorrect experiment state");
-    //     
-    //     // Patch experiment 
-    //     await using var context = await dbContextFactory.CreateDbContextAsync(ct);
-    //     var entry = context.Entry(exp.Storage);
-    //     entry.State = EntityState.Unchanged;
-    //     exp.Publication.Doi = data.Doi;
-    //     if (data.Target is not null) exp.Storage.Target = data.Target;
-    //     await context.SaveChangesAsync(ct);
-    //     
-    //     // Update state
-    //     await experimentEngine.ChangeStatusAsync(ExpState.Published, exp);
-    //     
-    //     // Send notification email
-    //     if (data.Notification is not null)
-    //     {
-    //         await experimentEngine.SendEmailNotificationAsync(exp, data.Notification.Subject, data.Notification.Body);
-    //     }
-    //
-    //     return Ok();
-    // }
     
     [HttpPost("{experimentId:guid}/email")]
     public async Task<IActionResult> SendEmailNotificationAsync(Guid experimentId, [FromBody] EmailTemplateOptions data, CancellationToken ct)
@@ -117,27 +87,8 @@ public class ExperimentsController(
         await experimentsService.PatchExperimentAsync(experimentId, jpatch, ct);
         
         return Ok(Newtonsoft.Json.JsonConvert.SerializeObject(jpatch));
-        await Task.Delay(0);
-        // return Ok( Newtonsoft.Json.JsonConvert.SerializeObject(data));
     }
 
-   
-
-    // [HttpPost("{experimentId:guid}/processing/result")]
-    // public async Task<IActionResult> SubmitResultAsync([FromBody] string html, Guid experimentId, CancellationToken ct)
-    // {
-    //     await _experimentEngine.SubmitResultAsync(experimentId, html, ct);
-    //     return Ok();
-    // }
-    //
-    // [HttpGet("{experimentId:guid}/processing/result")]
-    // public async Task<IActionResult> GetResultAsync(Guid experimentId, CancellationToken ct)
-    // {
-    //     var result = await _experimentEngine.GetResultAsync(experimentId, ct);
-    //     
-    //     return new JsonResult(result);
-    // }
-    
     [HttpPost("logs")]
     public IActionResult SubmitLogsAsync([FromBody] List<Log> logs)
     {

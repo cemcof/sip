@@ -8,18 +8,6 @@ namespace sip.Utils;
 
 public static class StringUtils
 {
-    public static string ToSafeFilename(string fileName, string? postfix = null)
-    {
-        var ext = Path.GetExtension(fileName);
-        var fname = Path.GetFileNameWithoutExtension(fileName);
-            
-        var invalidChars = Path.GetInvalidFileNameChars();
-        fname = string.Join("_", fname.Split(invalidChars, StringSplitOptions.RemoveEmptyEntries))
-            .TrimEnd('.');
-
-        return (postfix is null) ? fname + ext : fname + "_" + postfix + ext;
-    }
-        
     public static byte[] HexToByteArray(this string str)
     {
         return Enumerable.Range(0, str.Length)

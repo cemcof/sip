@@ -12,5 +12,5 @@ public class PeerReview : Proposal
 {
 
     public PeerReviewResult Result { get; set; }
-    public string Comments { get; set; }
+    public string? Comments { get; set; }
 }

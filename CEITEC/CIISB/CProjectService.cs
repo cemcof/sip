@@ -272,7 +272,7 @@ public class CProjectService(
 
     public ComponentRenderInfo GetProjectItemComponent(CProject project)
     {
-        var paramss = new Dictionary<string, object>
+        var paramss = new Dictionary<string, object?>
         {
             {nameof(CProjectItemComponent.Project), project},
         };
@@ -317,6 +317,7 @@ public class CProjectService(
 
     public Task<ProjectLoadResults> LoadManyAsync(CProjectFilter? filter)
     {
+        ArgumentNullException.ThrowIfNull(filter, nameof(filter));
         return projectService.LoadProjectsAsync<CProject>(filter);
     }
 

@@ -6,6 +6,13 @@ Project Proposal @CreationProposal.ProjectId
 
 
 @code {
-    [Parameter]
-    public CCreationProposal CreationProposal { get; set; }
+    [Parameter, EditorRequired]
+    public CCreationProposal CreationProposal { get; set; } = null!;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if (CreationProposal is null) throw new ArgumentNullException(nameof(CreationProposal));
+    }
+
 }

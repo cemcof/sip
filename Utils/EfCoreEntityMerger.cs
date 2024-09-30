@@ -12,7 +12,6 @@ public class EntityMergerOptions
 
 public class RawSqlEntityMerger<TDbContext>(
         IDbContextFactory<TDbContext>           dbContextFactory,
-        ILogger<RawSqlEntityMerger<TDbContext>> logger,
         IOptionsMonitor<EntityMergerOptions> options)
     : IEntityMerger<TDbContext>
     where TDbContext : DbContext

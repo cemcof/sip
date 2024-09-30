@@ -119,7 +119,7 @@ public static class ItemTools
             str => str.Split("=>", StringSplitOptions.TrimEntries).Last()
         );
 
-        return val => map[val!.ToString()!];
+        return val => map[val.ToString()];
     }
 
     public static ItemsProviderDelegate<TValue> StaticItems<TValue>(IEnumerable<TValue> fromlist)

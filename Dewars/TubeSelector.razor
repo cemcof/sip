@@ -82,9 +82,15 @@
 
     private TubeSelectorGuiStatus _guiStatus;
     [Parameter, EditorRequired] public EventCallback<Tube> TubeUpdated { get; set; }
-    [Parameter, EditorRequired] public IOrganization Organization { get; set; }
-    [Parameter, EditorRequired] public TubesService TubesService { get; set; } 
-    
+    [Parameter, EditorRequired] public IOrganization Organization { get; set; } = null!;
+    [Parameter, EditorRequired] public TubesService TubesService { get; set; } = null!;
+
+    protected override void OnParametersSet()
+    {
+        ArgumentNullException.ThrowIfNull(Organization, nameof(Organization));
+        ArgumentNullException.ThrowIfNull(TubesService, nameof(TubesService));
+    }
+
     private void _selectDewarAndHodler(string dewar, string holder)
     {
         Debug.WriteLine("Selecting dewar {0} and holder {1}", dewar, holder);

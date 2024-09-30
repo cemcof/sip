@@ -41,7 +41,7 @@ public class CiisbMigratorOptions
                 o.RequestCookies = new List<Cookie>()
                 {
                     new(
-                        cfmnigr.GetValue<string>("ShibName"),
+                        cfmnigr.GetValue<string>("ShibName") ?? throw new InvalidOperationException("ShibName is missing"),
                         cfmnigr.GetValue<string>("ShibValue"), "/", cfmnigr.GetValue<string>("CookieDomain")),
                     new("PHPSESSID", cfmnigr.GetValue<string>("PhpSessionId"), "/",
                         cfmnigr.GetValue<string>("CookieDomain"))

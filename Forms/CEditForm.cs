@@ -184,6 +184,7 @@ public class CEditForm<TModelType> : ComponentBase, IDisposable
     {
         Logger.LogTrace("Disposing editform");
         // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
         if (_editContext is not null)
         {
             _editContext.OnFieldChanged -= _onFieldChangedHandler;
@@ -197,7 +198,10 @@ public class CEditForm<TModelType> : ComponentBase, IDisposable
         // If _editContext changes, tear down and recreate all descendants.
         // This is so we can safely use the IsFixed optimization on CascadingValue,
         // optimizing for the common case where _editContext never changes.
+        // TODO - same if official?
+#pragma warning disable ASP0006
         builder.OpenRegion(_editContext.GetHashCode());
+#pragma warning restore ASP0006
 
         if (RenderAsFormElement)
         {

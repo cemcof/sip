@@ -8,7 +8,7 @@
 
 @if (_renderMode is RenderMode.Input && string.IsNullOrEmpty(_error) && _componentType is not null)
 {
-    <DynamicComponent Type="@_componentType" Parameters="@_componentParamsProvider()"></DynamicComponent>
+    <DynamicComponent Type="@_componentType" Parameters="@_componentParamsProvider()" />
 }
 
 @if (RenderError && !string.IsNullOrEmpty(_error))
@@ -56,7 +56,7 @@
     
     public Single SingleValueBinder { get; set; }
     public Double DoubleValueBinder { get; set; }
-    public Organization OrganizationValueBinder { get; set; }
+    public Organization? OrganizationValueBinder { get; set; }
     public List<string> StringListValueBinder { get; set; } = null!;
     
 

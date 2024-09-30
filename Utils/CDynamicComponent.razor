@@ -6,13 +6,12 @@
     public ComponentRenderInfo ComponentRenderInfo { get; set; }
     
     [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object>? AdditionalAttributes { get; set; }
+    public Dictionary<string, object?>? AdditionalAttributes { get; set; }
 
-    private Dictionary<string, object> _CombineParams()
+    private Dictionary<string, object?> _CombineParams()
     {
-        var additional = AdditionalAttributes ?? new Dictionary<string, object>();
+        var additional = AdditionalAttributes ?? new();
         var provided = ComponentRenderInfo.Parameters;
-
         return additional.Union(provided).ToDictionary();
     }
     

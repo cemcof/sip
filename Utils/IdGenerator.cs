@@ -14,13 +14,11 @@ public class YearOrderIdGeneratorOptions
     public string Postfix { get; set; } = "E";
 }
 
-
 /// <summary>
 /// Generates IDs containing year, entity order and letter to further distinguish the entity, e.g. :
 /// 210001I (first entity in year 21 of type I), 220125C (125. entity in year 22 of type C)
 /// Id generated this way is always sortable. 
 /// </summary>
-/// <typeparam name="TEntity"></typeparam>
 public class YearOrderIdGeneratorService(IDbContextFactory<AppDbContext> dbContextFactory, TimeProvider timeProvider)
 {
     public async Task<string> GenerateNextIdAsync<TEntity>(YearOrderIdGeneratorOptions options)

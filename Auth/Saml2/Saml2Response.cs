@@ -55,12 +55,18 @@ public class Saml2Response
     //We should check the signature reference, so it "references" the id of the root document element! If not - it's a hack
     private bool ValidateSignatureReference(SignedXml signedXml)
     {
+        if (signedXml.SignedInfo is null)
+            return false;
+            
         if (signedXml.SignedInfo.References.Count != 1) //no ref at all
             return false;
 
-        var reference = (Reference)signedXml.SignedInfo.References[0]!;
+        var reference = (Reference?)signedXml.SignedInfo.References[0];
         var id = reference?.Uri?[1..];
 
+        if (id is null)
+            return false;
+        
         var idElement = signedXml.GetIdElement(_xmlDoc, id);
 
         if (idElement == _xmlDoc.DocumentElement)

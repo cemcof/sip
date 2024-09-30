@@ -21,7 +21,7 @@
 
 @code {
     // Launch back to: "launchUrl": "https://localhost:7096/proposal/08da239e-ee82-43dc-8ab6-ff5a5bd47c99/submit"
-    public string Id;
+    private string? Id { get; set; }
 
 
     private async Task MigrateAll()
@@ -31,7 +31,7 @@
 
     private async Task MigrateOne()
     {
-        await Migrator.MigrateProject(Options.CurrentValue, Id);   
+        await Migrator.MigrateProject(Options.CurrentValue, Id ?? throw new InvalidOperationException("Id is missing"));   
     }
 
     private async Task MigrateUsers()

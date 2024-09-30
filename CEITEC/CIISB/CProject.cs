@@ -103,7 +103,7 @@ public class CProject : Project
         get
         {
             if (AffiliationDetails.Name.ToLower().Contains("biocev")) return true;
-            if (Applicant.Email.GetEmailDomain().ToLower().Contains("ibt.cas.")) return true;
+            if (Applicant.Email != null && Applicant.Email.GetEmailDomain().ToLower().Contains("ibt.cas.")) return true;
             return false;
         }
     }

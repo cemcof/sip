@@ -79,7 +79,6 @@
     [Parameter] public string? InstrumentId { get; set; }
 
     private CancellationTokenSource _cts = new();
-    private bool _renderReady = true;
     private Dictionary<IInstrument, Dictionary<string, ExperimentOptions>> _jobsAvailable = new();
     private Experiment? _currentExperiment;
     private ExperimentOptions? _currentExperimentMeta;

@@ -1,7 +1,7 @@
 <div class="document-panel pstate-@TechnicalFeasiblility.ProposalState @TechnicalFeasiblility prstatus-@TechnicalFeasiblility.Result">
     
     <div class="heading">
-        Technical feasilibilty - @TechnicalFeasiblility.Organization.Abbreviation
+        Technical feasilibilty - @TechnicalFeasiblility.Organization?.Abbreviation
     </div>
     
     <div class="body">
@@ -47,18 +47,26 @@
 
     // public bool IsRelevant => Project.InStatusAll<>()
     
-    [Parameter]
-    public TechnicalFeasiblility TechnicalFeasiblility { get; set; }
+    [Parameter, EditorRequired]
+    public TechnicalFeasiblility TechnicalFeasiblility { get; set; } = null!;
     
-    [Parameter]
-    public Project Project { get; set; }
+    [Parameter, EditorRequired]
+    public Project Project { get; set; } = null!;
     
-    [Parameter]
-    public AppUser CurrentUser { get; set; }
+    [Parameter, EditorRequired]
+    public AppUser CurrentUser { get; set; } = null!;
     
     [Parameter]
     public EventCallback OnRefresh { get; set; }
     
     [Parameter]
     public EventCallback OnSelect { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        ArgumentNullException.ThrowIfNull(TechnicalFeasiblility, nameof(TechnicalFeasiblility));
+        ArgumentNullException.ThrowIfNull(Project, nameof(Project));
+        ArgumentNullException.ThrowIfNull(CurrentUser, nameof(CurrentUser));
+    }
+
 }

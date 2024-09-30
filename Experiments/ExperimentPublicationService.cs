@@ -1,12 +1,9 @@
 using Microsoft.AspNetCore.JsonPatch;
-using sip.Core;
 using sip.Experiments.Model;
 
 namespace sip.Experiments;
 
-public class ExperimentPublicationService(ExperimentsService experimentsService,
-     IDbContextFactory<AppDbContext> dbContextFactory,
-     TimeProvider timeProvider)
+public class ExperimentPublicationService(ExperimentsService experimentsService, TimeProvider timeProvider)
 {
      public async Task RequestPublicationAsync(Experiment exp, CancellationToken ct = default)
     {
