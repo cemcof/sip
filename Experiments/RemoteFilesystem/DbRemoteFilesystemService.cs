@@ -18,8 +18,6 @@ public class DbRemoteFilesystemService(IDbContextFactory<AppDbContext> dbContext
 
     public async Task<List<FileSystemItemInfo>> RequestDirectoryInfoAsync(string path, string? scope = null, TimeSpan timeout = default, CancellationToken cts = default)
     {
-        var tsc = new TaskCompletionSource<List<FileSystemItemInfo>>();
-        
         await using var dbctx = await dbContextFactory.CreateDbContextAsync(cts);
         
         // Submit the path request and check if result is ready from previous request

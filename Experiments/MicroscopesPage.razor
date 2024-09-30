@@ -81,8 +81,6 @@
     private CancellationTokenSource _cts = new();
     private bool _renderReady = true;
     private Dictionary<IInstrument, Dictionary<string, ExperimentOptions>> _jobsAvailable = new();
-    private IInstrument? _selectedInstrument = null!;
-    private ExperimentOptions? _selecteJob = null!;
     private Experiment? _currentExperiment;
     private ExperimentOptions? _currentExperimentMeta;
     private ExperimentsResult _activeExperiments = ExperimentsResult.Empty();
@@ -90,8 +88,6 @@
     private async Task RefreshState()
     {
         var jobsAvailable = new Dictionary<IInstrument, Dictionary<string, ExperimentOptions>>();
-        IInstrument? selectedInstrument = null;
-        ExperimentOptions? selectedJob = null;
         ExperimentOptions? currentExperimentMeta = null;
         Experiment? currentExperiment = null; 
         ExperimentsResult activeExperiments = ExperimentsResult.Empty();
@@ -117,7 +113,7 @@
                     return;
                 }
             
-                selectedInstrument = instruments.Instruments.First(i => i.Name == InstrumentId);
+                var selectedInstrument = instruments.Instruments.First(i => i.Name == InstrumentId);
 
                 if (string.IsNullOrEmpty(ExperimentType))
                 {
@@ -125,8 +121,6 @@
                                                               instrumentJobs[selectedInstrument].MinBy(i => i.Value.DisplayOrder).Key));
                     return;
                 }
-
-                selectedJob = instrumentJobs[selectedInstrument][ExperimentType];
 
                 var expkey = (Organization.Id, selectedInstrument.Name, ExperimentType);
                 currentExperimentMeta = jobsAvailable[selectedInstrument][ExperimentType];
@@ -165,8 +159,6 @@
         }
         
         _currentExperiment = currentExperiment;
-        _selecteJob = selectedJob;
-        _selectedInstrument = selectedInstrument;
         _currentExperimentMeta = currentExperimentMeta;
         _jobsAvailable = jobsAvailable;
         _activeExperiments = activeExperiments;

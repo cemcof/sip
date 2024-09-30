@@ -22,7 +22,7 @@
                     </ItemTemplate>
 
                     <AlternativeBody Context="dropdown">
-                         <CEditForm TModelType="AppUser" Context="form"
+                         <CEditForm TModelType="AppUser"
                                    ModelFactory="@(UserManager.CreateItem)"
                                    OnSubmit="@((p) => _createOperatorSubmit(p, dropdown))"
                                    OnCancel="@(() => dropdown.SelectItem(null))">
