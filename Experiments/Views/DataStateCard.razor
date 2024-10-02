@@ -11,7 +11,7 @@
         </div>
         
         <div class="card-body">
-            <span class="card-text">Expired @Exp.Storage.DtExpiration.StandardFormat() (@Exp.Storage.DtExpiration.HappenAgo()). The
+            <span class="card-text">Expired @Exp.Storage.DtExpiration.StandardFormat() (@Exp.Storage.DtExpiration.HumanizeTimedelta()). The
                 dataset is no longer available on our storages.</span>
         </div>
     </section>
@@ -39,7 +39,7 @@
         </div>
 
         <div class="card-body">
-            <p class="card-title fw-bold">Expiration: @Exp.Storage.DtExpiration.StandardFormat() (@Exp.Storage.DtExpiration.HappenAgo())</p>
+            <p class="card-title fw-bold">Expiration: @Exp.Storage.DtExpiration.StandardFormat() (@Exp.Storage.DtExpiration.HumanizeTimedelta())</p>
             <p class="card-text">Since this dataset has not been marked to be archived, it will be deleted from our storage services by the date above.
                 Please download the dataset before this moment to your storage as described below.</p>
         </div>
@@ -68,7 +68,7 @@
         </div>
 
         <div class="card-body">
-            <p class="card-title fw-bold">Embargo ends: @Exp.Publication.DtEmbargo.StandardFormat() (@Exp.Publication.DtEmbargo.HappenAgo())</p>
+            <p class="card-title fw-bold">Embargo ends: @Exp.Publication.DtEmbargo.StandardFormat() (@Exp.Publication.DtEmbargo.HumanizeTimedelta())</p>
             <p class="card-text">Since this dataset has been marked to be archived, it is expected to be assigned public identifier (DOI) and made publicly available either automatically after embargo period or earlier on your decision.</p>
         </div>
 

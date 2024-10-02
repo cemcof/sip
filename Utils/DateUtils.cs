@@ -1,3 +1,6 @@
+using System.Globalization;
+using Humanizer.Localisation;
+
 namespace sip.Utils;
 
 public static class DateUtils
@@ -35,6 +38,28 @@ public static class DateUtils
         }
 
         return when.Humanize(dateToCompareAgainst: DateTime.UtcNow, utcDate: true);
+    }
+    
+    public static string HumanizeTimedelta(this DateTime when,
+        DateTime? compareAgainst = null,
+        bool countEmptyUnits = false,
+        int precision = 2,
+        bool toWords = false,
+        string collectionSeparator = ", ",
+        TimeUnit minUnit = TimeUnit.Second,
+        TimeUnit maxUnit = TimeUnit.Year,
+        CultureInfo? culture = null
+        )
+    {
+        when = (when.Kind is DateTimeKind.Local) ? when.ToUniversalTime() : when;
+        
+        var against = compareAgainst ?? DateTime.UtcNow;
+        against = (against.Kind is DateTimeKind.Local) ? against.ToUniversalTime() : against;
+        
+        var delta = when - against;
+        var hum = delta.Humanize(precision, countEmptyUnits, culture, maxUnit, minUnit, collectionSeparator, toWords);
+        // Add from now or ago
+        return when < against ? $"{hum} ago" : $"in {hum}";
     }
 
     public static DateTime StripSeconds(this DateTime dt)
