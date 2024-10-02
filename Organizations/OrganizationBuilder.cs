@@ -16,6 +16,8 @@ public class OrganizationBuilder
         _logger = logger;
         _configurationManager = configurationManager;
 
+        AddOrganizationsFromConfiguration();
+
         // Organizations seeding (from named options)
         _services.AddOptions<DbSeedOptions>()
             .Configure<IOptionListProvider<OrganizationOptions>>((seed, orgopts) =>
@@ -48,6 +50,57 @@ public class OrganizationBuilder
     public OrganizationBuilder AddOrganization<TOrganizationRef>() where TOrganizationRef : OrganizationDefinition
     {
         _services.ConfigureFromNamedSetup<OrganizationOptions, TOrganizationRef>();
+        return this;
+    }
+    
+    /// <summary>
+    /// List organizations section from configuration and extract organizations from it, configure them.
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    public OrganizationBuilder AddOrganizationsFromConfiguration()
+    {
+        var orgs = _configurationManager.GetSection("Organizations");
+        foreach (var org in orgs.GetChildren())
+        {
+            var type = org.GetValue<string>("Type");
+
+            var id = org.GetValue<string>(nameof(Organization.Id)) ?? 
+                     throw new ArgumentNullException(nameof(Organization.Id));
+            
+            var linkId = org.GetValue<string>(nameof(Organization.LinkId)) ?? 
+                         throw new ArgumentNullException(nameof(Organization.LinkId));
+            
+            var name = org.GetValue<string>(nameof(Organization.Name)) ?? 
+                       throw new ArgumentNullException(nameof(Organization.Name));
+            
+            var abbreviation = org.GetValue<string>(nameof(Organization.Abbreviation)) ?? 
+                              throw new ArgumentNullException(nameof(Organization.Abbreviation));
+            
+            var displayName = org.GetValue<string?>(nameof(Organization.DisplayName));
+            var description = org.GetValue<string?>(nameof(Organization.Description));
+            var url = org.GetValue<string?>(nameof(Organization.Url));
+
+
+            Organization organ = type switch
+            {
+                nameof(ResearchFacility) => new ResearchFacility(id, linkId, name, abbreviation)
+                    {DisplayName = displayName, Description = description, Url = url},
+                nameof(ResearchCenter) => new ResearchCenter(id, linkId, name, abbreviation)
+                    {DisplayName = displayName, Description = description, Url = url},
+                nameof(ResearchInfrastructure) => new ResearchInfrastructure(id, linkId, name, abbreviation)
+                    {DisplayName = displayName, Description = description, Url = url},
+                nameof(Company) => new Company(id, linkId, name, abbreviation)
+                    {DisplayName = displayName, Description = description, Url = url},
+                _ => throw new ArgumentOutOfRangeException(nameof(type), type, "Unknown or unsupported organization type")
+            };
+
+            _services.Configure<OrganizationOptions>(organ.Id, o =>
+            {
+                o.OrganizationDetails = organ;
+            });
+        }
         return this;
     }
 
