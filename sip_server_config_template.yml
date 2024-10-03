@@ -24,6 +24,10 @@ App:
     UrlBaseLocal: <url> # Path to the app from the hosting server, e.g. "https://localhost"
     AdminSupportMail: <email> # Where to send possible bugs and reports
     DataDirectory: <path> # Storage where the system has read/write access, e.g. /var/sip_data
+    OutOfService: # Optional - enabling will turn system into out of service mode
+        Enabled: False # True to enable maintenance mode
+        Reason: Maintenance # Reason to display to users accessing the system
+        AllowIps: [ "::1" ] # Only accessors from these ips will be allowed to use the system
 
 # For production - open to internet                
 AllowedHosts: "*"
@@ -37,5 +41,86 @@ Logging:
         Microsoft.Hosting.Lifetime: Debug
     Console:
         TimestampFormat: "[yyyy-MM-dd HH:mm:ss] "
+        
 
+# Configure GUI properties
+Gui:
+    BrandText: SIP
+    PanelTheme: theme-lightgreen
+    LogoPath: "/img/logos/ceitec_logo.jpg"
+    # Following modules will be displayed in the main menu, optionally filtered by RoleNetworkAuthorization
+    Modules:
+        userman:
+            DisplayText: Users
+            LinkHref: /userman
+            CssIcon: bi bi-people-fill
+            RoleNetworkAuthorization:
+                Roles: [ UserAdminRole ]
+
+# Optionally configure network settings
+Network:
+    TrustedProxies: [ <ip string> ] # If internal network is separated and computers access server via proxy, add the proxy's IP here
+    NoSignInNetworks: # Do not enable user login from these networks
+        - <ip string>
+
+# Configure messaging (email) settings
+Messaging:
+    Smtp:
+        Host: mail.example.com
+        Port: 25
+        From: EXAMPLE <example@mail.example.com>
+        DefaultReplyTo: EXAMPLE <example@mail.example.com>
+        SecureSocket: "None" # "None", "Auto", "SslOnConnect", "StartTls"...  
+        AppendReceivers: [ TESTMAIL <testmail@example.com> ] # These addresses will receive blind copies of all sent emails            
+
+
+# Configure authentication providers
+Authentication:
+    External:
+        # To obtain ClientId and ClientSecret, you need to follow each provider's instruction and register the app 
+        Orcid: # ORCID iD: https://orcid.org/developer-tools
+            Enabled: True
+            ClientId: <client id>
+            ClientSecret: <client secret>
+            DisplayName: Orcid
+            Description: Sign in with an ORCID iD, please prefer this method.
+            LogoUrl: /img/logos/orcid_signin.png
+            ApiEndpoint: https://api.orcid.org/v2.1/
+        
+        Google: # Google: https://developers.google.com/identity/protocols/oauth2
+            Enabled: True
+            ClientId: <client_id>
+            ClientSecret: <client_secret>
+            DisplayName: Google
+            Description: Sign in with an arbitrary Google account. Use this only if you do not own any instituatial account in the federation.
+            LogoUrl: /img/logos/google_signin.png
+        
+        Eduid: # EDUID.cz: https://www.eduid.cz/en/tech/saml
+            Enabled: False
+            SpEntityId: <entity_id>
+            DiscoveryServiceUrl: https://ds.eduid.cz/wayf.php
+            DiscoveryServiceFilter: <filter> # E.g: eyJ2ZXIiOiIyIiwiYWxsb3dGZWVkcyI6eyJlZHVJRC5jeiI6eyJhbGxvd0lkUHMiOlsiaHR0cHM6Ly9pZHAyLmljcy5tdW5pLmN6L2lkcC9zaGliYm9sZXRoIl19fX0=
+            LoginPath: /Shibboleth.sso/Login
+            CallbackPath: /Shibboleth.sso/SAML2/POST
+            ReturnUrlParameter: returnUrl
+            IdpMetadataUrl: https://metadata.eduid.cz/entities/eduid+idp
+            DisplayName: eduID.cz - Academic Identity Federation
+            Description: Sign in with your institution (e.g. Masaryk University) within eduid.cz federation.
+            LogoUrl: /img/logos/eduid_signin.png
+
+    # Configure authentication via tokens
+    Jwt:
+        Enabled: True
+        Consumer:
+            Audience: <string> # E.g. hostname of the server
+            TokenValidationParameters:
+                Key: <random secret string>
+                ValidateIssuerSigningKey: True
+                ValidateIssuer: True
+                ValidIssuer: aperture
+        Producer:
+            Issuer: <string> # Same as audience
+            IssuerSigningKey: <random secret string>
+            DefaultExpireAfter: 23:00:00
+            
 # TODO - much more...
