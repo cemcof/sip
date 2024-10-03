@@ -39,14 +39,10 @@
 @code {
 
     private const int MAX_FILES_COUNT_DEFAULT = 1;
-    private int? _maxFilesCount;
+    private int _maxFilesCount;
     [Parameter]
-    public int MaxFilesCount
-    {
-        get => _maxFilesCount ?? ModelPropertyType.GetCustomAttribute<MaxLengthAttribute>()?.Length ?? MAX_FILES_COUNT_DEFAULT;
-        set => _maxFilesCount = value;
-    }
-    public bool IsMultiple => MaxFilesCount > 1;
+    public int? MaxFilesCount { get; set; }
+    public bool IsMultiple => _maxFilesCount > 1;
 
     private const string ACCEPT_DEFAULT = "*";
     [Parameter] public string Accept { get; set; } = ACCEPT_DEFAULT;
@@ -92,6 +88,7 @@
         base.OnParametersSet();
         if (TargetDirectory is null) throw new ArgumentNullException(nameof(TargetDirectory));
         if (FilenamePrefix is null) throw new ArgumentNullException(nameof(FilenamePrefix));
+        _maxFilesCount = MaxFilesCount ?? ModelPropertyType.GetCustomAttribute<MaxLengthAttribute>()?.Length ?? MAX_FILES_COUNT_DEFAULT;
         
     }
 
