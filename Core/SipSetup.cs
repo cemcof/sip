@@ -173,12 +173,28 @@ public class SipSetup(string[] args)
             .AddOutEmailMessaging(conf.GetSection("Messaging:Smtp"));
         // .AddInEmailMessaging(conf.GetSection("Messaging:Imap"));
 
-        services.AddAuthentication()
-            .UseImpersonation(wb.Environment)
-            .AddSaml2(conf.GetSection("Authentication:External:Eduid"))
-            .AddGoogle(conf.GetSection("Authentication:External:Google"))
-            .AddOrcid(conf.GetSection("Authentication:External:Orcid"))
-            .AddTokenAuth(conf.GetSection("Authentication:Jwt"));
+        
+        // Authentication 
+        var auths = services.AddAuthentication()
+            .UseImpersonation(wb.Environment);
+        
+        // Supported schemes
+        List<(string, Action<IConfigurationSection>)> supportedAuths = [
+            ("Authentication:External:Eduid", s => auths.AddSaml2(s)), 
+            ("Authentication:External:Google", s => auths.AddGoogle(s)),
+            ("Authentication:External:Orcid", s => auths.AddOrcid(s)),
+            ("Authentication:Jwt", s => auths.AddTokenAuth(s))
+        ];
+        
+        // Register only enabled ones
+        foreach (var (sectionName, addAuth) in supportedAuths)
+        {
+            var section = conf.GetSection(sectionName);
+            if (section.GetValue("Enabled", false))
+            {
+                addAuth(section);
+            }
+        }
 
         // Setup gui
         se.AddSingleton<IIndexRedirector, DummyIndexRedirector>();
