@@ -10,12 +10,12 @@ public class HandlebarsUrlHelper(ILogger<HandlebarsUrlHelper> logger, IOptions<A
 
     public void Execute(EncodedTextWriter output, Context context, Arguments arguments)
     {
-        logger.LogDebug("Executing url helper with context type {ctxtype} and {argcount} arguments.", context.Value.GetType().FullName, arguments.Count());
+        logger.LogDebug("Executing url helper with context type {Ctxtype} and {Argcount} arguments", context.Value.GetType().FullName, arguments.Count());
         var urldetails = ParseUrlArguments(arguments);
         var urlstring = $"<a href=\"{urldetails.href}\">{urldetails.display}</a>";
 
         output.WriteSafeString(urlstring);
-        logger.LogDebug("Generated new url: {urlstring}", urlstring);
+        logger.LogDebug("Generated new url: {Urlstring}", urlstring);
     }
 
     public (string href, string display) ParseUrlArguments(Arguments arguments)

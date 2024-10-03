@@ -25,9 +25,10 @@
 
 
 @code {
-    
+
+    private ItemsProviderDelegate<TValue> _itemsProvider = null!;
     [Parameter]
-    public ItemsProviderDelegate<TValue> ItemsProvider { get; set; } = null!;
+    public ItemsProviderDelegate<TValue>? ItemsProvider { get; set; }
 
     // If item template is not given
     [Parameter]
@@ -50,19 +51,21 @@
             if (typeof(TValue) == typeof(string))
             {
                 var items = selectionAttr.GetKeyValues().ToList();
-                ItemsProvider = _ => ValueTask.FromResult(
+                _itemsProvider = _ => ValueTask.FromResult(
                     new ItemsProviderResult<TValue>(
                         items.Select(i => i.Key).Cast<TValue>(), items.Count
-                        )
-                    );
+                    )
+                );
                 DisplayNameMapper = value => items.First(x => x.Key.Equals(value)).Value;
             }
         }
-
-        if (ItemsProvider is null) throw new InvalidOperationException($"No item source found for {nameof(CCheckboxList<TValue>)}");
+        else if (ItemsProvider is not null)
+            _itemsProvider = ItemsProvider;
+        else 
+            throw new InvalidOperationException($"No item source found for {nameof(CCheckboxList<TValue>)}");
         
         // Load items 
-        var result = await ItemsProvider(new ItemsProviderRequest(default, default, default));
+        var result = await _itemsProvider(new ItemsProviderRequest(default, default, default));
         var resultItems = result.Items.ToList();
         
         if (typeof(TValue).IsPrimitive || typeof(TValue) == typeof(string))

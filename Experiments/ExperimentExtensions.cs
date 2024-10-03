@@ -13,15 +13,8 @@ namespace sip.Experiments;
 
 public class ExperimentsBuilder
 {
-    private readonly IServiceCollection _services;
-    private readonly IConfiguration _configurationRoot;
-
     public ExperimentsBuilder(IServiceCollection services, IConfigurationRoot configurationRoot)
     {
-        _services = services;
-        _configurationRoot = configurationRoot;
-
-        
         services.AddScheduledService<ExperimentsDailyRoutine>(c =>
         {
             c.CronString = "0 0 1 * * *";
@@ -121,10 +114,10 @@ public class ExperimentsBuilder
         // Instrument authorization
         
         // Register handlers 
-        _services.AddSingleton<InstrumentRemoteConnectAuthorizationHandler>();
-        _services.AddSingleton<IAuthorizationHandler, InstrumentRemoteConnectAuthorizationHandler>(s => s.GetRequiredService<InstrumentRemoteConnectAuthorizationHandler>());
-        _services.AddSingleton<IAuthorizationHandler, InstrumentJobsUseHandler>();
-        // _services.AddOptions<AuthorizationOptions>()
+        services.AddSingleton<InstrumentRemoteConnectAuthorizationHandler>();
+        services.AddSingleton<IAuthorizationHandler, InstrumentRemoteConnectAuthorizationHandler>(s => s.GetRequiredService<InstrumentRemoteConnectAuthorizationHandler>());
+        services.AddSingleton<IAuthorizationHandler, InstrumentJobsUseHandler>();
+        // services.AddOptions<AuthorizationOptions>()
         //     .Configure<IOptions<List<ExperimentOptions>>>((c, eopts) =>
         //     {
         //         // Add policies for all instruments of configured experiments 
@@ -150,7 +143,7 @@ public class ExperimentsBuilder
         
         
         // Instruments config
-        _services.AddOptions<InstrumentsOptions>()
+        services.AddOptions<InstrumentsOptions>()
             .GetOrganizationOptionsBuilder(configurationRoot)
             .Configure((options, configuration, organization) =>
             {
@@ -168,7 +161,7 @@ public class ExperimentsBuilder
                 }
             });
         
-        _services.AddOptions<ExperimentsOptions>()
+        services.AddOptions<ExperimentsOptions>()
             .GetOrganizationOptionsBuilder(configurationRoot)
             .ConfigureWithOptionsDependency<InstrumentsOptions>((options, conf, instrumentsOptions) =>
             {

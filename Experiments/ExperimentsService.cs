@@ -109,7 +109,7 @@ public class ExperimentsService(
         // Search string 
         var searches =
             (searchstring ?? "").Split("&", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-        var totalCount = 0;
+        int totalCount = 0;
 
         if (searches.Length == 0)
         {

@@ -15,45 +15,24 @@ public static class StringUtils
             .Select(x => Convert.ToByte(str.Substring(x, 2), 16))
             .ToArray();
     }
-
+    
+    /// <summary>
+    /// Shorthand for <c>String.Split</c> with <c>StringSplitOptions.TrimEntries</c> and <c>StringSplitOptions.RemoveEmptyEntries</c> applied
+    /// </summary>
+    /// <param name="str">String to split</param>
+    /// <param name="separators">Strings to split on</param>
+    /// <returns>String parts</returns>
     public static string[] SplitWithTrim(this string str, params string[] separators)
         => str.Split(separators, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
 
-    public static string ToSafeFilename(this string str)
+    /// <summary>
+    /// Remove special characters from string and replace them by safe character, underscore by default
+    /// </summary>
+    public static string ToSafeFilename(this string str, string replacement = "_")
     {
         var regex = new Regex("[\\/*?:\"<>| ]");
-        return regex.Replace(str, "_");
+        return regex.Replace(str, replacement);
     }
-
-    // public static byte[] HexToByteArray(this ReadOnlySpan<char> str)
-    // {
-    //     var chars = str;
-    //     return Enumerable.Range(0, str.Length)
-    //         .Where(x => x % 2 == 0)
-    //         .Select(x => Convert.ToByte(chars.Slice(x, 2), 16))
-    //         .ToArray();
-    // }
-    //
-
-
-    // DEL - this implementation is already in humanize lib
-    // public static string LimitLength(this string str, int maxChars = 50, string suffix = "...", bool fromEnd = false)
-    // {
-    //     if (suffix.Length > maxChars)
-    //     {
-    //         throw new ArgumentException($"{nameof(suffix)} must not be longer than {nameof(maxChars)}");
-    //     }
-    //
-    //     if (str.Length > maxChars + suffix.Length)
-    //     {
-    //         return fromEnd ?
-    //             suffix + str[(str.Length - maxChars + suffix.Length)..] :
-    //             str[..(maxChars - suffix.Length)] + suffix;
-    //     }
-    //
-    //     return str;
-    // }
-
     public static string WithPlaceholderExt(this string str, string placeholder = " - ")
     {
         return (string.IsNullOrWhiteSpace(str)) ? placeholder : str;
@@ -169,16 +148,12 @@ public static class StringUtils
         return str;
     }
 
-    public static string HideTextPartially(this string str, int hideStartIndex, int hideStopIndex)
-    {
-        return str.Substring(0, hideStartIndex) + new string('*', hideStopIndex - hideStartIndex) +
-               str.Substring(hideStopIndex);
-    }
+    public static string HideTextPartially(this string str, int hideStartIndex, int hideStopIndex) =>
+        str.Substring(0, hideStartIndex) + new string('*', hideStopIndex - hideStartIndex) +
+        str.Substring(hideStopIndex);
 
-    public static string HideEmailPartially(this string str)
-    {
-        return str.HideTextPartially(1, str.IndexOf('@'));
-    }
+    public static string HideEmailPartially(this string str) => 
+        str.HideTextPartially(1, str.IndexOf('@'));
 
     public static string GetEmailDomain(this string str)
     {
@@ -202,11 +177,12 @@ public static class StringUtils
     }
 
     /// <summary>
-    ///
+    /// Simplify HTML to plain text
+    /// - Merge whitespace, remove line breaks
+    /// - Replace br tags with newline
+    /// - Replace p tags with double newline
+    /// - Strip all remaining tags 
     /// </summary>
-    /// <param name="str"></param>
-    /// <param name="newlineSequence"></param>
-    /// <returns></returns>
     public static string HtmlToText(this string str, string newlineSequence = "\n")
     {
         // Get rid of line breaks and merge multiple whitespaces

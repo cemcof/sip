@@ -20,6 +20,7 @@ public class Scheduler(ILogger logger) : ISchedulerStarter
                 logger.LogError(e, "Exception occured during scheduled action execution");
             }
         }
+        // ReSharper disable once FunctionNeverReturns
     }
 
     public virtual Task ExecAction()

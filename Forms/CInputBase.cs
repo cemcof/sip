@@ -62,7 +62,7 @@ public abstract class CInputBase<TInput> : InputBase<TInput>, ICInputBase
     [Parameter]
     public int? MinLength
     {
-        get => _minLength ?? ModelPropertyType?.GetCustomAttribute<MinLengthAttribute>()?.Length ?? (IsRequired ? 1 : null); 
+        get => _minLength ?? ModelPropertyType.GetCustomAttribute<MinLengthAttribute>()?.Length ?? (IsRequired ? 1 : null); 
         set => _minLength = value;
     }
 
@@ -74,7 +74,7 @@ public abstract class CInputBase<TInput> : InputBase<TInput>, ICInputBase
     [Parameter]
     public int? MaxLength
     {
-        get => _maxLength ?? ModelPropertyType?.GetCustomAttribute<MaxLengthAttribute>()?.Length; 
+        get => _maxLength ?? ModelPropertyType.GetCustomAttribute<MaxLengthAttribute>()?.Length; 
         set => _maxLength = value;
     }
         
@@ -215,6 +215,7 @@ public abstract class CInputBase<TInput> : InputBase<TInput>, ICInputBase
     protected override void Dispose(bool disposing)
     {
         // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
         if (EditContext is not null)
         {
             EditContext.OnFieldChanged -= FiledNotifier;

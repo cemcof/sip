@@ -17,7 +17,6 @@
     
     <base href="~/"/>
     
-    @* <script src="https://cdn.tailwindcss.com"></script> *@
     <link rel="stylesheet" href="css/bootstrap/bootstrap.css"/>
     <link rel="stylesheet" href="css/fontawesome-free-5.15.4-web/css/all.css"/>
     <link rel="stylesheet"  href="css/@(opt.Identifier).css"/>
@@ -52,6 +51,7 @@ else
     <a class="dismiss">🗙</a>
 </div>
 
+@* ReSharper disable once Html.PathError *@
 <script src="_framework/blazor.server.js"></script>
 <script src="js/auto_reloader.js"></script>
 </body>

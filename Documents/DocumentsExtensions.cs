@@ -25,7 +25,7 @@ public class DocumentsBuilder
 
         _services.TryAddSingleton<DocumentService>();
         _services.TryAddSingleton<ZipArchiver>();
-        _services.TryAddSingleton<EmbeddedFileProvider>(s => new EmbeddedFileProvider(Assembly.GetExecutingAssembly()));
+        _services.TryAddSingleton<EmbeddedFileProvider>(_ => new EmbeddedFileProvider(Assembly.GetExecutingAssembly()));
 
         // Add renderers 
         _services.TryAddSingleton<MsWordRenderer>();
@@ -53,7 +53,7 @@ public class DocumentsBuilder
             var opts = sp.GetRequiredService<IOptions<AppOptions>>().Value;
             httpc.BaseAddress = opts.UrlBaseLocal;
         })
-        .ConfigurePrimaryHttpMessageHandler(sp =>
+        .ConfigurePrimaryHttpMessageHandler(_ =>
         {
             return new HttpClientHandler()
             {

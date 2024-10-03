@@ -4,37 +4,8 @@ using sip.Projects.Statuses;
 
 namespace sip.Projects;
 
-public class  Project : ITreeItem<Project>, IStringIdentified, IEquatable<Project>
+public class  Project : ITreeItem<Project>, IStringIdentified, IIdentified<string>
 {
-    #region EQUALS_BOILERPLATE
-        public bool Equals(Project? other)
-        {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return Id == other.Id;
-        }
-
-        public override bool Equals(object? obj)
-        {
-            return ReferenceEquals(this, obj) || obj is Project other && Equals(other);
-        }
-
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
-        }
-
-        public static bool operator ==(Project? left, Project? right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(Project? left, Project? right)
-        {
-            return !Equals(left, right);
-        }
-    #endregion
-    
     [MaxLength(128)] public string Id { get; set; } = null!;
     
     [MaxLength(256)] public string Acronym { get; set; } = string.Empty;

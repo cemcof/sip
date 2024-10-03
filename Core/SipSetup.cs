@@ -33,7 +33,6 @@ public class SipSetup(string[] args)
         var conf1 = wb.Configuration;
         configureApp ??= _ => { };
         var hostAssembly = Assembly.GetCallingAssembly();
-        var hostAssemblyName = hostAssembly.GetName().Name;
         // Support better options monitor
         // Data directory validator
         // DELME - not need this probably 
@@ -149,7 +148,7 @@ public class SipSetup(string[] args)
      
         var (services, conf) = (wb.Services, wb.Configuration);
             
-        var usermanBuilder = new UsermanBuilder(services, confLoggerFactory.CreateLogger<UsermanBuilder>())
+        new UsermanBuilder(services, confLoggerFactory.CreateLogger<UsermanBuilder>())
             .AddUserManagement()
             .ScanForRoleRefs(assebmly);
         
@@ -174,7 +173,7 @@ public class SipSetup(string[] args)
             .AddOutEmailMessaging(conf.GetSection("Messaging:Smtp"));
         // .AddInEmailMessaging(conf.GetSection("Messaging:Imap"));
 
-        var authenticationBuilder = services.AddAuthentication()
+        services.AddAuthentication()
             .UseImpersonation(wb.Environment)
             .AddSaml2(conf.GetSection("Authentication:External:Eduid"))
             .AddGoogle(conf.GetSection("Authentication:External:Google"))

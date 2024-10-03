@@ -31,13 +31,14 @@ public class WeasyPrintPdfRenderer(IOptions<WeasyPrintPdfRendererOptions> option
             UseShellExecute = false
         };
 
-        using Process process = new Process() { StartInfo = processStartInfo };
+        using Process process = new Process();
+        process.StartInfo = processStartInfo;
         process.Start();
         await process.StandardInput.WriteAsync(sourceText);
         await process.StandardInput.FlushAsync();
 
         var outstream = new MemoryStream(); // This has to be disposed! 
-        var errorOutput = await process.StandardError.ReadToEndAsync();
+        _ = await process.StandardError.ReadToEndAsync();
         await process.StandardOutput.BaseStream.CopyToAsync(outstream);
         await process.WaitForExitAsync();
         
@@ -64,7 +65,8 @@ public class WeasyPrintPdfRenderer(IOptions<WeasyPrintPdfRendererOptions> option
             UseShellExecute = false 
         };
 
-        using Process process = new Process() { StartInfo = processStartInfo };
+        using Process process = new Process();
+        process.StartInfo = processStartInfo;
         process.Start();
         await using (var stdIn = process.StandardInput)
         {
@@ -77,7 +79,7 @@ public class WeasyPrintPdfRenderer(IOptions<WeasyPrintPdfRendererOptions> option
             await stdOut.CopyToAsync(outstream);
         }
         
-        var errorOutput = await process.StandardError.ReadToEndAsync();
+        _ = await process.StandardError.ReadToEndAsync();
         await process.WaitForExitAsync();
 
         outstream.Position = 0;
