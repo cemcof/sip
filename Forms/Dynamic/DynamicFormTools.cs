@@ -77,9 +77,10 @@ public record DynamicElementSetup(
 public interface IBindPoint
 {
     public object? GetValue();
+    public T? GetValue<T>(T? defaultValue = default);
+    
     public void SetValue(object? value);
 
-    public T GetValue<T>(T defaultValue = default);
     void SetDefault(object? val);
     object Target { get; }
     string Key { get; }
@@ -88,7 +89,7 @@ public interface IBindPoint
 public abstract class BindPoint : IBindPoint
 {
     public abstract object? GetValue();
-    public abstract T GetValue<T>(T defaultValue = default);
+    public abstract T? GetValue<T>(T? defaultValue = default);
     public abstract void SetValue(object? value);
     public abstract void SetDefault(object? val); 
     public abstract object Target { get; }
@@ -117,7 +118,7 @@ public class DictBindPoint(IDictionary dict, string key) : BindPoint
         dict[key] = value;
     }
 
-    public override T GetValue<T>(T defaultValue = default)
+    public override T? GetValue<T>(T? defaultValue = default) where T : default
     {
         if (dict[key] is T val) return val;
         return defaultValue;
@@ -148,7 +149,7 @@ public class ObjectBindPoint(object obj, string key) : BindPoint
         PropertyInfo?.SetValue(obj, value);
     }
 
-    public override T GetValue<T>(T defaultValue = default)
+    public override T? GetValue<T>(T? defaultValue = default) where T : default
     {
         if (GetValue() is T val) return val;
         return defaultValue;
@@ -180,7 +181,7 @@ public class ListBindPoint(IList list, int index) : BindPoint
         list[index] = value;
     }
 
-    public override T GetValue<T>(T defaultValue = default)
+    public override T? GetValue<T>(T? defaultValue = default) where T : default
     {
         if (list[index] is T val) return val;
         return defaultValue;
