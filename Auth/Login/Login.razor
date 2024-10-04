@@ -6,13 +6,13 @@
 @inject IOptions<Dictionary<string, LoginProviderGuiOptions>> LoginGuiOptions
 @inject NavigationManager NavigationManager
 
-<div class="login-container">
+<div class="container mt-3">
     
-    <h1>Log in to the @AppOptions.Value.Name system via one of the following providers</h1>
+    <h1 class="text-center">Log in to the @AppOptions.Value.Name system via one of the following providers</h1>
     
     <div class="providers-container">
         
-        @foreach (var ao in LoginGuiOptions.Value)
+        @foreach (var ao in LoginGuiOptions.Value.OrderBy(l => l.Value.Order))
         {
             var (schemeName, opts) = (ao.Key, ao.Value);
             

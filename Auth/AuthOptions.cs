@@ -20,6 +20,7 @@ public class LoginProviderGuiOptions
     public string DisplayName { get; set; } = "";
     public string Description { get; set; } = "";
     public string LogoUrl { get; set; } = "/unknown.png";
+    public int Order { get; set; } = int.MaxValue;
 }
 
 public class AuthorizationConstants
