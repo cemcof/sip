@@ -122,5 +122,30 @@ Authentication:
             Issuer: <string> # Same as audience
             IssuerSigningKey: <random secret string>
             DefaultExpireAfter: 23:00:00
-            
-# TODO - much more...
+
+# Add organizations if necessary - they will be stored in the database if DbInit strategy is set accordingly
+Organizations:
+    - Type: <type> # ResearchFacility, Company, ResearchCenter, ResearchInfrastructure
+      Id: <short string> # Unique identifier, never change
+      LinkId: <short url-friendly string> # Reference to this organization in URL's
+      Name: <string> # Name of the organization, appears for example in metadata, e.g. "INSTRUCT-CZ_CIISB_CEMCOF" 
+      Abbreviation: <string> # E.g. CF CryoEM
+      DisplayName: <string> # E.g. Cryo-Electron Microscopy facility
+      Description: <string> # E.G. Core Facility for Cryo-EM in Madrid, CNB-CSIC
+      Url: <url string> # Optional
+
+# Configure supported centers - necessary for sip-node deployment
+Centers:
+    - Id: <organization id> # Organization this center maps to
+      Key: <random secure string> # Secure key to authenticate communication from nodes to the server
+      ConfigFile: <path> # Optional, can be also provided by a sip-node
+
+# Configure weasyprint - app to make PDFs from html
+WeasyPrintPdf:
+    WeasyprintExecutable: /usr/bin/weasyprint
+    BaseRequestUrl: https://localhost:443/
+
+Samples:
+    ProposalsFolder: "Data/Samples"            
+    
+# TODO more?

@@ -3,18 +3,11 @@
 # There is no problem defining your own top level keys and inserting them to relevant places in yaml config
 
 
-# Configure center basic information
-Center:
-    Identifier: <facility_id> # Same as in the SIP config under "Centers" section
-    UrlIdentifier: <url_compatible_string> # How will the center be identified in the URL, recommended is something short, lowercase and without special characters except _ and -
-    Name: <facility_name> # Full name of the facility, e.g. Cryo electron microscopy core facility
-    Abbreviation: <abbreviation> # Short descriptive name of the facility, e.g. CEMCOF,EM-Instruct-CZ,Brno
-
-# Connect to the SIP webserver
+# Connect to the SIP webserver - these properties can be given as command line arguments if node is not using config file
 SipApi:
+    Organization: <organization id>
     BaseUrl: <url> # E.g. "https://sip.example.com/api/" # CAUTION - trailing slash has to be there becaou oterwiese urljoiner is kinda dumb
     SecretKey: <secret> # Same secret string as is in the SIP server config
-
 
 # Configure nodes and their modules and actions
 LimsNodes: # TODO - rename key
@@ -29,6 +22,7 @@ LimsNodes: # TODO - rename key
 
 
 # Configure what pages/modules is seen in SIP GUI menu and how are they authorized
+# This is similar to the SIP server global gui config, but scoped to the organization
 Gui:
     Modules:
         <module_name>:
