@@ -52,7 +52,6 @@ public class PanelItemOptions
     public UserRoleAuthOptions? UserRoleAuthorization { get; set; }
     public string? CssIcon { get; set; }
 
-    public bool RequiresActiveOrganization { get; set; }
     public bool Render => !string.IsNullOrEmpty(DisplayText) || !string.IsNullOrEmpty(CssIcon);
 
     public IEnumerable<IAuthorizationRequirement> GetAuthorizationRequirements(IOrganization? org = null)
