@@ -90,7 +90,7 @@
                 </CDropdown>
                 
                 <CDropdown @bind-Value="@ctx.Model.SelectedOrganization" TValue="Organization" ItemsProvider="@OrganizationService.GetOrganizationsAsync">
-                    <ItemTemplate Context="org">@org.Name</ItemTemplate>
+                    <ItemTemplate Context="org">@(org.DisplayName ?? org.Name)</ItemTemplate>
                 </CDropdown>
             </InteractiveButtonForm>
         </ItemAdderTemplate>

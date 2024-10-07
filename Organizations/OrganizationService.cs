@@ -25,7 +25,8 @@ public class OrganizationService(
         {
             result = result.Where(r => r.IsFilterMatch(searchstring)).ToList();
         }
-
+        
+        var count = result.Count;
         if (request.Count != -1)
         {
             result = result.Skip(request.StartIndex)
@@ -39,9 +40,9 @@ public class OrganizationService(
                             .ToList();
         }
         
-        logger.LogTrace("GetOrganizationsAsync: {} items: {}", result.Count,
+        logger.LogTrace("GetOrganizationsAsync: {} items: {}", count,
             string.Join(", ", result.Select(r => r.Id)));
-        var itemResult = new ItemsProviderResult<Organization>(result, result.Count);
+        var itemResult = new ItemsProviderResult<Organization>(result, count);
         return ValueTask.FromResult(itemResult);
     }
 
