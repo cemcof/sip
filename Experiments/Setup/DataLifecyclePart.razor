@@ -67,8 +67,8 @@
             _dataLifecycle = value;
             _dataLifecycleInspectResult = DynamicFormTools.DynamicInspect(value.SetupDyn, Exp);
             OnLifecycleChanged.InvokeAsync();
-            Logger.LogInformation("SetupDyn: {@SetupDyn}, len {Len}, exp {@Exp}", _dataLifecycleInspectResult.Elements, _dataLifecycleInspectResult.Elements.Count, Exp);
-            Logger.LogInformation("Exp after setup: wftags={@WfTags}, procstate={ProcState}, patternsstor={@Patt}", Exp.Processing.WorkflowTags, Exp.Processing.State, Exp.DataSource.SourcePatterns);
+            Logger.LogTrace("SetupDyn: {@SetupDyn}, len {Len}, exp {@Exp}", _dataLifecycleInspectResult.Elements, _dataLifecycleInspectResult.Elements.Count, Exp);
+            Logger.LogTrace("Exp after setup: wftags={@WfTags}, procstate={ProcState}, patternsstor={@Patt}", Exp.Processing.WorkflowTags, Exp.Processing.State, Exp.DataSource.SourcePatterns);
         }
     }
 
