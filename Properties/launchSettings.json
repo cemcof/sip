@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "https": {
+    "https-toproposal": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
@@ -27,6 +27,17 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DOTNET_appsettings": "../sip-private/appsettings.Development.yml"
       }
+    },
+    "https-tomic": {
+        "commandName": "Project",
+        "dotnetRunMessages": true,
+        "launchBrowser": true,
+        "launchUrl": "cryoem/microscopes/Glacios/TRANSFER",
+        "applicationUrl": "https://localhost:7098;http://localhost:7097",
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development",
+            "DOTNET_appsettings": "../sip-private/appsettings.Development.yml"
+        }
     },
     "IIS Express": {
       "commandName": "IISExpress",
