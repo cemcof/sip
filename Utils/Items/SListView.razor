@@ -45,7 +45,7 @@
     
 
     private TItem? _selectedItem;
-    private int SelectedIndex => _selectedItem is null ? -1 : CurrentItems.IndexOf(_selectedItem); 
+    private int SelectedIndex => _selectedItem is null ? -1 : CurrentItems.FindIndex(EqualityComparer.EqualsWith(_selectedItem)); 
     
     [Parameter] public EventCallback<TItem> OnItemSelected { get; set; }
     [Parameter] public EventCallback<TItem> OnItemConfirmed { get; set; }
@@ -89,7 +89,7 @@
 
     public void SelectItem(TItem? item)
     {
-        if (item is null || !CurrentItems.Contains(item)) item = default;
+        if (item is null || !CurrentItems.Contains(item, EqualityComparer)) item = default;
         if (item is not null && EqualityComparer.Equals(item, _selectedItem)) return;
         if (item is not null && !ItemSelectable(item)) return;
         _selectedItem = item;
