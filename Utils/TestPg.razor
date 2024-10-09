@@ -1,0 +1,23 @@
+@page "/test"
+
+<CEditForm Model="@this">
+    <CDropdown TValue="String" ItemsProvider="@_itemsProvider" @bind-Value="@_val"></CDropdown>
+</CEditForm>
+
+@code {
+    private string? _val;
+
+    private ValueTask<ItemsProviderResult<string>> _itemsProvider(ItemsProviderRequest request, string? searchstring)
+    {
+        var items = new List<string>();
+        for (int i = 0; i < 100; i++)
+        {
+            items.Add($"Item {i}");
+        }
+        
+        var it = items.Skip(request.StartIndex).Take(request.Count);
+
+        return ValueTask.FromResult(new ItemsProviderResult<string>(it, 100));
+    }
+
+}
