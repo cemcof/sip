@@ -32,8 +32,15 @@
                     <InteractiveButton Caption="Archive and publish this dataset"
                                        BtnClass="btn btn-outline-primary btn-sm"
                                        OnClick="@OnEnablePublishRequest"
-                                       Tip="Use only if the data is relevant enough to be preserved. This will mark the experiment dataset to be archived and published."
-                                       />
+                                       Tip="Use only if the data is relevant enough to be preserved. This will mark the experiment dataset to be archived and published.">
+                        <ConfirmTemplate>
+                            <div class="d-flex">
+                                <p class="me-2">Are you sure to archive and publish this dataset?</p>
+                                <button class="btn btn-sm btn-primary" @onclick="context.ConfirmAsync">Yes, archive and publish</button>
+                                <button class="btn btn-sm btn-secondary" @onclick="context.CancelAsync">No, cancel</button>
+                            </div>
+                        </ConfirmTemplate>
+                    </InteractiveButton>
                 </TrueContent>
             </ConditionalRender>
         </div>
@@ -61,8 +68,15 @@
                     <InteractiveButton Caption="Do not archive and publish this dataset"
                                        BtnClass="btn btn-outline-primary btn-sm"
                                        OnClick="@OnDisablePublishRequest"
-                                       Tip="Use if the data is not relevant enough to be preserved. This will mark the experiment dataset to eventually expire."
-                                       />
+                                       Tip="Use if the data is not relevant enough to be preserved. This will mark the experiment dataset to eventually expire.">
+                        <ConfirmTemplate>
+                            <div class="d-flex">
+                                <p class="me-2">Are you sure not to archive and publish this dataset?</p>
+                                <button class="btn btn-sm btn-primary" @onclick="context.ConfirmAsync">Yes, do not archive and publish</button>
+                                <button class="btn btn-sm btn-secondary" @onclick="context.CancelAsync">No, cancel</button>
+                            </div>
+                        </ConfirmTemplate>
+                    </InteractiveButton>
                 </TrueContent>
             </ConditionalRender>
         </div>
@@ -82,6 +96,13 @@
                 <InteractiveButton Caption="Request publication now"
                                    BtnClass="btn btn-secondary btn-sm"
                                    OnClick="@(() => ExperimentPublicationService.RequestPublicationAsync(Exp))">
+                    <ConfirmTemplate>
+                        <div class="d-flex">
+                            <p class="me-2">This is irreversible action, the dataset will marked as ready for publication</p>
+                            <button class="btn btn-sm btn-primary" @onclick="context.ConfirmAsync">Yes, request publication</button>
+                            <button class="btn btn-sm btn-secondary" @onclick="context.CancelAsync">No, cancel</button>
+                        </div>
+                    </ConfirmTemplate>
                 </InteractiveButton>
             }
         </div>
