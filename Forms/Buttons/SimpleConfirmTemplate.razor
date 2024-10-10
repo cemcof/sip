@@ -1,0 +1,21 @@
+
+<div class="text-center">
+    @ChildContent
+    
+    <div class="d-flex justify-content-center">
+        <div class="btn-group btn-group-sm">
+            <button class="btn btn-sm btn-primary" @onclick="@OnConfirm">@OkBtnCaption</button>
+            <button class="btn btn-sm btn-secondary" @onclick="@OnCancel">@CancelBtnCaption</button>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter] public RenderFragment ChildContent { get; set; } = @<p>Are you sure?</p>;
+    [Parameter] public string OkBtnCaption { get; set; } = "OK";
+    [Parameter] public string CancelBtnCaption { get; set; } = "Cancel";
+    
+    [Parameter] public EventCallback OnConfirm { get; set; }
+    [Parameter] public EventCallback OnCancel { get; set; }
+}

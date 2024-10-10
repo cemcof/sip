@@ -1,6 +1,6 @@
 .interactive-button-container {
     position: relative;
-    
+    display: inline-block;
 }
 
 ::deep.tip-content {
