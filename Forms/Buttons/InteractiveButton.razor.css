@@ -1,5 +1,4 @@
-.interactive-button-container {
-    position: relative;
+::deep .interactive-button-container {
     display: inline-block;
 }
 

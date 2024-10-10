@@ -72,7 +72,7 @@
     
     &.tt-topright > .tt-slave {
         bottom: 100%;
-        right: 0;
+        left: 0;
     }
     
     
