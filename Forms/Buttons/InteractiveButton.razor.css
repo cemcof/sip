@@ -1,6 +1,4 @@
-::deep.interactive-button-container {
-    display: inline-block;
-}
+/*Some styling in buttons.css*/
 
 ::deep.tip-content {
     text-align: center;

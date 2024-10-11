@@ -132,3 +132,7 @@ button:hover {
     color: black;
     background-color: var(--bs-gray-600);
 }
+
+.interactive-button-container {
+    display: inline-block;
+}
