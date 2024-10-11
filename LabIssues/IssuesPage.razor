@@ -1,0 +1,24 @@
+@page "/{OrganizationId}/issues"
+@inherits OrganizationComponentBase
+
+@* Issues header *@
+<div class="d-flex">
+    <InteractiveButton Caption="New issue" 
+                       CssIcon="bi bi-plus-circle">
+        
+    </InteractiveButton>
+    
+    <SearchBar Placeholder="Search issues (by user, description, date, status...)" 
+               RequestSearch="@_onSearch"/>
+</div>
+
+<h3>Lab Issues</h3>
+
+@code {
+
+    private Task _onSearch((string, CancellationToken) searchRequest)
+    {
+        throw new NotImplementedException();
+    }
+
+}

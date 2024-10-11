@@ -83,7 +83,7 @@
                     items.Select(i => (TValue)Enum.Parse(typeof(TValue), i.Key)), items.Count
                     )
                 );
-            DisplayNameMapper = value => items.First(x => x.Key.Equals(value)).Value;
+            DisplayNameMapper = value => items.First(x => x.Key.Equals(value!.ToString())).Value;
         }
 
         if (ItemsProvider is null) throw new InvalidOperationException($"No item source found for {nameof(CRadioList<TValue>)}");

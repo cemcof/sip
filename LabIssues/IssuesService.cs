@@ -28,7 +28,9 @@ public class IssuesService(
         var usersSet = db.Set<Issue>();
         var users = await usersSet
             .Include(i => i.InitiatedBy)
+                .ThenInclude(u => u!.Contacts)
             .Include(i => i.Responsible)
+                .ThenInclude(u => u!.Contacts)
             .OrderByDescending(i => i.DtLastChange)
             .ToListAsync(cancellationToken: ct);
         if (string.IsNullOrWhiteSpace(filter)) return users;
