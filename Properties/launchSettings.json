@@ -39,6 +39,17 @@
             "DOTNET_appsettings": "../sip-private/appsettings.Development.yml"
         }
     },
+    "https-toissues": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "launchUrl": "cryoem/issues",
+      "applicationUrl": "https://localhost:7094;http://localhost:7093",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_appsettings": "../sip-private/appsettings.Development.yml"
+      }
+    },
     "https-totest": {
         "commandName": "Project",
         "dotnetRunMessages": true,
