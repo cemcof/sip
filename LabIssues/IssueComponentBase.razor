@@ -1,0 +1,28 @@
+@inject IssuesService IssuesService
+
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    public Issue Issue { get; set; } = null!;
+    
+    protected string MapIssueColorClass(Issue issue) =>
+        issue.Status switch
+        {
+            IssueStatus.Resolved => "bg-success",
+            IssueStatus.InProgress => IssuesService.AutoUrgencyHandler(issue) switch
+            {
+                IssueUrgency.Low => "bg-info",
+                IssueUrgency.Medium => "bg-warning",
+                IssueUrgency.High => "bg-danger",
+                _ => "bg-light"
+            },
+            IssueStatus.Initiated => "bg-light",
+            _ => throw new ArgumentOutOfRangeException()
+        };
+    
+    protected override void OnParametersSet()
+    {
+        if (Issue is null) throw new ArgumentNullException(nameof(Issue));
+    }
+}

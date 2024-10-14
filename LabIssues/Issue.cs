@@ -51,8 +51,8 @@ public class Issue : IStringFilter
     public DateTime DtLastNotified { get; set; }
     
     [Render(Title = "Notify every", Unit = "days")]
-    [Range(0.0, 365.0)]
-    public double NotifyIntervalDays { get; set; } = 7;
+    [Range(0, 365)]
+    public int NotifyIntervalDays { get; set; } = 7;
 
     public List<IssueComment> IssueComments { get; set; } = new();
     

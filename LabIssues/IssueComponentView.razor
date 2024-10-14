@@ -1,0 +1,38 @@
+@inherits IssueComponentBase
+
+
+<div class="card">
+    
+    <div class="card-header">
+        @* Render subject, date and buttons *@
+        <div class="d-flex justify-content-between align-items-center">
+            <div>@Issue.Subject</div>
+            <div>@Issue.DtCreated</div>
+        </div>
+
+    </div>
+    
+    <div class="card-body">
+        @* Here render comments *@
+        @foreach (var comment in Issue.IssueComments)
+        {
+            <div class="row">
+                <div class="col-4">
+                    <span>@(comment.Author?.Fullname ?? comment.IpAddress)</span>
+                    <span>@comment.DtCreated.StandardFormat()</span>
+                    <span>@comment.DtCreated.HumanizeTimedelta()</span>
+                </div>
+                
+                <div class="col-8">
+                    <span>@comment.Comment</span>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+
+@code {
+
+}

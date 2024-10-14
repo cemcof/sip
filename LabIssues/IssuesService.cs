@@ -6,7 +6,8 @@ namespace sip.LabIssues;
 
 public class IssuesService(
         IDbContextFactory<AppDbContext> dbContextFactory,
-        TimeProvider                  timeProvider,
+        TimeProvider                    timeProvider,
+        GeneralMessageBuilderProvider   messageBuilderProvider,
         SmtpSender                      emailService,
         IOptions<DailySchedulerOptions> dsoptions,
         ILogger<IssuesService>          logger,
@@ -108,7 +109,7 @@ public class IssuesService(
 
             var days = (DateTime.Today - issue.DtAssigned.Date).Days;
             // var notifyDays = (int) issue.NotifyIntervalDays == 0 ? 1 : (int) issue.NotifyIntervalDays;
-            if (days > 0 && (days % (int)issue.NotifyIntervalDays) == 0 && issue.DtLastNotified.Date != DateTime.Today)
+            if (days > 0 && (days % issue.NotifyIntervalDays) == 0 && issue.DtLastNotified.Date != DateTime.Today)
             {
                 await NotifyRemiderResponsible(issue);
                 issue.DtLastNotified = DateTime.UtcNow;
@@ -117,61 +118,15 @@ public class IssuesService(
 
         await db.SaveChangesAsync();
     }
-
-    private async Task NotifyRemiderResponsible(Issue issue)
-    {
-        await emailService.SendOne(IssueRemiderMessage(issue, appOptions.Value));
-    }
+    private Task SendToResponsible(Issue issue, string template) =>
+        messageBuilderProvider.CreateBuilder()
+            .BodyAndSubjectFromFileTemplate(issue, template)
+            .AddRecipient(issue.Responsible ?? throw new InvalidOperationException("Responsible is not set"))
+            .BuildAndSendAsync();
     
-    private async Task NotifyAssignResponsible(Issue issue)
-    {
-        await emailService.SendOne(IssueAssignedMessage(issue, appOptions.Value));
-    }
-    
-    public static MimeMessage IssueAssignedMessage(Issue issue, AppOptions appOptions)
-    {
-        var issueLink = appOptions.UrlBase + $"labissues/{issue.Id}";
-        
-        var message = new MimeMessage
-        {
-            Subject = $"[IID: {issue.Id}] New issue - {issue.Subject}",
-            Body = new TextPart("plain")
-            {
-                Text = 
-                    $"You have been made responsible for resolving a new issue: \n\n{issue.Description}\n\n" +
-                    $"See the issue at {issueLink}\n\n" +
-                    "# This email is generated automatically."
-            },
-        };
+    private Task NotifyRemiderResponsible(Issue issue) =>
+        SendToResponsible(issue, "IssueReminder.hbs");
 
-        if (issue.Responsible is null)
-            throw new InvalidOperationException($"{nameof(IssueAssignedMessage)} - Null responsible");
-        
-        message.To.Add(MailboxAddress.Parse(issue.Responsible.Fullcontact));
-        return message;
-    }
-
-    public static MimeMessage IssueRemiderMessage(Issue issue, AppOptions appOptions)
-    {
-        var issueLink = appOptions.UrlBase + $"/labissues/{issue.Id}";
-        
-        var message = new MimeMessage
-        {
-            Subject = $"[IID: {issue.Id}] Unresolved issue - {issue.Subject}",
-            Body = new TextPart("plain")
-            {
-                Text = 
-                    $"An issue has not been resolved for {(DateTime.Today - issue.DtAssigned).Days} days.\n\n" +
-                    $"{issue.Subject}\n{issue.Description}\n\n" +
-                    $"See the issue at {issueLink}\n\n" +
-                    "# This email is generated automatically."
-            },
-        };
-
-        if (issue.Responsible is null)
-            throw new InvalidOperationException($"{nameof(IssueAssignedMessage)} - Null responsible");
-        
-        message.To.Add(MailboxAddress.Parse(issue.Responsible.Fullcontact));
-        return message;
-    }
+    private Task NotifyAssignResponsible(Issue issue) =>
+        SendToResponsible(issue, "IssueAssigned.hbs");
 }
