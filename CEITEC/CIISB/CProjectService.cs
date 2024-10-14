@@ -181,7 +181,7 @@ public class CProjectService(
         var dataContext = new CProjectContext(project);
         
         var bd = messageBuilderProvider.CreateBuilder();
-        bd.BodyFromFileTemplate(dataContext,
+        bd.BodyAndSubjectFromFileTemplate(dataContext,
             (project.PeerReviewRequired) ? "ProposalSubmitUserWithPr.hbs" : "ProposalSubmitUser.hbs");
         bd.AddAttachment(
             await documentService.RenderToPdfAsync(project.CreationProposal, $"Proposal {project.Id}"));

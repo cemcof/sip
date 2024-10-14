@@ -78,7 +78,7 @@
         var targetUrl = $"/proposal/{propos.Id}/submit";
         var mb = MessageBuilderProvider.CreateBuilder();
         mb.AddRecipient(_searchUser);
-        mb.BodyFromFileTemplate(new {ProposalLink = targetUrl}, "NewProjectProposal.hbs");
+        mb.BodyAndSubjectFromFileTemplate(new {ProposalLink = targetUrl}, "NewProjectProposal.hbs");
         await mb.BuildAndSendAsync();
         _isSent = true;
     }

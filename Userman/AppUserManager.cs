@@ -41,7 +41,7 @@ public class AppUserManager(
             SystemName = appOptions.Value.Name
         };
 
-        messageBuilder.BodyFromFileTemplate(context, "LoginInviteTemplate.hbs");
+        messageBuilder.BodyAndSubjectFromFileTemplate(context, "LoginInviteTemplate.hbs");
         messageBuilder.Subject($"Sign up to {context.SystemName}");
         messageBuilder.AddRecipient(user);
         await messageBuilder.BuildAndSendAsync();

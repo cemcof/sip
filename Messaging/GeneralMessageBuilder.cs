@@ -34,36 +34,39 @@ public class GeneralMessageBuilder<TMessage> where TMessage : Message, new()
     /// <param name="path"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    public GeneralMessageBuilder<TMessage> BodyFromFileTemplate(object data, string path)
+    public GeneralMessageBuilder<TMessage> BodyAndSubjectFromFileTemplate(object data, string path)
     {
-        BuilderHandlers.Add(() => BodyFromHbsFileTemplateAsync(data, path));
+        BuilderHandlers.Add(() => BodyAndSubjectFromHbsFileTemplateAsync(data, path));
         return this;
     }
     
-    public async Task BodyFromHbsFileTemplateAsync(object data, string resourceTarget) 
+    public async Task BodyAndSubjectFromHbsFileTemplateAsync(object data, string resourceTarget) 
     {
         try
         {
             var renderer = DocumentService.HandlebarsService;
             var text = await DocumentService.ReadEmbeddedFileAsync(resourceTarget);
+            text = text.Trim();
+            var lines = text.Split("\n");
             
-            // Extract subject from the comment, if any
-            var subjMatch = Regex.Match(text, @"\{\{!S: ([^\}]*)}}");
-            var subj = (subjMatch.Groups.Count >= 2) ? subjMatch.Groups[1].Value : null;
+            // take first line of text and see if it starts with Subject: , if so, extract the subject, use regex
+            var subjectRegex = new Regex(@"subject:\s*(.*)", RegexOptions.IgnoreCase);
+            var subjectMatch = subjectRegex.Match(lines.First());
+            if (subjectMatch.Success)
+            {
+                var subject = subjectMatch.Groups[1].Value;
+                SubjectFromHbsStringTemplate(data, subject);
+                text = string.Join("\n", lines.Skip(1));
+            }
             
             var rendered = renderer.Render(text, data);
             BodyBuilder.HtmlBody = rendered;
             BodyBuilder.TextBody = rendered.HtmlToText();
-
-            if (!string.IsNullOrWhiteSpace(subj)) 
-            {
-                Subject(subj);
-            }
             
         }
         catch (Exception e)
         {
-            Logger.LogError(e, $"Error during {nameof(BodyFromHbsFileTemplateAsync)}");
+            Logger.LogError(e, $"Error during {nameof(BodyAndSubjectFromHbsFileTemplateAsync)}");
             throw;
         }
     }
@@ -108,7 +111,7 @@ public class GeneralMessageBuilder<TMessage> where TMessage : Message, new()
         Subject(subject);
     }
 
-    public void AddRecipient(AppUser user, MessageRecipientType recipientType = MessageRecipientType.Primary)
+    public GeneralMessageBuilder<TMessage> AddRecipient(AppUser user, MessageRecipientType recipientType = MessageRecipientType.Primary)
     {
         try
         {
@@ -121,6 +124,8 @@ public class GeneralMessageBuilder<TMessage> where TMessage : Message, new()
         {
             Logger.LogWarning("Failed to parse contact address for user {UserId}, skipping this recipient", user.Id);
         }
+        
+        return this;
     }
 
     public void AddRecipient(MailboxAddress mailbox, MessageRecipientType recipientType = MessageRecipientType.Primary)

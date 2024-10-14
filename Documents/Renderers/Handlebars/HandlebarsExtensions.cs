@@ -17,6 +17,7 @@ public class HandlebarsBuilder
         AddInlineSingletonHelper<HandelbarsListHelpper>();
         AddInlineSingletonHelper<HandlebarsUrlBuilderHelper>();
         AddInlineSingletonHelper<HandlebarsDateHelper>();
+        AddInlineSingletonHelper<HandlebarsTimedeltaHelper>();
     }
 
     public HandlebarsBuilder AddInlineSingletonHelper<THelper>() 

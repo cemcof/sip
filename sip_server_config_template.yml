@@ -20,8 +20,8 @@ Kestrel:
 App:
     Name: Scientific Integration Platform
     ShortName: SIP
-    UrlBase: <url> # Where your app is hosted E.g. https://sip.example.com
-    UrlBaseLocal: <url> # Path to the app from the hosting server, e.g. "https://localhost"
+    UrlBase: <url> # Where your app is hosted E.g. https://sip.example.com, must contain scheme!
+    UrlBaseLocal: <url> # Path to the app from the hosting server, e.g. "https://localhost", must contain scheme!
     AdminSupportMail: <email> # Where to send possible bugs and reports
     DataDirectory: <path> # Storage where the system has read/write access, e.g. /var/sip_data
     OutOfService: # Optional - enabling will turn system into out of service mode
