@@ -6,12 +6,23 @@ namespace sip.LabIssues;
 
 public class IssuesService(
         IDbContextFactory<AppDbContext> dbContextFactory,
+        TimeProvider                  timeProvider,
         SmtpSender                      emailService,
         IOptions<DailySchedulerOptions> dsoptions,
         ILogger<IssuesService>          logger,
         IOptions<AppOptions>            appOptions)
     : DailyScheduler(dsoptions, logger), IFilterItemsProvider<Issue>
 {
+    
+    public IssueUrgency AutoUrgencyHandler(Issue issue)
+    {
+        var timeDelta = timeProvider.DtUtcNow() - issue.DtAssigned;
+
+        if (timeDelta.Days < 7) return IssueUrgency.Low;
+        if (timeDelta.Days < 30) return IssueUrgency.Medium;
+        return IssueUrgency.High;
+    }
+    
     public Issue CreateItem()
     {
         return new Issue()
@@ -25,16 +36,17 @@ public class IssuesService(
     public async Task<IEnumerable<Issue>> GetItems(string? filter = null, CancellationToken ct = default)
     {
         await using var db = await dbContextFactory.CreateDbContextAsync(ct);
-        var usersSet = db.Set<Issue>();
-        var users = await usersSet
+        var issuesSet = db.Set<Issue>();
+        var issues = await issuesSet
             .Include(i => i.InitiatedBy)
                 .ThenInclude(u => u!.Contacts)
             .Include(i => i.Responsible)
                 .ThenInclude(u => u!.Contacts)
+            .Include(i => i.Organization)
             .OrderByDescending(i => i.DtLastChange)
             .ToListAsync(cancellationToken: ct);
-        if (string.IsNullOrWhiteSpace(filter)) return users;
-        return users.Where(u => u.IsFilterMatch(filter));
+        if (string.IsNullOrWhiteSpace(filter)) return issues;
+        return issues.Where(u => u.IsFilterMatch(filter));
     }
 
     public async Task UpdateItem(Issue item)
