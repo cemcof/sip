@@ -73,7 +73,6 @@ public class ExperimentControlService(
         // Ensure unique subpath
         subPath = await experimentsService.GetUniqueSubpathAsync(
             subPath, 
-            experiment.Id.ToString()[^7..], 
             experiment.Organization);
         
         experiment.Processing.SerializeWorkflow();

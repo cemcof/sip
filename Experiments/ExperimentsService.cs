@@ -492,7 +492,7 @@ public class ExperimentsService(
         await context.SaveChangesAsync();
     }
 
-    public async Task<string> GetUniqueSubpathAsync(string subPath, string hash, IOrganization experimentOrganization)
+    public async Task<string> GetUniqueSubpathAsync(string subPath, IOrganization experimentOrganization)
     {
         await using var context = await dbContextFactory.CreateDbContextAsync();
         
@@ -501,6 +501,7 @@ public class ExperimentsService(
             .Where(e => e.Experiment.OrganizationId == experimentOrganization.Id)
             .CountAsync();
 
+        var hash = Guid.NewGuid().ToString("N")[^8..];
         return expsMatching == 0 ? subPath : $"{subPath}_{hash}";
     }
 }
