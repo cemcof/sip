@@ -70,6 +70,12 @@ public class ExperimentControlService(
             subPath = Path.Combine(experiment.OrganizationUser.LinkId, subPath);
         }
         
+        // Ensure unique subpath
+        subPath = await experimentsService.GetUniqueSubpathAsync(
+            subPath, 
+            experiment.Id.ToString()[^7..], 
+            experiment.Organization);
+        
         experiment.Processing.SerializeWorkflow();
         experiment.Storage.SubPath  = subPath;
         experiment.Storage.DtLastUpdate = timeProvider.DtUtcNow();

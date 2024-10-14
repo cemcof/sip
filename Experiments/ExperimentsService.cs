@@ -491,4 +491,16 @@ public class ExperimentsService(
         entry.Property(property).IsModified = true;
         await context.SaveChangesAsync();
     }
+
+    public async Task<string> GetUniqueSubpathAsync(string subPath, string hash, IOrganization experimentOrganization)
+    {
+        await using var context = await dbContextFactory.CreateDbContextAsync();
+        
+        var expsMatching = await context.Set<ExperimentStorage>()
+            .Where(e => e.SubPath == subPath)
+            .Where(e => e.Experiment.OrganizationId == experimentOrganization.Id)
+            .CountAsync();
+
+        return expsMatching == 0 ? subPath : $"{subPath}_{hash}";
+    }
 }
