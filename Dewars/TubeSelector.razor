@@ -9,9 +9,10 @@
             @foreach (var dw in Options.Get(Organization).DewarList)
             {
                 var dwCaptured = dw;
-                <DewarSvg DewarId="@dwCaptured"
-                          HolderClicked="@((h) => _selectDewarAndHodler(dwCaptured, h))"
-                          GetHolderClass="@((h) => _getHolderClass(dwCaptured, h))"
+                <DewarSvg DewarId="@dwCaptured.Name"
+                          HolderCount="@dwCaptured.HoldersCount"
+                          HolderClicked="@((h) => _selectDewarAndHodler(dwCaptured.Name, h))"
+                          GetHolderClass="@((h) => _getHolderClass(dwCaptured.Name, h))"
                           StaticOnly="@false">
                 </DewarSvg>
             }
@@ -38,7 +39,7 @@
                 <button @onclick="_backToDewars" class="btn btn-outline-secondary">&lt;&lt; Back to dewars</button>
             </div>
             <div class="text-center">Edit details of the tube</div>
-            <DetailedTubeId Tube="_tube"></DetailedTubeId>
+            <DetailedTubeId Tube="_tube" />
             
             <div class="px-5">
                 <div class="form-group">
@@ -71,7 +72,12 @@
         Editing
     }
     
-    private Tube _tube = new();
+    private TubeSelectorGuiStatus _guiStatus;
+    [Parameter, EditorRequired] public EventCallback<Tube> TubeUpdated { get; set; }
+    [Parameter, EditorRequired] public IOrganization Organization { get; set; } = null!;
+    [Parameter, EditorRequired] public TubesService TubesService { get; set; } = null!;
+
+    private Tube _tube = null!;
 
     public void ApplyTube(Tube tube)
     {
@@ -80,10 +86,10 @@
         StateHasChanged();
     }
 
-    private TubeSelectorGuiStatus _guiStatus;
-    [Parameter, EditorRequired] public EventCallback<Tube> TubeUpdated { get; set; }
-    [Parameter, EditorRequired] public IOrganization Organization { get; set; } = null!;
-    [Parameter, EditorRequired] public TubesService TubesService { get; set; } = null!;
+    protected override void OnInitialized()
+    {
+        _tube = new Tube(Organization);
+    }
 
     protected override void OnParametersSet()
     {
@@ -99,10 +105,10 @@
         _guiStatus = TubeSelectorGuiStatus.SelectingTube;
     }
 
-    private async Task _selectDeckAndPosition(string deck, string postion)
+    private async Task _selectDeckAndPosition(string deck, string position)
     {
-        _tube = (await TubesService.GetTube(Organization, _tube.Dewar, _tube.Holder, deck, postion)) ?? 
-                new Tube() {Dewar = _tube.Dewar, Holder = _tube.Holder, Position = postion, Deck = deck};
+        _tube = (await TubesService.GetTube(Organization, _tube.Dewar, _tube.Holder, deck, position)) ?? 
+                new Tube(Organization) {Dewar = _tube.Dewar, Holder = _tube.Holder, Position = position, Deck = deck};
         _guiStatus = TubeSelectorGuiStatus.Editing;
     }
 
@@ -149,7 +155,7 @@
 
     private void _backToDewars()
     {
-        _tube = new Tube();
+        _tube = new Tube(Organization);
         _guiStatus = TubeSelectorGuiStatus.SelectingDewarAndHolder;
     }
 
@@ -161,7 +167,7 @@
             return;
         }
 
-        _tube = new Tube() {Dewar = _tube.Dewar, Holder = _tube.Holder};
+        _tube = new Tube(Organization) {Dewar = _tube.Dewar, Holder = _tube.Holder};
         _guiStatus = TubeSelectorGuiStatus.SelectingTube;
     }
 }

@@ -28,10 +28,15 @@
 
 @code {
 
-    [Parameter]
-    public Tube Tube { get; set; } = new();
+    [Parameter, EditorRequired]
+    public Tube Tube { get; set; } = null!; 
 
     [Parameter]
     public string CssClass { get; set; } = String.Empty;
+
+    protected override void OnParametersSet()
+    {
+        ArgumentNullException.ThrowIfNull(Tube, nameof(Tube));
+    }
 
 }

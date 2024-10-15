@@ -63,10 +63,11 @@ public class TubesService(IDbContextFactory<AppDbContext> dbContextFactory, ILog
         await using var dbContext = await dbContextFactory.CreateDbContextAsync(ct);
         
         tube.LastChange = DateTime.UtcNow;
-        var trackedEntry = await dbContext.Set<Tube>().FindAsync(tube.Structure, tube.OrganizationId);
+        var trackedEntry = await dbContext.Set<Tube>()
+            .FindAsync([tube.Structure, tube.OrganizationId], ct);
         if (trackedEntry is null)
         {
-            dbContext.Set<Tube>().Add(tube);
+            dbContext.Entry(tube).State = EntityState.Added;
             logger.LogInformation("Creating new tube entry {}, {}, {}", tube.Structure, tube.User, tube.Description);
         }
         else

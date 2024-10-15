@@ -55,13 +55,13 @@
         <circle cx="50" cy="50" r="32" id="circ2"/>
         <circle cx="50" cy="50" r="20" id="circ3"/>
 
-        @for (int i = 0; i < 6; i++)
+        @for (int i = 0; i < HolderCount; i++)
         {
-            var cap = ((i + 1) % 6) + 1;
-            <g @onclick="@(() => HolderClicked.InvokeAsync(cap.ToString()))" transform="@($"rotate({i * 60}, 50, 50)")" class="group-kekw @GetHolderClass(cap.ToString())">
+            var cap = ((i + 1) % HolderCount) + 1;
+            <g @onclick="@(() => HolderClicked.InvokeAsync(cap.ToString()))" transform="@($"rotate({i * (360 / HolderCount)}, 50, 50)")" class="group-kekw @GetHolderClass(cap.ToString())">
                 <rect class="fake-click-rect" x="50" y="42" height="16" width="35"/>
                 <rect class="holder-rect" x="50" y="49" width="26" height="2"/>
-                <text font-weight="bold" font-size="6" x="80" y="50" dominant-baseline="middle" text-anchor="middle" transform="rotate(@(i * -60), 80, 50)">@cap</text>
+                <text font-weight="bold" font-size="6" x="80" y="50" dominant-baseline="middle" text-anchor="middle" transform="rotate(@(i * -(360 / HolderCount)), 80, 50)">@cap</text>
             </g>
         }
 
@@ -76,6 +76,9 @@
 
     [Parameter]
     public string DewarId { get; set; } = "";
+    
+    [Parameter] 
+    public int HolderCount { get; set; } = 6;
     
     [Parameter]
     public bool StaticOnly { get; set; } 

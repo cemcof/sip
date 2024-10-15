@@ -135,6 +135,13 @@ public class Tube
     public string TrimmedId => Structure.Trim('/');
 
     public bool IsEmpty => string.IsNullOrWhiteSpace(Description) && string.IsNullOrWhiteSpace(User);
-
+    
+    private Tube() { }
+    
+    public Tube(IOrganization organization)
+    {
+        OrganizationId = organization.Id;
+        Organization = (Organization)organization;
+    }
 
 }
