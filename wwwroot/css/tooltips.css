@@ -105,7 +105,7 @@
         margin-right: 0;
         right: 100%;
         top: 50%;
-        transform: translateY(-50%);
+        transform: translate(-7px, -50%);
     }
     
     /*Fullsize theme*/
@@ -187,7 +187,8 @@
         &.tt-left {
             &::after {
                 top: 50%; /* To the middle of the tooltip container */
-                right: 0;
+                left: 0;
+                transform: translate(-7px, -50%);
                 border-color: transparent transparent transparent black;
             }
         }

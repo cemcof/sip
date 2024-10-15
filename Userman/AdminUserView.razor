@@ -5,10 +5,10 @@
 
 <div class="user-view-heading">
     <span>@User</span>
-    <div class="link-group">
+    <div class="btnint-group">
         <InteractiveButton
             Caption="Remove user"
-            BtnClass="bt-link"
+            BtnClass="btn btn-outline-danger"
             TooltipDirection="@TooltipDirection.BottomLeft"
             Tip="Attempts to remove user from the system. Additional entities depending on the user might get removed as well."
             OnClick="DeleteUser">
@@ -27,7 +27,7 @@
         <InteractiveButtonForm TFormModel="AdminUserView"
             Model="@(this)"
             Caption="Merge to"
-            BtnClass="bt-link"
+            BtnClass="btn btn-outline-primary"
             Tip="Merge this user to the selected user, preserving selected user and removing this user."
             TooltipDirection="@TooltipDirection.BottomLeft"
             OnSubmit="MergeUser"
@@ -42,13 +42,16 @@
         
         <InteractiveButton Caption="Invalidate sessions"
                            TooltipDirection="@TooltipDirection.BottomLeft"
-                           BtnClass="bt-link"
+                           BtnClass="btn btn-outline-primary"
                            Tip="Updates security stamp for the user, rendering login cookie of the the user invalid, which signs the user out."
                            OnClick="@(()=>UserManager.UpdateSecurityStampAsync(User))" />
         
         @* <AuthorizeView Policy="@ImpersonationOptions.ImpersonatorPolicy"> *@
-            @* TODO auth  *@
-            <NavLink class="bt-link" href="@($"/impersonation/impersonate/?userId={User.Id}")">Impersonate this user</NavLink>
+        @* TODO auth  *@
+        <div> 
+            @* Necessary div container for btn-group *@
+            <NavLink class="btn btn-outline-primary" href="@($"/impersonation/impersonate/?userId={User.Id}")">Impersonate this user</NavLink>
+        </div>
         @* </AuthorizeView> *@
         
     </div>
@@ -121,7 +124,7 @@
             
             <InteractiveButton
                 TooltipDirection="TooltipDirection.Left"
-                BtnClass="bt-link"
+                BtnClass="btn btn-sm btn-outline-secondary"
                 Caption="Send login invitation"
                 Tip="Emails user with a link that offers login via an external provider, mapping that external account to the internal user in the system"
                 OnClick="InviteUser">

@@ -130,9 +130,33 @@ button:hover {
 
 .bt-icon:hover {
     color: black;
-    background-color: var(--bs-gray-600);
 }
 
 .interactive-button-container {
     display: inline-block;
+}
+
+.btnint-group {
+    display: inline-flex;
+}
+
+.btnint-group > * > .btn {
+    border-radius: 0;
+    border-collapse: collapse;
+    margin-right: -1px;
+}
+
+.btnint-group > *:first-child > .btn {
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.btnint-group > *:last-child > .btn {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.btnint-group > * {
+    margin-right: 0;
+    margin-left: 0;
 }

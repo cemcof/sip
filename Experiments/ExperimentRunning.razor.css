@@ -30,7 +30,6 @@
     .exp-log-results-container {
         display: flex;
         align-items: stretch;
-        height: calc(100vh - 110px);
     }
 
     .results {
