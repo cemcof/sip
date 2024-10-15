@@ -1,10 +1,13 @@
-@page "/{OrganizationId}/issues"
+@page "/{OrganizationId}/issues/{IssueId?}"
 @inherits OrganizationComponentBase
+
+@inject IssuesService IssuesService
 
 @* Issues header *@
 <div class="d-flex">
     <InteractiveButton Caption="New issue" 
-                       CssIcon="bi bi-plus-circle">
+                       CssIcon="bi bi-plus-circle"
+                       OnClick="@_onNewIssue">
         
     </InteractiveButton>
     
@@ -12,11 +15,31 @@
                RequestSearch="@_onSearch"/>
 </div>
 
-<h3>Lab Issues</h3>
+<div class="container-fluid">
+    @* Render issues *@
+    
+</div>
 
 @code {
+    
+    [Parameter] public string? IssueId { get; set; }
+    
+    private List<Issue> _issues = new();
+    private Issue? _selectedIssue = null!;
+
+    protected override Task OnParametersSetAsync()
+    {
+        // Load issues and then select issue, if given by param
+        
+        return base.OnParametersSetAsync();
+    }
 
     private Task _onSearch((string, CancellationToken) searchRequest)
+    {
+        throw new NotImplementedException();
+    }
+
+    private Task _onNewIssue()
     {
         throw new NotImplementedException();
     }

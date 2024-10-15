@@ -24,10 +24,9 @@ public enum IssueUrgency
 
 public class Issue : IStringFilter
 {
-    [StringLength(10)]
     public string Id { get; set; } = null!;
 
-    public string OrganizationId { get; set; }
+    public string OrganizationId { get; set; } = null!;
     public Organization Organization { get; set; } = null!;
     
     public Guid? InitiatedById { get; set; }
@@ -90,6 +89,10 @@ public class IssueEntityConfig : IEntityTypeConfiguration<Issue>
 {
     public void Configure(EntityTypeBuilder<Issue> builder)
     {
+        builder.HasKey(i => new { i.OrganizationId, i.Id });
+        builder.Property(i => i.Id)
+            .HasMaxLength(10);
+        
         builder
             .HasOne(i => i.Responsible)
             .WithMany()
