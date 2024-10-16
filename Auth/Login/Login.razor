@@ -6,6 +6,8 @@
 @inject IOptions<Dictionary<string, LoginProviderGuiOptions>> LoginGuiOptions
 @inject NavigationManager NavigationManager
 
+@if (!_redirecting)
+{
 <div class="container mt-3">
     
     <h1 class="text-center">Log in to the @AppOptions.Value.Name system via one of the following providers</h1>
@@ -33,11 +35,20 @@
     </div>
     
 </div>
+}
+else
+{
+    <div class="container mt-5">
+        <h1 class="text-center">Redirecting to authentication provider...</h1>
+    </div>
+}
 
 @code {
     
     [Parameter]
     public string? ReturnUrl { get; set; }
+
+    private bool _redirecting;
 
     protected override void OnInitialized()
     {
@@ -50,6 +61,7 @@
 
     private void ChallengeScheme(string scheme)
     {
+        _redirecting = true;
         var retUrl = string.IsNullOrWhiteSpace(ReturnUrl) ? "/" : ReturnUrl!;
         var retEncoded = HttpUtility.UrlEncode(retUrl);
         var target = $"/challenge/{scheme}?returnUrl={retEncoded}";
