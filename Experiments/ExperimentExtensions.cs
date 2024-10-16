@@ -42,7 +42,7 @@ public class ExperimentsBuilder
             .GetOrganizationOptionsBuilder(configurationRoot)
             .BindOrganizationConfiguration("Engines");
         
-        services.AddOptions<IrodsDataAccessView>()
+        services.AddOptions<IrodsViewOptions>()
             .GetOrganizationOptionsBuilder(configurationRoot)
             .BindOrganizationConfiguration("ExperimentViews:IrodsDataAccess");
         
