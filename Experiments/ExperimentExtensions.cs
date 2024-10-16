@@ -6,6 +6,7 @@ using sip.Experiments.Logs;
 using sip.Experiments.Model;
 using sip.Experiments.RemoteFilesystem;
 using sip.Experiments.Samples;
+using sip.Experiments.Views;
 using sip.Experiments.Workflows;
 using sip.Organizations.Centers;
 
@@ -40,6 +41,10 @@ public class ExperimentsBuilder
         services.AddOptions<EnginesOptions>()
             .GetOrganizationOptionsBuilder(configurationRoot)
             .BindOrganizationConfiguration("Engines");
+        
+        services.AddOptions<IrodsDataAccessView>()
+            .GetOrganizationOptionsBuilder(configurationRoot)
+            .BindOrganizationConfiguration("ExperimentViews:IrodsDataAccess");
         
         services.AddSingleton<IWorkflowProvider, CompositeWorkflowProvider>();
         

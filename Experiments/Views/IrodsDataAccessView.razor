@@ -1,4 +1,5 @@
 ﻿@using sip.Experiments.Model
+@inject IOptionsMonitor<IrodsViewOptions> IrodsViewOptions
 
 @if (IsAccessible)
 {
@@ -26,7 +27,7 @@
 
     <li>
         Use for example wget to fetch our download script:
-        <CopiableCode CodeContent="wget https://raw.githubusercontent.com/cemcof/cemcof.github.io/main/irods_fetch.py" />
+        <CopiableCode CodeContent="@($"wget {Options.PythonDownloadScriptUrl}")" />
     </li>
 
     <li>Start the data downloading using the following command:
@@ -46,7 +47,7 @@
     <li>In powershell, navigate to the folder where you want to have your dataset downloaded. You can do so
         by right-clicking with shift in Windows explorer and selecting "Open Powershell here"</li>
     <li>Fetch our download script using the following command:
-        <CopiableCode CodeContent="iwr https://raw.githubusercontent.com/cemcof/cemcof.github.io/main/irods_fetch.py -outfile irods_fetch.py" /></li>
+        <CopiableCode CodeContent="@($"iwr {Options.PythonDownloadScriptUrl} -outfile irods_fetch.py")" /></li>
     <li>Start the data downloading using the following command:
         <CopiableCode CodeContent="@_GetPythonFetch()" />
     </li>
@@ -65,17 +66,19 @@ else
 
     [Parameter, EditorRequired] public ExperimentStorage ExperimentStorage { get; set; } = null!;
     
+    private IrodsViewOptions Options => IrodsViewOptions.Get(ExperimentStorage.Experiment.Organization);
+    
     private bool IsAccessible => 
         ExperimentStorage.Target is not null && 
         ExperimentStorage.Token is not null && 
         ExperimentStorage.FullPath is not null;
     
     private string _GetIrodsFetchUnixOneliner()
-        => $"curl -sSfL \"https://raw.githubusercontent.com/cemcof/cemcof.github.io/main/irods_fetch_unix.sh\" " +
+        => $"curl -sSfL \"{Options.UnixDownloadScriptUrl}\" " +
            $"| bash -s -- --host \"{ExperimentStorage.Target}\" -t \"{ExperimentStorage.Token}\" -c \"{ExperimentStorage.FullPath}\"";
 
     private string _GetPowershellFetch()
-        => "Invoke-Command -ScriptBlock ([Scriptblock]::Create((iwr \"https://raw.githubusercontent.com/cemcof/cemcof.github.io/main/irods_fetch_win.ps1\").Content)) " +
+        => $"Invoke-Command -ScriptBlock ([Scriptblock]::Create((iwr \"{Options.WindowsDownloadScriptUrl}\").Content)) " +
            $"-ArgumentList ($args + @('--host', '{ExperimentStorage.Target}', '-t', '{ExperimentStorage.Token}', '-c', '{ExperimentStorage.FullPath}'))";
     
     private string _GetPythonFetch()
