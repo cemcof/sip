@@ -42,6 +42,7 @@ public class DataLifecycleOptions : IEquatable<DataLifecycleOptions>
 
     [Required] public string Id { get; set; } = null!;
     [Required] public string DisplayName { get; set; } = null!;
+    public int Order { get; set; } = int.MaxValue;
     public string Tip { get; set; } = string.Empty;
 
     public object? SetupDyn { get; set; }
