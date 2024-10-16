@@ -17,7 +17,12 @@
 
 <div class="container-fluid">
     @* Render issues *@
-    
+    <div class="row">
+        @foreach (var issue in _issues)
+        {
+            <IssueView Issue="@issue"/>
+        }
+    </div>
 </div>
 
 @code {
@@ -27,11 +32,10 @@
     private List<Issue> _issues = new();
     private Issue? _selectedIssue = null!;
 
-    protected override Task OnParametersSetAsync()
+    protected override async Task OnParametersSetAsync()
     {
         // Load issues and then select issue, if given by param
-        
-        return base.OnParametersSetAsync();
+        _issues = (await IssuesService.GetItems()).ToList();
     }
 
     private Task _onSearch((string, CancellationToken) searchRequest)
