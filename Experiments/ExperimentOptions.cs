@@ -10,6 +10,8 @@ public class ExperimentOptions
     public int DisplayOrder { get; set; } = int.MaxValue;
 
     public Dictionary<string, DataLifecycleOptions> DataLifecycles { get; set; } = new();
+    public IEnumerable<DataLifecycleOptions> DataLifecyclesOrdered => DataLifecycles.Values.OrderBy(d => d.Order);
+    
     public Dictionary<string, Workflow> Workflows { get; set; } = new();
 
     public TimeSpan? IdleTimeout { get; set; }
