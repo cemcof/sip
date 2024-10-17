@@ -9,15 +9,15 @@
     protected string MapIssueColorClass(Issue issue) =>
         issue.Status switch
         {
-            IssueStatus.Resolved => "bg-success",
+            IssueStatus.Resolved => "bg-success text-white",
             IssueStatus.InProgress => IssuesService.AutoUrgencyHandler(issue) switch
             {
-                IssueUrgency.Low => "bg-info",
-                IssueUrgency.Medium => "bg-warning",
-                IssueUrgency.High => "bg-danger",
-                _ => "bg-light"
+                IssueUrgency.Low => "bg-info text-white",
+                IssueUrgency.Medium => "bg-warning text-white",
+                IssueUrgency.High => "bg-danger text-white",
+                _ => "bg-ligh text-whitet"
             },
-            IssueStatus.Initiated => "bg-light",
+            IssueStatus.Initiated => "bg-light text-white",
             _ => throw new ArgumentOutOfRangeException()
         };
     

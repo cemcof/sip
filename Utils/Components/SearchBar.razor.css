@@ -12,3 +12,7 @@
     right: 0.5rem;
     font-size: 60%;
 }
+
+.searchbar > input {
+    height: 100%;
+}

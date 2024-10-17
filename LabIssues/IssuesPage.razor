@@ -4,10 +4,12 @@
 @inject IssuesService IssuesService
 
 @* Issues header *@
-<div class="d-flex">
+<div class="d-flex align-items-stretch">
     <InteractiveButton Caption="New issue" 
+                       ContainerClass="me-1"
                        CssIcon="bi bi-plus-circle"
-                       OnClick="@_onNewIssue">
+                       BtnClass="btn btn-sm btn-primary"
+                       OnClick="@_onNewIssueClick">
         
     </InteractiveButton>
     
@@ -17,18 +19,22 @@
 
 <div class="container-fluid">
     @* Render issues *@
-    <div class="row">
-        @foreach (var issue in _issues)
-        {
-            <IssueView Issue="@issue"/>
-        }
-    </div>
+    @if (_issueCreate is not null)
+    {
+        <IssueCreateComponent IssueCreate="@_issueCreate" />
+    }
+
+    @foreach (var issue in _issues)
+    {
+        <IssueView Issue="@issue"/>
+    }
 </div>
 
 @code {
     
     [Parameter] public string? IssueId { get; set; }
-    
+
+    private IssueCreate? _issueCreate;
     private List<Issue> _issues = new();
     private Issue? _selectedIssue = null!;
 
@@ -43,9 +49,12 @@
         throw new NotImplementedException();
     }
 
-    private Task _onNewIssue()
+    private Task _onNewIssueClick()
     {
-        throw new NotImplementedException();
+        // _issueCreate = new IssueCreate(AuthUser)
+        // {
+        // };
+        return Task.CompletedTask;
     }
 
 }

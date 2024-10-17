@@ -54,6 +54,22 @@ public class Issue : IStringFilter
     public int NotifyIntervalDays { get; set; } = 7;
 
     public List<IssueComment> IssueComments { get; set; } = new();
+
+
+    private Issue() { }
+    public Issue(string id, IssueCreate issueCreate)
+    {
+        Id = id;
+        OrganizationId = issueCreate.Organization.Id;
+        DtCreated = issueCreate.DtCreated;
+        DtLastChange = DtCreated;
+
+        if (!string.IsNullOrWhiteSpace(issueCreate.Description))
+        {
+            var descriptionComment = new IssueComment(issueCreate.IpAddress.ToString(), DtCreated, "Description: " + issueCreate.Description);
+            IssueComments.Add(descriptionComment);
+        }
+    }
     
     
     public IssueUrgency DetermineUrgency(Func<Issue, IssueUrgency> autoUrgencyHandler)

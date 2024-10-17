@@ -18,15 +18,17 @@
         {
             <div class="row">
                 <div class="col-4">
-                    <span>@(comment.Author?.Fullname ?? comment.IpAddress)</span>
-                    <span>@comment.DtCreated.StandardFormat()</span>
-                    <span>@comment.DtCreated.HumanizeTimedelta()</span>
+                    <span>@(comment.Author?.Fullname ?? comment.IpAddress?.ToString() ?? "<unknown user>")</span> <br/>
+                    <small class="fst-italic">@comment.DtCreated.StandardFormat()</small> <br/>
+                    <small class="fst-italic">@comment.DtCreated.HumanizeTimedelta()</small>
                 </div>
                 
                 <div class="col-8">
                     <span>@comment.Comment</span>
                 </div>
             </div>
+            
+            <hr/>
         }
     </div>
 

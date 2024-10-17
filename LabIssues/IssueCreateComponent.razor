@@ -1,0 +1,32 @@
+@inject IssuesService IssuesService   
+
+<CEditForm class="card bg-info" Model="IssueCreate" RenderAsFormElement="@false">
+
+    <div class="card-header">
+        @* Render subject, date and buttons *@
+        <div class="d-flex justify-content-between align-items-center">
+            <CTextInput @bind-Value="@context.Model.Subject" DisplayName="Subject" IsRequired="@true" />
+        </div>
+    </div>
+
+    <div class="card-body">
+        <CTextInput Sizing="Sizing.Small" NoteIn="Describe the issue" @bind-Value="@context.Model.Description" />
+        
+        @* Dropdowns for responsible and initiator *@
+        @* Initiator readonly if given by login, otherwise dropdown *@
+        
+        
+        @* Then Create cancel buttons *@
+    </div>
+
+</CEditForm>
+
+
+@code {
+    [Parameter] public IssueCreate IssueCreate { get; set; } = null!;
+    
+    [Parameter] public EventCallback<Issue> OnCreated { get; set; }
+    
+
+
+}
