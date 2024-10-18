@@ -1,1 +1,0 @@
-INSERT INTO `lims-staging`.Contact (ContactId, Email, EmailVerified, Firstname, Lastname, Phone, Affiliation, Position, IsPrimary, AppUserId) VALUES ('08da918e-7339-4d52-8e6d-456fdb4c0649', null, 0, 'Radek', 'Veverka', null, null, null, 1, '08da918e-732a-4995-8569-08b14a507bc8');

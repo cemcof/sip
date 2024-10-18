@@ -1,7 +1,0 @@
-INSERT INTO lims.MessageRecipient (Id, MessageId, UserId, Type) VALUES ('08da1be8-5fa6-4f50-8e86-7adbe48117a1', '08da1be8-5fa2-4e20-822e-e1b8181ffe1d', '08da1be5-d6d8-401e-882e-d4b9a4fd0647', 'Primary');
-INSERT INTO lims.MessageRecipient (Id, MessageId, UserId, Type) VALUES ('08da1bf2-c3f0-4ffb-848d-7471c9089d53', '08da1bf2-c3ec-4dba-8a98-72ca31a06058', '08da1be5-d6d8-401e-882e-d4b9a4fd0647', 'Primary');
-INSERT INTO lims.MessageRecipient (Id, MessageId, UserId, Type) VALUES ('08da1bf4-3447-4b34-8287-fc17b7ac1f2c', '08da1bf4-3443-4735-84ae-f28b7ddae964', '08da1be5-d6d8-401e-882e-d4b9a4fd0647', 'Primary');
-INSERT INTO lims.MessageRecipient (Id, MessageId, UserId, Type) VALUES ('08da1bf6-0920-40bd-86b8-e8e8bb827ea3', '08da1bf6-091b-4f87-8afb-8be91171df6a', '08da1be5-d6d8-401e-882e-d4b9a4fd0647', 'Primary');
-INSERT INTO lims.MessageRecipient (Id, MessageId, UserId, Type) VALUES ('08da1bf7-fa17-43e3-8c99-ca2d8d6cbe1a', '08da1bf7-fa12-4c6e-8a0b-06f93401acbc', '08da1be5-d6d8-401e-882e-d4b9a4fd0647', 'Primary');
-INSERT INTO lims.MessageRecipient (Id, MessageId, UserId, Type) VALUES ('08da1bf8-0709-49f8-865b-5306a5314a3b', '08da1bf8-0709-4894-8ca5-b4503af39958', '08da1be5-d6d8-401e-882e-d4b9a4fd0647', 'Primary');
-INSERT INTO lims.MessageRecipient (Id, MessageId, UserId, Type) VALUES ('08da1bf8-59af-43c4-8641-67291a20c99b', '08da1bf8-59ab-44f3-8249-498414d5619a', '08da1be5-d6d8-401e-882e-d4b9a4fd0647', 'Primary');
