@@ -38,3 +38,18 @@ public class Organization(string id, string linkId, string name, string abbrevia
     public bool IsFilterMatch(string? filter = null)
         => StringUtils.IsFilterMatchAtLeastOneOf(filter, Name, Id, Abbreviation, Description);
 }
+
+
+
+// ======== Organization types ==========
+public class ResearchInfrastructure(string id, string linkId, string name, string abbreviation)
+    : Organization(id, linkId, name, abbreviation);
+public class ResearchCenter(string id, string linkId, string name, string abbreviation) 
+    : Organization(id, linkId, name, abbreviation);
+public class ResearchFacility(string id, string linkId, string name, string abbreviation) 
+    : Organization(id, linkId, name, abbreviation);
+public class Company(string id, string linkId, string name, string abbreviation) 
+    : Organization(id, linkId, name, abbreviation);
+
+
+

@@ -52,7 +52,6 @@ public class AppRole : ITreeItem<AppRole>, IEquatable<AppRole>
     public ICollection<UserInRole> UserInRoles { get; set; } = new List<UserInRole>();
 }
 
-
 public class AppRoleEntityTypeConfiguration : IEntityTypeConfiguration<AppRole>
 {
     public void Configure(EntityTypeBuilder<AppRole> builder)
@@ -63,3 +62,10 @@ public class AppRoleEntityTypeConfiguration : IEntityTypeConfiguration<AppRole>
             .IsRequired(false);
     }
 }
+
+
+public class LabOperatorRole : RoleDefinition;
+public class LabUserRole : RoleDefinition;
+public class RemoteMicAdminRole : RoleDefinition;
+public class RemoteMicUserRole : RoleDefinition;
+

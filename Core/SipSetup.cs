@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using sip.Auth.Verification;
-using sip.CEITEC.CIISB;
-using sip.CEITEC.DirectAccess;
 using sip.Core.IndexRedirecting;
 
 namespace sip.Core;
@@ -155,8 +153,6 @@ public class SipSetup(string[] args)
         
         var projectsBuilder = new ProjectsBuilder(services, conf);
         // projectsBuilder.AutoScanProjectTypes(assebmly); E Project errors
-        projectsBuilder.AutoAddProject<CProject>();
-        projectsBuilder.AutoAddProject<DProject>();
         
         projectsBuilder.AutoScanStatuses(assebmly);
 

@@ -2,7 +2,6 @@
 // Global usings (imports) can be found in Usings.cs 
 // ========================================================================
 
-using sip.CEITEC.CIISB.DataMigration;
 using sip.Autoloaders;
 using sip.Core;
 using sip.Core.IndexRedirecting;
@@ -34,9 +33,4 @@ sipSetup.AutoDefault(builder =>
     services.AddEnvironment(config);
     services.AddSchedule(config);
     services.AddRemoteAccess(config);
-    
-    // Migration feature from old CIISB, del in production
-    var cfmnigr = builder.WebApplicationBuilder.Configuration.GetSection("PhpMigrator");
-    CiisbMigratorOptions.Configure(services, cfmnigr);
-    
 });

@@ -26,7 +26,6 @@ global using sip.Organizations;
 global using sip.Auth;
 global using sip.Auth.Jwt;
 global using sip.Auth.Saml2;
-global using sip.CEITEC;
 global using sip.Documents;
 global using sip.Messaging;
 global using sip.Projects;
